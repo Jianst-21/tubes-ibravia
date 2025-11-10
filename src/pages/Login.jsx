@@ -47,6 +47,7 @@ export const Login = () => {
         // Coba login user
         try {
           res = await userApi.post("/auth/login", { identifier, password });
+          console.log("Response dari server:", res.data); // 👈 tambahkan ini
           role = "user";
           token = res.data.token;
           currentUser = res.data.user;
