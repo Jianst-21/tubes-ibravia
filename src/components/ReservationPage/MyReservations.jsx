@@ -14,7 +14,8 @@ export default function MyReservations() {
     const fetchReservations = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/reservations/user/${storedUser.id_user}`
+          `${import.meta.env.VITE_API_BASE_URL}/reservations/user/${storedUser.id_user}`,
+          { withCredentials: true }
         );
         setReservations(res.data.reservations || []);
       } catch (err) {
@@ -24,6 +25,7 @@ export default function MyReservations() {
         setLoading(false);
       }
     };
+
 
     fetchReservations();
   }, []);

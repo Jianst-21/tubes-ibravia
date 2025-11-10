@@ -26,8 +26,10 @@ export const Block = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/block/${selectedVilla}`
+        `${import.meta.env.VITE_API_BASE_URL}/block/${selectedVilla}`,
+        { withCredentials: true }
       );
+
 
       const sortedBlocks = (res.data || []).sort((a, b) => {
         const numA = parseInt(a.block_name.replace(/\D/g, "")) || 0;
@@ -132,8 +134,8 @@ export const Block = () => {
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
           className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border border-border transition-all duration-300 ${currentPage === 1
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:scale-110"
+            ? "opacity-50 cursor-not-allowed"
+            : "hover:scale-110"
             }`}
           style={{
             backgroundColor: "hsl(var(--card))",
@@ -153,8 +155,8 @@ export const Block = () => {
           }
           disabled={currentPage === totalPages}
           className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border border-border transition-all duration-300 ${currentPage === totalPages
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:scale-110"
+            ? "opacity-50 cursor-not-allowed"
+            : "hover:scale-110"
             }`}
           style={{
             backgroundColor: "hsl(var(--card))",
