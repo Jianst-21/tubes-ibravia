@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* =====================================
+    🎨 THEME VARIABLES (Tailwind v4)
+===================================== */
+@theme {
+  /* Warna berbasis HSL variabel */
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-card: hsl(var(--card));
+
+  /* Font */
+  --font-body: Inter, sans-serif;
+  --font-subheader: Poppins, sans-serif;
+  --font-headline: "Playfair Display", serif;
+
+  /* Shadow & animasi */
+  --shadow-glow: 0 0 12px hsl(var(--primary) / 0.5);
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+/* =====================================
+    🌗 COLOR MODE (Light & Dark)
+===================================== */
+@layer base {
+  :root {
+    --background: 210 100% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 213 85% 45%;
+    --primary-foreground: 210 100% 98%;
+    --secondary: 210 30% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --border: 214 32% 91%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --primary: 213 85% 65%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 222 47% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --border: 222 40% 25%;
+  }
+
+  *:where([class*="border"]) {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body transition-colors duration-300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  input[type="password"]::-ms-reveal,
+  input[type="password"]::-ms-clear {
+    display: none;
+  }
+
+  input[type="password"]::-webkit-textfield-decoration-container {
+    display: none;
+  }
+
+  input[type="password"]::-webkit-credentials-auto-fill-button {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+/* =====================================
+    ⚙️ UTILITIES
+===================================== */
+@utility border-dynamic {
+  border-color: hsl(var(--border)) !important;
+}
+
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+/* =====================================
+    🃏 CARD COMPONENT
+===================================== */
+@utility card-hover {
+  @apply rounded-xl border border-border bg-card shadow-md transition-all duration-400 transform-gpu hover:scale-[1.03] hover:-translate-y-2 hover:shadow-lg;
+}
+
+/* Mode gelap otomatis menyesuaikan */
+@utility dark-card-hover {
+  @apply border-border bg-card shadow-sm dark:shadow-glow;
+}
+
+/* =====================================
+   🎞️ ANIMASI & CAROUSEL
+===================================== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility carousel-img {
+  @apply absolute cursor-pointer transition-all duration-600 rounded-3xl overflow-hidden shadow-2xl;
+}
+
+.carousel-img img {
+  width: 460px;
+  height: 320px;
+  object-fit: cover;
+  transition: all 0.4s ease-in-out;
+  border-radius: 1.5rem;
+}
+
+.carousel-img.center {
+  z-index: 10;
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+.carousel-img.left {
+  z-index: 5;
+  transform: translateX(-180px) scale(0.85);
+  filter: brightness(0.8);
+}
+
+.carousel-img.right {
+  z-index: 5;
+  transform: translateX(180px) scale(0.85);
+  filter: brightness(0.8);
+}
+
+/* =====================================
+   🏠 CUSTOM VILLA BUTTON
+===================================== */
+@utility villa-btn {
+  @apply flex flex-col items-center justify-center w-36 h-36 rounded-xl border border-border bg-card text-foreground shadow-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:shadow-none cursor-pointer;
+}
+
+/* =====================================
+   ⏩ PAGINATION ARROWS
+===================================== */
+@utility pagination-arrow {
+  @apply transition-all duration-300 border border-border bg-card text-foreground shadow-none hover:bg-primary hover:text-primary-foreground hover:shadow-glow hover:scale-[1.08];
+}
+
+/* =====================================
+   📦 BUTTON UTAMA
+===================================== */
+@utility ibravia-button {
+  @apply px-6 py-2 rounded-[8px] bg-primary text-primary-foreground font-medium transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-md dark:hover:shadow-glow cursor-pointer;
+}
+
+@layer components {
+  .btn-login {
+    @apply w-full py-2 rounded-md font-medium text-primary-foreground bg-gradient-to-r from-primary to-blue-600 transition-all duration-500 ease-out shadow-md hover:shadow-lg active:scale-[0.97] active:brightness-95;
+    background-size: 200% auto;
+    background-position: left center;
+  }
+
+  .btn-login:hover {
+    background-position: right center;
+    @apply from-blue-700 to-blue-500;
+  }
+}
