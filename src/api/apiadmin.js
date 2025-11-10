@@ -5,7 +5,7 @@ import axios from "axios";
 const apiAdmin = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL
     ? `${import.meta.env.VITE_API_BASE_URL}/api/admin`
-    : "http://localhost:5000/api/admin",
+    : "https://server-ibravia.railway.app/api/",
   timeout: 10000, //  Timeout agar request tidak menggantung
 });
 
