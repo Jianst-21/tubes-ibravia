@@ -19,8 +19,13 @@ export const DetailProperties = () => {
       try {
         if (!id_block) return;
 
-        const res = await axios.get(`http://localhost:5000/api/houses/block/${id_block}`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/houses/block/${id_block}`,
+          { withCredentials: true }
+        );
+
         const data = Array.isArray(res.data) ? res.data : res.data?.data || [];
+
 
         if (data.length === 0) {
           setError("No houses found for this block");
