@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_BASE_URL ||
-    "http://localhost:5000/api", // fallback ke lokal
-  withCredentials: true, // penting untuk session/cookie
+  baseURL: "https://server-ibravia.up.railway.app/api/", // backend online kamu
+  withCredentials: true, // kalau pakai session / cookie
 });
 
 export default api;
