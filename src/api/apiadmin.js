@@ -29,7 +29,7 @@ apiAdmin.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.warn("❌ Token admin kadaluarsa atau tidak valid. Harap login ulang.");
+      console.warn(" Token admin kadaluarsa atau tidak valid. Harap login ulang.");
       localStorage.removeItem("adminToken");
       localStorage.removeItem("token");
       localStorage.removeItem("user");

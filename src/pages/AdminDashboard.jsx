@@ -63,12 +63,8 @@ const AdminDashboard = () => {
 
     const fetchDashboard = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/admin/dashboard",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await apiAdmin.get("/dashboard");
+
 
         const result = res.data?.data || {};
         setStats({
@@ -90,7 +86,7 @@ const AdminDashboard = () => {
       try {
         const res = await apiAdmin.get("/residence-info");
         console.log(res.data);
-        
+
         setResidenceName(res.data.name || "Unknown Residence");
       } catch (error) {
         console.error("Error fetching residence name:", error);
