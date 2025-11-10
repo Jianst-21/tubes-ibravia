@@ -7,7 +7,7 @@ import { Reservation } from "./pages/Reservation";
 import { AboutUs } from "./pages/AboutUs";
 import { SignUp } from "./pages/SignUp";
 import { VerifyOTP } from "./pages/VerifyOTP";
-import { DetailProperties } from "./pages/detailProperties";
+import { DetailProperties } from "./pages/DetailProperties";
 import { Block } from "./components/PropertiesPage/Block";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
