@@ -18,9 +18,8 @@ export default function AdminDataReport() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/admin/report", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await apiAdmin.get("/report");
+
       setReport(res.data);
     } catch (err) {
       console.error("Gagal mengambil data report:", err);

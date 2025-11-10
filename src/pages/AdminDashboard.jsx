@@ -88,12 +88,9 @@ const AdminDashboard = () => {
 
     const fetchResidenceName = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/admin/residence-info",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await apiAdmin.get("/residence-info");
+        console.log(res.data);
+        
         setResidenceName(res.data.name || "Unknown Residence");
       } catch (error) {
         console.error("Error fetching residence name:", error);

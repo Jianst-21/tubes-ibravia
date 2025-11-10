@@ -41,10 +41,9 @@ const ManageReservation = () => {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(
-        "http://localhost:5000/api/admin/manage-reservation",
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await apiAdmin.get("/manage-reservation");
+      console.log(res.data);
+
       setReservations(res.data || []);
     } catch (err) {
       console.error("Gagal mengambil data:", err);
@@ -88,14 +87,11 @@ const ManageReservation = () => {
       const token = localStorage.getItem("token");
       const endpoint =
         type === "accept"
-          ? "http://localhost:5000/api/admin/accept-reservation"
-          : "http://localhost:5000/api/admin/cancel-reservation";
+          ? "/accept-reservation"
+          : "/cancel-reservation";
 
-      await axios.post(
-        endpoint,
-        { id_reservasi, id_house },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await apiAdmin.post(endpoint, { id_reservasi, id_house });
+
 
       // Tutup modal konfirmasi dulu
       closeModal();
@@ -173,11 +169,10 @@ const ManageReservation = () => {
                 return (
                   <div
                     key={item.id_reservasi}
-                    className={`bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full transition-all duration-500 border-b-4 border-b-black ${
-                      removingId === item.id_reservasi
-                        ? "opacity-0 translate-y-4 scale-95"
-                        : "hover:shadow-md"
-                    }`}
+                    className={`bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full transition-all duration-500 border-b-4 border-b-black ${removingId === item.id_reservasi
+                      ? "opacity-0 translate-y-4 scale-95"
+                      : "hover:shadow-md"
+                      }`}
                   >
                     {/* ... (ISI KARTU SAMA SEPERTI SEBELUMNYA) ... */}
                     {/* Header Card */}
@@ -200,18 +195,17 @@ const ManageReservation = () => {
 
                       <div className="flex flex-col items-end gap-2">
                         <span
-                          className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${
-                            item.status &&
+                          className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${item.status &&
                             item.status.toLowerCase() === "pending"
-                              ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
+                            ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
+                            : item.status &&
+                              item.status.toLowerCase() === "accepted"
+                              ? "border-green-200 text-green-700 bg-green-50"
                               : item.status &&
-                                  item.status.toLowerCase() === "accepted"
-                                ? "border-green-200 text-green-700 bg-green-50"
-                                : item.status &&
-                                    item.status.toLowerCase() === "expired"
-                                  ? "border-orange-200 text-orange-700 bg-orange-50"
-                                  : "border-red-200 text-red-700 bg-red-50"
-                          }`}
+                                item.status.toLowerCase() === "expired"
+                                ? "border-orange-200 text-orange-700 bg-orange-50"
+                                : "border-red-200 text-red-700 bg-red-50"
+                            }`}
                         >
                           {displayStatus}
                         </span>
