@@ -16,7 +16,6 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  // Ambil user dari localStorage
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
   const id_user = storedUser.id_user;
 
@@ -40,34 +39,30 @@ export default function EditProfile() {
       setIsDark(isNowDark);
       localStorage.setItem("theme", isNowDark ? "dark" : "light");
     });
-
     observer.observe(document.documentElement, { attributes: true });
+
     return () => observer.disconnect();
   }, []);
   // ================================
 
-  // ======== Fetch Data User =========
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await apiUser.get(`/${id_user}`);
-        console.log("Response dari /user/:id:", res);
+        const data = res.data;
 
-        if (res?.data?.user) {
-          const userData = res.data.user;
-          const [first, ...rest] = (userData.name || "").split(" ");
+        if (data?.user) {
+          const [first, ...rest] = (data.user.name || "").split(" ");
           const last = rest.join(" ");
-
           setUser({
             first_name: first,
             last_name: last,
-            email: userData.email || "",
-            phone_number: userData.phone_number || "",
-            address: userData.address || "",
+            email: data.user.email || "",
+            phone_number: data.user.phone_number || "",
+            address: data.user.address || "",
             profile_photo: null,
           });
-
-          setPreview(userData.photo_profile || null);
+          setPreview(data.user.photo_profile || null);
         }
       } catch (error) {
         console.error(error);
@@ -76,9 +71,7 @@ export default function EditProfile() {
     };
     fetchUser();
   }, [id_user]);
-  // ================================
 
-  // ======== Handle Ganti Foto =========
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -95,9 +88,7 @@ export default function EditProfile() {
     setPreview(null);
     setUser({ ...user, profile_photo: null });
   };
-  // ================================
 
-  // ======== Submit Update Profil =========
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -120,7 +111,7 @@ export default function EditProfile() {
       });
 
       toast.success("Profil berhasil diperbarui!");
-      setPreview(res.data?.user?.photo_profile || null);
+      setPreview(res.data.user.photo_profile || null);
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.error || "Gagal memperbarui profil.");
@@ -128,7 +119,6 @@ export default function EditProfile() {
       setLoading(false);
     }
   };
-  // ================================
 
   return (
     <div
@@ -161,11 +151,7 @@ export default function EditProfile() {
           <div className="flex items-center gap-6">
             <div className="w-48 h-48 rounded-full bg-card flex items-center justify-center overflow-hidden border border-border transition-all duration-300">
               {preview ? (
-                <img
-                  src={preview}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                />
+                <img src={preview} alt="Profile" className="w-full h-full object-cover" />
               ) : (
                 <User className="w-16 h-16 text-foreground/50" />
               )}
@@ -212,49 +198,18 @@ export default function EditProfile() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField
-              label="First Name"
-              value={user.first_name}
-              onChange={(val) => setUser({ ...user, first_name: val })}
-              disabled={false}
-              isDark={isDark}
-            />
-            <InputField
-              label="Last Name"
-              value={user.last_name}
-              onChange={(val) => setUser({ ...user, last_name: val })}
-              disabled={false}
-              isDark={isDark}
-            />
+            <InputField label="First Name" value={user.first_name} onChange={(val) => setUser({ ...user, first_name: val })} disabled={false} isDark={isDark} />
+            <InputField label="Last Name" value={user.last_name} onChange={(val) => setUser({ ...user, last_name: val })} disabled={false} isDark={isDark} />
           </div>
-          <InputField
-            label="Telephone"
-            value={user.phone_number}
-            onChange={(val) => setUser({ ...user, phone_number: val })}
-            disabled={false}
-            isDark={isDark}
-          />
-          <InputField
-            label="Email Address"
-            value={user.email}
-            onChange={() => {}}
-            disabled
-            isDark={isDark}
-          />
-          <TextAreaField
-            label="Address"
-            value={user.address}
-            onChange={(val) => setUser({ ...user, address: val })}
-            isDark={isDark}
-          />
+          <InputField label="Telephone" value={user.phone_number} onChange={(val) => setUser({ ...user, phone_number: val })} disabled={false} isDark={isDark} />
+          <InputField label="Email Address" value={user.email} onChange={() => { }} disabled isDark={isDark} />
+          <TextAreaField label="Address" value={user.address} onChange={(val) => setUser({ ...user, address: val })} isDark={isDark} />
 
           <div className="flex justify-end">
             <button
               type="submit"
               disabled={loading}
-              className={`ibravia-button ${
-                loading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
+              className={`ibravia-button ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
             >
               {loading ? "Saving..." : "Save"}
             </button>
@@ -268,9 +223,7 @@ export default function EditProfile() {
 // Input Components
 const InputField = ({ label, value, onChange, disabled, isDark }) => (
   <div>
-    <label className="block text-sm font-medium mb-1 text-foreground">
-      {label}
-    </label>
+    <label className="block text-sm font-medium mb-1 text-foreground">{label}</label>
     <input
       type="text"
       value={value}
@@ -287,9 +240,7 @@ const InputField = ({ label, value, onChange, disabled, isDark }) => (
 
 const TextAreaField = ({ label, value, onChange, isDark }) => (
   <div>
-    <label className="block text-sm font-medium mb-1 text-foreground">
-      {label}
-    </label>
+    <label className="block text-sm font-medium mb-1 text-foreground">{label}</label>
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
