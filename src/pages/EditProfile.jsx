@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeft, User, Upload, X } from "lucide-react";
-import api from "../../api/api";
+import api from "../api/api";
+
 
 export default function EditProfile() {
   const [user, setUser] = useState({
