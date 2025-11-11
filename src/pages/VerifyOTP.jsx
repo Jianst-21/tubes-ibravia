@@ -13,14 +13,18 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Ambil email & purpose dari state, fallback ke localStorage
-  const [email, setEmail] = useState(location.state?.email || localStorage.getItem("email") || "");
-  const [purpose, setPurpose] = useState(location.state?.purpose || localStorage.getItem("purpose") || "signup");
+  // Ambil email & purpose dari state atau localStorage
+  const [email, setEmail] = useState(
+    location.state?.email || localStorage.getItem("email") || ""
+  );
+  const [purpose, setPurpose] = useState(
+    location.state?.purpose || localStorage.getItem("otpPurpose") || "signup"
+  );
 
   // Simpan ke localStorage agar tetap tersedia setelah refresh
   useEffect(() => {
     if (email) localStorage.setItem("email", email);
-    if (purpose) localStorage.setItem("purpose", purpose);
+    if (purpose) localStorage.setItem("otpPurpose", purpose);
   }, [email, purpose]);
 
   // Redirect jika email tidak ditemukan
@@ -37,8 +41,8 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
       setCanResend(true);
       return;
     }
-    const t = setInterval(() => setTimeLeft((s) => s - 1), 1000);
-    return () => clearInterval(t);
+    const timer = setInterval(() => setTimeLeft((t) => t - 1), 1000);
+    return () => clearInterval(timer);
   }, [timeLeft]);
 
   const focusInput = (idx) => {
@@ -89,15 +93,17 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
       const res = await api.post("/auth/verify-otp", {
         email,
         otp: code,
-        purpose, // kirim purpose yang valid
+        purpose,
       });
 
       alert(res.data.message);
 
       localStorage.removeItem("email");
-      localStorage.removeItem("purpose");
+      localStorage.removeItem("otpPurpose");
 
-      navigate(purpose === "signup" ? "/Login" : "/ResetPassword", { state: { email } });
+      navigate(purpose === "signup" ? "/Login" : "/ResetPassword", {
+        state: { email },
+      });
     } catch (err) {
       console.error("❌ Verify error:", err.response?.data || err);
       setError(err.response?.data?.error || "Verifikasi gagal. Coba lagi.");
@@ -116,10 +122,12 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     }
 
     try {
+      console.log("🔁 Resend OTP payload:", { email, purpose });
       const res = await api.post("/auth/resend-otp", {
         email,
-        purpose, // selalu kirim purpose yang benar
+        purpose,
       });
+
       alert(res.data.message);
       setTimeLeft(resendCooldown);
       setCanResend(false);
@@ -176,12 +184,18 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
               onClick={handleResend}
               disabled={!canResend}
               className={`cursor-pointer font-medium transition-all duration-300 ${
-                canResend ? "text-blue-600 hover:text-blue-700 hover:underline" : "text-slate-400 cursor-not-allowed"
+                canResend
+                  ? "text-blue-600 hover:text-blue-700 hover:underline"
+                  : "text-slate-400 cursor-not-allowed"
               }`}
             >
               {canResend ? "Kirim ulang kode" : `Kirim ulang kode (${timeLeft}s)`}
             </button>
-            {!canResend && <div className="mt-1 text-xs text-slate-500 animate-pulse">Wait until {timeLeft}s before resending</div>}
+            {!canResend && (
+              <div className="mt-1 text-xs text-slate-500 animate-pulse">
+                Wait until {timeLeft}s before resending
+              </div>
+            )}
           </div>
         </form>
       </div>
