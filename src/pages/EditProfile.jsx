@@ -50,7 +50,8 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const { data } = await apiUser.get(`/${id_user}`);
+        const res = await apiUser.get(`/${d}`);
+        console.log(" Response dari /user/:id:", res);
 
         if (data?.user) {
           const [first, ...rest] = (data.user.name || "").split(" ");
@@ -193,12 +194,12 @@ export default function EditProfile() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField label="First Name" value={user.first_name} onChange={(val) => setUser({...user, first_name: val})} disabled={false} isDark={isDark} />
-            <InputField label="Last Name" value={user.last_name} onChange={(val) => setUser({...user, last_name: val})} disabled={false} isDark={isDark} />
+            <InputField label="First Name" value={user.first_name} onChange={(val) => setUser({ ...user, first_name: val })} disabled={false} isDark={isDark} />
+            <InputField label="Last Name" value={user.last_name} onChange={(val) => setUser({ ...user, last_name: val })} disabled={false} isDark={isDark} />
           </div>
-          <InputField label="Telephone" value={user.phone_number} onChange={(val) => setUser({...user, phone_number: val})} disabled={false} isDark={isDark} />
-          <InputField label="Email Address" value={user.email} onChange={() => {}} disabled isDark={isDark} />
-          <TextAreaField label="Address" value={user.address} onChange={(val) => setUser({...user, address: val})} isDark={isDark} />
+          <InputField label="Telephone" value={user.phone_number} onChange={(val) => setUser({ ...user, phone_number: val })} disabled={false} isDark={isDark} />
+          <InputField label="Email Address" value={user.email} onChange={() => { }} disabled isDark={isDark} />
+          <TextAreaField label="Address" value={user.address} onChange={(val) => setUser({ ...user, address: val })} isDark={isDark} />
 
           <div className="flex justify-end">
             <button
@@ -224,11 +225,10 @@ const InputField = ({ label, value, onChange, disabled, isDark }) => (
       value={value}
       onChange={(e) => onChange(e.target.value)}
       disabled={disabled}
-      className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${
-        disabled
+      className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${disabled
           ? "bg-background/50 text-foreground/50 cursor-not-allowed"
           : "bg-card text-foreground"
-      }`}
+        }`}
     />
   </div>
 );
