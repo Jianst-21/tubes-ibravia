@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeft, User, Upload, X } from "lucide-react";
-import api from "../../api/api";
-
 
 export default function EditProfile() {
   const [user, setUser] = useState({
@@ -27,6 +26,7 @@ export default function EditProfile() {
 
   // ======== Theme Persist =========
   useEffect(() => {
+    // Ambil theme dari localStorage atau system preference
     const savedTheme = localStorage.getItem("theme");
     const darkMode = savedTheme
       ? savedTheme === "dark"
@@ -35,6 +35,7 @@ export default function EditProfile() {
     setIsDark(darkMode);
     document.documentElement.classList.toggle("dark", darkMode);
 
+    // Observe perubahan class dark (jika ada toggle)
     const observer = new MutationObserver(() => {
       const isNowDark = document.documentElement.classList.contains("dark");
       setIsDark(isNowDark);
@@ -49,8 +50,7 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get(`/${id_user}`);
-        const data = res.data;
+        const res = await api.get(`/api/user/${id_user}`);
 
         if (data?.user) {
           const [first, ...rest] = (data.user.name || "").split(" ");
@@ -107,12 +107,12 @@ export default function EditProfile() {
         formData.append("remove_photo", "true");
       }
 
-      const res = await api.put(`/${id_user}`, formData, {
+      const res = await api.put(`/api/user/${id_user}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       toast.success("Profil berhasil diperbarui!");
-      setPreview(res.data.user.photo_profile || null);
+      setPreview(data.user.photo_profile || null);
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.error || "Gagal memperbarui profil.");
@@ -122,11 +122,7 @@ export default function EditProfile() {
   };
 
   return (
-    <div
-      className={`min-h-screen w-full px-4 sm:px-8 py-10 flex flex-col items-center transition-colors duration-300 ${
-        isDark ? "bg-background dark" : "bg-background"
-      }`}
-    >
+    <div className={`min-h-screen w-full px-4 sm:px-8 py-10 flex flex-col items-center transition-colors duration-300 ${isDark ? "bg-background dark" : "bg-background"}`}>
       <Toaster position="top-right" />
 
       {/* Header */}
@@ -142,11 +138,7 @@ export default function EditProfile() {
       </div>
 
       {/* Card */}
-      <div
-        className={`w-full max-w-6xl border border-border p-8 md:p-12 rounded-2xl transition-colors duration-300 ${
-          isDark ? "bg-card dark:bg-card" : "bg-card"
-        }`}
-      >
+      <div className={`w-full max-w-6xl border border-border p-8 md:p-12 rounded-2xl transition-colors duration-300 ${isDark ? "bg-card dark:bg-card" : "bg-card"}`}>
         {/* Foto & info */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-10 mb-10">
           <div className="flex items-center gap-6">
@@ -230,11 +222,10 @@ const InputField = ({ label, value, onChange, disabled, isDark }) => (
       value={value}
       onChange={(e) => onChange(e.target.value)}
       disabled={disabled}
-      className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${
-        disabled
+      className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${disabled
           ? "bg-background/50 text-foreground/50 cursor-not-allowed"
           : "bg-card text-foreground"
-      }`}
+        }`}
     />
   </div>
 );
