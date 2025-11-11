@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeft, User, Upload, X } from "lucide-react";
-import apiUser from "../../api/apiUser";
+import apiUser from "../../api/api";
 
 export default function EditProfile() {
   const [user, setUser] = useState({
