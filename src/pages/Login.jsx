@@ -147,12 +147,12 @@ export const Login = () => {
                 />
                 Remember me
               </label>
-              <a
-                href="/ForgotPassword"
+              <Link
+                to="/forgot-password"
                 className="text-primary hover:underline hover:opacity-90 transition"
               >
                 Forgot Password?
-              </a>
+              </Link>
             </div>
 
             {/* LOGIN BUTTON */}

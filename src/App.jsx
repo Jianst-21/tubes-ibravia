@@ -34,7 +34,7 @@ function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/VerifyOTP" element={<VerifyOTP />} />
         <Route path="/EditProfile" element={<EditProfile />} />
-        <Route path="/ForgotPassword" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
 
