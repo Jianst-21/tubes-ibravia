@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeft, User, Upload, X } from "lucide-react";
-import apiUser from "../../api/api";
+import api from "../../api/api";
+
 
 export default function EditProfile() {
   const [user, setUser] = useState({
@@ -48,7 +49,7 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await apiUser.get(`/${id_user}`);
+        const res = await api.get(`/${id_user}`);
         const data = res.data;
 
         if (data?.user) {
@@ -106,7 +107,7 @@ export default function EditProfile() {
         formData.append("remove_photo", "true");
       }
 
-      const res = await apiUser.put(`/${id_user}`, formData, {
+      const res = await api.put(`/${id_user}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
