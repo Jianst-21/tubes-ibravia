@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Sidebar from "../components/AdminDashboard/Sidebar";
 import axios from "axios";
 import { Printer, ChevronLeft, ChevronRight, FileText } from "lucide-react";
-import apiAdmin from "../../api/apiAdmin";
+import apiAdmin from "../../api/apiadmin";
 
 export default function AdminDataReport() {
   const [report, setReport] = useState([]);

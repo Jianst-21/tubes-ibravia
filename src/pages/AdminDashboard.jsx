@@ -3,7 +3,7 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import { BookText, BookCheck, BookX } from "lucide-react";
 import ChartCard from "../components/AdminDashboard/ChartCard";
 import axios from "axios";
-import apiAdmin from "../../api/apiAdmin";
+import apiAdmin from "../../api/apiadmin";
 /* ===============================
    COMPONENT: STAT CARD
 ================================= */
