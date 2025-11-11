@@ -3,7 +3,7 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import { BookText, BookCheck, BookX } from "lucide-react";
 import ChartCard from "../components/AdminDashboard/ChartCard";
 import axios from "axios";
-import apiAdmin from "../../api/apiadmin";
+import apiadmin from "../../api/apiadmin";
 /* ===============================
    COMPONENT: STAT CARD
 ================================= */
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
 
     const fetchDashboard = async () => {
       try {
-        const res = await apiAdmin.get("/dashboard");
+        const res = await apiadmin.get("/dashboard");
         console.log("Dashboard response:", res.data);
 
         const result = res.data?.data || {};
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
 
     const fetchResidenceName = async () => {
       try {
-        const res = await apiAdmin.get("/residence-info");
+        const res = await apiadmin.get("/residence-info");
         console.log(res.data);
 
         setResidenceName(res.data.name || "Unknown Residence");
