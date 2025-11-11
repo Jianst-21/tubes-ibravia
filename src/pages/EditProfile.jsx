@@ -50,9 +50,8 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:5000/api/user/${id_user}`
-        );
+        const { data } = await apiUser.get(`/${id_user}`);
+
         if (data?.user) {
           const [first, ...rest] = (data.user.name || "").split(" ");
           const last = rest.join(" ");

@@ -64,7 +64,7 @@ const AdminDashboard = () => {
     const fetchDashboard = async () => {
       try {
         const res = await apiAdmin.get("/dashboard");
-
+        console.log("Dashboard response:", res.data);
 
         const result = res.data?.data || {};
         setStats({
@@ -99,10 +99,10 @@ const AdminDashboard = () => {
 
   return (
     <>
-      {/* ✅ Sidebar tetap fix di kiri */}
+      {/* Sidebar tetap fix di kiri */}
       <Sidebar />
 
-      {/* ✅ Area kanan: tidak scroll, fix penuh */}
+      {/* Area kanan: tidak scroll, fix penuh */}
       <div className="fixed inset-y-0 left-64 right-0 bg-gray-50 flex flex-col justify-between overflow-hidden">
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div>
