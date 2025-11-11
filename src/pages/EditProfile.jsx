@@ -51,7 +51,7 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await api.get(`/api/user/${id_user}`);
+        const res = await api.get(`/user/${id_user}`);
 
         if (data?.user) {
           const [first, ...rest] = (data.user.name || "").split(" ");
@@ -108,9 +108,10 @@ export default function EditProfile() {
         formData.append("remove_photo", "true");
       }
 
-      const res = await api.put(`/api/user/${id_user}`, formData, {
+      const res = await api.put(`/user/${id_user}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
 
       toast.success("Profil berhasil diperbarui!");
       setPreview(data.user.photo_profile || null);
@@ -224,8 +225,8 @@ const InputField = ({ label, value, onChange, disabled, isDark }) => (
       onChange={(e) => onChange(e.target.value)}
       disabled={disabled}
       className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${disabled
-          ? "bg-background/50 text-foreground/50 cursor-not-allowed"
-          : "bg-card text-foreground"
+        ? "bg-background/50 text-foreground/50 cursor-not-allowed"
+        : "bg-card text-foreground"
         }`}
     />
   </div>
