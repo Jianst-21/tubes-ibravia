@@ -64,7 +64,7 @@ export const SignUp = () => {
 
       // simpan email & purpose ke localStorage
       localStorage.setItem("email", formData.email);
-      localStorage.setItem("purpose", "signup"); // ✅ penting untuk VerifyOTP
+      localStorage.setItem("otpPurpose", "signup");
 
       // munculkan popup sukses
       setPopupMessage({
@@ -222,7 +222,7 @@ export const SignUp = () => {
               Login
             </Link>
           </p>
-          
+
           <PopupSignup
             show={showPopup}
             message={popupMessage}

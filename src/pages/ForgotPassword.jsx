@@ -83,7 +83,7 @@ export const ForgotPassword = () => {
         onClose={() => {
           setShowPopup(false);
           if (popupMessage?.title === "OTP Terkirim") {
-            navigate("/VerifyOTP", { state: { email, purpose: "reset_password" } });
+            navigate("/VerifyOTP", { state: { email, otppurpose: "reset_password" } });
           }
         }}
       />
