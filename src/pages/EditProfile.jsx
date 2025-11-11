@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeft, User, Upload, X } from "lucide-react";
-import apiUser from "../../api/apiUser"; 
-
+import apiUser from "../../api/apiUser";
 
 export default function EditProfile() {
   const [user, setUser] = useState({
@@ -18,6 +16,7 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
+  // Ambil user dari localStorage
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
   const id_user = storedUser.id_user;
 
@@ -28,7 +27,6 @@ export default function EditProfile() {
 
   // ======== Theme Persist =========
   useEffect(() => {
-    // Ambil theme dari localStorage atau system preference
     const savedTheme = localStorage.getItem("theme");
     const darkMode = savedTheme
       ? savedTheme === "dark"
@@ -37,36 +35,39 @@ export default function EditProfile() {
     setIsDark(darkMode);
     document.documentElement.classList.toggle("dark", darkMode);
 
-    // Observe perubahan class dark (jika ada toggle)
     const observer = new MutationObserver(() => {
       const isNowDark = document.documentElement.classList.contains("dark");
       setIsDark(isNowDark);
       localStorage.setItem("theme", isNowDark ? "dark" : "light");
     });
-    observer.observe(document.documentElement, { attributes: true });
 
+    observer.observe(document.documentElement, { attributes: true });
     return () => observer.disconnect();
   }, []);
   // ================================
 
+  // ======== Fetch Data User =========
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await apiUser.get(`/${d}`);
-        console.log(" Response dari /user/:id:", res);
+        const res = await apiUser.get(`/${id_user}`);
+        console.log("Response dari /user/:id:", res);
 
-        if (data?.user) {
-          const [first, ...rest] = (data.user.name || "").split(" ");
+        if (res?.data?.user) {
+          const userData = res.data.user;
+          const [first, ...rest] = (userData.name || "").split(" ");
           const last = rest.join(" ");
+
           setUser({
             first_name: first,
             last_name: last,
-            email: data.user.email || "",
-            phone_number: data.user.phone_number || "",
-            address: data.user.address || "",
+            email: userData.email || "",
+            phone_number: userData.phone_number || "",
+            address: userData.address || "",
             profile_photo: null,
           });
-          setPreview(data.user.photo_profile || null);
+
+          setPreview(userData.photo_profile || null);
         }
       } catch (error) {
         console.error(error);
@@ -75,7 +76,9 @@ export default function EditProfile() {
     };
     fetchUser();
   }, [id_user]);
+  // ================================
 
+  // ======== Handle Ganti Foto =========
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -92,7 +95,9 @@ export default function EditProfile() {
     setPreview(null);
     setUser({ ...user, profile_photo: null });
   };
+  // ================================
 
+  // ======== Submit Update Profil =========
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -110,14 +115,12 @@ export default function EditProfile() {
         formData.append("remove_photo", "true");
       }
 
-      const { data } = await axios.put(
-        `http://localhost:5000/api/user/${id_user}`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+      const res = await apiUser.put(`/${id_user}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       toast.success("Profil berhasil diperbarui!");
-      setPreview(data.user.photo_profile || null);
+      setPreview(res.data?.user?.photo_profile || null);
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.error || "Gagal memperbarui profil.");
@@ -125,9 +128,14 @@ export default function EditProfile() {
       setLoading(false);
     }
   };
+  // ================================
 
   return (
-    <div className={`min-h-screen w-full px-4 sm:px-8 py-10 flex flex-col items-center transition-colors duration-300 ${isDark ? "bg-background dark" : "bg-background"}`}>
+    <div
+      className={`min-h-screen w-full px-4 sm:px-8 py-10 flex flex-col items-center transition-colors duration-300 ${
+        isDark ? "bg-background dark" : "bg-background"
+      }`}
+    >
       <Toaster position="top-right" />
 
       {/* Header */}
@@ -143,13 +151,21 @@ export default function EditProfile() {
       </div>
 
       {/* Card */}
-      <div className={`w-full max-w-6xl border border-border p-8 md:p-12 rounded-2xl transition-colors duration-300 ${isDark ? "bg-card dark:bg-card" : "bg-card"}`}>
+      <div
+        className={`w-full max-w-6xl border border-border p-8 md:p-12 rounded-2xl transition-colors duration-300 ${
+          isDark ? "bg-card dark:bg-card" : "bg-card"
+        }`}
+      >
         {/* Foto & info */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-10 mb-10">
           <div className="flex items-center gap-6">
             <div className="w-48 h-48 rounded-full bg-card flex items-center justify-center overflow-hidden border border-border transition-all duration-300">
               {preview ? (
-                <img src={preview} alt="Profile" className="w-full h-full object-cover" />
+                <img
+                  src={preview}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <User className="w-16 h-16 text-foreground/50" />
               )}
@@ -196,18 +212,49 @@ export default function EditProfile() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField label="First Name" value={user.first_name} onChange={(val) => setUser({ ...user, first_name: val })} disabled={false} isDark={isDark} />
-            <InputField label="Last Name" value={user.last_name} onChange={(val) => setUser({ ...user, last_name: val })} disabled={false} isDark={isDark} />
+            <InputField
+              label="First Name"
+              value={user.first_name}
+              onChange={(val) => setUser({ ...user, first_name: val })}
+              disabled={false}
+              isDark={isDark}
+            />
+            <InputField
+              label="Last Name"
+              value={user.last_name}
+              onChange={(val) => setUser({ ...user, last_name: val })}
+              disabled={false}
+              isDark={isDark}
+            />
           </div>
-          <InputField label="Telephone" value={user.phone_number} onChange={(val) => setUser({ ...user, phone_number: val })} disabled={false} isDark={isDark} />
-          <InputField label="Email Address" value={user.email} onChange={() => { }} disabled isDark={isDark} />
-          <TextAreaField label="Address" value={user.address} onChange={(val) => setUser({ ...user, address: val })} isDark={isDark} />
+          <InputField
+            label="Telephone"
+            value={user.phone_number}
+            onChange={(val) => setUser({ ...user, phone_number: val })}
+            disabled={false}
+            isDark={isDark}
+          />
+          <InputField
+            label="Email Address"
+            value={user.email}
+            onChange={() => {}}
+            disabled
+            isDark={isDark}
+          />
+          <TextAreaField
+            label="Address"
+            value={user.address}
+            onChange={(val) => setUser({ ...user, address: val })}
+            isDark={isDark}
+          />
 
           <div className="flex justify-end">
             <button
               type="submit"
               disabled={loading}
-              className={`ibravia-button ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+              className={`ibravia-button ${
+                loading ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
               {loading ? "Saving..." : "Save"}
             </button>
@@ -221,23 +268,28 @@ export default function EditProfile() {
 // Input Components
 const InputField = ({ label, value, onChange, disabled, isDark }) => (
   <div>
-    <label className="block text-sm font-medium mb-1 text-foreground">{label}</label>
+    <label className="block text-sm font-medium mb-1 text-foreground">
+      {label}
+    </label>
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       disabled={disabled}
-      className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${disabled
+      className={`w-full border border-border rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-primary transition-colors duration-300 ${
+        disabled
           ? "bg-background/50 text-foreground/50 cursor-not-allowed"
           : "bg-card text-foreground"
-        }`}
+      }`}
     />
   </div>
 );
 
 const TextAreaField = ({ label, value, onChange, isDark }) => (
   <div>
-    <label className="block text-sm font-medium mb-1 text-foreground">{label}</label>
+    <label className="block text-sm font-medium mb-1 text-foreground">
+      {label}
+    </label>
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
