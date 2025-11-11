@@ -14,7 +14,7 @@ export const AboutUs = () => {
         {/*Main Content*/}
         <main>
             <AboutTop />
-            <VillaSection />                
+            <VillaSection />
 
         </main>
         {/*Footer*/}
