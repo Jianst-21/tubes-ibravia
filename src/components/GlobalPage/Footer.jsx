@@ -12,9 +12,9 @@ const Footer = () => {
           <img
             src={LogoPutih}
             alt="Ibravia Logo"
-            className="w-[50px] h-[50px] mr-3 object-contain"
+            className="h-11 w-auto mr-3 object-contain"
           />
-          <h1 className="text-xl font-bold tracking-wide">IBRAVIA</h1>
+          <h1 className="font-bold text-[20px] tracking-wide">IBRAVIA</h1>
         </div>
 
         {/* Menu Navigasi */}
