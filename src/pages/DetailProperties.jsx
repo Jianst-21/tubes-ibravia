@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Navbar } from "../components/GlobalPage/Navbar";
 import HouseSelector from "../components/DetailPage/HouseSelector";
 import HouseDetail from "../components/DetailPage/HouseDetail";
-
+import Footer from "../components/GlobalPage/Footer";
 export const DetailProperties = () => {
   const { id_block } = useParams();
   const [houses, setHouses] = useState([]);
@@ -63,6 +63,8 @@ export const DetailProperties = () => {
           <HouseDetail house={selectedHouse} />
         </>
       )}
+
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { Navbar } from "../components/GlobalPage/Navbar";
 import { AboutTop } from "../components/AboutUs/AboutTop";
 import { VillaSection } from "../components/AboutUs/VillaSection";
+import Footer from "../components/GlobalPage/Footer";
 export const AboutUs = () => {
     return <div className=" min-h-screen overflow-x-hidden">
 
@@ -18,7 +19,7 @@ export const AboutUs = () => {
 
         </main>
         {/*Footer*/}
-
+        <Footer />
 
     </div>;
 
