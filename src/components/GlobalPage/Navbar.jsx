@@ -191,38 +191,47 @@ export const Navbar = () => {
       </div>
 
       {/* MOBILE MENU */}
+      {/* MOBILE MENU */}
       <div
         className={cn(
-          "fixed inset-0 bg-background/95 backdrop-blur-md z-[90] flex flex-col items-center justify-center transition-all duration-300 md:hidden",
+          "fixed inset-0 z-[99] flex flex-col items-center justify-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden",
           isMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         )}
+        style={{
+          overflow: "hidden", // 🔒 biar ga bisa scroll
+        }}
       >
-        <div className="flex flex-col items-center space-y-6 text-lg">
+        {/* NAV ITEMS */}
+        <ul className="flex flex-col items-center space-y-6 text-lg font-medium">
           {navItems.map((item, key) => (
-            <Link
-              key={key}
-              to={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
+            <li key={key}>
+              <Link
+                to={item.href}
+                className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            </li>
           ))}
+        </ul>
 
-          <div className="w-32 border-t border-border my-4"></div>
+        <div className="w-32 border-t border-border my-6" />
 
-          <div className="flex flex-col space-y-3 w-40">
-            {isReady &&
-              (isLoggedIn ? (
+        {/* AUTH BUTTONS */}
+        <div className="flex flex-col gap-4 w-[200px]">
+          {isReady && (
+            <>
+              {isLoggedIn ? (
                 <>
                   <button
                     onClick={() => {
                       navigate("/EditProfile");
                       setIsMenuOpen(false);
                     }}
-                    className="ibravia-button bg-transparent border border-primary text-primary hover:bg-primary hover:text-primary-foreground text-center"
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all"
                   >
                     Edit Profile
                   </button>
@@ -231,33 +240,34 @@ export const Navbar = () => {
                       handleLogout();
                       setIsMenuOpen(false);
                     }}
-                    className="ibravia-button border border-destructive text-destructive hover:bg-destructive hover:text-white text-center bg-card dark:bg-transparent"
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-destructive text-destructive bg-transparent hover:bg-destructive hover:text-white transition-all"
                   >
                     Logout
                   </button>
-
                 </>
               ) : (
                 <>
                   <Link
                     to="/Login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="ibravia-button bg-transparent border border-primary text-primary hover:bg-primary hover:text-primary-foreground text-center"
+                    className="w-full px-5 py-2 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 transition-all text-center"
                   >
                     Login
                   </Link>
                   <Link
                     to="/SignUp"
                     onClick={() => setIsMenuOpen(false)}
-                    className="ibravia-button text-center"
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all text-center"
                   >
                     Sign Up
                   </Link>
                 </>
-              ))}
-          </div>
+              )}
+            </>
+          )}
         </div>
       </div>
+
     </nav>
   );
 };
