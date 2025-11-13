@@ -28,7 +28,7 @@ const Footer = () => {
           <Link to="/reservation" className="hover:underline">
             Reservation
           </Link>
-          <Link to="/about" className="hover:underline">
+          <Link to="/aboutus" className="hover:underline">
             About Us
           </Link>
           <Link to="/contact" className="hover:underline">
