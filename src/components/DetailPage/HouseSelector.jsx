@@ -34,16 +34,16 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
 
   return (
     <section
-      className="relative w-screen h-[80vh] left-1/2 right-1/2 -translate-x-1/2 bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="relative w-screen h-[80vh] mt-[90px] bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      {/* Overlay gelap */}
-      <div className="absolute inset-0 bg-black/60"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/60 z-10"></div>
 
-      {/* Konten utama */}
-      <div className="relative z-10 flex flex-col justify-center items-center h-full px-3 sm:px-6 text-center text-white">
+      {/* Konten */}
+      <div className="relative z-20 flex flex-col justify-center items-center h-full px-3 sm:px-6 text-center text-white">
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-8 sm:mb-12 drop-shadow-lg">
           Choose Your House!
         </h2>
@@ -88,8 +88,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
             className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 ${currentPage === 1
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:scale-110 hover:shadow-md"
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:scale-110 hover:shadow-md"
               }`}
             style={{
               backgroundColor: "hsl(var(--card))",
@@ -103,15 +103,15 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             className="font-semibold text-base sm:text-lg"
             style={{ color: "hsl(var(--foreground))" }}
           >
-            {currentPage} 
+            {currentPage}
           </span>
 
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
             className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 ${currentPage === totalPages
-                ? "opacity-50 cursor-not-allowed"
-                : "hover:scale-110 hover:shadow-md"
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:scale-110 hover:shadow-md"
               }`}
             style={{
               backgroundColor: "hsl(var(--card))",
