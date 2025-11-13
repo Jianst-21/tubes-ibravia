@@ -3,7 +3,7 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import { BookText, BookCheck, BookX } from "lucide-react";
 import ChartCard from "../components/AdminDashboard/ChartCard";
 import axios from "axios";
-import apiadmin from "../api/apiadmin";
+
 /* ===============================
    COMPONENT: STAT CARD
 ================================= */
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
   });
   const [residenceName, setResidenceName] = useState("");
 
-  // 🔒 Lock body scroll
+  //  Lock body scroll
   useLayoutEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -65,6 +65,7 @@ const AdminDashboard = () => {
       try {
         const res = await apiadmin.get("/dashboard");
         console.log("Dashboard response:", res.data);
+        ;
 
         const result = res.data?.data || {};
         setStats({
@@ -73,7 +74,7 @@ const AdminDashboard = () => {
           cancelled: result.cancelled_reservations ?? 0,
           weeklydata:
             result.latest_reservations?.map((r, i) => ({
-              name: `Resv ${i + 1}`,
+              name: `Week ${i + 1}`,
               value: parseInt(r?.house?.number_block || 0),
             })) ?? [],
         });
@@ -84,6 +85,7 @@ const AdminDashboard = () => {
 
     const fetchResidenceName = async () => {
       try {
+
         const res = await apiadmin.get("/residence-info");
         console.log(res.data);
 
@@ -99,10 +101,10 @@ const AdminDashboard = () => {
 
   return (
     <>
-      {/* Sidebar tetap fix di kiri */}
+      {/*  Sidebar tetap fix di kiri */}
       <Sidebar />
 
-      {/* Area kanan: tidak scroll, fix penuh */}
+      {/*  Area kanan: tidak scroll, fix penuh */}
       <div className="fixed inset-y-0 left-64 right-0 bg-gray-50 flex flex-col justify-between overflow-hidden">
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div>
