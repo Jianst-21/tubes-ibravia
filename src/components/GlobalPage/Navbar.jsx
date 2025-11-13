@@ -101,9 +101,8 @@ export const Navbar = () => {
             className="h-11 w-auto transition-all duration-300 object-contain"
           />
           <span
-            className={`font-bold text-[20px] ${
-              isDark ? "text-white" : "text-[#0A3764]"
-            }`}
+            className={`font-bold text-[20px] ${isDark ? "text-white" : "text-[#0A3764]"
+              }`}
           >
             IBRAVIA
           </span>
@@ -232,10 +231,11 @@ export const Navbar = () => {
                       handleLogout();
                       setIsMenuOpen(false);
                     }}
-                    className="ibravia-button bg-transparent border border-destructive text-destructive hover:bg-destructive hover:text-white text-center"
+                    className="ibravia-button border border-destructive text-destructive hover:bg-destructive hover:text-white text-center bg-card dark:bg-transparent"
                   >
                     Logout
                   </button>
+
                 </>
               ) : (
                 <>
