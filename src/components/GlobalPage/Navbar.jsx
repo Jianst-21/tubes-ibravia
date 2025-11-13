@@ -36,6 +36,7 @@ export const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Efek sticky dan theme
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
@@ -74,6 +75,22 @@ export const Navbar = () => {
     };
   }, []);
 
+  // 🔒 Kunci scroll body saat menu mobile terbuka
+  useEffect(() => {
+    if (isMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+  }, [isMenuOpen]);
+
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("user");
@@ -101,8 +118,9 @@ export const Navbar = () => {
             className="h-11 w-auto transition-all duration-300 object-contain"
           />
           <span
-            className={`font-bold text-[20px] ${isDark ? "text-white" : "text-[#0A3764]"
-              }`}
+            className={`font-bold text-[20px] ${
+              isDark ? "text-white" : "text-[#0A3764]"
+            }`}
           >
             IBRAVIA
           </span>
@@ -263,7 +281,6 @@ export const Navbar = () => {
           </div>
         </div>
       )}
-
     </nav>
   );
 };
