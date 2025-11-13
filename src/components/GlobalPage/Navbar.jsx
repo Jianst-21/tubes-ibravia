@@ -191,82 +191,78 @@ export const Navbar = () => {
       </div>
 
       {/* MOBILE MENU */}
-      {/* MOBILE MENU */}
-      <div
-        className={cn(
-          "fixed inset-0 z-[99] flex flex-col items-center justify-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden",
-          isMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        )}
-        style={{
-          overflow: "hidden", // 🔒 biar ga bisa scroll
-        }}
-      >
-        {/* NAV ITEMS */}
-        <ul className="flex flex-col items-center space-y-6 text-lg font-medium">
-          {navItems.map((item, key) => (
-            <li key={key}>
-              <Link
-                to={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto"
+          style={{
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          {/* NAV ITEMS */}
+          <ul className="flex flex-col items-center space-y-6 text-lg font-medium mt-24">
+            {navItems.map((item, key) => (
+              <li key={key}>
+                <Link
+                  to={item.href}
+                  className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        <div className="w-32 border-t border-border my-6" />
+          <div className="w-32 border-t border-border my-8" />
 
-        {/* AUTH BUTTONS */}
-        <div className="flex flex-col gap-4 w-[200px]">
-          {isReady && (
-            <>
-              {isLoggedIn ? (
-                <>
-                  <button
-                    onClick={() => {
-                      navigate("/EditProfile");
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all"
-                  >
-                    Edit Profile
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setIsMenuOpen(false);
-                    }}
-                    className="w-full px-5 py-2 rounded-lg font-semibold border border-destructive text-destructive bg-transparent hover:bg-destructive hover:text-white transition-all"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/Login"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="w-full px-5 py-2 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 transition-all text-center"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/SignUp"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all text-center"
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              )}
-            </>
-          )}
+          {/* AUTH BUTTONS */}
+          <div className="flex flex-col gap-4 w-[200px] mb-12">
+            {isReady && (
+              <>
+                {isLoggedIn ? (
+                  <>
+                    <button
+                      onClick={() => {
+                        navigate("/EditProfile");
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all"
+                    >
+                      Edit Profile
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full px-5 py-2 rounded-lg font-semibold border border-destructive text-destructive bg-transparent hover:bg-destructive hover:text-white transition-all"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/Login"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="w-full px-5 py-2 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 transition-all text-center"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/SignUp"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all text-center"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
     </nav>
   );
