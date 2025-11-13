@@ -41,8 +41,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
           window.innerWidth <= 640
             ? "95vh" // HP
             : window.innerWidth <= 1024
-              ? "100vh" // Tablet
-              : "110vh", // Laptop / Desktop
+              ? "98vh" // Tablet
+              : "100vh", // Laptop / Desktop
       }}
 
     >
