@@ -4,7 +4,7 @@ import { HeroSection } from "../components/HomePage/HeroSection";
 import { TrustedCollaboration } from "../components/HomePage/TrustedCollaboration";
 import { WhyChooseUs } from "../components/HomePage/WhyChooseUs";
 import  {HouseCollections}  from "../components/HomePage/HouseCollections";
-
+import { Footer } from "../components/GlobalPage/Footer";
 
 export const Home = () => {
     return <div className=" min-h-screen overflow-x-hidden">
@@ -24,7 +24,7 @@ export const Home = () => {
            
             <HouseCollections />
         </main>
-        {/*Footer*/}
+        {Footer/}
 
 
     </div>;
