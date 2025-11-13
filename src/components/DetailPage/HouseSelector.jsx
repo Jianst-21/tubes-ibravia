@@ -37,9 +37,12 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
       className="relative w-screen h-[80vh] left-1/2 right-1/2 -translate-x-1/2 bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize:
-          window.innerWidth <= 1024 ? "120% auto" : "110% auto",
-        backgroundPosition: "center center",
+        minHeight:
+          window.innerWidth <= 640
+            ? "95vh" // HP
+            : window.innerWidth <= 1024
+              ? "110vh" // Tablet
+              : "120vh", // Laptop / Desktop
       }}
 
     >
