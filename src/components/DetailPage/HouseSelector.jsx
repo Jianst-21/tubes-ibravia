@@ -34,7 +34,7 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
 
   return (
     <section
-      className="relative w-screen h-[80vh] mt-[90px] bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="pt-[100px] left-1/2 right-1/2 -translate-x-1/2 bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
       }}
