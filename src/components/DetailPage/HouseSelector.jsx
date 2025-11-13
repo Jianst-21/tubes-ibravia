@@ -34,16 +34,20 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
 
   return (
     <section
-      className="pt-[100px] left-1/2 right-1/2 -translate-x-1/2 bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="relative w-screen h-[80vh] left-1/2 right-1/2 -translate-x-1/2 bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
+        backgroundSize:
+          window.innerWidth <= 1024 ? "120% auto" : "110% auto",
+        backgroundPosition: "center center",
       }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10"></div>
 
-      {/* Konten */}
-      <div className="relative z-20 flex flex-col justify-center items-center h-full px-3 sm:px-6 text-center text-white">
+    >
+      {/* Overlay gelap */}
+      <div className="absolute inset-0 bg-black/60"></div>
+
+      {/* Konten utama */}
+      <div className="relative z-10 flex flex-col justify-center items-center h-full px-3 sm:px-6 text-center text-white">
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-8 sm:mb-12 drop-shadow-lg">
           Choose Your House!
         </h2>
