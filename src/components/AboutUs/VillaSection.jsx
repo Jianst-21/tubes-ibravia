@@ -41,7 +41,7 @@ export const VillaSection = () => {
         },
         {
           title: "Housing Overview",
-          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located in [insert area name]. The project enjoys a strategic position close to public amenities such as schools, local markets, and major roads.",
+          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located in Jl. Raya Jember No. C2, Perum Kalirejo, Kec./Kab. Banyuwangi, Jawa Timur. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
           img: "/images/block/A.png",
         },
       ],
@@ -52,7 +52,7 @@ export const VillaSection = () => {
       slides: [
         {
           title: "Villa Ijen Delima",
-          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located in Jl. Raya Jember No. C2, Perum Kalirejo, Kec./Kab. Banyuwangi, Jawa Timur. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
+          desc: "Villa Ijen Delima is a residential complex developed by PT Bumi Bangun Persada Property, offering homes with a modern minimalist touch. Part of a new neighborhood, this residence is built with functionality and aesthetics in mind. It provides the ideal space for modern family living.",
           img: "/images/block/E.png",
         },
         {

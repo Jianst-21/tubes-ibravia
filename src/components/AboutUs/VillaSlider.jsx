@@ -43,7 +43,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                         </h2>
                         {desc && (
                             <p
-                                className={`text-sm mb-4 leading-snug text-justify ${
+                                className={`text-[18px] mb-4 leading-snug text-justify ${
                                     blueTheme ? "text-white/80" : "text-gray-600"
                                 }`}
                             >
