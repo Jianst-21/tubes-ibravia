@@ -3,7 +3,7 @@ import axios from "axios";
 const apiAdmin = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL
     ? `${import.meta.env.VITE_API_BASE_URL}/admin`
-    : "https://server-ibravia.up.railway.app/api/admin",
+    : "VITE_API_URL=https://server-ibrarvia.zeabur.app/api/admin",
   timeout: 10000,
 });
 
