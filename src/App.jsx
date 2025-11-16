@@ -3,7 +3,7 @@ import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import OauthSuccess from "./pages/OauthSuccess";
- import { Properties } from "./pages/Properties";
+import { Properties } from "./pages/Properties";
 import { Reservation } from "./pages/Reservation";
 import { AboutUs } from "./pages/AboutUs";
 import { SignUp } from "./pages/SignUp";
@@ -106,4 +106,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;
