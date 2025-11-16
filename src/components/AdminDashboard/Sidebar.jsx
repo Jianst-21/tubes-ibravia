@@ -19,53 +19,59 @@ const Sidebar = () => {
   const [notifCount, setNotifCount] = useState(0);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
 
-    const fetchNotifCount = async () => {
-      try {
-        const res = await apiAdmin.get("/notifications", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const unreadCount = res.data.filter(
-          (n) => n.read_status !== "read"
-        ).length;
-        setNotifCount(unreadCount);
-      } catch (err) {
-        console.error("Error fetching notifications:", err);
-      }
-    };
+  const ENABLE_LOG = false; // <<< MATIKAN LOG DARI SINI
 
-    fetchNotifCount();
-
-    console.log("🟢 Realtime listener aktif...");
-    const channel = supabaseRealtime
-      .channel("admin-notification-realtime")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "notification" },
-        (payload) => {
-          console.log("🔔 Notifikasi berubah:", payload.eventType);
-          fetchNotifCount();
-        }
-      )
-      .subscribe((status) => {
-        console.log("Realtime status:", status);
+  const fetchNotifCount = async () => {
+    try {
+      const res = await apiAdmin.get("/notifications", {
+        headers: { Authorization: `Bearer ${token}` },
       });
+      const unreadCount = res.data.filter(
+        (n) => n.read_status !== "read"
+      ).length;
+      setNotifCount(unreadCount);
+    } catch (err) {
+      if (ENABLE_LOG) console.error("Error fetching notifications:", err);
+    }
+  };
 
-    window.addEventListener("notifUpdated", fetchNotifCount);
+  fetchNotifCount();
 
-    return () => {
-      window.removeEventListener("notifUpdated", fetchNotifCount);
-      try {
-        supabaseRealtime.removeChannel(channel);
-        console.log("🧹 Realtime listener dibersihkan");
-      } catch (err) {
-        console.warn("Gagal remove channel:", err);
+  if (ENABLE_LOG) console.log("🟢 Realtime listener aktif...");
+
+  const channel = supabaseRealtime
+    .channel("admin-notification-realtime")
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "notification" },
+      (payload) => {
+        if (ENABLE_LOG)
+          console.log("🔔 Notifikasi berubah:", payload.eventType);
+        fetchNotifCount();
       }
-    };
-  }, []);
+    )
+    .subscribe((status) => {
+      if (ENABLE_LOG) console.log("Realtime status:", status);
+    });
+
+  window.addEventListener("notifUpdated", fetchNotifCount);
+
+  return () => {
+    window.removeEventListener("notifUpdated", fetchNotifCount);
+    try {
+      supabaseRealtime.removeChannel(channel);
+      if (ENABLE_LOG) console.log("🧹 Realtime listener dibersihkan");
+    } catch (err) {
+      if (ENABLE_LOG) console.warn("Gagal remove channel:", err);
+    }
+  };
+}, []);
+
+
 
   // --- Logout logic ---
   const handleLogoutClick = () => setShowLogoutModal(true);

@@ -3,6 +3,7 @@ import { cn } from "../../lib/utils";
 import { Menu, X, LogOut, UserCog } from "lucide-react";
 import { ThemeToggle } from "./ThemeTooggle";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import LogoBiru from "../../assets/images/logo/Logo Biru.png";
 import LogoPutih from "../../assets/images/logo/Logo Putih.png";
@@ -96,6 +97,7 @@ export const Navbar = () => {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUserData(null);
+    toast.success("Logout successful!"); 
     navigate("/Login");
   };
 
@@ -118,9 +120,8 @@ export const Navbar = () => {
             className="h-11 w-auto transition-all duration-300 object-contain"
           />
           <span
-            className={`font-bold text-[20px] ${
-              isDark ? "text-white" : "text-[#0A3764]"
-            }`}
+            className={`font-bold text-[20px] ${isDark ? "text-white" : "text-[#0A3764]"
+              }`}
           >
             IBRAVIA
           </span>

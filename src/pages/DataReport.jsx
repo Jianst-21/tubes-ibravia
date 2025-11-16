@@ -1,8 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Sidebar from "../components/AdminDashboard/Sidebar";
-import axios from "axios";
-import { Printer, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 import apiAdmin from "../api/apiadmin";
+import { Printer, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 
 export default function AdminDataReport() {
   const [report, setReport] = useState([]);
@@ -19,7 +18,7 @@ export default function AdminDataReport() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await apiAdmin.get("/report");
+      const res = await apiAdmin.get("/reports");
 
       setReport(res.data);
     } catch (err) {
@@ -69,7 +68,7 @@ export default function AdminDataReport() {
               Reservation Report
             </h1>
             <p className="text-gray-500 mt-1 print:text-sm">
-             Report of reservations that were received and canceled.
+              Report of reservations that were received and canceled.
             </p>
           </div>
 
@@ -114,7 +113,7 @@ export default function AdminDataReport() {
                   <td colSpan="5" className="px-6 py-8 text-center">
                     <div className="flex flex-col items-center justify-center text-gray-500">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#0B3C78] mb-2"></div>
-                      Memuat data laporan...
+                      Loading report data...
                     </div>
                   </td>
                 </tr>
@@ -124,7 +123,7 @@ export default function AdminDataReport() {
                     <div className="flex flex-col items-center justify-center text-gray-400">
                       <FileText size={48} strokeWidth={1} className="mb-4" />
                       <p className="text-lg font-medium text-gray-500">
-                        Belum ada data laporan.
+                        There is no report data yet.{" "}
                       </p>
                     </div>
                   </td>

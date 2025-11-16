@@ -7,7 +7,7 @@ const apiAdmin = axios.create({
   timeout: 10000,
 });
 
-// === Interceptor Request ===
+// Interceptor request → otomatis kirim JWT token admin
 apiAdmin.interceptors.request.use(
   (config) => {
     const token =
@@ -24,7 +24,7 @@ apiAdmin.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// === Interceptor Response ===
+// Interceptor response → auto-logout kalau token invalid / expired
 apiAdmin.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -37,5 +37,3 @@ apiAdmin.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default apiAdmin;

@@ -25,62 +25,62 @@ export const Login = () => {
     }
   }, [navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitted(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitted(true);
 
-    try {
-      let res;
-      let role = "";
-      let token;
-      let currentUser;
+  try {
+    let res, role, token, currentUser;
 
-      // Try login as admin
-      try {
-        res = await adminApi.post("/auth/login", { identifier, password });
-        role = "admin";
-        token = res.data.token;
-        currentUser = res.data.admin;
-      } catch (errAdmin) {
-        console.warn("Admin login failed:", errAdmin.response?.data?.error);
+    const isEmail = identifier.includes("@");
 
-        // Coba login user
-        try {
-          res = await userApi.post("/auth/login", { identifier, password });
-          role = "user";
-          token = res.data.token;
-          currentUser = res.data.user;
-        } catch (errUser) {
-          // Jika gagal user juga, throw error
-          throw new Error("Incorrect email or password.");
-        }
-      }
-
-
-      if (!currentUser) throw new Error("User data not found.");
-
-      const userToStore = {
-        id_user: currentUser.id_user || currentUser.id || currentUser.id_admin,
-        name: currentUser.name || currentUser.username,
-        email: currentUser.email,
-        role,
-      };
-
-      localStorage.setItem("user", JSON.stringify(userToStore));
-      if (token) localStorage.setItem("token", token);
-      localStorage.setItem("isLoggedIn", "true");
-
-      toast.success("Login successful!");
-      setTimeout(() => {
-        navigate(role === "admin" ? "/admin/dashboard" : "/");
-      }, 1000);
-    } catch (err) {
-      console.error("❌ Login error:", err.response?.data || err.message);
-      toast.error(err.response?.data?.error || "Incorrect email or password.");
-    } finally {
-      setSubmitted(false);
+    // ===========================
+    // USER LOGIN (EMAIL)
+    // ===========================
+    if (isEmail) {
+      res = await userApi.post("/auth/login", { identifier, password });
+      role = "user";
+      token = res.data.token;
+      currentUser = res.data.user;
     }
-  };
+
+    // ===========================
+    // ADMIN LOGIN (USERNAME)
+    // ===========================
+    else {
+      res = await adminApi.post("/login", { identifier, password });
+      role = "admin";
+      token = res.data.token;
+      currentUser = res.data.admin;
+    }
+
+    if (!currentUser) throw new Error("User data not found.");
+
+    const userToStore = {
+      id_user:
+        currentUser.id_user || currentUser.id || currentUser.id_admin,
+      name: currentUser.name || currentUser.username,
+      email: currentUser.email,
+      role,
+    };
+
+    localStorage.setItem("user", JSON.stringify(userToStore));
+    localStorage.setItem("token", token);
+    localStorage.setItem("isLoggedIn", "true");
+
+    toast.success("Login successful!");
+    setTimeout(() => {
+      navigate(role === "admin" ? "/admin/dashboard" : "/");
+    }, 1000);
+
+  } catch (err) {
+    console.error("❌ Login error:", err.response?.data || err.message);
+    toast.error(err.response?.data?.error || "Incorrect email or password.");
+  } finally {
+    setSubmitted(false);
+  }
+};
+
 
   return (
     <section className="min-h-screen grid md:grid-cols-2 md:gap-x-[80px] bg-[hsl(var(--background))] font-sans">
@@ -147,12 +147,12 @@ export const Login = () => {
                 />
                 Remember me
               </label>
-              <Link
-                to="/forgot-password"
+              <a
+                href="/ForgotPassword"
                 className="text-primary hover:underline hover:opacity-90 transition"
               >
                 Forgot Password?
-              </Link>
+              </a>
             </div>
 
             {/* LOGIN BUTTON */}
@@ -177,6 +177,9 @@ export const Login = () => {
           {/* GOOGLE LOGIN */}
           <button
             type="button"
+            onClick={() =>
+              (window.location.href = "http://localhost:5000/api/auth/google")
+            }
             className="w-full border border-blue-600 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-[0.98]"
           >
             <FcGoogle className="text-xl" /> Log in with Google
