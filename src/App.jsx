@@ -2,12 +2,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
-import { Properties } from "./pages/Properties";
+import OauthSuccess from "./pages/OauthSuccess";
+ import { Properties } from "./pages/Properties";
 import { Reservation } from "./pages/Reservation";
 import { AboutUs } from "./pages/AboutUs";
 import { SignUp } from "./pages/SignUp";
 import { VerifyOTP } from "./pages/VerifyOTP";
-import { DetailProperties } from "./pages/DetailProperties";
+import { DetailProperties } from "./pages/detailProperties";
 import { Block } from "./components/PropertiesPage/Block";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { ResetPassword } from "./pages/ResetPassword";
@@ -21,8 +22,6 @@ import ManageReservation from "./pages/ManageReservation";
 import { AdminProtectedRoute, UserProtectedRoute } from "./lib/ProtectedRoute";
 // ProtectedRoute versi user
 
-// trigger redeploy
-
 function App() {
   return (
     <BrowserRouter>
@@ -34,9 +33,10 @@ function App() {
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/VerifyOTP" element={<VerifyOTP />} />
         <Route path="/EditProfile" element={<EditProfile />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/oauth-success" element={<OauthSuccess />} />
 
         {/* Other pages */}
         <Route path="/Block" element={<Block />} />
