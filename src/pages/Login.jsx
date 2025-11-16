@@ -4,7 +4,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import userApi from "../api/api";
-import adminApi from "../api/apiadmin";
+import apiAdmin from "../api/apiadmin";
 import herobg from "../assets/images/colection/hero-bg.jpg";
 
 export const Login = () => {
@@ -48,7 +48,7 @@ const handleSubmit = async (e) => {
     // ADMIN LOGIN (USERNAME)
     // ===========================
     else {
-      res = await adminApi.post("/login", { identifier, password });
+      res = await apiAdmin.post("/login", { identifier, password });
       role = "admin";
       token = res.data.token;
       currentUser = res.data.admin;
