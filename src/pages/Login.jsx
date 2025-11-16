@@ -178,8 +178,9 @@ export const Login = () => {
           <button
             type="button"
             onClick={() =>
-              (window.location.href = `${import.meta.env.VITE_API_URL}/api/auth/google`)
+              (window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`)
             }
+
 
             className="w-full border border-blue-600 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-[0.98]"
           >
