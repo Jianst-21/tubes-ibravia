@@ -18,7 +18,7 @@ export default function AdminDataReport() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await apiAdmin.get("/reports");
+      const res = await apiAdmin.get("/report");
 
       setReport(res.data);
     } catch (err) {
