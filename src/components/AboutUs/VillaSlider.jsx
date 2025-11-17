@@ -18,7 +18,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
     const nextSlide = () =>
         setCurrent((prev) => (prev + 1) % slides.length);
 
-    const { title, desc, text, img } = slides[current];
+    const { title, desc, img } = slides[current];
 
     return (
         <div
@@ -31,7 +31,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                         }`}
                 >
                     {/* Text Section */}
-                    <div className="max-w-md text-center md:text-left md:pr-20">
+                    <div className="max-w-2xl text-center md:text-left md:pr-24">
                         <h2
                             className={`text-3xl md:text-4xl font-bold mb-[42px] ${blueTheme ? "text-white" : "text-[#003B73]"
                                 }`}
@@ -45,15 +45,6 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                                     }`}
                             >
                                 {desc}
-                            </p>
-                        )}
-
-                        {text && (
-                            <p
-                                className={`text-sm md:text-base leading-relaxed ${blueTheme ? "text-white/90" : "text-gray-700"
-                                    }`}
-                            >
-                                {text}
                             </p>
                         )}
                     </div>
