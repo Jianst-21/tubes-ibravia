@@ -5,7 +5,7 @@ import Footer from "../components/GlobalPage/Footer";
 export const AboutUs = () => {
     return <div className=" min-h-screen overflow-x-hidden">
 
-        {/* Theme Toggle */}
+        {/* Theme Tzoggle */}
         {/* <ThemeToggle /> */}
 
         {/*Navbar*/}
