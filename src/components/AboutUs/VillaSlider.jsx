@@ -27,9 +27,10 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         >
             <div className="flex justify-center items-center py-10 px-6 md:px-10">
                 <div
-                    className={`flex flex-col md:flex-row items-center justify-between gap-[75px] max-w-7xl w-full ${reversed ? "md:flex-row-reverse" : ""
+                    className={`flex flex-col md:flex-row items-center justify-center gap-[75px] max-w-7xl w-full ${reversed ? "md:flex-row-reverse" : ""
                         }`}
                 >
+
                     {/* Text Section */}
                     <div className="max-w-2xl text-center md:text-left md:pr-24">
                         <h2
