@@ -148,7 +148,7 @@ export const Login = () => {
                 Remember me
               </label>
               <a
-                href="/ForgotPassword"
+                href="/forgot-password"
                 className="text-primary hover:underline hover:opacity-90 transition"
               >
                 Forgot Password?
