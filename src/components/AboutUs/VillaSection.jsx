@@ -20,7 +20,7 @@ export const VillaSection = () => {
         },
         {
           title: "Housing Overview",
-          desc: "Villa Ijen Nebraska consists of 48 exclusive units located in a strategic area of [insert area name]. With easy access to schools, shopping centers, hospitals, and main roads, it offers both comfort and daily convenience for families.",
+          desc: "Villa Ijen Nebraska consists of 48 exclusive units located in a strategic area at C2, Raya Jember Street, Kalirejo Housing Complex, Banyuwangi Regency, East Java. With easy access to shopping centers, hospitals, and major roads, it offers both comfort and everyday convenience for families.",
           img: "/images/block/M.png",
         },
       ],
@@ -41,7 +41,7 @@ export const VillaSection = () => {
         },
         {
           title: "Housing Overview",
-          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located in Jl. Raya Jember No. C2, Perum Kalirejo, Kec./Kab. Banyuwangi, Jawa Timur. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
+          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located in Jl. Raya Jember No. C2, Perum Kalirejo, Kec./Kab. Banyuwangi, Jawa Timur. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.Villa Ijen Raya offers 38 thoughtfully designed housing units located at C2, Raya Jember Street, Kalirejo Housing Complex, Banyuwangi Regency, East Java. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
           img: "/images/block/A.png",
         },
       ],
@@ -62,7 +62,7 @@ export const VillaSection = () => {
         },
         {
           title: "Housing Overview",
-          desc: "Villa Ijen Delima offers 38 thoughtfully designed housing units located at Jl. Sumberayu RT 03 / RW 011, Muncar, Banyuwangi, Jawa Timur. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
+          desc: "Villa Ijen Delima offers 38 thoughtfully designed housing units located at Sumberayu Street, RT 03 / RW 011, Muncar District, Banyuwangi Regency, East Java. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
           img: "/images/block/E.png",
         },
       ],
@@ -83,7 +83,7 @@ export const VillaSection = () => {
         },
         {
           title: "Housing Overview",
-          desc: "Villa Ijen Gold 3 features 54 modern housing units, each built with attention to comfort and style. Nestled in a prime area of Jalan Ikan Layur Perum. Taman Puring Asri Blok A-6 Sobo, Banyuwangi, residents can enjoy seamless access to shopping districts, public facilities, and main transport routes.",
+          desc: "Villa Ijen Gold 3 features 54 modern housing units, each built with attention to comfort and style. Nestled in a prime area on Ikan Layur Street, Taman Puring Asri Housing Complex, Block A-6, Sobo, Banyuwangi Regency, East Java, residents can enjoy seamless access to shopping districts, public facilities, and main transport routes.",
           img: "/images/block/Q.png",
         },
       ],

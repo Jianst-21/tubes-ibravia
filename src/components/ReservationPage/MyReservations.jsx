@@ -19,7 +19,7 @@ export default function MyReservations() {
         );
         setReservations(res.data.reservations || []);
       } catch (err) {
-        console.error("❌ Gagal mengambil data reservasi:", err);
+        console.error(" Gagal mengambil data reservasi:", err);
         setReservations([]);
       } finally {
         setLoading(false);
