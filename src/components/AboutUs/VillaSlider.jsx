@@ -32,7 +32,9 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                 >
 
                     {/* Text Section */}
-                    <div className="max-w-2xl text-center md:text-left md:pr-24">
+                    <div className={`max-w-2xl text-center md:text-left 
+                                    ${reversed ? "md:pl-24" : "md:pr-24"}
+                                 `}>
                         <h2
                             className={`text-3xl md:text-4xl font-bold mb-[42px] ${blueTheme ? "text-white" : "text-[#003B73]"
                                 }`}
