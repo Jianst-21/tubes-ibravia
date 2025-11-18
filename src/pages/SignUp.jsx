@@ -211,6 +211,9 @@ export const SignUp = () => {
           {/* GOOGLE LOGIN */}
           <button
             type="button"
+            onClick={() =>
+              (window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`)
+            }
             className="cursor-pointer w-full border border-blue-600 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-[0.98]"
           >
             <FcGoogle className="text-xl" /> Log in with Google
