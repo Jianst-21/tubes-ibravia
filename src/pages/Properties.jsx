@@ -11,7 +11,7 @@ export const Properties = () => {
 
 
       
-        <main>
+        <main className="flex-grow">
             <Top />
             <Block/>
         </main>

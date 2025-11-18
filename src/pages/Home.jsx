@@ -18,7 +18,7 @@ export const Home = () => {
 
 
         {/*Main Content*/}
-        <main >
+        <main className="flex-grow">
             <HeroSection />
             <TrustedCollaboration />
             <WhyChooseUs />
