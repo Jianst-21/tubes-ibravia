@@ -43,7 +43,8 @@ export default function PopupReservation({ show, onClose }) {
 
             <button
               onClick={handleHome}
-              className="cursor-pointer bg-[#007BFF] hover:bg-[#006AE0] text-white px-6 py-2 rounded-md font-medium shadow-md transition"
+              className="cursor-pointer bg-[#007BFF] hover:bg-[#006AE0] text-white px-6 py-2 
+              rounded-md font-medium shadow-md transition"
             >
               Home
             </button>

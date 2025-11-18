@@ -2,8 +2,10 @@ import backgroundImage from "../../../src/assets/images/colection/homepage-atas.
 
 export const HeroSection = () => {
   return (
-    <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-center overflow-hidden -mb-px bg-[hsl(var(--card))]">
-      <div className="absolute left-0 top-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-10 w-full h-full" />
+    <section className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex 
+    items-center overflow-hidden -mb-px bg-[hsl(var(--card))]">
+      <div className="absolute left-0 top-0 bg-gradient-to-r from-black/70 
+      via-black/40 to-transparent z-10 w-full h-full" />
       <img
         src={backgroundImage}
         alt="Hero Background"
@@ -20,7 +22,9 @@ export const HeroSection = () => {
         </p>
 
         <button
-          className="cursor-pointer bg-primary text-primary-foreground font-medium text-base px-6 py-3 rounded-[8px] transition-all duration-300 hover:scale-105 hover:shadow-md dark:hover:shadow-glow"
+          className="cursor-pointer bg-primary text-primary-foreground font-medium 
+          text-base px-6 py-3 rounded-[8px] transition-all duration-300 hover:scale-105 
+          hover:shadow-md dark:hover:shadow-glow"
           onClick={() => (window.location.href = "/Properties")}
         >
           Find Your Home

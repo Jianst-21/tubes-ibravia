@@ -93,7 +93,8 @@ const Notification = () => {
               <div
                 key={n.id_notification}
                 onClick={() => handleSelect(n)}
-                className={`flex justify-between items-center px-8 py-5 rounded-2xl shadow-md transition-all duration-200 cursor-pointer ${
+                className={`flex justify-between items-center px-8 py-5 rounded-2xl shadow-md transition-all 
+                  duration-200 cursor-pointer ${
                   n.read
                     ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     : "bg-[#0B3C78] text-white hover:bg-[#0d478b]"

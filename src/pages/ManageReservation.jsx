@@ -151,7 +151,8 @@ const ManageReservation = () => {
               </p>
             </div>
           ) : reservations.length === 0 ? (
-            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border border-gray-200 mt-10">
+            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl 
+            shadow-sm border border-gray-200 mt-10">
               <Info className="w-10 h-10 text-gray-400 mb-4" />
               <p className="text-center text-gray-500 text-lg font-medium">
                 There is no reservation data at the moment.
@@ -170,7 +171,9 @@ const ManageReservation = () => {
                 return (
                   <div
                     key={item.id_reservasi}
-                    className={`bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full transition-all duration-500 border-b-4 border-b-black ${removingId === item.id_reservasi
+                    className={`bg-white rounded-2xl shadow-sm border border-gray-200
+                       p-6 w-full transition-all duration-500 border-b-4 border-b-black 
+                       ${removingId === item.id_reservasi
                       ? "opacity-0 translate-y-4 scale-95"
                       : "hover:shadow-md"
                       }`}

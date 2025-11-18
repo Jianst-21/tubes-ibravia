@@ -172,7 +172,8 @@ export const SignUp = () => {
                   onChange={handleChange}
                   className={`w-full pr-10 border rounded-md px-4 py-2 text-sm 
                     bg-card text-foreground shadow-sm outline-none transition-all duration-300 
-                    focus:ring-2 focus:ring-offset-2 ${error.confirm ? "border-red-500 focus:ring-red-500" : "border-border focus:ring-primary"}`}
+                    focus:ring-2 focus:ring-offset-2 
+                    ${error.confirm ? "border-red-500 focus:ring-red-500" : "border-border focus:ring-primary"}`}
                   required
                 />
                 <button
@@ -193,7 +194,8 @@ export const SignUp = () => {
 
             <button
               type="submit"
-              className="cursor-pointer w-full bg-primary text-white py-2 rounded-md hover:opacity-90 transition-all duration-200 active:scale-[0.98]"
+              className="cursor-pointer w-full bg-primary text-white py-2 rounded-md 
+              hover:opacity-90 transition-all duration-200 active:scale-[0.98]"
             >
               Sign Up
             </button>
@@ -214,7 +216,8 @@ export const SignUp = () => {
             onClick={() =>
               (window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`)
             }
-            className="cursor-pointer w-full border border-blue-600 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-[0.98]"
+            className="cursor-pointer w-full border border-blue-600 text-blue-600 py-2 rounded-md flex items-center 
+            justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-[0.98]"
           >
             <FcGoogle className="text-xl" /> Log in with Google
           </button>

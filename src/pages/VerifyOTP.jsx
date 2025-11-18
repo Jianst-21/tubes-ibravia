@@ -165,7 +165,9 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
                 value={v}
                 onChange={(e) => handleChange(e, i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
-                className="w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-xl rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-4 focus:ring-primary/20 transition shadow-sm"
+                className="w-12 h-12 md:w-14 md:h-14 text-center text-lg md:text-xl rounded-lg border
+                 border-border bg-background text-foreground focus:outline-none focus:ring-4 focus:ring-primary/20 
+                 transition shadow-sm"
                 autoComplete={i === 0 ? "one-time-code" : "off"}
               />
             ))}

@@ -24,7 +24,8 @@ const StatCard = ({ title, value, type }) => {
   };
 
   return (
-    <div className="bg-[#0B3C78] text-white rounded-2xl shadow-md flex items-center justify-between p-4 sm:p-6 md:p-8 h-28 sm:h-32 md:h-36 transition-all duration-300">
+    <div className="bg-[#0B3C78] text-white rounded-2xl shadow-md flex items-center 
+    justify-between p-4 sm:p-6 md:p-8 h-28 sm:h-32 md:h-36 transition-all duration-300">
       <div className="flex-shrink-0 opacity-90">{icons[type]}</div>
       <div className="text-right flex flex-col justify-center">
         <p className="text-sm md:text-base font-semibold tracking-wider uppercase opacity-80 mb-1">

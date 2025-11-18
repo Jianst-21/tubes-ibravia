@@ -64,14 +64,16 @@ export const ForgotPassword = () => {
             placeholder="Enter personal or work email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md p-3 focus:outline-none 
+                  focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
 
         <button
           type="submit"
-          className="cursor-pointer w-full bg-[#0056FF] text-white p-3 rounded-[4px] font-medium mt-6 hover:opacity-90 active:scale-[0.98] transition-all duration-200"
+          className="cursor-pointer w-full bg-[#0056FF] text-white p-3 rounded-[4px] 
+              font-medium mt-6 hover:opacity-90 active:scale-[0.98] transition-all duration-200"
         >
           Send Reset OTP
         </button>

@@ -34,7 +34,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
 
   return (
     <section
-      className="relative w-screen h-[80vh] left-1/2 right-1/2 -translate-x-1/2 bg-cover bg-center bg-no-repeat overflow-hidden"
+      className="relative w-screen h-[80vh] left-1/2 right-1/2 -translate-x-1/2 
+      bg-cover bg-center bg-no-repeat overflow-hidden"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         minHeight:
@@ -57,7 +58,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
 
         {/* Grid rumah */}
         <div
-          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-3 sm:gap-6 justify-items-center max-w-7xl w-full"
+          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 
+          gap-3 sm:gap-6 justify-items-center max-w-7xl w-full"
         >
           {currentHouses.length > 0 ? (
             currentHouses.map((house) => {
@@ -69,7 +71,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
                   key={house.id_house}
                   onClick={() => !isSold && onSelect(house)}
                   disabled={isSold}
-                  className={`w-[80px] sm:w-full aspect-[2/3] flex items-center justify-center font-semibold text-sm sm:text-lg shadow-md transition-all duration-300 rounded-[8px]
+                  className={`w-[80px] sm:w-full aspect-[2/3] flex items-center justify-center 
+                    font-semibold text-sm sm:text-lg shadow-md transition-all duration-300 rounded-[8px]
           ${isSold
                       ? "bg-gray-700 text-gray-300 cursor-not-allowed"
                       : isSelected
@@ -94,7 +97,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 ${currentPage === 1
+            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 
+              sm:h-12 rounded-full border border-border transition-all duration-300 ${currentPage === 1
               ? "opacity-50 cursor-not-allowed"
               : "hover:scale-110 hover:shadow-md"
               }`}
@@ -116,7 +120,9 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 ${currentPage === totalPages
+            className={`cursor-pointer flex items-center justify-center w-10 h-10 
+              sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 
+              ${currentPage === totalPages
               ? "opacity-50 cursor-not-allowed"
               : "hover:scale-110 hover:shadow-md"
               }`}

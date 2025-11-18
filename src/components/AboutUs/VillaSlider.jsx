@@ -22,12 +22,14 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
     return (
         <div
-            className={`relative w-full transition-colors duration-500 ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-black"
+            className={`relative w-full transition-colors duration-500 
+                ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-black"
                 }`}
         >
             <div className="flex justify-center items-center py-10 px-6 md:px-10">
                 <div
-                    className={`flex flex-col md:flex-row items-center justify-center gap-[75px] max-w-7xl w-full ${reversed ? "md:flex-row-reverse" : ""
+                    className={`flex flex-col md:flex-row items-center justify-center 
+                        gap-[75px] max-w-7xl w-full ${reversed ? "md:flex-row-reverse" : ""
                         }`}
                 >
 
@@ -36,7 +38,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                                     ${reversed ? "md:pl-24" : "md:pr-24"}
                                  `}>
                         <h2
-                            className={`text-3xl md:text-4xl font-bold mb-[42px] ${blueTheme ? "text-white" : "text-[#003B73]"
+                            className={`text-3xl md:text-4xl font-bold mb-[42px] 
+                                ${blueTheme ? "text-white" : "text-[#003B73]"
                                 }`}
                         >
                             {title}
@@ -44,7 +47,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
                         {desc && (
                             <p
-                                className={`text-[18px] mb-4 leading-snug text-justify ${blueTheme ? "text-white/80" : "text-gray-600"
+                                className={`text-[18px] mb-4 leading-snug text-justify 
+                                    ${blueTheme ? "text-white/80" : "text-gray-600"
                                     }`}
                             >
                                 {desc}
@@ -73,13 +77,17 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
             {/* Controls */}
             <button
                 onClick={prevSlide}
-                className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/60 text-black dark:text-white dark:bg-white/10 dark:hover:bg-white/30 rounded-full p-2 transition-all"
+                className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 
+                bg-white/30 hover:bg-white/60 text-black dark:text-white dark:bg-white/10 
+                dark:hover:bg-white/30 rounded-full p-2 transition-all"
             >
                 <ChevronLeft size={20} />
             </button>
             <button
                 onClick={nextSlide}
-                className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/60 text-black dark:text-white dark:bg-white/10 dark:hover:bg-white/30 rounded-full p-2 transition-all"
+                className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 
+                bg-white/30 hover:bg-white/60 text-black dark:text-white dark:bg-white/10 
+                dark:hover:bg-white/30 rounded-full p-2 transition-all"
             >
                 <ChevronRight size={20} />
             </button>

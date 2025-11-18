@@ -75,8 +75,9 @@ export default function AdminDataReport() {
           {/* 🔹 Tombol Print Report dengan pointer dan efek hover */}
           <button
             onClick={handlePrint}
-            className="print:hidden bg-[#0F62FF] hover:bg-[#0D56E0] text-white px-5 py-2.5 rounded-lg flex items-center gap-2 shadow-sm 
-                       hover:shadow-md transition-all duration-200 font-medium cursor-pointer hover:scale-[1.03] active:scale-95"
+            className="print:hidden bg-[#0F62FF] hover:bg-[#0D56E0] text-white px-5 py-2.5 rounded-lg 
+            flex items-center gap-2 shadow-sm hover:shadow-md transition-all duration-200 font-medium 
+            cursor-pointer hover:scale-[1.03] active:scale-95"
           >
             <Printer size={18} />
             Print Report
@@ -85,10 +86,12 @@ export default function AdminDataReport() {
 
         <div
           ref={tableRef}
-          className="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200 print:shadow-none print:border-0 print:rounded-none"
+          className="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200 print:shadow-none 
+          print:border-0 print:rounded-none"
         >
           <table className="min-w-full text-sm text-left text-gray-700 print:border-collapse print:w-full">
-            <thead className="bg-[#0B3C78] text-white text-xs uppercase tracking-wider font-semibold print:bg-gray-100 print:text-black">
+            <thead className="bg-[#0B3C78] text-white text-xs uppercase tracking-wider font-semibold 
+            print:bg-gray-100 print:text-black">
               <tr>
                 <th className="px-6 py-4 rounded-tl-xl print:rounded-none print:border print:border-gray-300">
                   Customer Name
@@ -102,7 +105,8 @@ export default function AdminDataReport() {
                 <th className="px-6 py-4 print:border print:border-gray-300">
                   Reservation Date
                 </th>
-                <th className="px-6 py-4 rounded-tr-xl print:rounded-none print:border print:border-gray-300 text-center">
+                <th className="px-6 py-4 rounded-tr-xl print:rounded-none print:border 
+                print:border-gray-300 text-center">
                   Status
                 </th>
               </tr>
@@ -158,7 +162,9 @@ export default function AdminDataReport() {
                     </td>
                     <td className="px-6 py-4 print:border print:border-gray-300 text-center">
                       <span
-                        className={`inline-block px-3 py-1 text-xs font-semibold rounded-full border capitalize print:border-0 print:px-0 print:py-0 print:bg-transparent print:text-black ${getStatusColorClass(
+                        className={`inline-block px-3 py-1 text-xs font-semibold rounded-full border 
+                          capitalize print:border-0 print:px-0 print:py-0 print:bg-transparent print:text-black 
+                          ${getStatusColorClass(
                           item.status
                         )}`}
                       >
@@ -179,9 +185,9 @@ export default function AdminDataReport() {
             <button
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 
-                 hover:bg-gray-100 hover:border-gray-400 disabled:opacity-50 disabled:cursor-not-allowed 
-                 transition-all active:scale-95 cursor-pointer"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 
+              bg-white text-gray-600 hover:bg-gray-100 hover:border-gray-400 disabled:opacity-50 
+              disabled:cursor-not-allowed transition-all active:scale-95 cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
@@ -195,9 +201,9 @@ export default function AdminDataReport() {
             <button
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
-              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 
-                 hover:bg-gray-100 hover:border-gray-400 disabled:opacity-50 disabled:cursor-not-allowed 
-                 transition-all active:scale-95 cursor-pointer"
+              className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 
+              bg-white text-gray-600 hover:bg-gray-100 hover:border-gray-400 disabled:opacity-50 
+              disabled:cursor-not-allowed transition-all active:scale-95 cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>

@@ -68,7 +68,8 @@ export const WhyChooseUs = () => {
 
                   {/* FEATURE TEXT BOX */}
                   <div
-                    className="flex items-center justify-center font-semibold text-lg rounded-3xl px-7 py-3.5 min-w-[320px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
+                    className="flex items-center justify-center font-semibold text-lg 
+                    rounded-3xl px-7 py-3.5 min-w-[320px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
                     style={{
                       backgroundColor: fillColor,
                       color: textColor,

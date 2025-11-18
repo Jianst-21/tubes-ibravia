@@ -58,7 +58,8 @@ export const Block = () => {
   const currentBlocks = blocks.slice(startIndex, endIndex);
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-10 bg-background text-foreground transition-colors duration-300">
+    <div className="min-h-screen flex flex-col items-center py-10 bg-background 
+    text-foreground transition-colors duration-300">
       {/* Header */}
       <div className="text-center mb-10 px-4">
         <h3 className="text-sm font-medium opacity-80">
@@ -94,14 +95,16 @@ export const Block = () => {
           Loading blocks...
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-8 w-11/12 sm:w-10/12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 
+        lg:grid-cols-5 gap-5 sm:gap-8 w-11/12 sm:w-10/12">
           {currentBlocks.map((block) => {
             const imgPath = `/images/block/${block.block_name}.png`;
 
             return (
               <div
                 key={block.id_block}
-                className="cursor-pointer rounded-xl overflow-hidden border border-border hover:scale-[1.03] transition-all duration-300"
+                className="cursor-pointer rounded-xl overflow-hidden border 
+                border-border hover:scale-[1.03] transition-all duration-300"
                 onClick={() =>
                   navigate(`/detail-properties/${block.id_block}`)
                 }
@@ -133,7 +136,8 @@ export const Block = () => {
         <button
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
-          className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border border-border transition-all duration-300 ${currentPage === 1
+          className={`cursor-pointer flex items-center justify-center w-10 h-10 
+            rounded-full border border-border transition-all duration-300 ${currentPage === 1
             ? "opacity-50 cursor-not-allowed"
             : "hover:scale-110"
             }`}
@@ -154,7 +158,9 @@ export const Block = () => {
             setCurrentPage((p) => Math.min(p + 1, totalPages))
           }
           disabled={currentPage === totalPages}
-          className={`cursor-pointer flex items-center justify-center w-10 h-10 rounded-full border border-border transition-all duration-300 ${currentPage === totalPages
+          className={`cursor-pointer flex items-center justify-center w-10 h-10 
+            rounded-full border border-border transition-all duration-300 
+            ${currentPage === totalPages
             ? "opacity-50 cursor-not-allowed"
             : "hover:scale-110"
             }`}

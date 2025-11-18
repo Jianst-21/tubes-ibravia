@@ -107,7 +107,9 @@ export const Login = () => {
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 autoComplete="username"
-                className="w-full border border-border rounded-md px-4 py-2 text-sm bg-card text-foreground shadow-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="w-full border border-border rounded-md px-4 py-2 text-sm bg-card 
+                text-foreground shadow-sm outline-none transition-all duration-300 focus:ring-2 
+                focus:ring-primary focus:ring-offset-2"
                 required
               />
             </div>
@@ -124,13 +126,16 @@ export const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
-                  className="w-full pr-10 border border-border rounded-md px-4 py-2 text-sm bg-card text-foreground shadow-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="w-full pr-10 border border-border rounded-md px-4 py-2 text-sm bg-card 
+                  text-foreground shadow-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-primary 
+                  focus:ring-offset-2"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 opacity-50 hover:opacity-100 transition-opacity duration-200"
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 
+                  hover:text-gray-700 opacity-50 hover:opacity-100 transition-opacity duration-200"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -159,7 +164,9 @@ export const Login = () => {
             <button
               type="submit"
               disabled={submitted}
-              className="cursor-pointer w-full py-2 rounded-md font-medium text-primary-foreground bg-gradient-to-r from-primary to-blue-600 hover:from-blue-700 hover:to-blue-600 transition-all duration-300 shadow-sm hover:shadow-md active:scale-[0.98]"
+              className="cursor-pointer w-full py-2 rounded-md font-medium text-primary-foreground 
+              bg-gradient-to-r from-primary to-blue-600 hover:from-blue-700 hover:to-blue-600 transition-all 
+              duration-300 shadow-sm hover:shadow-md active:scale-[0.98]"
             >
               {submitted ? "Processing..." : "Log In"}
             </button>
@@ -182,7 +189,9 @@ export const Login = () => {
             }
 
 
-            className="cursor-pointer w-full border border-blue-600 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all duration-200 active:scale-[0.98]"
+            className="cursor-pointer w-full border border-blue-600 text-blue-600 py-2 rounded-md 
+            flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all 
+            duration-200 active:scale-[0.98]"
           >
             <FcGoogle className="text-xl" /> Log in with Google
           </button>

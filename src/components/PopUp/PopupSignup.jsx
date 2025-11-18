@@ -25,7 +25,8 @@ const PopupSignup = ({ show, message, onClose }) => {
             </p>
             <button
               onClick={onClose}
-              className="cursor-pointer bg-primary text-white px-5 py-2 rounded-md hover:opacity-90 transition-all duration-200"
+              className="cursor-pointer bg-primary text-white px-5 py-2 rounded-md 
+              hover:opacity-90 transition-all duration-200"
             >
               OK
             </button>

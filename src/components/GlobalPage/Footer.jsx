@@ -6,7 +6,8 @@ const Footer = () => {
     return (
         <footer className="bg-[#063B73] text-white pt-8 pb-[55px]">
             {/* Bagian atas: logo dan menu */}
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 mb-[41px]">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between 
+                items-center px-6 mb-[41px]">
                 {/* Logo + Nama */}
                 <Link to="/" className="flex items-end space-x-2">
                     <img
@@ -46,7 +47,8 @@ const Footer = () => {
             <div className="border-t border-gray-400 opacity-50 w-[90%] max-w-7xl mx-auto" />
 
             {/* Bagian bawah */}
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 mt-[55px] text-sm text-gray-300">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between 
+            items-center px-6 mt-[55px] text-sm text-gray-300">
                 <p>Ibravia © 2025. All Rights Reserved.</p>
                 <p>Ibravia is not responsible for transactions outside the platform.</p>
             </div>

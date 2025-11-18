@@ -102,7 +102,9 @@ export default function HouseDetail({ house, setSelectedHouse }) {
       <div className="relative flex justify-center items-center mb-14 h-[420px] overflow-hidden">
         <button
           onClick={handlePrev}
-          className="cursor-pointer absolute left-4 md:left-10 z-20 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border bg-background/70 hover:bg-background/90 hover:scale-110 transition-all duration-300 shadow-md"
+          className="cursor-pointer absolute left-4 md:left-10 z-20 flex items-center 
+          justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border bg-background/70 hover:bg-background/90 
+          hover:scale-110 transition-all duration-300 shadow-md"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -135,7 +137,9 @@ export default function HouseDetail({ house, setSelectedHouse }) {
 
         <button
           onClick={handleNext}
-          className="cursor-pointer absolute right-4 md:right-10 z-20 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border bg-background/70 hover:bg-background/90 hover:scale-110 transition-all duration-300 shadow-md"
+          className="cursor-pointer absolute right-4 md:right-10 z-20 flex items-center 
+          justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border bg-background/70 
+          hover:bg-background/90 hover:scale-110 transition-all duration-300 shadow-md"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
@@ -155,7 +159,9 @@ export default function HouseDetail({ house, setSelectedHouse }) {
           <div className="space-y-2 text-base text-foreground/90">
             <p>
               <span className="font-medium">House Description:</span>{" "}
-              {`${house.block?.bedroom || 0} Bedrooms, ${house.block?.bathroom || 0} Bathrooms, ${house.block?.living_room || 0} Living Room, ${house.block?.family_room || 0} Family Room, ${house.block?.kitchen || 0} Kitchen`}
+              {`${house.block?.bedroom || 0} Bedrooms, ${house.block?.bathroom || 0} 
+              Bathrooms, ${house.block?.living_room || 0} Living Room, ${house.block?.family_room || 0} 
+              Family Room, ${house.block?.kitchen || 0} Kitchen`}
             </p>
             <p><span className="font-medium">Land Area (m²):</span> {house.land_area}</p>
             <p><span className="font-medium">Building Area (m²):</span> {house.house_area}</p>
@@ -243,7 +249,8 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                   e.stopPropagation();
                   handleZoomPrev();
                 }}
-                className="cursor-pointer absolute left-[-80px] p-3 rounded-full bg-black/40 hover:bg-black/60 text-white transition"
+                className="cursor-pointer absolute left-[-80px] p-3 rounded-full bg-black/40 
+                hover:bg-black/60 text-white transition"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={40} />
@@ -255,7 +262,8 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                   e.stopPropagation();
                   handleZoomNext();
                 }}
-                className="cursor-pointer absolute right-[-80px] p-3 rounded-full bg-black/40 hover:bg-black/60 text-white transition"
+                className="cursor-pointer absolute right-[-80px] p-3 rounded-full bg-black/40 
+                hover:bg-black/60 text-white transition"
                 aria-label="Next image"
               >
                 <ChevronRight size={40} />
@@ -267,7 +275,8 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                   e.stopPropagation();
                   setShowZoom(false);
                 }}
-                className="cursor-pointer absolute top-[-60px] right-[-60px] p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition"
+                className="cursor-pointer absolute top-[-60px] right-[-60px] p-2 rounded-full 
+                bg-black/40 hover:bg-black/60 text-white transition"
                 aria-label="Close zoom"
               >
                 <X size={30} />

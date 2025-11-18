@@ -115,7 +115,8 @@ export const ResetPassword = () => {
               placeholder="Enter your new password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={`w-full pr-10 border rounded-md p-3 text-sm focus:ring-2 focus:ring-offset-2 outline-none transition-all duration-300 ${
+              className={`w-full pr-10 border rounded-md p-3 text-sm focus:ring-2 focus:ring-offset-2 
+                outline-none transition-all duration-300 ${
                 error.password
                   ? "border-red-500 focus:ring-red-500"
                   : "border-gray-300 focus:ring-blue-500"
@@ -125,7 +126,8 @@ export const ResetPassword = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 opacity-50 hover:opacity-100 bg-transparent border-none p-0 focus:outline-none"
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500 
+              hover:text-gray-700 opacity-50 hover:opacity-100 bg-transparent border-none p-0 focus:outline-none"
               tabIndex={-1}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -149,7 +151,8 @@ export const ResetPassword = () => {
               placeholder="Confirm your new password"
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
-              className={`w-full pr-10 border rounded-md p-3 text-sm focus:ring-2 focus:ring-offset-2 outline-none transition-all duration-300 ${
+              className={`w-full pr-10 border rounded-md p-3 text-sm focus:ring-2 
+                focus:ring-offset-2 outline-none transition-all duration-300 ${
                 error.confirm
                   ? "border-red-500 focus:ring-red-500"
                   : "border-gray-300 focus:ring-blue-500"
@@ -159,7 +162,8 @@ export const ResetPassword = () => {
             <button
               type="button"
               onClick={() => setShowConfirm(!showConfirm)}
-              className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 opacity-50 hover:opacity-100 bg-transparent border-none p-0 focus:outline-none"
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500 
+              hover:text-gray-700 opacity-50 hover:opacity-100 bg-transparent border-none p-0 focus:outline-none"
               tabIndex={-1}
             >
               {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -175,7 +179,8 @@ export const ResetPassword = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="cursor-pointer w-full bg-[#0056FF] text-white p-3 rounded-md font-medium mt-6 hover:opacity-90 active:scale-[0.98] transition-all duration-200"
+          className="cursor-pointer w-full bg-[#0056FF] text-white p-3 rounded-md font-medium mt-6 
+          hover:opacity-90 active:scale-[0.98] transition-all duration-200"
         >
           Reset Password
         </button>

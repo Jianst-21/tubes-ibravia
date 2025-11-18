@@ -74,7 +74,8 @@ export const HouseCollections = () => {
             <Link
               key={house.id_house}
               to={`/Detail-Properties/${house.id_block}`} // ← arahkan ke halaman detail
-              className="group card-hover bg-card rounded-xl text-left block font-[var(--font-body)] transition-all duration-300 h-[420px] flex flex-col p-4 shadow-md hover:shadow-lg"
+              className="group card-hover bg-card rounded-xl text-left block font-[var(--font-body)] 
+              transition-all duration-300 h-[420px] flex flex-col p-4 shadow-md hover:shadow-lg"
             >
               {/* Gambar */}
               <div className="relative flex-shrink-0">

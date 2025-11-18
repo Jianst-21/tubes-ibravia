@@ -16,7 +16,8 @@ export const AboutTop = () => {
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full">
         {/* Gambar di kiri */}
         <div
-          className="flex-shrink-0 rounded-3xl overflow-hidden shadow-2xl border border-white/30 max-w-sm md:max-w-md lg:max-w-lg"
+          className="flex-shrink-0 rounded-3xl overflow-hidden shadow-2xl border 
+          border-white/30 max-w-sm md:max-w-md lg:max-w-lg"
           style={{
             marginLeft: "52px",
             marginRight: "105px",

@@ -39,41 +39,40 @@ const Dropdown = ({
       <button
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
-        className={`flex items-center justify-between border border-gray-300 rounded-md p-2 w-56 bg-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all
-          ${
-            disabled
-              ? "bg-gray-100 cursor-not-allowed opacity-60"
-              : "hover:border-blue-500 cursor-pointer"
+        className={`flex items-center justify-between border border-gray-300 rounded-md p-2 w-56 
+          bg-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all
+          ${disabled
+            ? "bg-gray-100 cursor-not-allowed opacity-60"
+            : "hover:border-blue-500 cursor-pointer"
           }`}
       >
         <span
-          className={`block truncate ${
-            !value ? "text-gray-400" : "text-gray-700"
-          }`}
+          className={`block truncate ${!value ? "text-gray-400" : "text-gray-700"
+            }`}
         >
           {value
             ? options.find((opt) => opt.value === value)?.label || value
             : placeholder || "Select"}
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+            }`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-56 bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm animate-in fade-in zoom-in-95 duration-100 top-[calc(100%-0.5rem)]">
+        <div className="absolute z-10 mt-1 w-56 bg-white shadow-lg max-h-60 rounded-md py-1 
+        text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm animate-in 
+        fade-in zoom-in-95 duration-100 top-[calc(100%-0.5rem)]">
           {options.length > 0 ? (
             options.map((option) => (
               <div
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
-                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 transition-colors ${
-                  option.value === value
-                    ? "text-blue-900 bg-blue-50 font-medium"
-                    : "text-gray-900"
-                }`}
+                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 transition-colors ${option.value === value
+                  ? "text-blue-900 bg-blue-50 font-medium"
+                  : "text-gray-900"
+                  }`}
               >
                 <span className="block truncate">{option.label}</span>
               </div>
@@ -215,9 +214,8 @@ const ManageHouse = () => {
     const blockName =
       filteredHouse.block?.block_name || filteredHouse.block_name || "";
     const number = filteredHouse.number_block || "";
-    fullAddress = `${residenceName}${
-      residenceName ? ", " : ""
-    }Block ${blockName} No. ${number}${location ? `, ${location}` : ""}`.trim();
+    fullAddress = `${residenceName}${residenceName ? ", " : ""
+      }Block ${blockName} No. ${number}${location ? `, ${location}` : ""}`.trim();
   }
 
   return (
@@ -254,7 +252,8 @@ const ManageHouse = () => {
 
           {/* CARD DETAIL */}
           {filteredHouse ? (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full transition-all duration-500 border-b-4 border-b-black hover:shadow-md">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full 
+            transition-all duration-500 border-b-4 border-b-black hover:shadow-md">
               <div className="flex justify-between items-start mb-5">
                 <div>
                   <p className="text-[#0B3C78] font-semibold text-sm tracking-wide uppercase">
@@ -268,15 +267,15 @@ const ManageHouse = () => {
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <span
-                    className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider capitalize ${
-                      filteredHouse.status === "sold"
-                        ? "border-blue-200 text-blue-800 bg-blue-50"
-                        : filteredHouse.status === "available"
-                          ? "border-green-200 text-green-700 bg-green-50"
-                          : filteredHouse.status === "reserved"
-                            ? "border-yellow-200 text-yellow-700 bg-yellow-50"
-                            : "border-gray-200 text-gray-600 bg-gray-50"
-                    }`}
+                    className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider capitalize
+                      ${filteredHouse.status === "sold"
+                      ? "border-blue-200 text-blue-800 bg-blue-50"
+                      : filteredHouse.status === "available"
+                        ? "border-green-200 text-green-700 bg-green-50"
+                        : filteredHouse.status === "reserved"
+                          ? "border-yellow-200 text-yellow-700 bg-yellow-50"
+                          : "border-gray-200 text-gray-600 bg-gray-50"
+                      }`}
                   >
                     {filteredHouse.status}
                   </span>
@@ -328,14 +327,17 @@ const ManageHouse = () => {
                 <button
                   onClick={handleEditClick}
                   disabled={updating}
-                  className="px-6 py-2.5 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-70 flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-2.5 rounded-lg font-semibold text-white bg-[#0F62FF] 
+                  hover:opacity-90 shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-70 flex 
+                  items-center gap-2 cursor-pointer"
                 >
                   Edit Status
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border border-gray-200 mt-10">
+            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border 
+                          border-gray-200 mt-10">
               <p className="text-center text-gray-500 text-lg font-medium">
                 {!selectedBlock || !selectedNumber
                   ? "Please select block and house number to view details."
@@ -348,8 +350,10 @@ const ManageHouse = () => {
 
       {/* MODAL KONFIRMASI */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 scale-100 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 
+                      backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 scale-100 
+                      animate-in zoom-in-95 duration-200">
             <h3 className="text-xl font-bold text-gray-900 mb-2">
               Confirm Status Change
             </h3>
@@ -363,18 +367,20 @@ const ManageHouse = () => {
               <button
                 onClick={() => setShowModal(false)}
                 disabled={updating}
-                className="px-4 py-2 rounded-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-50 cursor-pointer"
+                className="px-4 py-2 rounded-lg font-semibold text-gray-700 bg-gray-100
+                 hover:bg-gray-200 transition-colors disabled:opacity-50 cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmUpdate}
                 disabled={updating}
-                className={`px-5 py-2 rounded-lg font-semibold text-white transition-all shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center gap-2 ${
-                  targetStatus === "available"
-                    ? "bg-green-600 hover:bg-green-700"
-                    : "bg-[#0B3C78] hover:opacity-90"
-                }`}
+                className={`px-5 py-2 rounded-lg font-semibold text-white transition-all
+                   shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center
+                    gap-2 ${targetStatus === "available"
+                  ? "bg-green-600 hover:bg-green-700"
+                  : "bg-[#0B3C78] hover:opacity-90"
+                  }`}
               >
                 {updating && <Loader2 className="w-4 h-4 animate-spin" />}
                 {updating ? "Updating..." : capitalize(targetStatus)}
@@ -386,8 +392,10 @@ const ManageHouse = () => {
 
       {/* --- SUCCESS POPUP MODAL --- */}
       {successModal.isOpen && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col items-center max-w-sm w-full mx-4 scale-100 animate-in zoom-in-95 duration-300">
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40
+                 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col items-center 
+                 max-w-sm w-full mx-4 scale-100 animate-in zoom-in-95 duration-300">
             {/* Icon Check Biru Besar */}
             <div
               className="w-24 h-24 rounded-full flex items-center justify-center mb-6"

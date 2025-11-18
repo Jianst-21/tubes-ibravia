@@ -88,7 +88,8 @@ export const BlockPreview = ({ selectedVilla }) => {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full overflow-hidden rounded-2xl flex items-center justify-center bg-secondary/30 select-none cursor-grab active:cursor-grabbing"
+      className="w-full h-full overflow-hidden rounded-2xl flex items-center justify-center 
+      bg-secondary/30 select-none cursor-grab active:cursor-grabbing"
       onWheel={handleWheel}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
