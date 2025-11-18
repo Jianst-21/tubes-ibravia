@@ -10,7 +10,7 @@ export const Properties = () => {
         <Navbar />
 
 
-        {/*Main Content* /}
+      
         <main>
             <Top />
             <Block/>
