@@ -77,7 +77,7 @@ const Notification = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50 font-sans relative">
-      {/* Sidebar */}
+      {/* Sidebar  */}
       <Sidebar />
 
       {/* Main Content */}
