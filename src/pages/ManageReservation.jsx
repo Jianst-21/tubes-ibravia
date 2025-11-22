@@ -48,7 +48,7 @@ const ManageReservation = () => {
       setReservations(res.data || []);
     } catch (err) {
       console.error("Gagal mengambil data:", err);
-      toast.error("Gagal memuat data reservasi.");
+      toast.error("Failed to load reservation data.");
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +118,7 @@ const ManageReservation = () => {
       console.error(`Gagal memproses aksi:`, err);
       // if (loadingToast) toast.dismiss(loadingToast);
       toast.error(
-        err.response?.data?.error || "Terjadi kesalahan saat memproses."
+        err.response?.data?.error || "An error occurred while processing."
       );
     } finally {
       setIsActionLoading(false);
@@ -310,7 +310,7 @@ const ManageReservation = () => {
                       ) : (
                         <div className="flex items-center text-sm text-gray-500 bg-gray-50 px-4 py-2 rounded-full italic">
                           <CheckCircle className="w-4 h-4 mr-2 text-gray-400" />
-                          Reservasi ini telah selesai diproses.
+                          This reservation has been processed.
                         </div>
                       )}
                     </div>
