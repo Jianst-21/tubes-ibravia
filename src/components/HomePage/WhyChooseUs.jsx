@@ -52,7 +52,7 @@ export const WhyChooseUs = () => {
 
   return (
     <section className="bg-[#003B73] text-white py-20 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
 
         {/* ================= LEFT ================= */}
         <motion.div
@@ -109,7 +109,6 @@ export const WhyChooseUs = () => {
           </div>
         </motion.div>
 
-        {/* ================= RIGHT (CAROUSEL) ================= */}
         {/* ================= RIGHT (CAROUSEL) ================= */}
         {/* MOBILE: hanya tampilkan gambar utama, tanpa carousel */}
         <div className="flex-1 flex justify-center items-center h-[250px] lg:hidden">
