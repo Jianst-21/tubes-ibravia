@@ -113,7 +113,7 @@ export const WhyChooseUs = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex-1 relative flex justify-center items-center h-[420px]"
+          className="flex-1 relative flex justify-center items-center h-[420px] carousel-wrapper"
         >
           <AnimatePresence>
             {images.map((img, index) => {
@@ -129,12 +129,12 @@ export const WhyChooseUs = () => {
                       : "right"
                   }
                   onClick={() => handleClick(index)}
-                  className="flex-1 relative flex justify-center items-center h-[420px] carousel-wrapper"
+                  className="absolute cursor-pointer w-[80%] max-w-[380px] sm:max-w-[500px]"
                 >
                   <img
                     src={img}
                     alt={`house-${index}`}
-                    className="rounded-3xl border-2 border-white w-full h-auto max-h-[260px] sm:max-h-[350px] object-cover"
+                    className="rounded-3xl border-2 border-white w-[380px] sm:w-[460px] max-w-full object-cover"
                   />
                 </motion.div>
               );
