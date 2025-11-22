@@ -40,13 +40,13 @@ export default function HouseDetail({ house, setSelectedHouse }) {
 
   const handleBookNow = async () => {
     if (!user) {
-      alert("Silakan login terlebih dahulu sebelum memesan rumah.");
+      alert("You need to log in before making a reservation.");
       navigate("/Login");
       return;
     }
 
     if (!house.id_house || !house.id_pt) {
-      alert("Data rumah tidak lengkap untuk reservasi.");
+      alert("This house cannot be reserved because its data is incomplete.");
       return;
     }
 
@@ -64,7 +64,7 @@ export default function HouseDetail({ house, setSelectedHouse }) {
       }
     } catch (err) {
       console.error("Reservation error:", err);
-      alert(err.response?.data?.error || "Gagal membuat reservasi.");
+      alert(err.response?.data?.error || "Failed to make a reservation.");
     }
   };
 
