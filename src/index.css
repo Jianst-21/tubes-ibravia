@@ -118,54 +118,75 @@
   @apply absolute cursor-pointer transition-all duration-600 rounded-3xl overflow-hidden shadow-2xl;
 }
 
-/* IMG RESPONSIVE */
+/* =====================================
+   🎞️ CAROUSEL FIXED SIZE & SAFE AREA
+===================================== */
 .carousel-img img {
-  width: 100%;
-  height: 100%;
+  width: 480px;
+  height: 320px;
+  max-width: 90%;
   object-fit: cover;
   border-radius: 1.5rem;
+  transition: 0.4s ease;
 }
 
 /* CENTER SLIDE */
 .carousel-img.center {
   z-index: 10;
-  transform: scale(1);
+  transform: translateX(0) scale(1);
   filter: brightness(1);
 }
 
-/* LEFT & RIGHT Desktop */
+/* LEFT & RIGHT (lebih rapat, tidak keluar layar) */
 .carousel-img.left {
   z-index: 5;
-  transform: translateX(-100px) scale(0.85);
-  filter: brightness(0.8);
+  transform: translateX(-140px) scale(0.85);
+  filter: brightness(0.85);
 }
 
 .carousel-img.right {
   z-index: 5;
-  transform: translateX(100px) scale(0.85);
-  filter: brightness(0.8);
+  transform: translateX(140px) scale(0.85);
+  filter: brightness(0.85);
+}
+
+/* Hindari overflow agar tidak keluar container */
+.carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 /* =====================================
-   📱 MOBILE RESPONSIVE ADJUSTMENTS
+   📱 MOBILE FIX
 ===================================== */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .carousel-img img {
-    width: 70%;
-    max-width: 260px;
-    max-height: 180px;
-  }
-
-  .carousel-img.center {
-    transform: translateX(0) scale(1);
+    width: 280px;
+    height: 180px;
   }
 
   .carousel-img.left {
-    transform: translateX(-20%) scale(0.8);
+    transform: translateX(-80px) scale(0.8);
   }
 
   .carousel-img.right {
-    transform: translateX(20%) scale(0.8);
+    transform: translateX(80px) scale(0.8);
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-img img {
+    width: 240px;
+    height: 150px;
+  }
+
+  .carousel-img.left {
+    transform: translateX(-60px) scale(0.75);
+  }
+
+  .carousel-img.right {
+    transform: translateX(60px) scale(0.75);
   }
 }
 

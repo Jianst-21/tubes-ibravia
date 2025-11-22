@@ -129,7 +129,7 @@ export const WhyChooseUs = () => {
                       : "right"
                   }
                   onClick={() => handleClick(index)}
-                  className="absolute cursor-pointer w-[80%] max-w-[380px] sm:max-w-[500px]"
+                  className="flex-1 relative flex justify-center items-center h-[420px] carousel-wrapper"
                 >
                   <img
                     src={img}
