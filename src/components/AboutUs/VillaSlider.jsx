@@ -75,7 +75,6 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
             </div>
 
             {/* Controls */}
-            {/* Controls */}
             <button
                 onClick={prevSlide}
                 className="
@@ -90,7 +89,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         transition-all shadow-lg
     "
             >
-                <ChevronLeft size={18} className="md:size-22" />
+                <ChevronLeft size={18} className="md:size-20" />
             </button>
 
             <button
@@ -107,8 +106,9 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                     transition-all shadow-lg
                 "
             >
-                <ChevronRight size={18} className="md:size-22" />
+                <ChevronRight size={18} className="md:size-20" />
             </button>
+
 
 
             {/* Indicators */}
