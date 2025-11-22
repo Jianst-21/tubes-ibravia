@@ -75,22 +75,41 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
             </div>
 
             {/* Controls */}
+            {/* Controls */}
             <button
                 onClick={prevSlide}
-                className="cursor-pointer absolute left-4 top-1/2 -translate-y-1/2 
-                bg-white/30 hover:bg-white/60 text-black dark:text-white dark:bg-white/10 
-                dark:hover:bg-white/30 rounded-full p-2 transition-all"
+                className="
+        absolute top-1/2 -translate-y-1/2 
+        p-3 md:p-4
+        left-3 md:left-8
+        rounded-full
+        bg-black/25 hover:bg-black/40
+        dark:bg-white/20 dark:hover:bg-white/40
+        backdrop-blur-sm
+        text-white
+        transition-all shadow-lg
+    "
             >
-                <ChevronLeft size={20} />
+                <ChevronLeft size={18} className="md:size-22" />
             </button>
+
             <button
                 onClick={nextSlide}
-                className="cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 
-                bg-white/30 hover:bg-white/60 text-black dark:text-white dark:bg-white/10 
-                dark:hover:bg-white/30 rounded-full p-2 transition-all"
+                className="
+                    absolute top-1/2 -translate-y-1/2 
+                    p-3 md:p-4
+                    right-3 md:right-8
+                    rounded-full
+                    bg-black/25 hover:bg-black/40
+                    dark:bg-white/20 dark:hover:bg-white/40
+                    backdrop-blur-sm
+                    text-white
+                    transition-all shadow-lg
+                "
             >
-                <ChevronRight size={20} />
+                <ChevronRight size={18} className="md:size-22" />
             </button>
+
 
             {/* Indicators */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
