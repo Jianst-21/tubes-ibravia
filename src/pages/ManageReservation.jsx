@@ -340,51 +340,53 @@ const ManageReservation = () => {
                 : "Are you sure you want to reject this reservation?"}
             </p>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex justify-evenly mx-1 mt-4">
               {actionModal.type === "accept" ? (
                 <>
+                  {/* Dismiss kiri */}
+                  <button
+                    onClick={closeModal}
+                    disabled={isActionLoading}
+                    className="w-36 py-3 rounded-lg font-semibold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center cursor-pointer"
+                  >
+                    Dismiss
+                  </button>
+
+                  {/* Approve kanan */}
                   <button
                     onClick={executeAction}
                     disabled={isActionLoading}
-                    className="w-full py-3 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 transition flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
                     {isActionLoading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      <CheckCircle className="w-5 h-5" />
+                      "Accepted"
                     )}
-                    Approve
-                  </button>
-                  <button
-                    onClick={closeModal}
-                    disabled={isActionLoading}
-                    className="w-full py-3 rounded-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <XCircle className="w-5 h-5 text-gray-500" />
-                    Dismiss
                   </button>
                 </>
               ) : (
                 <>
+                  {/* Keep kiri */}
+                  <button
+                    onClick={closeModal}
+                    disabled={isActionLoading}
+                    className="w-36 py-3 rounded-lg font-semibold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center cursor-pointer"
+                  >
+                    Keep
+                  </button>
+
+                  {/* Reject kanan */}
                   <button
                     onClick={executeAction}
                     disabled={isActionLoading}
-                    className="w-full py-3 rounded-lg font-semibold text-white bg-red-600 hover:bg-red-700 transition flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-semibold text-white bg-red-600 hover:bg-red-700 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
                     {isActionLoading ? (
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
-                      <Trash2 className="w-5 h-5" />
+                      "Cancelled"
                     )}
-                    Reject Reservation
-                  </button>
-                  <button
-                    onClick={closeModal}
-                    disabled={isActionLoading}
-                    className="w-full py-3 rounded-lg font-semibold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <Info className="w-5 h-5" />
-                    Keep Reservation
                   </button>
                 </>
               )}
