@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Check } from "lucide-react";
+
+// Images
 import houseMain from "../../assets/images/house/A.png";
 import houseLeft from "../../assets/images/house/B.png";
 import houseRight from "../../assets/images/house/C.png";
@@ -23,7 +25,7 @@ export const WhyChooseUs = () => {
     }
   };
 
-  // === ANIMASI SLIDE (pakai vw supaya aman mobile) ===
+  // === Smooth slide animation, no cropping, no shrinking ===
   const slideVariants = {
     center: {
       x: 0,
@@ -33,25 +35,25 @@ export const WhyChooseUs = () => {
       transition: { duration: 0.5, ease: "easeOut" },
     },
     left: {
-      x: "-22vw",
-      scale: 0.85,
-      filter: "brightness(0.8)",
+      x: "-140px",
+      scale: 0.9,
+      filter: "brightness(0.85)",
       zIndex: 5,
       transition: { duration: 0.5, ease: "easeOut" },
     },
     right: {
-      x: "22vw",
-      scale: 0.85,
-      filter: "brightness(0.8)",
+      x: "140px",
+      scale: 0.9,
+      filter: "brightness(0.85)",
       zIndex: 5,
       transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
   return (
-    <section className="bg-[#003B73] text-white py-20 px-6 md:px-12 overflow-hidden">
+    <section className="bg-[#003B73] text-white py-20 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20">
-        
+
         {/* ================= LEFT ================= */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -76,7 +78,7 @@ export const WhyChooseUs = () => {
                   key={index}
                   className="flex items-center gap-5 justify-center lg:justify-start"
                 >
-                  {/* ICON CHECK */}
+                  {/* ICON */}
                   <div
                     className="flex items-center justify-center rounded-full border-2"
                     style={{
@@ -113,7 +115,7 @@ export const WhyChooseUs = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex-1 relative flex justify-center items-center h-[420px] carousel-wrapper"
+          className="flex-1 relative flex justify-center items-center h-[450px] overflow-visible"
         >
           <AnimatePresence>
             {images.map((img, index) => {
@@ -122,19 +124,15 @@ export const WhyChooseUs = () => {
                   key={img}
                   variants={slideVariants}
                   animate={
-                    index === 1
-                      ? "center"
-                      : index === 0
-                      ? "left"
-                      : "right"
+                    index === 1 ? "center" : index === 0 ? "left" : "right"
                   }
                   onClick={() => handleClick(index)}
-                  className="absolute cursor-pointer w-[80%] max-w-[380px] sm:max-w-[500px]"
+                  className="absolute cursor-pointer"
                 >
                   <img
                     src={img}
                     alt={`house-${index}`}
-                    className="rounded-3xl border-2 border-white w-[380px] sm:w-[460px] max-w-full object-cover"
+                    className="rounded-3xl border-2 border-white w-[430px] h-[280px] object-cover shadow-xl"
                   />
                 </motion.div>
               );
