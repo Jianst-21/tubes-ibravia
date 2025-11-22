@@ -47,7 +47,7 @@ export default function MyReservations() {
   if (!Array.isArray(reservations) || reservations.length === 0)
     return (
       <p className="text-center mt-20 text-gray-600 dark:text-gray-300">
-        Belum ada reservasi yang aktif.
+        You have no active reservations.
       </p>
     );
 
