@@ -23,24 +23,29 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
     return (
         <div
             className={`relative w-full transition-colors duration-500 
-                ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-black"
-                }`}
+                ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-black"}
+            `}
         >
             <div className="flex justify-center items-center py-10 px-6 md:px-10">
                 <div
                     className={`flex flex-col md:flex-row items-center justify-center 
-                        gap-[75px] max-w-7xl w-full ${reversed ? "md:flex-row-reverse" : ""
-                        }`}
+                        gap-[75px] max-w-7xl w-full 
+                        ${reversed ? "md:flex-row-reverse" : ""}
+                    `}
                 >
 
                     {/* Text Section */}
-                    <div className={`max-w-2xl text-center md:text-left 
-                                    ${reversed ? "md:pl-24" : "md:pr-24"}
-                                 `}>
+                    <div
+                        className={`
+                            max-w-2xl text-center md:text-left 
+                            px-6 md:px-10 lg:px-16     /* SAFE PADDING FIX */
+                            ${reversed ? "md:pl-24" : "md:pr-24"}
+                        `}
+                    >
                         <h2
                             className={`text-3xl md:text-4xl font-bold mb-[42px] 
-                                ${blueTheme ? "text-white" : "text-[#003B73]"
-                                }`}
+                                ${blueTheme ? "text-white" : "text-[#003B73]"}
+                            `}
                         >
                             {title}
                         </h2>
@@ -48,14 +53,13 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                         {desc && (
                             <p
                                 className={`text-[18px] mb-4 leading-snug text-justify 
-                                    ${blueTheme ? "text-white/80" : "text-gray-600"
-                                    }`}
+                                    ${blueTheme ? "text-white/80" : "text-gray-600"}
+                                `}
                             >
                                 {desc}
                             </p>
                         )}
                     </div>
-
 
                     {/* Image Section */}
                     <div className="relative w-[600px] h-[420px] overflow-hidden rounded-[20px] flex-shrink-0">
@@ -66,9 +70,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                         />
                         <div
                             className="absolute inset-0 rounded-[20px] pointer-events-none"
-                            style={{
-                                border: `2px solid hsl(var(--border))`,
-                            }}
+                            style={{ border: `2px solid hsl(var(--border))` }}
                         ></div>
                     </div>
                 </div>
@@ -79,46 +81,44 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                 onClick={prevSlide}
                 className="
                     cursor-pointer absolute 
-                    left-6 md:left-10 
+                    left-4 sm:left-6 md:left-10 lg:left-14   /* JAUHKAN DARI TEKS */
                     top-1/2 -translate-y-1/2 
                     bg-white/40 hover:bg-white/70 
                     text-black 
                     rounded-full 
-                    p-1.5 md:p-2.5     /* DESKTOP LEBIH KECIL */
+                    p-1.5 md:p-2 lg:p-2.5                /* RESPONSIVE SIZE */
                     shadow-md 
                     transition-all
                 "
             >
-                <ChevronLeft size={18} className="md:w-5 md:h-5" />
+                <ChevronLeft size={18} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
             </button>
 
             <button
                 onClick={nextSlide}
                 className="
                     cursor-pointer absolute 
-                    right-6 md:right-10 
+                    right-4 sm:right-6 md:right-10 lg:right-14   /* JAUHKAN JUGA */
                     top-1/2 -translate-y-1/2 
                     bg-white/40 hover:bg-white/70 
                     text-black 
                     rounded-full 
-                    p-1.5 md:p-2.5     /* DESKTOP LEBIH KECIL */
+                    p-1.5 md:p-2 lg:p-2.5
                     shadow-md 
                     transition-all
                 "
             >
-                <ChevronRight size={18} className="md:w-5 md:h-5" />
+                <ChevronRight size={18} className="md:w-5 md:h-5 lg:w-6 lg:h-6" />
             </button>
-
-
-
 
             {/* Indicators */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
                 {slides.map((_, i) => (
                     <div
                         key={i}
-                        className={`w-3 h-3 rounded-full transition-all ${i === current ? "bg-white" : "bg-white/40"
-                            }`}
+                        className={`w-3 h-3 rounded-full transition-all 
+                            ${i === current ? "bg-white" : "bg-white/40"}
+                        `}
                     ></div>
                 ))}
             </div>
