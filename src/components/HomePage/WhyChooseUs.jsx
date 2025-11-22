@@ -110,12 +110,23 @@ export const WhyChooseUs = () => {
         </motion.div>
 
         {/* ================= RIGHT (CAROUSEL) ================= */}
+        {/* ================= RIGHT (CAROUSEL) ================= */}
+        {/* MOBILE: hanya tampilkan gambar utama, tanpa carousel */}
+        <div className="flex-1 flex justify-center items-center h-[250px] lg:hidden">
+          <img
+            src={houseMain}
+            alt="house-main"
+            className="rounded-3xl border-2 border-white w-[320px] h-[200px] object-cover shadow-xl"
+          />
+        </div>
+
+        {/* DESKTOP: carousel aktif */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex-1 relative flex justify-center items-center h-[450px] overflow-visible"
+          className="flex-1 relative justify-center items-center h-[450px] overflow-visible hidden lg:flex"
         >
           <AnimatePresence>
             {images.map((img, index) => {
@@ -139,6 +150,7 @@ export const WhyChooseUs = () => {
             })}
           </AnimatePresence>
         </motion.div>
+
       </div>
     </section>
   );
