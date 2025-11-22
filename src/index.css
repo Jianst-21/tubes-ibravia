@@ -122,8 +122,8 @@
    🎞️ CAROUSEL FIXED SIZE & SAFE AREA
 ===================================== */
 .carousel-img img {
-  width: 480px;
-  height: 320px;
+  width: 430px;
+  height: 280px;
   max-width: 90%;
   object-fit: cover;
   border-radius: 1.5rem;
@@ -176,11 +176,13 @@
 }
 
 @media (max-width: 480px) {
-  .carousel-img img {
-    width: 240px;
-    height: 150px;
+  .carousel-container {
+    height: 260px !important;
   }
-
+  .carousel-img img {
+    width: 75vw;
+    height: 180px;
+  }
   .carousel-img.left {
     transform: translateX(-60px) scale(0.75);
   }
