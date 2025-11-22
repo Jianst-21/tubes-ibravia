@@ -30,7 +30,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
   // Redirect jika email tidak ditemukan
   useEffect(() => {
     if (!email) {
-      alert("Email tidak ditemukan. Silakan ulangi proses.");
+      alert("Email not found. Please restart the process.");
       navigate(purpose === "signup" ? "/SignUp" : "/ForgotPassword");
     }
   }, [email, navigate, purpose]);
@@ -85,7 +85,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
   };
 
   const submitCode = async (code) => {
-    if (!email) return alert("Email tidak ditemukan.");
+    if (!email) return alert("Email not found.");
     setIsVerifying(true);
     setError("");
 
@@ -106,7 +106,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
       });
     } catch (err) {
       console.error("❌ Verify error:", err.response?.data || err);
-      setError(err.response?.data?.error || "Verifikasi gagal. Coba lagi.");
+      setError(err.response?.data?.error || "Verification failed. Please try again.");
       setValues(Array(length).fill(""));
       focusInput(0);
     } finally {
@@ -116,7 +116,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
 
   const handleResend = async () => {
     if (!email) {
-      alert("Email tidak ditemukan, silakan ulangi proses.");
+      alert("Email not found, please restart the process.");
       navigate(purpose === "signup" ? "/SignUp" : "/ForgotPassword");
       return;
     }
@@ -133,7 +133,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
       setCanResend(false);
     } catch (err) {
       console.error("❌ Resend OTP error:", err.response?.data || err);
-      alert(err.response?.data?.error || "Gagal mengirim ulang OTP.");
+      alert(err.response?.data?.error || "Failed to resend OTP.");
     }
   };
 
