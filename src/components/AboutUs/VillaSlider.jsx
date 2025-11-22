@@ -78,36 +78,37 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
             <button
                 onClick={prevSlide}
                 className="
-        absolute top-1/2 -translate-y-1/2 
-        p-3 md:p-4
-        left-3 md:left-8
-        rounded-full
-        bg-black/25 hover:bg-black/40
-        dark:bg-white/20 dark:hover:bg-white/40
-        backdrop-blur-sm
-        text-white
-        transition-all shadow-lg
-    "
+                    cursor-pointer absolute 
+                    left-6 md:left-10 
+                    top-1/2 -translate-y-1/2 
+                    bg-white/40 hover:bg-white/70 
+                    text-black 
+                    rounded-full 
+                    p-1.5 md:p-2.5     /* DESKTOP LEBIH KECIL */
+                    shadow-md 
+                    transition-all
+                "
             >
-                <ChevronLeft size={18} className="md:size-20" />
+                <ChevronLeft size={18} className="md:w-5 md:h-5" />
             </button>
 
             <button
                 onClick={nextSlide}
                 className="
-                    absolute top-1/2 -translate-y-1/2 
-                    p-3 md:p-4
-                    right-3 md:right-8
-                    rounded-full
-                    bg-black/25 hover:bg-black/40
-                    dark:bg-white/20 dark:hover:bg-white/40
-                    backdrop-blur-sm
-                    text-white
-                    transition-all shadow-lg
+                    cursor-pointer absolute 
+                    right-6 md:right-10 
+                    top-1/2 -translate-y-1/2 
+                    bg-white/40 hover:bg-white/70 
+                    text-black 
+                    rounded-full 
+                    p-1.5 md:p-2.5     /* DESKTOP LEBIH KECIL */
+                    shadow-md 
+                    transition-all
                 "
             >
-                <ChevronRight size={18} className="md:size-20" />
+                <ChevronRight size={18} className="md:w-5 md:h-5" />
             </button>
+
 
 
 
