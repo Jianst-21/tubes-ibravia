@@ -23,6 +23,7 @@ export const WhyChooseUs = () => {
     }
   };
 
+  // === ANIMASI SLIDE (pakai vw supaya aman mobile) ===
   const slideVariants = {
     center: {
       x: 0,
@@ -32,14 +33,14 @@ export const WhyChooseUs = () => {
       transition: { duration: 0.5, ease: "easeOut" },
     },
     left: {
-      x: "-35%",
+      x: "-22vw",
       scale: 0.85,
       filter: "brightness(0.8)",
       zIndex: 5,
       transition: { duration: 0.5, ease: "easeOut" },
     },
     right: {
-      x: "35%",
+      x: "22vw",
       scale: 0.85,
       filter: "brightness(0.8)",
       zIndex: 5,
@@ -50,7 +51,8 @@ export const WhyChooseUs = () => {
   return (
     <section className="bg-[#003B73] text-white py-20 px-6 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20">
-        {/* ================= LEFT SIDE ================= */}
+        
+        {/* ================= LEFT ================= */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -64,8 +66,6 @@ export const WhyChooseUs = () => {
 
           <div className="space-y-7">
             {features.map((feature, index) => {
-              // Ganjil: background putih, teks & check biru tua  
-              // Genap: background biru tua, teks & check putih
               const isOdd = index % 2 === 0;
               const fillColor = isOdd ? "white" : "#003B73";
               const textColor = isOdd ? "#003B73" : "white";
@@ -90,7 +90,7 @@ export const WhyChooseUs = () => {
                     <Check size={26} strokeWidth={3} />
                   </div>
 
-                  {/* FEATURE TEXT BOX */}
+                  {/* BOX */}
                   <div
                     className="flex items-center justify-center font-semibold text-lg 
                     rounded-3xl px-7 py-3.5 min-w-[320px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
@@ -107,7 +107,7 @@ export const WhyChooseUs = () => {
           </div>
         </motion.div>
 
-        {/* ================= RIGHT SIDE (CAROUSEL IMAGES) ================= */}
+        {/* ================= RIGHT (CAROUSEL) ================= */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -117,13 +117,6 @@ export const WhyChooseUs = () => {
         >
           <AnimatePresence>
             {images.map((img, index) => {
-              const isCenter = index === 1;
-              const className = isCenter
-                ? "carousel-img center"
-                : index === 0
-                  ? "carousel-img left"
-                  : "carousel-img right";
-
               return (
                 <motion.div
                   key={img}
@@ -132,17 +125,16 @@ export const WhyChooseUs = () => {
                     index === 1
                       ? "center"
                       : index === 0
-                        ? "left"
-                        : "right"
+                      ? "left"
+                      : "right"
                   }
                   onClick={() => handleClick(index)}
-                  className="absolute cursor-pointer"
+                  className="absolute cursor-pointer w-[80%] max-w-[380px] sm:max-w-[500px]"
                 >
-
                   <img
                     src={img}
                     alt={`house-${index}`}
-                    className="rounded-3xl border-2 border-white w-[600px] h-[420px] object-cover"
+                    className="rounded-3xl border-2 border-white w-full h-auto max-h-[260px] sm:max-h-[350px] object-cover"
                   />
                 </motion.div>
               );
