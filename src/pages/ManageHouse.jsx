@@ -181,7 +181,7 @@ const ManageHouse = () => {
       }, 2000);
     } catch (err) {
       console.error("Gagal ubah status:", err);
-      alert("Gagal mengubah status rumah.");
+      alert("Failed to update house status.");
     } finally {
       setUpdating(false);
     }
