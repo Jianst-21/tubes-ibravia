@@ -23,6 +23,30 @@ export const WhyChooseUs = () => {
     }
   };
 
+  const slideVariants = {
+    center: {
+      x: 0,
+      scale: 1,
+      filter: "brightness(1)",
+      zIndex: 10,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+    left: {
+      x: "-35%",
+      scale: 0.85,
+      filter: "brightness(0.8)",
+      zIndex: 5,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+    right: {
+      x: "35%",
+      scale: 0.85,
+      filter: "brightness(0.8)",
+      zIndex: 5,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
+  };
+
   return (
     <section className="bg-[#003B73] text-white py-20 px-6 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-20">
@@ -97,19 +121,24 @@ export const WhyChooseUs = () => {
               const className = isCenter
                 ? "carousel-img center"
                 : index === 0
-                ? "carousel-img left"
-                : "carousel-img right";
+                  ? "carousel-img left"
+                  : "carousel-img right";
 
               return (
                 <motion.div
                   key={img}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className={className}
+                  variants={slideVariants}
+                  animate={
+                    index === 1
+                      ? "center"
+                      : index === 0
+                        ? "left"
+                        : "right"
+                  }
                   onClick={() => handleClick(index)}
+                  className="absolute cursor-pointer"
                 >
+
                   <img
                     src={img}
                     alt={`house-${index}`}

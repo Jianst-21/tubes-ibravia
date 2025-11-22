@@ -96,51 +96,71 @@
 @utility dark-card-hover {
   @apply border-border bg-card shadow-sm dark:shadow-glow;
 }
-
 /* =====================================
    🎞️ ANIMASI & CAROUSEL
 ===================================== */
 @keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
+/* BASE STYLE */
 @utility carousel-img {
   @apply absolute cursor-pointer transition-all duration-600 rounded-3xl overflow-hidden shadow-2xl;
 }
 
+/* IMG RESPONSIVE */
 .carousel-img img {
-  width: 460px;
-  height: 320px;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  max-height: 320px;
   object-fit: cover;
-  transition: all 0.4s ease-in-out;
   border-radius: 1.5rem;
 }
 
+/* CENTER SLIDE */
 .carousel-img.center {
   z-index: 10;
   transform: scale(1);
   filter: brightness(1);
 }
 
+/* LEFT & RIGHT Desktop */
 .carousel-img.left {
   z-index: 5;
-  transform: translateX(-180px) scale(0.85);
+  transform: translateX(-35%) scale(0.85);
   filter: brightness(0.8);
 }
 
 .carousel-img.right {
   z-index: 5;
-  transform: translateX(180px) scale(0.85);
+  transform: translateX(35%) scale(0.85);
   filter: brightness(0.8);
 }
+
+/* =====================================
+   📱 MOBILE RESPONSIVE ADJUSTMENTS
+===================================== */
+@media (max-width: 640px) {
+  .carousel-img img {
+    max-width: 85%; /* gambar lebih kecil */
+    max-height: 220px; 
+  }
+
+  .carousel-img.center {
+    transform: translateX(0) scale(1);
+  }
+
+  .carousel-img.left {
+    transform: translateX(-20%) scale(0.8);
+  }
+
+  .carousel-img.right {
+    transform: translateX(20%) scale(0.8);
+  }
+}
+  
 
 /* =====================================
    🏠 CUSTOM VILLA BUTTON

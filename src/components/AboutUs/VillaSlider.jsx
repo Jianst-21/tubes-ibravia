@@ -7,7 +7,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrent((prev) => (prev + 1) % slides.length);
-        }, 5000);
+        }, 15000);
         return () => clearInterval(interval);
     }, [slides.length]);
 
