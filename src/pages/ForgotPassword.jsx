@@ -13,7 +13,7 @@ export const ForgotPassword = () => {
     e.preventDefault();
 
     if (!email) {
-      setPopupMessage({ title: "Email Kosong", text: "Silakan masukkan email Anda." });
+      setPopupMessage({ title: "Empty Email", text: "Please enter your email address." });
       setShowPopup(true);
       return;
     }
@@ -25,17 +25,17 @@ export const ForgotPassword = () => {
       localStorage.setItem("otpPurpose", "reset_password");
 
       setPopupMessage({
-        title: "OTP Terkirim",
+        title: "OTP Sent",
         text:
           res.data.message ||
-          "Kode OTP telah dikirim ke email Anda. Silakan cek email dan verifikasi akun.",
+          "The OTP code has been sent to your email. Please check your inbox and verify your account.",
       });
       setShowPopup(true);
     } catch (err) {
       console.error("Forgot password error:", err);
       setPopupMessage({
-        title: "Gagal Mengirim OTP",
-        text: err.response?.data?.error || "Terjadi kesalahan saat mengirim OTP.",
+        title: "Failed to Send OTP",
+        text: err.response?.data?.error || "An error occurred while sending the OTP.",
       });
       setShowPopup(true);
     }
@@ -84,7 +84,7 @@ export const ForgotPassword = () => {
         message={popupMessage}
         onClose={() => {
           setShowPopup(false);
-          if (popupMessage?.title === "OTP Terkirim") {
+          if (popupMessage?.title === "OTP Sent") {
             navigate("/VerifyOTP", { state: { email, otppurpose: "reset_password" } });
           }
         }}
