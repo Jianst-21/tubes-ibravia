@@ -87,7 +87,7 @@ const Notification = () => {
         {/* Daftar Notifikasi */}
         <div className="space-y-5">
           {notifications.length === 0 ? (
-            <p className="text-gray-500">Tidak ada notifikasi.</p>
+            <p className="text-gray-500">No notifications.</p>
           ) : (
             notifications.map((n) => (
               <div
