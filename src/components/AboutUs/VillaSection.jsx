@@ -41,7 +41,7 @@ export const VillaSection = () => {
         },
         {
           title: "Housing Overview",
-          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located in Jl. Raya Jember No. C2, Perum Kalirejo, Kec./Kab. Banyuwangi, Jawa Timur. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.Villa Ijen Raya offers 38 thoughtfully designed housing units located at C2, Raya Jember Street, Kalirejo Housing Complex, Banyuwangi Regency, East Java. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
+          desc: "Villa Ijen Raya offers 38 thoughtfully designed housing units located at C2, Raya Jember Street, Kalirejo Housing Complex, Banyuwangi Regency, East Java. The complex enjoys a strategic location close to public amenities such as schools, local markets, and major roads.",
           img: "/images/block/A.png",
         },
       ],
