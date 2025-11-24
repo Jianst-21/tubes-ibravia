@@ -16,7 +16,7 @@ export const Top = () => {
 
       {/* Kotak transparan sedikit lebih solid */}
       <div className="relative z-10 flex flex-col items-center justify-center 
-      bg-white/50 px-20 py-16 bordershadow-md max-w-4xl text-center rounded-[20px]">
+      bg-white/50 px-20 py-16 bordershadow-md max-w-4xl text-center rounded-[8px]">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-18">
           Discover Your Perfect Property
         </h1>
