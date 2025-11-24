@@ -199,7 +199,7 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                 transition={{ duration: 0.2 }}
                 className={`h-[46px] px-8 rounded-[8px] font-semibold text-white shadow-md transition-all duration-500 
                 ${bookingStatus === "sold"
-                    ? "bg-gray-400 cursor-not-allowed opacity-70"
+                    ? "bg-gray-700 cursor-not-allowed opacity-70"
                     : bookingStatus === "reserved"
                       ? "bg-yellow-500 cursor-not-allowed opacity-90"
                       : "bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
