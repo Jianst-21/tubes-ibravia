@@ -8,7 +8,7 @@ export const Top = () => {
       <img
         src={backgroundImage}
         alt="Hero Background"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover rounded-[20px]"
       />
 
       {/* Overlay lembut */}
