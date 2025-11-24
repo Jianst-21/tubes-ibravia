@@ -8,7 +8,7 @@ export const Top = () => {
       <img
         src={backgroundImage}
         alt="Hero Background"
-        className="absolute inset-0 w-full h-full object-cover rounded-[20px]"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
       {/* Overlay lembut */}
@@ -16,7 +16,7 @@ export const Top = () => {
 
       {/* Kotak transparan sedikit lebih solid */}
       <div className="relative z-10 flex flex-col items-center justify-center 
-      bg-white/50 px-20 py-16 bordershadow-md max-w-4xl text-center">
+      bg-white/50 px-20 py-16 bordershadow-md max-w-4xl text-center rounded-[20px]">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-18">
           Discover Your Perfect Property
         </h1>
