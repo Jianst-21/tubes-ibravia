@@ -201,7 +201,7 @@ const ManageReservation = () => {
                         <span
                           className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${item.status &&
                             item.status.toLowerCase() === "pending"
-                            ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
+                            ? "border-yellow-200 text-[#C5880A] bg-white"
                             : item.status &&
                               item.status.toLowerCase() === "accepted"
                               ? "border-green-200 text-green-700 bg-green-50"
