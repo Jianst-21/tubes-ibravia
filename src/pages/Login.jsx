@@ -88,7 +88,7 @@ export const Login = () => {
       {/* LEFT FORM */}
       <div className="flex items-center justify-center px-6 md:pl-[80px] md:pr-0">
         <div className="w-full max-w-md animate-[fade-in_0.8s_ease-out_forwards] text-left">
-          <h2 className="text-4xl font-bold mb-2 text-foreground font-[var(--font-subheader)]">
+          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">
             Welcome Back
           </h2>
           <p className="text-sm text-muted-foreground mb-8">
