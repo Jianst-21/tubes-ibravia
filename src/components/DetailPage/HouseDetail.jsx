@@ -86,10 +86,8 @@ export default function HouseDetail({ house, setSelectedHouse }) {
     setShowZoom(true);
   };
 
-  const handleZoomPrev = () =>
-    setZoomIndex((prev) => (prev - 1 + images.length) % images.length);
-  const handleZoomNext = () =>
-    setZoomIndex((prev) => (prev + 1) % images.length);
+  const handleZoomPrev = () => setZoomIndex((prev) => (prev - 1 + images.length) % images.length);
+  const handleZoomNext = () => setZoomIndex((prev) => (prev + 1) % images.length);
 
   if (!house) {
     return <p className="text-center mt-6 text-muted-foreground">Select a house to view details</p>;
@@ -97,7 +95,6 @@ export default function HouseDetail({ house, setSelectedHouse }) {
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground px-6 md:px-16 py-12 transition-colors duration-500">
-
       {/* ================= CAROUSEL ================= */}
       <div className="relative flex justify-center items-center mb-14 h-[420px] overflow-hidden">
         <button
@@ -122,14 +119,15 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                 alt={`House ${index}`}
                 onClick={() => handleImageClick(index)}
                 className={`absolute rounded-2xl object-cover shadow-2xl transition-all duration-700 ease-in-out cursor-pointer
-        ${isActive
-                    ? "w-[600px] h-[400px] z-50 opacity-100 scale-100 pointer-events-auto"
-                    : isLeft
-                      ? "w-[460px] h-[320px] -translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
-                      : isRight
-                        ? "w-[460px] h-[320px] translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
-                        : "hidden pointer-events-none"
-                  }`}
+        ${
+          isActive
+            ? "w-[600px] h-[400px] z-50 opacity-100 scale-100 pointer-events-auto"
+            : isLeft
+              ? "w-[460px] h-[320px] -translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
+              : isRight
+                ? "w-[460px] h-[320px] translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
+                : "hidden pointer-events-none"
+        }`}
               />
             );
           })}
@@ -163,9 +161,16 @@ export default function HouseDetail({ house, setSelectedHouse }) {
               Bathrooms, ${house.block?.living_room || 0} Living Room, ${house.block?.family_room || 0} 
               Family Room, ${house.block?.kitchen || 0} Kitchen`}
             </p>
-            <p><span className="font-medium">Land Area (m²):</span> {house.land_area}</p>
-            <p><span className="font-medium">Building Area (m²):</span> {house.house_area}</p>
-            <p><span className="font-medium">Address:</span> {house.block?.residence?.location || "Unknown location"}</p>
+            <p>
+              <span className="font-medium">Land Area (m²):</span> {house.land_area}
+            </p>
+            <p>
+              <span className="font-medium">Building Area (m²):</span> {house.house_area}
+            </p>
+            <p>
+              <span className="font-medium">Address:</span>{" "}
+              {house.block?.residence?.location || "Unknown location"}
+            </p>
           </div>
         </div>
 
@@ -175,14 +180,18 @@ export default function HouseDetail({ house, setSelectedHouse }) {
             <div className="flex flex-col items-center">
               <p className="text-sm text-muted-foreground mb-1">Full Payment</p>
               <div className="border border-border rounded-[4px] px-5 py-3 text-center min-w-[160px]">
-                <p className="font-semibold text-foreground">IDR {Number(house.full_price).toLocaleString("id-ID")}</p>
+                <p className="font-semibold text-foreground">
+                  IDR {Number(house.full_price).toLocaleString("id-ID")}
+                </p>
               </div>
             </div>
 
             <div className="flex flex-col items-center">
               <p className="text-sm text-muted-foreground mb-1">Down Payment</p>
               <div className="border border-border rounded-[4px] px-5 py-3 text-center min-w-[160px]">
-                <p className="font-semibold text-foreground">IDR {Number(house.down_payment).toLocaleString("id-ID")}</p>
+                <p className="font-semibold text-foreground">
+                  IDR {Number(house.down_payment).toLocaleString("id-ID")}
+                </p>
               </div>
             </div>
 
@@ -198,12 +207,13 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                 whileTap={!buttonDisabled ? { scale: 0.95 } : {}}
                 transition={{ duration: 0.2 }}
                 className={`h-[46px] px-8 rounded-[8px] font-semibold text-white shadow-md transition-all duration-500 
-                ${bookingStatus === "sold"
+                ${
+                  bookingStatus === "sold"
                     ? "bg-gray-700 cursor-not-allowed opacity-70"
                     : bookingStatus === "reserved"
                       ? "bg-yellow-500 cursor-not-allowed opacity-90"
                       : "bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
-                  }`}
+                }`}
               >
                 {buttonText}
               </motion.button>
@@ -286,7 +296,10 @@ export default function HouseDetail({ house, setSelectedHouse }) {
         )}
       </AnimatePresence>
 
-      <PopupReservation show={showReservationPopup} onClose={() => setShowReservationPopup(false)} />
+      <PopupReservation
+        show={showReservationPopup}
+        onClose={() => setShowReservationPopup(false)}
+      />
     </div>
   );
 }

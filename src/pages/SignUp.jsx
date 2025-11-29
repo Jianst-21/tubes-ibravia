@@ -28,19 +28,19 @@ export const SignUp = () => {
   // Validasi password dan konfirmasi
   useEffect(() => {
     if (formData.password && !passwordRegex.test(formData.password)) {
-      setError(prev => ({
+      setError((prev) => ({
         ...prev,
         password: "Password must include minimum 8 characters, letters, numbers, and symbols.",
       }));
-    } else setError(prev => ({ ...prev, password: "" }));
+    } else setError((prev) => ({ ...prev, password: "" }));
 
     if (formData.confirmPassword && formData.confirmPassword !== formData.password) {
-      setError(prev => ({ ...prev, confirm: "Passwords do not match." }));
-    } else setError(prev => ({ ...prev, confirm: "" }));
+      setError((prev) => ({ ...prev, confirm: "Passwords do not match." }));
+    } else setError((prev) => ({ ...prev, confirm: "" }));
   }, [formData.password, formData.confirmPassword]);
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -69,7 +69,8 @@ export const SignUp = () => {
       // munculkan popup sukses
       setPopupMessage({
         title: "Registration Successful!",
-        text: res.data.message || "The OTP has been sent to your email. Please verify your account!",
+        text:
+          res.data.message || "The OTP has been sent to your email. Please verify your account!",
       });
       setShowPopup(true);
     } catch (err) {
@@ -122,7 +123,9 @@ export const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1 text-foreground">Email Address</label>
+              <label className="block text-sm font-medium mb-1 text-foreground">
+                Email Address
+              </label>
               <input
                 type="email"
                 name="email"
@@ -157,12 +160,16 @@ export const SignUp = () => {
                 </button>
               </div>
               {error.password && (
-                <p className="text-xs text-red-500 mt-2 animate-[fade-in_0.3s_ease-out]">{error.password}</p>
+                <p className="text-xs text-red-500 mt-2 animate-[fade-in_0.3s_ease-out]">
+                  {error.password}
+                </p>
               )}
             </div>
 
             <div className="relative">
-              <label className="block text-sm font-medium mb-1 text-foreground">Confirm Password</label>
+              <label className="block text-sm font-medium mb-1 text-foreground">
+                Confirm Password
+              </label>
               <div className="relative">
                 <input
                   type={showConfirm ? "text" : "password"}
@@ -188,7 +195,9 @@ export const SignUp = () => {
                 </button>
               </div>
               {error.confirm && (
-                <p className="text-xs text-red-500 mt-2 animate-[fade-in_0.3s_ease-out]">{error.confirm}</p>
+                <p className="text-xs text-red-500 mt-2 animate-[fade-in_0.3s_ease-out]">
+                  {error.confirm}
+                </p>
               )}
             </div>
 
@@ -204,9 +213,7 @@ export const SignUp = () => {
           {/* Divider */}
           <div className="flex items-center my-8">
             <hr className="flex-1 border-border" />
-            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">
-              or continue with
-            </span>
+            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">or continue with</span>
             <hr className="flex-1 border-border" />
           </div>
 
@@ -238,7 +245,6 @@ export const SignUp = () => {
             }}
           />
         </div>
-
       </div>
 
       <div className="hidden md:block">

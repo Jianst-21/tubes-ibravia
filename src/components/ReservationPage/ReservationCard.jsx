@@ -63,13 +63,9 @@ export default function ReservationCard({ data }) {
           <h3 className="font-bold text-blue-800 dark:text-blue-400 text-sm">
             Block {data.block_name} {data.number_block}
           </h3>
-          <p className="font-semibold text-lg text-foreground">
-            {data.residence_name}
-          </p>
+          <p className="font-semibold text-lg text-foreground">{data.residence_name}</p>
 
-          <p className="text-sm text-muted-foreground mt-1">
-            {data.description}
-          </p>
+          <p className="text-sm text-muted-foreground mt-1">{data.description}</p>
 
           <div className="mt-3 text-xs text-muted-foreground space-y-1">
             <p>
@@ -109,8 +105,7 @@ export default function ReservationCard({ data }) {
               borderWidth: "1px",
             }}
           >
-            {data.reservation_status.charAt(0).toUpperCase() +
-              data.reservation_status.slice(1)}
+            {data.reservation_status.charAt(0).toUpperCase() + data.reservation_status.slice(1)}
           </span>
         </div>
       </div>

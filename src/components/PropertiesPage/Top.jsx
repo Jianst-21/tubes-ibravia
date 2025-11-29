@@ -2,8 +2,10 @@ import backgroundImage from "../../../src/assets/images/colection/property-page.
 
 export const Top = () => {
   return (
-    <section className="relative w-full h-[70vh] md:h-[80vh] lg:h-[85vh] 
-    flex items-center justify-center overflow-hidden">
+    <section
+      className="relative w-full h-[70vh] md:h-[80vh] lg:h-[85vh] 
+    flex items-center justify-center overflow-hidden"
+    >
       {/* Background image */}
       <img
         src={backgroundImage}
@@ -15,8 +17,10 @@ export const Top = () => {
       <div className="absolute inset-0 bg-black/20" />
 
       {/* Kotak transparan sedikit lebih solid */}
-      <div className="relative z-10 flex flex-col items-center justify-center 
-      bg-white/50 px-20 py-16 bordershadow-md max-w-4xl text-center rounded-[8px]">
+      <div
+        className="relative z-10 flex flex-col items-center justify-center 
+      bg-white/50 px-20 py-16 bordershadow-md max-w-4xl text-center rounded-[8px]"
+      >
         <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-18">
           Discover Your Perfect Property
         </h1>

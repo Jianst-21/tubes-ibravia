@@ -1,5 +1,4 @@
 import backgroundImage from "@/assets/images/colection/property-page.png";
-import houseImage from "@/assets/images/colection/hero-bg.jpg";
 
 export const AboutTop = () => {
   return (
@@ -33,17 +32,12 @@ export const AboutTop = () => {
         </div>
 
         {/* Teks di kanan */}
-        <div
-          className="text-white max-w-[600px] text-left flex flex-col justify-center"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">
-            About Us, IBRAVIA
-          </h2>
+        <div className="text-white max-w-[600px] text-left flex flex-col justify-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">About Us, IBRAVIA</h2>
           <p className="text-base md:text-lg leading-relaxed text-gray-100">
-            Ibravia is a trusted property developer dedicated to creating modern, 
-            comfortable, and affordable homes for families. With a commitment to 
-            quality and customer satisfaction, we strive to guide every client through
-             their journey of finding the perfect home.
+            Ibravia is a trusted property developer dedicated to creating modern, comfortable, and
+            affordable homes for families. With a commitment to quality and customer satisfaction,
+            we strive to guide every client through their journey of finding the perfect home.
           </p>
         </div>
       </div>

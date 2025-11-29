@@ -86,13 +86,9 @@ const ManageReservation = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const endpoint =
-        type === "accept"
-          ? "/accept-reservation"
-          : "/cancel-reservation";
+      const endpoint = type === "accept" ? "/accept-reservation" : "/cancel-reservation";
 
       await apiAdmin.post(endpoint, { id_reservasi, id_house });
-
 
       // Tutup modal konfirmasi dulu
       closeModal();
@@ -108,18 +104,14 @@ const ManageReservation = () => {
         // Mulai animasi hapus dari list
         setRemovingId(id_reservasi);
         setTimeout(() => {
-          setReservations((prev) =>
-            prev.filter((r) => r.id_reservasi !== id_reservasi)
-          );
+          setReservations((prev) => prev.filter((r) => r.id_reservasi !== id_reservasi));
           setRemovingId(null);
         }, 400);
       }, 2000); // Modal sukses tampil selama 2 detik
     } catch (err) {
       console.error(`Gagal memproses aksi:`, err);
       // if (loadingToast) toast.dismiss(loadingToast);
-      toast.error(
-        err.response?.data?.error || "An error occurred while processing."
-      );
+      toast.error(err.response?.data?.error || "An error occurred while processing.");
     } finally {
       setIsActionLoading(false);
     }
@@ -139,20 +131,18 @@ const ManageReservation = () => {
 
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Manage Reservation
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Manage Reservation</h1>
 
           {isLoading ? (
             <div className="flex justify-center items-center mt-10">
               <Loader2 className="w-8 h-8 animate-spin text-[#0B3C78] mr-2" />
-              <p className="text-[#0B3C78] font-semibold">
-                Loading reservation data...
-              </p>
+              <p className="text-[#0B3C78] font-semibold">Loading reservation data...</p>
             </div>
           ) : reservations.length === 0 ? (
-            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl 
-            shadow-sm border border-gray-200 mt-10">
+            <div
+              className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl 
+            shadow-sm border border-gray-200 mt-10"
+            >
               <Info className="w-10 h-10 text-gray-400 mb-4" />
               <p className="text-center text-gray-500 text-lg font-medium">
                 There is no reservation data at the moment.
@@ -161,11 +151,8 @@ const ManageReservation = () => {
           ) : (
             <div className="flex flex-col gap-6">
               {reservations.map((item) => {
-                const deadlineDate = new Date(
-                  item.deadline_date
-                ).toLocaleDateString("en-GB");
-                const isPending =
-                  item.status && item.status.toLowerCase() === "pending";
+                const deadlineDate = new Date(item.deadline_date).toLocaleDateString("en-GB");
+                const isPending = item.status && item.status.toLowerCase() === "pending";
                 const displayStatus = formatStatus(item.status);
 
                 return (
@@ -173,10 +160,11 @@ const ManageReservation = () => {
                     key={item.id_reservasi}
                     className={`bg-white rounded-2xl shadow-sm border border-gray-200
                        p-6 w-full transition-all duration-500 border-b-4 border-b-black 
-                       ${removingId === item.id_reservasi
-                      ? "opacity-0 translate-y-4 scale-95"
-                      : "hover:shadow-md"
-                      }`}
+                       ${
+                         removingId === item.id_reservasi
+                           ? "opacity-0 translate-y-4 scale-95"
+                           : "hover:shadow-md"
+                       }`}
                   >
                     {/* ... (ISI KARTU SAMA SEPERTI SEBELUMNYA) ... */}
                     {/* Header Card */}
@@ -191,33 +179,27 @@ const ManageReservation = () => {
 
                         <p className="text-sm text-gray-500 mt-1">
                           Reservation Date:{" "}
-                          {new Date(item.reservation_date).toLocaleDateString(
-                            "en-GB"
-                          )}
+                          {new Date(item.reservation_date).toLocaleDateString("en-GB")}
                         </p>
                       </div>
 
                       <div className="flex flex-col items-end gap-2">
                         <span
-                          className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${item.status &&
-                            item.status.toLowerCase() === "pending"
-                            ? "border-yellow-200 text-[#C5880A] bg-white"
-                            : item.status &&
-                              item.status.toLowerCase() === "accepted"
-                              ? "border-green-200 text-green-700 bg-green-50"
-                              : item.status &&
-                                item.status.toLowerCase() === "expired"
-                                ? "border-orange-200 text-orange-700 bg-orange-50"
-                                : "border-red-200 text-red-700 bg-red-50"
-                            }`}
+                          className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${
+                            item.status && item.status.toLowerCase() === "pending"
+                              ? "border-yellow-200 text-[#C5880A] bg-white"
+                              : item.status && item.status.toLowerCase() === "accepted"
+                                ? "border-green-200 text-green-700 bg-green-50"
+                                : item.status && item.status.toLowerCase() === "expired"
+                                  ? "border-orange-200 text-orange-700 bg-orange-50"
+                                  : "border-red-200 text-red-700 bg-red-50"
+                          }`}
                         >
                           {displayStatus}
                         </span>
                         <div className="flex items-center gap-1.5 text-gray-600 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100 mt-4">
                           <CalendarDays className="w-4 h-4 text-gray-500" />
-                          <span className="text-sm font-medium">
-                            Deadline: {deadlineDate}
-                          </span>
+                          <span className="text-sm font-medium">Deadline: {deadlineDate}</span>
                         </div>
                       </div>
                     </div>
@@ -231,18 +213,14 @@ const ManageReservation = () => {
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Customer Info
                           </span>
-                          <p className="text-gray-700 font-medium">
-                            {item.name}
-                          </p>
+                          <p className="text-gray-700 font-medium">{item.name}</p>
                           <p className="text-sm text-gray-500">{item.email}</p>
                         </div>
                         <div>
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Address
                           </span>
-                          <p className="text-sm leading-relaxed">
-                            {item.address}
-                          </p>
+                          <p className="text-sm leading-relaxed">{item.address}</p>
                         </div>
                       </div>
                       <div className="space-y-3 md:border-l md:pl-6 border-gray-100">
@@ -250,26 +228,20 @@ const ManageReservation = () => {
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Property Details
                           </span>
-                          <p className="text-sm leading-relaxed">
-                            {item.description}
-                          </p>
+                          <p className="text-sm leading-relaxed">{item.description}</p>
                         </div>
                         <div className="flex gap-6">
                           <div>
                             <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                               Land Area
                             </span>
-                            <p className="text-sm leading-relaxed">
-                              {item.land_area} m²
-                            </p>
+                            <p className="text-sm leading-relaxed">{item.land_area} m²</p>
                           </div>
                           <div>
                             <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                               House Area
                             </span>
-                            <p className="text-sm leading-relaxed">
-                              {item.building_area} m²
-                            </p>
+                            <p className="text-sm leading-relaxed">{item.building_area} m²</p>
                           </div>
                         </div>
                       </div>
@@ -280,13 +252,7 @@ const ManageReservation = () => {
                       {isPending ? (
                         <>
                           <button
-                            onClick={() =>
-                              openModal(
-                                "cancel",
-                                item.id_reservasi,
-                                item.id_house
-                              )
-                            }
+                            onClick={() => openModal("cancel", item.id_reservasi, item.id_house)}
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-red-600 border border-red-600 bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                           >
@@ -294,13 +260,7 @@ const ManageReservation = () => {
                           </button>
 
                           <button
-                            onClick={() =>
-                              openModal(
-                                "accept",
-                                item.id_reservasi,
-                                item.id_house
-                              )
-                            }
+                            onClick={() => openModal("accept", item.id_reservasi, item.id_house)}
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                           >
@@ -328,9 +288,7 @@ const ManageReservation = () => {
           {/* ... (ISI MODAL KONFIRMASI SAMA SEPERTI SEBELUMNYA) ... */}
           <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl scale-100 animate-in zoom-in-95 duration-200">
             <h3 className="text-xl font-bold text-center text-gray-900 mb-2">
-              {actionModal.type === "accept"
-                ? "Accept Reservation"
-                : "Cancel Reservation"}
+              {actionModal.type === "accept" ? "Accept Reservation" : "Cancel Reservation"}
             </h3>
             <div className="w-full h-px bg-gray-200 my-4"></div>
 
@@ -358,11 +316,7 @@ const ManageReservation = () => {
                     disabled={isActionLoading}
                     className="w-36 py-3 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
-                    {isActionLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      "Accepted"
-                    )}
+                    {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Accepted"}
                   </button>
                 </>
               ) : (
@@ -382,11 +336,7 @@ const ManageReservation = () => {
                     disabled={isActionLoading}
                     className="w-36 py-3 rounded-lg font-semibold text-white bg-red-600 hover:bg-red-700 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
-                    {isActionLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                    ) : (
-                      "Cancelled"
-                    )}
+                    {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Cancelled"}
                   </button>
                 </>
               )}
@@ -413,9 +363,7 @@ const ManageReservation = () => {
 
             {/* Teks Judul */}
             <h2 className="text-2xl font-extrabold text-gray-900 text-center mb-3">
-              {successModal.type === "accept"
-                ? "Reservation Accepted!"
-                : "Reservation Canceled"}
+              {successModal.type === "accept" ? "Reservation Accepted!" : "Reservation Canceled"}
             </h2>
 
             {/* Teks Deskripsi */}

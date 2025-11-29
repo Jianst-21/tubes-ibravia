@@ -1,4 +1,3 @@
 export const NotFound = () => {
-    return <div>APALAHHH</div>;
-
-}
+  return <div>APALAHHH</div>;
+};

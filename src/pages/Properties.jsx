@@ -4,21 +4,17 @@ import { Block } from "../components/PropertiesPage/Block";
 import Footer from "../components/GlobalPage/Footer";
 
 export const Properties = () => {
-    return <div className=" min-h-screen overflow-x-hidden">
+  return (
+    <div className=" min-h-screen overflow-x-hidden">
+      {/*Navbar*/}
+      <Navbar />
 
-        {/*Navbar*/}
-        <Navbar />
-
-
-      
-        <main className="flex-grow">
-            <Top />
-            <Block/>
-        </main>
-        {/*Footer*/}
-        <Footer/>
-
-
-    </div>;
-
-}
+      <main className="flex-grow">
+        <Top />
+        <Block />
+      </main>
+      {/*Footer*/}
+      <Footer />
+    </div>
+  );
+};

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { VillaButton } from "../GlobalPage/VillaButton";
 import { VillaSlider } from "./VillaSlider";
 
@@ -110,22 +110,14 @@ export const VillaSection = () => {
       {/* Tombol Villa */}
       <div className="flex flex-wrap justify-center gap-8 px-6 md:px-16 mb-12">
         {villas.map((villa) => (
-          <VillaButton
-            key={villa.id}
-            name={villa.name}
-            onClick={() => scrollToVilla(villa.id)}
-          />
+          <VillaButton key={villa.id} name={villa.name} onClick={() => scrollToVilla(villa.id)} />
         ))}
       </div>
 
       {/* Villa Slides */}
       <div className="flex flex-col gap-20">
         {villas.map((villa, index) => (
-          <div
-            key={villa.id}
-            id={villa.id}
-            ref={(el) => (sectionRefs.current[index] = el)}
-          >
+          <div key={villa.id} id={villa.id} ref={(el) => (sectionRefs.current[index] = el)}>
             <VillaSlider
               name={villa.name}
               slides={villa.slides}
@@ -136,6 +128,5 @@ export const VillaSection = () => {
         ))}
       </div>
     </section>
-
   );
 };

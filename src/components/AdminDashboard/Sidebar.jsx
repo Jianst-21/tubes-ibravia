@@ -19,59 +19,54 @@ const Sidebar = () => {
   const [notifCount, setNotifCount] = useState(0);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (!token) return;
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
 
-  const ENABLE_LOG = false; // <<< MATIKAN LOG DARI SINI
+    const ENABLE_LOG = false; // <<< MATIKAN LOG DARI SINI
 
-  const fetchNotifCount = async () => {
-    try {
-      const res = await apiAdmin.get("/notifications", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const unreadCount = res.data.filter(
-        (n) => n.read_status !== "read"
-      ).length;
-      setNotifCount(unreadCount);
-    } catch (err) {
-      if (ENABLE_LOG) console.error("Error fetching notifications:", err);
-    }
-  };
-
-  fetchNotifCount();
-
-  if (ENABLE_LOG) console.log("🟢 Realtime listener aktif...");
-
-  const channel = supabaseRealtime
-    .channel("admin-notification-realtime")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: "notification" },
-      (payload) => {
-        if (ENABLE_LOG)
-          console.log("🔔 Notifikasi berubah:", payload.eventType);
-        fetchNotifCount();
+    const fetchNotifCount = async () => {
+      try {
+        const res = await apiAdmin.get("/notifications", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const unreadCount = res.data.filter((n) => n.read_status !== "read").length;
+        setNotifCount(unreadCount);
+      } catch (err) {
+        if (ENABLE_LOG) console.error("Error fetching notifications:", err);
       }
-    )
-    .subscribe((status) => {
-      if (ENABLE_LOG) console.log("Realtime status:", status);
-    });
+    };
 
-  window.addEventListener("notifUpdated", fetchNotifCount);
+    fetchNotifCount();
 
-  return () => {
-    window.removeEventListener("notifUpdated", fetchNotifCount);
-    try {
-      supabaseRealtime.removeChannel(channel);
-      if (ENABLE_LOG) console.log("🧹 Realtime listener dibersihkan");
-    } catch (err) {
-      if (ENABLE_LOG) console.warn("Gagal remove channel:", err);
-    }
-  };
-}, []);
+    if (ENABLE_LOG) console.log("🟢 Realtime listener aktif...");
 
+    const channel = supabaseRealtime
+      .channel("admin-notification-realtime")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "notification" },
+        (payload) => {
+          if (ENABLE_LOG) console.log("🔔 Notifikasi berubah:", payload.eventType);
+          fetchNotifCount();
+        }
+      )
+      .subscribe((status) => {
+        if (ENABLE_LOG) console.log("Realtime status:", status);
+      });
 
+    window.addEventListener("notifUpdated", fetchNotifCount);
+
+    return () => {
+      window.removeEventListener("notifUpdated", fetchNotifCount);
+      try {
+        supabaseRealtime.removeChannel(channel);
+        if (ENABLE_LOG) console.log("🧹 Realtime listener dibersihkan");
+      } catch (err) {
+        if (ENABLE_LOG) console.warn("Gagal remove channel:", err);
+      }
+    };
+  }, []);
 
   // --- Logout logic ---
   const handleLogoutClick = () => setShowLogoutModal(true);
@@ -204,12 +199,10 @@ useEffect(() => {
               <div className="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-red-100 mb-4">
                 <AlertTriangle className="h-8 w-8 text-red-600" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Log Out Confirmation
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Log Out Confirmation</h3>
               <p className="text-sm text-gray-500 mb-6">
-                Are you sure you want to log out from this account? You’ll need
-                to log in again to access the admin panel.
+                Are you sure you want to log out from this account? You’ll need to log in again to
+                access the admin panel.
               </p>
               <div className="flex gap-3">
                 <button

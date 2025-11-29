@@ -6,13 +6,14 @@ export const VillaButton = ({ name, active, onClick }) => {
       onClick={onClick}
       className={`flex flex-col items-center justify-center rounded-2xl border text-sm sm:text-base 
     font-medium shadow-sm transition-all duration-300 cursor-pointer
-    ${active
-          ? "bg-primary text-primary-foreground scale-[1.02] shadow-glow"
-          : "bg-card text-foreground border-dynamic hover:scale-[1.02]"
-        }`}
+    ${
+      active
+        ? "bg-primary text-primary-foreground scale-[1.02] shadow-glow"
+        : "bg-card text-foreground border-dynamic hover:scale-[1.02]"
+    }`}
       style={{
-        width: "240px",  
-        height: "240px", 
+        width: "240px",
+        height: "240px",
         flexShrink: 0,
       }}
     >
@@ -22,9 +23,7 @@ export const VillaButton = ({ name, active, onClick }) => {
           width: "120px",
           height: "120px",
           borderColor: "hsl(var(--primary))",
-          backgroundColor: active
-            ? "hsl(var(--card))"
-            : "transparent",
+          backgroundColor: active ? "hsl(var(--card))" : "transparent",
         }}
       >
         <Home
@@ -36,10 +35,7 @@ export const VillaButton = ({ name, active, onClick }) => {
           }}
         />
       </div>
-      <span className="text-center font-semibold leading-tight text-base">
-        {name}
-      </span>
+      <span className="text-center font-semibold leading-tight text-base">{name}</span>
     </button>
-
   );
 };

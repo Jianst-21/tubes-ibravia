@@ -26,7 +26,6 @@ export default function MyReservations() {
       }
     };
 
-
     fetchReservations();
   }, []);
 
@@ -38,11 +37,7 @@ export default function MyReservations() {
     );
 
   if (loading)
-    return (
-      <p className="text-center mt-20 text-gray-600 dark:text-gray-300">
-        Loading...
-      </p>
-    );
+    return <p className="text-center mt-20 text-gray-600 dark:text-gray-300">Loading...</p>;
 
   if (!Array.isArray(reservations) || reservations.length === 0)
     return (

@@ -88,9 +88,7 @@ export const HouseCollections = () => {
 
               {/* Konten */}
               <div className="mt-4 flex-grow space-y-2">
-                <p className="text-sm text-primary font-medium">
-                  {house.category}
-                </p>
+                <p className="text-sm text-primary font-medium">{house.category}</p>
                 <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
                   {house.title}
                 </h3>
@@ -108,9 +106,7 @@ export const HouseCollections = () => {
                       />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">
-                        {house.price}
-                      </p>
+                      <p className="text-sm font-semibold text-foreground">{house.price}</p>
                       <p className="text-xs text-[hsl(var(--muted-foreground))]">
                         {house.developer}
                       </p>
@@ -124,10 +120,7 @@ export const HouseCollections = () => {
 
         {/* Tombol */}
         <div className="mt-12">
-          <Link
-            to="/properties"
-            className="ibravia-button px-8 py-3 font-[var(--font-subheader)]"
-          >
+          <Link to="/properties" className="ibravia-button px-8 py-3 font-[var(--font-subheader)]">
             Explore More
           </Link>
         </div>

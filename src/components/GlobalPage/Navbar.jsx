@@ -97,7 +97,7 @@ export const Navbar = () => {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setUserData(null);
-    toast.success("Logout successful!"); 
+    toast.success("Logout successful!");
     navigate("/Login");
   };
 
@@ -105,9 +105,7 @@ export const Navbar = () => {
     <nav
       className={cn(
         "fixed top-0 left-0 w-full z-[100] transition-colors duration-300",
-        isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-md shadow-sm"
-          : "py-5"
+        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" : "py-5"
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
@@ -119,10 +117,7 @@ export const Navbar = () => {
             alt="Ibravia Logo"
             className="h-11 w-auto transition-all duration-300 object-contain"
           />
-          <span
-            className={`font-bold text-[20px] ${isDark ? "text-white" : "text-[#0A3764]"
-              }`}
-          >
+          <span className={`font-bold text-[20px] ${isDark ? "text-white" : "text-[#0A3764]"}`}>
             IBRAVIA
           </span>
         </Link>
@@ -151,14 +146,14 @@ export const Navbar = () => {
                   from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
                   onClick={() => setOpen((prev) => !prev)}
                 >
-                  {userData?.email
-                    ? userData.email.charAt(0).toUpperCase()
-                    : "U"}
+                  {userData?.email ? userData.email.charAt(0).toUpperCase() : "U"}
                 </button>
 
                 {open && (
-                  <div className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg 
-                  rounded-md z-50 transition-all duration-200">
+                  <div
+                    className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg 
+                  rounded-md z-50 transition-all duration-200"
+                  >
                     <p className="px-4 py-2 text-sm border-b border-border truncate">
                       {userData?.email}
                     </p>

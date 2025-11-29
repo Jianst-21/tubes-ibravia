@@ -3,24 +3,21 @@ import { AboutTop } from "../components/AboutUs/AboutTop";
 import { VillaSection } from "../components/AboutUs/VillaSection";
 import Footer from "../components/GlobalPage/Footer";
 export const AboutUs = () => {
-    return <div className=" min-h-screen overflow-x-hidden">
+  return (
+    <div className=" min-h-screen overflow-x-hidden">
+      {/* Theme Tzoggle */}
+      {/* <ThemeToggle /> */}
 
-        {/* Theme Tzoggle */}
-        {/* <ThemeToggle /> */}
+      {/*Navbar*/}
+      <Navbar />
 
-        {/*Navbar*/}
-        <Navbar />
-
-
-        {/*Main Content*/}
-        <main>
-            <AboutTop />
-            <VillaSection />
-
-        </main>
-        {/*Footer*/}
-        <Footer />
-
-    </div>;
-
-}
+      {/*Main Content*/}
+      <main>
+        <AboutTop />
+        <VillaSection />
+      </main>
+      {/*Footer*/}
+      <Footer />
+    </div>
+  );
+};

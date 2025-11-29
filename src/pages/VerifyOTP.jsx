@@ -14,9 +14,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
   const navigate = useNavigate();
 
   // Ambil email & purpose dari state atau localStorage
-  const [email, setEmail] = useState(
-    location.state?.email || localStorage.getItem("email") || ""
-  );
+  const [email, setEmail] = useState(location.state?.email || localStorage.getItem("email") || "");
   const [purpose, setPurpose] = useState(
     location.state?.purpose || localStorage.getItem("otpPurpose") || "signup"
   );
@@ -141,9 +139,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     <div className="min-h-screen flex items-center justify-center bg-background p-6 animate-[fade-in_0.7s_ease-out_forwards]">
       <div className="w-full max-w-md bg-card text-center rounded-2xl shadow-lg p-6 border border-border">
         <h1 className="text-2xl font-subheader mb-2 text-foreground">Insert OTP Code</h1>
-        <p className="text-sm text-slate-500 mb-6">
-          The OTP code has been sent to your email.
-        </p>
+        <p className="text-sm text-slate-500 mb-6">The OTP code has been sent to your email.</p>
 
         <form
           className="flex flex-col items-center gap-4"
@@ -175,7 +171,11 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
 
           <div className="w-full mt-2">
             {error && <div className="text-sm text-red-600 mb-2">{error}</div>}
-            <button type="submit" disabled={isVerifying} className="ibravia-button w-full disabled:opacity-50">
+            <button
+              type="submit"
+              disabled={isVerifying}
+              className="ibravia-button w-full disabled:opacity-50"
+            >
               {isVerifying ? "Memverifikasi..." : "Verifikasi OTP"}
             </button>
           </div>

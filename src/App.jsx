@@ -14,8 +14,6 @@ import { ResetPassword } from "./pages/ResetPassword";
 import EditProfile from "./pages/EditProfile";
 import OauthSuccess from "./pages/OauthSuccess";
 
-
-
 import AdminDashboard from "./pages/AdminDashboard";
 import ManageHouse from "./pages/ManageHouse";
 import Notification from "./pages/Notification";
@@ -41,7 +39,6 @@ function App() {
         <Route path="/ResetPassword" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/oauth-success" element={<OauthSuccess />} />
-
 
         {/* Other pages */}
         <Route path="/Block" element={<Block />} />

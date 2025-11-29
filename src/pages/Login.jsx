@@ -57,8 +57,7 @@ export const Login = () => {
       if (!currentUser) throw new Error("User data not found.");
 
       const userToStore = {
-        id_user:
-          currentUser.id_user || currentUser.id || currentUser.id_admin,
+        id_user: currentUser.id_user || currentUser.id || currentUser.id_admin,
         name: currentUser.name || currentUser.username,
         email: currentUser.email,
         role,
@@ -72,7 +71,6 @@ export const Login = () => {
       setTimeout(() => {
         navigate(role === "admin" ? "/admin/dashboard" : "/");
       }, 1000);
-
     } catch (err) {
       console.error("❌ Login error:", err.response?.data || err.message);
       toast.error(err.response?.data?.error || "Incorrect email or password.");
@@ -81,16 +79,13 @@ export const Login = () => {
     }
   };
 
-
   return (
     <section className="min-h-screen grid md:grid-cols-2 md:gap-x-[80px] bg-[hsl(var(--background))] font-sans">
       <Toaster position="top-right" reverseOrder={false} />
       {/* LEFT FORM */}
       <div className="flex items-center justify-center px-6 md:pl-[80px] md:pr-0">
         <div className="w-full max-w-md animate-[fade-in_0.8s_ease-out_forwards] text-left">
-          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">
-            Welcome Back
-          </h2>
+          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">Welcome Back</h2>
           <p className="text-sm text-muted-foreground mb-8">
             Log in to access your account and explore properties.
           </p>
@@ -116,9 +111,7 @@ export const Login = () => {
 
             {/* PASSWORD */}
             <div className="relative">
-              <label className="block text-sm font-medium mb-1 text-foreground">
-                Password
-              </label>
+              <label className="block text-sm font-medium mb-1 text-foreground">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -146,10 +139,7 @@ export const Login = () => {
             {/* REMEMBER ME & FORGOT PASSWORD */}
             <div className="flex items-center justify-between text-sm text-foreground">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="accent-primary w-4 h-4 rounded-sm"
-                />
+                <input type="checkbox" className="accent-primary w-4 h-4 rounded-sm" />
                 Remember me
               </label>
               <a
@@ -175,9 +165,7 @@ export const Login = () => {
           {/* Divider */}
           <div className="flex items-center my-8">
             <hr className="flex-1 border-border" />
-            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">
-              or continue with
-            </span>
+            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">or continue with</span>
             <hr className="flex-1 border-border" />
           </div>
 
@@ -187,8 +175,6 @@ export const Login = () => {
             onClick={() =>
               (window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`)
             }
-
-
             className="cursor-pointer w-full border border-blue-600 text-blue-600 py-2 rounded-md 
             flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all 
             duration-200 active:scale-[0.98]"
@@ -207,11 +193,7 @@ export const Login = () => {
 
       {/* RIGHT IMAGE */}
       <div className="hidden md:block">
-        <img
-          src={herobg}
-          alt="Login background"
-          className="w-full h-full object-cover"
-        />
+        <img src={herobg} alt="Login background" className="w-full h-full object-cover" />
       </div>
     </section>
   );

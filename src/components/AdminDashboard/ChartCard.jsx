@@ -13,9 +13,7 @@ const ChartCard = ({ data = [] }) => {
     <div className="w-full bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
-        <h2 className="text-gray-800 font-semibold text-lg">
-          Weekly Report
-        </h2>
+        <h2 className="text-gray-800 font-semibold text-lg">Weekly Report</h2>
         <p className="text-sm text-gray-500 flex items-center gap-1">
           <span className="w-2 h-2 bg-black rounded-full inline-block" />
           Current Week
@@ -23,12 +21,11 @@ const ChartCard = ({ data = [] }) => {
       </div>
 
       {/* Chart */}
-      <div className="w-full h-[190px]"> {/* ⬅️ tinggi dikurangi dari 320px ke 220px */}
+      <div className="w-full h-[190px]">
+        {" "}
+        {/* ⬅️ tinggi dikurangi dari 320px ke 220px */}
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={data}
-            margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
-          >
+          <LineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
             <XAxis
               dataKey="name"
@@ -36,11 +33,7 @@ const ChartCard = ({ data = [] }) => {
               axisLine={false}
               tickLine={false}
             />
-            <YAxis
-              tick={{ fill: "#6B7280", fontSize: 12 }}
-              axisLine={false}
-              tickLine={false}
-            />
+            <YAxis tick={{ fill: "#6B7280", fontSize: 12 }} axisLine={false} tickLine={false} />
             <Tooltip
               contentStyle={{
                 borderRadius: "8px",

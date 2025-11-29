@@ -3,18 +3,10 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import apiAdmin from "../api/apiadmin";
 import { ChevronDown, Check, Loader2 } from "lucide-react"; // Tambah import Check & Loader2
 
-
 /* ===============================
    🔽 Komponen Dropdown Kustom (Tidak Berubah) a
 =============================== */
-const Dropdown = ({
-  label,
-  options,
-  value,
-  onChange,
-  disabled,
-  placeholder,
-}) => {
+const Dropdown = ({ label, options, value, onChange, disabled, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -41,38 +33,38 @@ const Dropdown = ({
         disabled={disabled}
         className={`flex items-center justify-between border border-gray-300 rounded-md p-2 w-56 
           bg-white text-left focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all
-          ${disabled
-            ? "bg-gray-100 cursor-not-allowed opacity-60"
-            : "hover:border-blue-500 cursor-pointer"
+          ${
+            disabled
+              ? "bg-gray-100 cursor-not-allowed opacity-60"
+              : "hover:border-blue-500 cursor-pointer"
           }`}
       >
-        <span
-          className={`block truncate ${!value ? "text-gray-400" : "text-gray-700"
-            }`}
-        >
+        <span className={`block truncate ${!value ? "text-gray-400" : "text-gray-700"}`}>
           {value
             ? options.find((opt) => opt.value === value)?.label || value
             : placeholder || "Select"}
         </span>
         <ChevronDown
-          className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
-            }`}
+          className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute z-10 mt-1 w-56 bg-white shadow-lg max-h-60 rounded-md py-1 
+        <div
+          className="absolute z-10 mt-1 w-56 bg-white shadow-lg max-h-60 rounded-md py-1 
         text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm animate-in 
-        fade-in zoom-in-95 duration-100 top-[calc(100%-0.5rem)]">
+        fade-in zoom-in-95 duration-100 top-[calc(100%-0.5rem)]"
+        >
           {options.length > 0 ? (
             options.map((option) => (
               <div
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
-                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 transition-colors ${option.value === value
-                  ? "text-blue-900 bg-blue-50 font-medium"
-                  : "text-gray-900"
-                  }`}
+                className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 transition-colors ${
+                  option.value === value ? "text-blue-900 bg-blue-50 font-medium" : "text-gray-900"
+                }`}
               >
                 <span className="block truncate">{option.label}</span>
               </div>
@@ -121,9 +113,7 @@ const ManageHouse = () => {
   }, []);
 
   const blockOptions = [
-    ...new Set(
-      houses.map((h) => h.block?.block_name || h.block_name).filter(Boolean)
-    ),
+    ...new Set(houses.map((h) => h.block?.block_name || h.block_name).filter(Boolean)),
   ]
     .sort()
     .map((block) => ({ value: block, label: `Block ${block}` }));
@@ -146,9 +136,7 @@ const ManageHouse = () => {
 
   const handleEditClick = () => {
     if (!filteredHouse) return;
-    setTargetStatus(
-      filteredHouse.status === "available" ? "sold" : "available"
-    );
+    setTargetStatus(filteredHouse.status === "available" ? "sold" : "available");
     setShowModal(true);
   };
 
@@ -163,9 +151,7 @@ const ManageHouse = () => {
       // Update state lokal dulu
       setHouses((prev) =>
         prev.map((h) =>
-          h.id_house === filteredHouse.id_house
-            ? { ...h, status: targetStatus }
-            : h
+          h.id_house === filteredHouse.id_house ? { ...h, status: targetStatus } : h
         )
       );
 
@@ -200,10 +186,8 @@ const ManageHouse = () => {
 
   if (filteredHouse) {
     const descParts = [];
-    if (filteredHouse?.block?.bedroom)
-      descParts.push(`${filteredHouse.block.bedroom} Bedrooms`);
-    if (filteredHouse?.block?.bathroom)
-      descParts.push(`${filteredHouse.block.bathroom} Bathrooms`);
+    if (filteredHouse?.block?.bedroom) descParts.push(`${filteredHouse.block.bedroom} Bedrooms`);
+    if (filteredHouse?.block?.bathroom) descParts.push(`${filteredHouse.block.bathroom} Bathrooms`);
     if (filteredHouse?.block?.living_room) descParts.push("Living Room");
     if (filteredHouse?.block?.family_room) descParts.push("Family Room");
     if (filteredHouse?.block?.kitchen) descParts.push("Kitchen");
@@ -211,11 +195,11 @@ const ManageHouse = () => {
 
     const residenceName = filteredHouse.residence?.residence_name || "";
     const location = filteredHouse.residence?.location || "";
-    const blockName =
-      filteredHouse.block?.block_name || filteredHouse.block_name || "";
+    const blockName = filteredHouse.block?.block_name || filteredHouse.block_name || "";
     const number = filteredHouse.number_block || "";
-    fullAddress = `${residenceName}${residenceName ? ", " : ""
-      }Block ${blockName} No. ${number}${location ? `, ${location}` : ""}`.trim();
+    fullAddress = `${residenceName}${
+      residenceName ? ", " : ""
+    }Block ${blockName} No. ${number}${location ? `, ${location}` : ""}`.trim();
   }
 
   return (
@@ -224,9 +208,7 @@ const ManageHouse = () => {
 
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">
-            Manage House
-          </h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Manage House</h1>
 
           {/* FILTER AREA */}
           <div className="flex gap-6 mb-8 relative z-10">
@@ -252,29 +234,30 @@ const ManageHouse = () => {
 
           {/* CARD DETAIL */}
           {filteredHouse ? (
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full 
-            transition-all duration-500 border-b-4 border-b-black hover:shadow-md">
+            <div
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full 
+            transition-all duration-500 border-b-4 border-b-black hover:shadow-md"
+            >
               <div className="flex justify-between items-start mb-5">
                 <div>
                   <p className="text-[#0B3C78] font-semibold text-sm tracking-wide uppercase">
-                    Block {filteredHouse.block?.block_name} • No.{" "}
-                    {filteredHouse.number_block}
+                    Block {filteredHouse.block?.block_name} • No. {filteredHouse.number_block}
                   </p>
                   <h2 className="text-2xl font-bold text-gray-900 mt-1">
-                    {filteredHouse.residence?.residence_name ||
-                      "Nama Residence"}
+                    {filteredHouse.residence?.residence_name || "Nama Residence"}
                   </h2>
                 </div>
                 <div className="flex flex-col items-end gap-2">
                   <span
                     className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider capitalize
-                      ${filteredHouse.status === "sold"
-                      ? "border-blue-200 text-blue-800 bg-blue-50"
-                      : filteredHouse.status === "available"
-                        ? "border-green-200 text-green-700 bg-green-50"
-                        : filteredHouse.status === "reserved"
-                          ? "border-yellow-200 text-yellow-700 bg-yellow-50"
-                          : "border-gray-200 text-gray-600 bg-gray-50"
+                      ${
+                        filteredHouse.status === "sold"
+                          ? "border-blue-200 text-blue-800 bg-blue-50"
+                          : filteredHouse.status === "available"
+                            ? "border-green-200 text-green-700 bg-green-50"
+                            : filteredHouse.status === "reserved"
+                              ? "border-yellow-200 text-yellow-700 bg-yellow-50"
+                              : "border-gray-200 text-gray-600 bg-gray-50"
                       }`}
                   >
                     {filteredHouse.status}
@@ -290,9 +273,7 @@ const ManageHouse = () => {
                     <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                       House Description
                     </span>
-                    <p className="text-sm leading-relaxed">
-                      {houseDescription}
-                    </p>
+                    <p className="text-sm leading-relaxed">{houseDescription}</p>
                   </div>
                   <div>
                     <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
@@ -307,9 +288,7 @@ const ManageHouse = () => {
                       <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                         Land Area
                       </span>
-                      <p className="text-sm leading-relaxed">
-                        {filteredHouse.land_area ?? "-"} m²
-                      </p>
+                      <p className="text-sm leading-relaxed">{filteredHouse.land_area ?? "-"} m²</p>
                     </div>
                     <div>
                       <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
@@ -336,8 +315,10 @@ const ManageHouse = () => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border 
-                          border-gray-200 mt-10">
+            <div
+              className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border 
+                          border-gray-200 mt-10"
+            >
               <p className="text-center text-gray-500 text-lg font-medium">
                 {!selectedBlock || !selectedNumber
                   ? "Please select block and house number to view details."
@@ -350,13 +331,15 @@ const ManageHouse = () => {
 
       {/* MODAL KONFIRMASI */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 
-                      backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 scale-100 
-                      animate-in zoom-in-95 duration-200">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Confirm Status Change
-            </h3>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 
+                      backdrop-blur-sm animate-in fade-in duration-200"
+        >
+          <div
+            className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 scale-100 
+                      animate-in zoom-in-95 duration-200"
+          >
+            <h3 className="text-xl font-bold text-gray-900 mb-2">Confirm Status Change</h3>
             <div className="w-full h-px bg-gray-200 my-4"></div>
             <p className="text-gray-600 mb-8 leading-relaxed">
               {targetStatus === "available"
@@ -377,10 +360,11 @@ const ManageHouse = () => {
                 disabled={updating}
                 className={`px-5 py-2 rounded-lg font-semibold text-white transition-all
                    shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center
-                    gap-2 ${targetStatus === "available"
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-[#0B3C78] hover:opacity-90"
-                  }`}
+                    gap-2 ${
+                      targetStatus === "available"
+                        ? "bg-green-600 hover:bg-green-700"
+                        : "bg-[#0B3C78] hover:opacity-90"
+                    }`}
               >
                 {updating && <Loader2 className="w-4 h-4 animate-spin" />}
                 {updating ? "Updating..." : capitalize(targetStatus)}
@@ -392,10 +376,14 @@ const ManageHouse = () => {
 
       {/* --- SUCCESS POPUP MODAL --- */}
       {successModal.isOpen && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40
-                 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col items-center 
-                 max-w-sm w-full mx-4 scale-100 animate-in zoom-in-95 duration-300">
+        <div
+          className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40
+                 backdrop-blur-sm animate-in fade-in duration-300"
+        >
+          <div
+            className="bg-white rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col items-center 
+                 max-w-sm w-full mx-4 scale-100 animate-in zoom-in-95 duration-300"
+          >
             {/* Icon Check Biru Besar */}
             <div
               className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
@@ -416,9 +404,7 @@ const ManageHouse = () => {
             {/* Teks Deskripsi */}
             <p className="text-gray-500 text-center text-base leading-relaxed">
               Status has been changed to{" "}
-              <strong className="text-gray-900 font-semibold">
-                {successModal.status}
-              </strong>{" "}
+              <strong className="text-gray-900 font-semibold">{successModal.status}</strong>{" "}
               successfully.
             </p>
           </div>

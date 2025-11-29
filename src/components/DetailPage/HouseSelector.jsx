@@ -45,7 +45,6 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
               ? "98vh" // Tablet
               : "100vh", // Laptop / Desktop
       }}
-
     >
       {/* Overlay gelap */}
       <div className="absolute inset-0 bg-black/60"></div>
@@ -73,12 +72,13 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
                   disabled={isSold}
                   className={`w-[80px] sm:w-full aspect-[2/3] flex items-center justify-center 
                     font-semibold text-sm sm:text-lg shadow-md transition-all duration-300 rounded-[8px]
-          ${isSold
-                      ? "bg-gray-700 text-gray-300 cursor-not-allowed"
-                      : isSelected
-                        ? "bg-blue-700 text-white scale-105 shadow-lg cursor-pointer"
-                        : "bg-white text-black hover:scale-105 hover:bg-gray-100 cursor-pointer active:scale-95"
-                    }`}
+          ${
+            isSold
+              ? "bg-gray-700 text-gray-300 cursor-not-allowed"
+              : isSelected
+                ? "bg-blue-700 text-white scale-105 shadow-lg cursor-pointer"
+                : "bg-white text-black hover:scale-105 hover:bg-gray-100 cursor-pointer active:scale-95"
+          }`}
                 >
                   {house.number_block || `#${house.id_house}`}
                 </button>
@@ -89,7 +89,6 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
               No houses found for this block.
             </div>
           )}
-
         </div>
 
         {/* Pagination */}
@@ -98,9 +97,10 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
             className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 
-              sm:h-12 rounded-full border border-border transition-all duration-300 ${currentPage === 1
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:scale-110 hover:shadow-md"
+              sm:h-12 rounded-full border border-border transition-all duration-300 ${
+                currentPage === 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:scale-110 hover:shadow-md"
               }`}
             style={{
               backgroundColor: "hsl(var(--card))",
@@ -122,9 +122,10 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             disabled={currentPage === totalPages}
             className={`cursor-pointer flex items-center justify-center w-10 h-10 
               sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 
-              ${currentPage === totalPages
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:scale-110 hover:shadow-md"
+              ${
+                currentPage === totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:scale-110 hover:shadow-md"
               }`}
             style={{
               backgroundColor: "hsl(var(--card))",

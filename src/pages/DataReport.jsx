@@ -64,9 +64,7 @@ export default function AdminDataReport() {
       <main className="flex-1 p-8 ml-64 transition-all duration-300 print:ml-0 print:p-0 print:w-full">
         <div className="flex items-center justify-between mb-8 print:mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 print:text-2xl">
-              Reservation Report
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-900 print:text-2xl">Reservation Report</h1>
             <p className="text-gray-500 mt-1 print:text-sm">
               Report of reservations that were received and canceled.
             </p>
@@ -90,23 +88,23 @@ export default function AdminDataReport() {
           print:border-0 print:rounded-none"
         >
           <table className="min-w-full text-sm text-left text-gray-700 print:border-collapse print:w-full">
-            <thead className="bg-[#0B3C78] text-white text-xs uppercase tracking-wider font-semibold 
-            print:bg-gray-100 print:text-black">
+            <thead
+              className="bg-[#0B3C78] text-white text-xs uppercase tracking-wider font-semibold 
+            print:bg-gray-100 print:text-black"
+            >
               <tr>
                 <th className="px-6 py-4 rounded-tl-xl print:rounded-none print:border print:border-gray-300">
                   Customer Name
                 </th>
-                <th className="px-6 py-4 text-center print:border print:border-gray-300">
-                  Block
-                </th>
+                <th className="px-6 py-4 text-center print:border print:border-gray-300">Block</th>
                 <th className="px-6 py-4 text-center print:border print:border-gray-300">
                   Number House
                 </th>
-                <th className="px-6 py-4 print:border print:border-gray-300">
-                  Reservation Date
-                </th>
-                <th className="px-6 py-4 rounded-tr-xl print:rounded-none print:border 
-                print:border-gray-300 text-center">
+                <th className="px-6 py-4 print:border print:border-gray-300">Reservation Date</th>
+                <th
+                  className="px-6 py-4 rounded-tr-xl print:rounded-none print:border 
+                print:border-gray-300 text-center"
+                >
                   Status
                 </th>
               </tr>
@@ -137,9 +135,7 @@ export default function AdminDataReport() {
                   <tr
                     key={i}
                     className={`hover:bg-gray-50 transition-colors print:hover:bg-transparent ${
-                      i % 2 === 0
-                        ? "bg-white"
-                        : "bg-gray-50/50 print:bg-transparent"
+                      i % 2 === 0 ? "bg-white" : "bg-gray-50/50 print:bg-transparent"
                     }`}
                   >
                     <td className="px-6 py-4 font-medium text-gray-900 print:border print:border-gray-300">
@@ -164,9 +160,7 @@ export default function AdminDataReport() {
                       <span
                         className={`inline-block px-3 py-1 text-xs font-semibold rounded-full border 
                           capitalize print:border-0 print:px-0 print:py-0 print:bg-transparent print:text-black 
-                          ${getStatusColorClass(
-                          item.status
-                        )}`}
+                          ${getStatusColorClass(item.status)}`}
                       >
                         {item.status}
                       </span>
@@ -193,9 +187,7 @@ export default function AdminDataReport() {
             </button>
 
             {/* Nomor halaman */}
-            <span className="text-lg font-semibold text-gray-700">
-              {currentPage}
-            </span>
+            <span className="text-lg font-semibold text-gray-700">{currentPage}</span>
 
             {/* Tombol kanan */}
             <button

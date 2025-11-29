@@ -31,10 +31,7 @@ const Notification = () => {
 
         setNotifications(sorted);
       } catch (err) {
-        console.error(
-          "❌ Error fetching notifications:",
-          err.response?.data || err.message
-        );
+        console.error("❌ Error fetching notifications:", err.response?.data || err.message);
       }
     };
 
@@ -67,10 +64,7 @@ const Notification = () => {
           });
         });
       } catch (err) {
-        console.error(
-          "❌ Gagal update status notifikasi:",
-          err.response?.data || err.message
-        );
+        console.error("❌ Gagal update status notifikasi:", err.response?.data || err.message);
       }
     }
   };
@@ -95,22 +89,16 @@ const Notification = () => {
                 onClick={() => handleSelect(n)}
                 className={`flex justify-between items-center px-8 py-5 rounded-2xl shadow-md transition-all 
                   duration-200 cursor-pointer ${
-                  n.read
-                    ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                    : "bg-[#0B3C78] text-white hover:bg-[#0d478b]"
-                }`}
+                    n.read
+                      ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      : "bg-[#0B3C78] text-white hover:bg-[#0d478b]"
+                  }`}
               >
                 <div className="flex items-center gap-4">
                   <BellRing size={28} />
                   <div>
-                    <p className="text-lg font-semibold">
-                      New Message Received
-                    </p>
-                    <p
-                      className={`text-sm mt-1 ${
-                        n.read ? "text-gray-600" : "text-gray-200"
-                      }`}
-                    >
+                    <p className="text-lg font-semibold">New Message Received</p>
+                    <p className={`text-sm mt-1 ${n.read ? "text-gray-600" : "text-gray-200"}`}>
                       {n.content}
                     </p>
                   </div>

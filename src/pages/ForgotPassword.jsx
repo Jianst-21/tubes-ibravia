@@ -47,18 +47,13 @@ export const ForgotPassword = () => {
         onSubmit={handleSubmit}
         className="w-full max-w-md bg-white rounded-2xl shadow-lg p-10 space-y-0"
       >
-        <h2 className="text-2xl font-bold text-center text-[#1e1e1e]">
-          Forgotten your password?
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-[#1e1e1e]">Forgotten your password?</h2>
         <p className="text-center text-[14px] text-gray-600 mt-3">
           There is nothing to worry about, we'll send you a message to help you reset your password.
         </p>
 
-       
         <div className="mt-[45px]">
-          <label className="block text-sm font-medium text-gray-800 mb-[5px]">
-            Email Address
-          </label>
+          <label className="block text-sm font-medium text-gray-800 mb-[5px]">Email Address</label>
           <input
             type="email"
             placeholder="Enter personal or work email address"

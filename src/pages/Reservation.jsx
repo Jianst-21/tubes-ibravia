@@ -3,19 +3,18 @@ import MyReservations from "../components/ReservationPage/MyReservations";
 import Footer from "../components/GlobalPage/Footer";
 
 export const Reservation = () => {
-    return (
-        <div className="min-h-screen flex flex-col overflow-x-hidden">
+  return (
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
+      {/*Navbar*/}
+      <Navbar />
 
-            {/*Navbar*/}
-            <Navbar />
+      {/*Main Content*/}
+      <main className="flex-grow">
+        <MyReservations />
+      </main>
 
-            {/*Main Content*/}
-            <main className="flex-grow">
-                <MyReservations />
-            </main>
-
-            {/*Footer*/}
-            <Footer />
-        </div>
-    );
+      {/*Footer*/}
+      <Footer />
+    </div>
+  );
 };

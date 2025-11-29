@@ -53,7 +53,6 @@ export const WhyChooseUs = () => {
   return (
     <section className="bg-[#003B73] text-white py-20 px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
-
         {/* ================= LEFT ================= */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -133,9 +132,7 @@ export const WhyChooseUs = () => {
                 <motion.div
                   key={img}
                   variants={slideVariants}
-                  animate={
-                    index === 1 ? "center" : index === 0 ? "left" : "right"
-                  }
+                  animate={index === 1 ? "center" : index === 0 ? "left" : "right"}
                   onClick={() => handleClick(index)}
                   className="absolute cursor-pointer"
                 >
@@ -149,7 +146,6 @@ export const WhyChooseUs = () => {
             })}
           </AnimatePresence>
         </motion.div>
-
       </div>
     </section>
   );

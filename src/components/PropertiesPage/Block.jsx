@@ -5,7 +5,6 @@ import { VillaButton } from "../GlobalPage/VillaButton";
 import { BlockPreview } from "../GlobalPage/BlockPreview";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-
 const villas = [
   { id: "N001", name: "Villa Ijen Nebraska" },
   { id: "R001", name: "Villa Ijen Raya" },
@@ -25,11 +24,9 @@ export const Block = () => {
   const fetchBlocks = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URL}/block/${selectedVilla}`,
-        { withCredentials: true }
-      );
-
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/block/${selectedVilla}`, {
+        withCredentials: true,
+      });
 
       const sortedBlocks = (res.data || []).sort((a, b) => {
         const numA = parseInt(a.block_name.replace(/\D/g, "")) || 0;
@@ -58,16 +55,16 @@ export const Block = () => {
   const currentBlocks = blocks.slice(startIndex, endIndex);
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-10 bg-background 
-    text-foreground transition-colors duration-300">
+    <div
+      className="min-h-screen flex flex-col items-center py-10 bg-background 
+    text-foreground transition-colors duration-300"
+    >
       {/* Header */}
       <div className="text-center mb-10 px-4">
         <h3 className="text-sm font-medium opacity-80">
           Find the home that fits your lifestyle and future
         </h3>
-        <h1 className="text-3xl font-bold mt-2 text-primary ">
-          House Collections
-        </h1>
+        <h1 className="text-3xl font-bold mt-2 text-primary ">House Collections</h1>
       </div>
 
       {/* Tombol Villa (pakai komponen VillaButton) */}
@@ -83,20 +80,21 @@ export const Block = () => {
       </div>
 
       {/* Placeholder Gambar */}
-      <div className="w-11/12 sm:w-10/12 h-80 sm:h-[480px] rounded-2xl mb-10  mt-[100px] 
-      flex items-center justify-center bg-secondary/30 border border-dynamic">
+      <div
+        className="w-11/12 sm:w-10/12 h-80 sm:h-[480px] rounded-2xl mb-10  mt-[100px] 
+      flex items-center justify-center bg-secondary/30 border border-dynamic"
+      >
         <BlockPreview selectedVilla={selectedVilla} />
       </div>
 
-
       {/* Grid Block */}
       {loading ? (
-        <div className="text-center text-sm opacity-70 mt-6">
-          Loading blocks...
-        </div>
+        <div className="text-center text-sm opacity-70 mt-6">Loading blocks...</div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 
-        lg:grid-cols-5 gap-5 sm:gap-8 w-11/12 sm:w-10/12">
+        <div
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 
+        lg:grid-cols-5 gap-5 sm:gap-8 w-11/12 sm:w-10/12"
+        >
           {currentBlocks.map((block) => {
             const imgPath = `/images/block/${block.block_name}.png`;
 
@@ -105,19 +103,17 @@ export const Block = () => {
                 key={block.id_block}
                 className="cursor-pointer rounded-xl overflow-hidden border 
                 border-border hover:scale-[1.03] transition-all duration-300"
-                onClick={() =>
-                  navigate(`/detail-properties/${block.id_block}`)
-                }
+                onClick={() => navigate(`/detail-properties/${block.id_block}`)}
               >
                 <img
                   src={imgPath}
                   alt={`Block ${block.block_name}`}
-                  onError={(e) => e.target.src = "https://via.placeholder.com/300x200?text=No+Image"}
+                  onError={(e) =>
+                    (e.target.src = "https://via.placeholder.com/300x200?text=No+Image")
+                  }
                   className="w-full h-36 sm:h-40 object-cover"
                 />
-                <div className="p-3 text-center font-semibold">
-                  Block {block.block_name}
-                </div>
+                <div className="p-3 text-center font-semibold">Block {block.block_name}</div>
               </div>
             );
           })}
@@ -130,16 +126,14 @@ export const Block = () => {
         </div>
       )}
 
-
       {/* Pagination */}
       <div className="flex items-center gap-3 mt-10">
         <button
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
           className={`cursor-pointer flex items-center justify-center w-10 h-10 
-            rounded-full border border-border transition-all duration-300 ${currentPage === 1
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:scale-110"
+            rounded-full border border-border transition-all duration-300 ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:scale-110"
             }`}
           style={{
             backgroundColor: "hsl(var(--card))",
@@ -149,21 +143,14 @@ export const Block = () => {
           <ChevronLeft size={20} />
         </button>
 
-        <span className="font-medium text-sm sm:text-base">
-          {currentPage}
-        </span>
+        <span className="font-medium text-sm sm:text-base">{currentPage}</span>
 
         <button
-          onClick={() =>
-            setCurrentPage((p) => Math.min(p + 1, totalPages))
-          }
+          onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
           disabled={currentPage === totalPages}
           className={`cursor-pointer flex items-center justify-center w-10 h-10 
             rounded-full border border-border transition-all duration-300 
-            ${currentPage === totalPages
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:scale-110"
-            }`}
+            ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:scale-110"}`}
           style={{
             backgroundColor: "hsl(var(--card))",
             color: "hsl(var(--foreground))",
@@ -172,8 +159,6 @@ export const Block = () => {
           <ChevronRight size={20} />
         </button>
       </div>
-
-
     </div>
   );
 };

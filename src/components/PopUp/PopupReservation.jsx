@@ -36,9 +36,9 @@ export default function PopupReservation({ show, onClose }) {
               Your Reservation is Successful
             </p>
             <p className="text-gray-600 text-justify text-sm mb-8 leading-relaxed">
-              Thank you for your successful reservation with Ibravia. 
-              Your reservation request has been received. Our team will reach out to you 
-              shortly to arrange a house visit. Don’t forget to confirm within 7 days once we contact you.
+              Thank you for your successful reservation with Ibravia. Your reservation request has
+              been received. Our team will reach out to you shortly to arrange a house visit. Don’t
+              forget to confirm within 7 days once we contact you.
             </p>
 
             <button

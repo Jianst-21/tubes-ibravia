@@ -26,7 +26,6 @@ export const DetailProperties = () => {
 
         const data = Array.isArray(res.data) ? res.data : res.data?.data || [];
 
-
         if (data.length === 0) {
           setError("No houses found for this block");
         } else {

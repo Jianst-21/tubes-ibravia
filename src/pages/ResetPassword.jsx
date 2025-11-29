@@ -17,16 +17,14 @@ export const ResetPassword = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState(null);
 
-  const passwordRegex =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   // ✅ Real-time validation seperti di SignUp.jsx
   useEffect(() => {
     if (password && !passwordRegex.test(password)) {
       setError((prev) => ({
         ...prev,
-        password:
-          "Password must be at least 8 characters, include letters, numbers, and symbols.",
+        password: "Password must be at least 8 characters, include letters, numbers, and symbols.",
       }));
     } else {
       setError((prev) => ({ ...prev, password: "" }));
@@ -77,9 +75,7 @@ export const ResetPassword = () => {
       console.error("Reset password error:", err);
       setPopupMessage({
         title: "Failed to Reset Password",
-        text:
-          err.response?.data?.error ||
-          "An error occurred while resetting your password.",
+        text: err.response?.data?.error || "An error occurred while resetting your password.",
       });
       setShowPopup(true);
     }
@@ -96,19 +92,14 @@ export const ResetPassword = () => {
           padding: "60px",
         }}
       >
-        <h2 className="text-3xl font-bold text-center text-[#1e1e1e]">
-          Reset your password
-        </h2>
+        <h2 className="text-3xl font-bold text-center text-[#1e1e1e]">Reset your password</h2>
         <p className="text-center text-gray-600 mt-3 leading-relaxed">
-          Enter your new password below and confirm it to reset your account
-          access.
+          Enter your new password below and confirm it to reset your account access.
         </p>
 
         {/* New Password */}
         <div className="mt-[45px]">
-          <label className="block text-sm font-medium text-gray-800 mb-[4px]">
-            New Password
-          </label>
+          <label className="block text-sm font-medium text-gray-800 mb-[4px]">New Password</label>
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
@@ -117,10 +108,10 @@ export const ResetPassword = () => {
               onChange={(e) => setPassword(e.target.value)}
               className={`w-full pr-10 border rounded-md p-3 text-sm focus:ring-2 focus:ring-offset-2 
                 outline-none transition-all duration-300 ${
-                error.password
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300 focus:ring-blue-500"
-              }`}
+                  error.password
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-blue-500"
+                }`}
               required
             />
             <button
@@ -153,10 +144,10 @@ export const ResetPassword = () => {
               onChange={(e) => setConfirm(e.target.value)}
               className={`w-full pr-10 border rounded-md p-3 text-sm focus:ring-2 
                 focus:ring-offset-2 outline-none transition-all duration-300 ${
-                error.confirm
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-gray-300 focus:ring-blue-500"
-              }`}
+                  error.confirm
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-blue-500"
+                }`}
               required
             />
             <button

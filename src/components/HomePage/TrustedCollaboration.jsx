@@ -17,9 +17,7 @@ export const TrustedCollaboration = () => {
           We Proudly Present
         </p>
 
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-12">
-          Our Trusted Collaboration
-        </h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-12">Our Trusted Collaboration</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-2 justify-items-center">
           {partners.map((partner, i) => (

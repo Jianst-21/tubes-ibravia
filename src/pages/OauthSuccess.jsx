@@ -47,15 +47,11 @@ export default function OauthSuccess() {
     <div className="min-h-screen flex flex-col items-center justify-center gap-5 text-center p-4">
       {/* Menggunakan ikon spinner yang lebih modern dari lucide-react */}
       <Loader2 className="w-12 h-12 text-primary animate-spin" />
-      
+
       {/* Mengelompokkan teks untuk kerapian */}
       <div className="flex flex-col gap-1.5">
-        <p className="text-xl font-semibold text-foreground">
-          Logging in with Google...
-        </p>
-        <p className="text-base text-muted-foreground">
-          Please wait, redirecting...
-        </p>
+        <p className="text-xl font-semibold text-foreground">Logging in with Google...</p>
+        <p className="text-base text-muted-foreground">Please wait, redirecting...</p>
       </div>
     </div>
   );
