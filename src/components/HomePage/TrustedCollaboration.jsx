@@ -25,18 +25,16 @@ export const TrustedCollaboration = () => {
           </h2>
         </div>
 
-        {/* GRID yang sejajar dengan navbar */}
-        <div
-          className="
-            grid 
-            grid-cols-1 
-            md:grid-cols-3 
-            gap-12 
-            pt-2
-            md:justify-between 
-            justify-center
-          "
-        >
+        {/* Grid PT sejajar dengan navbar karena mengikuti container */}
+        <div className="
+          grid 
+          grid-cols-1 
+          md:grid-cols-3 
+          gap-12 
+          pt-2 
+          justify-center
+        ">
+
           {partners.map((partner, i) => (
             <motion.div
               key={partner.id}
@@ -44,22 +42,10 @@ export const TrustedCollaboration = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
               viewport={{ once: true }}
-              className="
-                w-[309px] 
-                h-[306px] 
-                bg-[hsl(var(--background))] 
-                rounded-2xl 
-                shadow-[0_4px_12px_rgba(0,0,0,0.25)] 
-                transition-transform 
-                duration-300 
-                hover:scale-105 
-                flex 
-                flex-col 
-                items-center 
-                justify-center
-                mx-auto 
-                md:mx-0
-              "
+              className="w-[309px] h-[306px] bg-[hsl(var(--background))] rounded-2xl 
+          shadow-[0_4px_12px_rgba(0,0,0,0.25)] 
+          transition-transform duration-300 hover:scale-105 
+          flex flex-col items-center justify-center mx-auto"
             >
               <div className="w-36 h-36 mb-6 rounded-full overflow-hidden shadow-md">
                 <img
@@ -74,5 +60,6 @@ export const TrustedCollaboration = () => {
         </div>
       </div>
     </section>
+
   );
 };
