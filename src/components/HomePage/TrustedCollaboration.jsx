@@ -26,7 +26,15 @@ export const TrustedCollaboration = () => {
         </div>
 
         {/* Grid PT sejajar dengan navbar karena mengikuti container */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-2 justify-between">
+        <div className="
+          grid 
+          grid-cols-1 
+          md:grid-cols-3 
+          gap-12 
+          pt-2 
+          place-items-center
+        ">
+
           {partners.map((partner, i) => (
             <motion.div
               key={partner.id}
