@@ -12,17 +12,21 @@ const partners = [
 export const TrustedCollaboration = () => {
   return (
     <section className="pt-12 pb-20 bg-[hsl(var(--background))] text-foreground">
-      <div className="container mx-auto px-4 md:px-6 text-center">
+      <div className="container mx-auto px-4 md:px-6">
 
-        <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
-          We Proudly Present
-        </p>
+        {/* Heading tetap di tengah */}
+        <div className="text-center">
+          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
+            We Proudly Present
+          </p>
 
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-12">
-          Our Trusted Collaboration
-        </h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-12">
+            Our Trusted Collaboration
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-2 justify-items-center">
+        {/* Grid PT sejajar dengan navbar karena mengikuti container */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-2 justify-between">
           {partners.map((partner, i) => (
             <motion.div
               key={partner.id}
@@ -31,9 +35,9 @@ export const TrustedCollaboration = () => {
               transition={{ duration: 0.6, delay: i * 0.2 }}
               viewport={{ once: true }}
               className="w-[309px] h-[306px] bg-[hsl(var(--background))] rounded-2xl 
-              shadow-[0_4px_12px_rgba(0,0,0,0.25)] 
-              transition-transform duration-300 hover:scale-105 
-              flex flex-col items-center justify-center"
+          shadow-[0_4px_12px_rgba(0,0,0,0.25)] 
+          transition-transform duration-300 hover:scale-105 
+          flex flex-col items-center justify-center mx-auto md:mx-0"
             >
               <div className="w-36 h-36 mb-6 rounded-full overflow-hidden shadow-md">
                 <img
@@ -48,5 +52,6 @@ export const TrustedCollaboration = () => {
         </div>
       </div>
     </section>
+
   );
 };
