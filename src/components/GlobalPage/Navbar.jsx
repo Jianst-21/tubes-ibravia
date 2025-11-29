@@ -136,7 +136,7 @@ export const Navbar = () => {
         </div>
 
         {/* AUTH + THEME */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center gap-4 ml-auto">
           {isReady &&
             (isLoggedIn ? (
               <div className="relative" ref={dropdownRef}>
