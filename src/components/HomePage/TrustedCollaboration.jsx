@@ -32,7 +32,7 @@ export const TrustedCollaboration = () => {
           md:grid-cols-3 
           gap-12 
           pt-2 
-          place-items-center
+          justify-center
         ">
 
           {partners.map((partner, i) => (
