@@ -136,23 +136,22 @@ export const Navbar = () => {
         </div>
 
         {/* AUTH + THEME */}
-        <div className="hidden md:flex items-center gap-4 ml-auto">
+        <div className="hidden md:flex items-center gap-4">
           {isReady &&
             (isLoggedIn ? (
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
                   className="cursor-pointer w-10 h-10 rounded-full bg-gradient-to-r 
-                  from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
+          from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
                   onClick={() => setOpen((prev) => !prev)}
                 >
                   {userData?.email ? userData.email.charAt(0).toUpperCase() : "U"}
                 </button>
 
                 {open && (
-                  <div
-                    className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg 
-                  rounded-md z-50 transition-all duration-200"
+                  <div className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg 
+          rounded-md z-50 transition-all duration-200"
                   >
                     <p className="px-4 py-2 text-sm border-b border-border truncate">
                       {userData?.email}
@@ -163,7 +162,7 @@ export const Navbar = () => {
                         setOpen(false);
                       }}
                       className="cursor-pointer w-full text-left px-4 py-2 text-sm 
-                      hover:bg-secondary flex items-center gap-2"
+              hover:bg-secondary flex items-center gap-2"
                     >
                       <UserCog size={16} /> Edit Profile
                     </button>
@@ -173,7 +172,7 @@ export const Navbar = () => {
                         setOpen(false);
                       }}
                       className="cursor-pointer w-full text-left px-4 py-2 text-sm 
-                      hover:bg-secondary flex items-center gap-2 border-t border-border"
+              hover:bg-secondary flex items-center gap-2 border-t border-border"
                     >
                       <LogOut size={16} /> Logout
                     </button>
@@ -185,14 +184,14 @@ export const Navbar = () => {
                 <Link
                   to="/Login"
                   className="px-4 py-2 rounded-md border border-primary 
-                  text-primary hover:bg-primary/10 transition-colors"
+          text-primary hover:bg-primary/10 transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   to="/SignUp"
                   className="px-4 py-2 rounded-md bg-primary 
-                  text-white hover:bg-primary/90 transition-colors"
+          text-white hover:bg-primary/90 transition-colors"
                 >
                   Sign Up
                 </Link>
