@@ -45,7 +45,7 @@ export const TrustedCollaboration = () => {
               className="w-[309px] h-[306px] bg-[hsl(var(--background))] rounded-2xl 
           shadow-[0_4px_12px_rgba(0,0,0,0.25)] 
           transition-transform duration-300 hover:scale-105 
-          flex flex-col items-center justify-center mx-auto md:mx-0"
+          flex flex-col items-center justify-center mx-auto"
             >
               <div className="w-36 h-36 mb-6 rounded-full overflow-hidden shadow-md">
                 <img
