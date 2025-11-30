@@ -2,15 +2,16 @@ import React, { useEffect, useState, useLayoutEffect } from "react";
 import Sidebar from "../components/AdminDashboard/Sidebar";
 import { BookText, BookCheck, BookX } from "lucide-react";
 import ChartCard from "../components/AdminDashboard/ChartCard";
-import axios from "axios";
 import apiadmin from "../api/apiadmin";
 
 /* ===============================
-   COMPONENT: STAT CARD
+   STAT CARD (DARI DASHBOARD 1)
 ================================= */
-const StatCard = ({ title, value, type }) => {
+const StatCard = ({ title, value, type, className = "" }) => {
   const icons = {
-    reserved: <BookText size={65} strokeWidth={1.5} className="text-white/90" />,
+    reserved: (
+      <BookText size={65} strokeWidth={1.5} className="text-white/90" />
+    ),
     sold: <BookCheck size={65} strokeWidth={1.5} className="text-white/90" />,
     cancelled: <BookX size={65} strokeWidth={1.5} className="text-white/90" />,
   };
@@ -23,10 +24,18 @@ const StatCard = ({ title, value, type }) => {
 
   return (
     <div
-      className="bg-[#0B3C78] text-white rounded-2xl shadow-md flex items-center 
-    justify-between p-4 sm:p-6 md:p-8 h-28 sm:h-32 md:h-36 transition-all duration-300"
+      className={`
+        bg-[#0B3C78] text-white rounded-2xl shadow-md
+        flex items-center justify-between
+        p-4 sm:p-6 md:p-8
+        h-28 sm:h-32 md:h-36
+        w-[270px]
+        transition-all duration-300
+        ${className}
+      `}
     >
       <div className="flex-shrink-0 opacity-90">{icons[type]}</div>
+
       <div className="text-right flex flex-col justify-center">
         <p className="text-sm md:text-base font-semibold tracking-wider uppercase opacity-80 mb-1">
           {title}
@@ -40,7 +49,7 @@ const StatCard = ({ title, value, type }) => {
 };
 
 /* ===============================
-   COMPONENT: ADMIN DASHBOARD
+   ADMIN DASHBOARD
 ================================= */
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -49,9 +58,10 @@ const AdminDashboard = () => {
     cancelled: 0,
     weeklydata: [],
   });
+
   const [residenceName, setResidenceName] = useState("");
 
-  //  Lock body scroll
+  // Lock body scroll
   useLayoutEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -61,13 +71,11 @@ const AdminDashboard = () => {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     const fetchDashboard = async () => {
       try {
         const res = await apiadmin.get("/dashboard");
-        console.log("Dashboard response:", res.data);
         const result = res.data?.data || {};
+
         setStats({
           reserved: result.reserved_houses ?? 0,
           sold: result.total_houses ?? 0,
@@ -86,8 +94,6 @@ const AdminDashboard = () => {
     const fetchResidenceName = async () => {
       try {
         const res = await apiadmin.get("/residence-info");
-        console.log(res.data);
-
         setResidenceName(res.data.name || "Unknown Residence");
       } catch (error) {
         console.error("Error fetching residence name:", error);
@@ -104,14 +110,13 @@ const AdminDashboard = () => {
 
       <div className="fixed inset-y-0 left-64 right-0 bg-gray-50 flex flex-col justify-between overflow-hidden">
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
-          {/* Wrapper */}
           <div className="max-w-[1100px] mx-auto w-full">
             {/* TITLE */}
             <h1 className="text-3xl font-bold text-gray-900 mb-8">
               Dashboard {residenceName}
             </h1>
 
-            {/* CHART (Gap disamakan dengan statcard gap) */}
+            {/* CHART */}
             <div className="mb-12 sm:mb-14 md:mb-20 lg:mb-[70px]">
               <ChartCard data={stats.weeklydata} />
             </div>
@@ -123,7 +128,6 @@ const AdminDashboard = () => {
                 gap-6 sm:gap-10 md:gap-14 lg:gap-[54px]
               "
             >
-              {/* kiri */}
               <StatCard
                 title="RESERVED"
                 value={stats.reserved}
@@ -131,7 +135,6 @@ const AdminDashboard = () => {
                 className="justify-self-start"
               />
 
-              {/* tengah */}
               <StatCard
                 title="SOLD"
                 value={stats.sold}
@@ -139,7 +142,6 @@ const AdminDashboard = () => {
                 className="justify-self-center"
               />
 
-              {/* kanan */}
               <StatCard
                 title="CANCELLED"
                 value={stats.cancelled}
@@ -148,7 +150,7 @@ const AdminDashboard = () => {
               />
             </div>
 
-            {/* Bottom spacing — sama seperti spacing statcard */}
+            {/* BOTTOM SPACING */}
             <div className="mt-12 sm:mt-14 md:mt-20 lg:mt-[70px]" />
           </div>
         </div>
