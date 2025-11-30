@@ -203,7 +203,10 @@ const ManageHouse = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans relative">
+      <div
+      className="flex min-h-screen bg-gray-50 relative"
+      style={{ fontFamily: "Roboto, sans-serif" }}
+      >
       <Sidebar />
 
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">

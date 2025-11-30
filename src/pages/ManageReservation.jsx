@@ -118,7 +118,7 @@ const ManageReservation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex relative">
+    <div className="min-h-screen bg-gray-50 flex relative font-sans">
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -128,7 +128,7 @@ const ManageReservation = () => {
       />
 
       <Sidebar />
-      <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
+      <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50 font-sans">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Manage Reservation</h1>
 
