@@ -130,7 +130,7 @@ const ManageReservation = () => {
       <Sidebar />
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50 font-sans">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Manage Reservation</h1>
+          <h1 className="text-3xl font-bold text-gray-900 -mt-1 mb-8">Manage Reservation</h1>
 
           {isLoading ? (
             <div className="flex justify-center items-center mt-10">
