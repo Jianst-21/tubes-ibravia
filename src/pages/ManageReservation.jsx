@@ -128,7 +128,6 @@ const ManageReservation = () => {
       />
 
       <Sidebar />
-
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Manage Reservation</h1>
@@ -158,48 +157,58 @@ const ManageReservation = () => {
                 return (
                   <div
                     key={item.id_reservasi}
-                    className={`bg-white rounded-2xl shadow-sm border border-gray-200
-                       p-6 w-full transition-all duration-500 border-b-4 border-b-black 
-                       ${
-                         removingId === item.id_reservasi
-                           ? "opacity-0 translate-y-4 scale-95"
-                           : "hover:shadow-md"
-                       }`}
+                    className={`bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full transition-all duration-500 border-b-4 border-b-black ${
+                      removingId === item.id_reservasi
+                        ? "opacity-0 translate-y-4 scale-95"
+                        : "hover:shadow-md"
+                    }`}
                   >
-                    {/* ... (ISI KARTU SAMA SEPERTI SEBELUMNYA) ... */}
                     {/* Header Card */}
                     <div className="flex justify-between items-start mb-5">
+                      {/* LEFT */}
                       <div>
                         <p className="text-[#0B3C78] font-semibold text-sm tracking-wide uppercase">
                           Block {item.block_name} • No. {item.number_house}
                         </p>
+
                         <h2 className="text-2xl font-bold text-gray-900 mt-1">
                           {item.residence_name || "Unknown Residence"}
                         </h2>
-
-                        <p className="text-sm text-gray-500 mt-1">
-                          Reservation Date:{" "}
-                          {new Date(item.reservation_date).toLocaleDateString("en-GB")}
-                        </p>
                       </div>
 
-                      <div className="flex flex-col items-end gap-2">
+                      {/* RIGHT: STATUS + DATE INFO */}
+                      <div className="flex flex-col items-end gap-3">
+                        {/* STATUS */}
                         <span
                           className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${
-                            item.status && item.status.toLowerCase() === "pending"
-                              ? "border-yellow-200 text-[#C5880A] bg-white"
-                              : item.status && item.status.toLowerCase() === "accepted"
+                            item.status?.toLowerCase() === "pending"
+                              ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
+                              : item.status?.toLowerCase() === "accepted"
                                 ? "border-green-200 text-green-700 bg-green-50"
-                                : item.status && item.status.toLowerCase() === "expired"
+                                : item.status?.toLowerCase() === "expired"
                                   ? "border-orange-200 text-orange-700 bg-orange-50"
                                   : "border-red-200 text-red-700 bg-red-50"
                           }`}
                         >
                           {displayStatus}
                         </span>
-                        <div className="flex items-center gap-1.5 text-gray-600 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100 mt-4">
-                          <CalendarDays className="w-4 h-4 text-gray-500" />
-                          <span className="text-sm font-medium">Deadline: {deadlineDate}</span>
+
+                        {/* DATE CARD (RESERVATION DATE + DEADLINE) */}
+                        <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 shadow-sm w-full">
+                          <div className="grid grid-cols-[auto_1fr] gap-x-2 text-sm font-medium text-gray-700">
+                            {/* Reservation */}
+                            <span>Reservation</span>
+                            <span>
+                              :{" "}
+                              {new Date(
+                                item.reservation_date
+                              ).toLocaleDateString("en-GB")}
+                            </span>
+
+                            {/* Deadline */}
+                            <span>Deadline</span>
+                            <span>: {deadlineDate}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -213,14 +222,18 @@ const ManageReservation = () => {
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Customer Info
                           </span>
-                          <p className="text-gray-700 font-medium">{item.name}</p>
+                          <p className="text-gray-700 font-medium">
+                            {item.name}
+                          </p>
                           <p className="text-sm text-gray-500">{item.email}</p>
                         </div>
                         <div>
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Address
                           </span>
-                          <p className="text-sm leading-relaxed">{item.address}</p>
+                          <p className="text-sm leading-relaxed">
+                            {item.address}
+                          </p>
                         </div>
                       </div>
                       <div className="space-y-3 md:border-l md:pl-6 border-gray-100">
@@ -228,20 +241,26 @@ const ManageReservation = () => {
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Property Details
                           </span>
-                          <p className="text-sm leading-relaxed">{item.description}</p>
+                          <p className="text-sm leading-relaxed">
+                            {item.description}
+                          </p>
                         </div>
                         <div className="flex gap-6">
                           <div>
                             <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                               Land Area
                             </span>
-                            <p className="text-sm leading-relaxed">{item.land_area} m²</p>
+                            <p className="text-sm leading-relaxed">
+                              {item.land_area} m²
+                            </p>
                           </div>
                           <div>
                             <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                               House Area
                             </span>
-                            <p className="text-sm leading-relaxed">{item.building_area} m²</p>
+                            <p className="text-sm leading-relaxed">
+                              {item.building_area} m²
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -252,7 +271,13 @@ const ManageReservation = () => {
                       {isPending ? (
                         <>
                           <button
-                            onClick={() => openModal("cancel", item.id_reservasi, item.id_house)}
+                            onClick={() =>
+                              openModal(
+                                "cancel",
+                                item.id_reservasi,
+                                item.id_house
+                              )
+                            }
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-red-600 border border-red-600 bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                           >
@@ -260,7 +285,13 @@ const ManageReservation = () => {
                           </button>
 
                           <button
-                            onClick={() => openModal("accept", item.id_reservasi, item.id_house)}
+                            onClick={() =>
+                              openModal(
+                                "accept",
+                                item.id_reservasi,
+                                item.id_house
+                              )
+                            }
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                           >
@@ -270,7 +301,7 @@ const ManageReservation = () => {
                       ) : (
                         <div className="flex items-center text-sm text-gray-500 bg-gray-50 px-4 py-2 rounded-full italic">
                           <CheckCircle className="w-4 h-4 mr-2 text-gray-400" />
-                          This reservation has been processed.
+                          Reservasi ini telah selesai diproses.
                         </div>
                       )}
                     </div>
