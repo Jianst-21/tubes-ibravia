@@ -108,7 +108,7 @@ const AdminDashboard = () => {
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div>
             {/* ===== TITLE ===== */}
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mt-1 mb-8">
               Dashboard {residenceName || ""}
             </h1>
 
