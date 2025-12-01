@@ -13,27 +13,22 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   if (!slides.length) return null;
 
-  const prevSlide = () =>
-    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  const nextSlide = () =>
-    setCurrent((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
 
   const { title, desc, img } = slides[current];
 
   return (
     <div
       className={`relative w-full transition-colors duration-500 
-        ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-black"}
+        ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-white"}
       `}
     >
       <div
         className="
-          flex justify-center items-center py-10
-          px-6             /* mobile */
-          md:px-10         /* tablet */
-          lg:px-[100px]    /* ≥1280 */
-          xl:px-[120px]    /* ≥1440 */
-        "
+        flex justify-center items-center py-10
+        px-6 md:px-10 lg:px-[100px] xl:px-[120px]
+      "
       >
         <div
           className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
@@ -41,33 +36,19 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
           `}
         >
           {/* TEXT */}
-          <div
-            className={`
-              flex flex-col justify-center
-              max-w-[512px]   /* tidak boleh lebih dari gambar */
-              text-center md:text-left
-            `}
-          >
-            <h2
-              className={`text-3xl md:text-4xl font-bold mb-[42px]
-                ${blueTheme ? "text-white" : "text-white"}
-              `}
-            >
+          <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-[42px]">
               {title}
             </h2>
 
             {desc && (
-              <p
-                className={`text-[18px] leading-relaxed text-justify
-                  ${blueTheme ? "text-white/85" : "text-white/85"}
-                `}
-              >
+              <p className="text-[18px] leading-relaxed text-white/85 text-justify">
                 {desc}
               </p>
             )}
           </div>
 
-          {/* IMAGE SECTION */}
+          {/* IMAGE */}
           <div className="relative flex-shrink-0">
             <div className="w-[512px] max-w-full aspect-[512/344] overflow-hidden rounded-2xl">
               <img
@@ -80,34 +61,31 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* Chevron Left */}
-      <button
-        onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 left-0 z-20
-             w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center
-             hover:scale-105 transition-all"
-        style={{
-          marginLeft: window.innerWidth >= 1440 ? "64px" : "48px"
-        }}
-      >
-        <ChevronLeft className="text-[#004a88]" size={20} />
-      </button>
+      {/* Chevron Base Style */}
+      {[
+        { side: "left", action: prevSlide, Icon: ChevronLeft },
+        { side: "right", action: nextSlide, Icon: ChevronRight }
+      ].map(({ side, action, Icon }) => (
+        <button
+          key={side}
+          onClick={action}
+          className={`
+          absolute top-1/2 -translate-y-1/2 z-20
+          w-10 h-10 rounded-full flex items-center justify-center
+          shadow-md transition-all backdrop-blur cursor-pointer
+          ${side === "left" ? "xl:-translate-x-[64px] lg:-translate-x-[48px] -translate-x-[16px]" : ""}
+          ${side === "right" ? "xl:translate-x-[64px] lg:translate-x-[48px] translate-x-[16px]" : ""}
+          ${blueTheme
+              ? "bg-white/20 text-white hover:bg-white/40"
+              : "bg-white/20 text-white hover:bg-white/40"
+            }
+        `}
+        >
+          <Icon size={20} />
+        </button>
+      ))}
 
-      {/* Chevron Right */}
-      <button
-        onClick={nextSlide}
-        className="absolute top-1/2 -translate-y-1/2 right-0 z-20
-             w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center
-             hover:scale-105 transition-all"
-        style={{
-          marginRight: window.innerWidth >= 1440 ? "64px" : "48px"
-        }}
-      >
-        <ChevronRight className="text-[#004a88]" size={20} />
-      </button>
-
-
-      {/* DOT INDICATORS */}
+      {/* DOTS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <div
