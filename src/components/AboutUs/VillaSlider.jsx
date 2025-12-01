@@ -83,28 +83,45 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
       {/* Chevron Left */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 left-0 z-20
-             w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center
-             hover:scale-105 transition-all"
+        className={`absolute top-1/2 -translate-y-1/2 left-0 z-20
+    w-10 h-10 rounded-full flex items-center justify-center shadow-md
+    hover:scale-105 transition-all backdrop-blur
+    ${blueTheme ? "bg-white/20 text-white hover:bg-white/40"
+            : "bg-black/20 text-black hover:bg-black/40"}
+  `}
         style={{
-          marginLeft: window.innerWidth >= 1440 ? "64px" : "48px"
+          marginLeft:
+            window.innerWidth >= 1440
+              ? "64px"
+              : window.innerWidth >= 1280
+                ? "48px"
+                : "16px",
         }}
       >
-        <ChevronLeft className="text-[#004a88]" size={20} />
+        <ChevronLeft size={20} />
       </button>
 
       {/* Chevron Right */}
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 -translate-y-1/2 right-0 z-20
-             w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center
-             hover:scale-105 transition-all"
+        className={`absolute top-1/2 -translate-y-1/2 right-0 z-20
+    w-10 h-10 rounded-full flex items-center justify-center shadow-md
+    hover:scale-105 transition-all backdrop-blur
+    ${blueTheme ? "bg-white/20 text-white hover:bg-white/40"
+            : "bg-black/20 text-black hover:bg-black/40"}
+  `}
         style={{
-          marginRight: window.innerWidth >= 1440 ? "64px" : "48px"
+          marginRight:
+            window.innerWidth >= 1440
+              ? "64px"
+              : window.innerWidth >= 1280
+                ? "48px"
+                : "16px",
         }}
       >
-        <ChevronRight className="text-[#004a88]" size={20} />
+        <ChevronRight size={20} />
       </button>
+
 
 
       {/* DOT INDICATORS */}
