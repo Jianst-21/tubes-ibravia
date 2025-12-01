@@ -117,9 +117,9 @@ export const Navbar = () => {
             key={isDark ? "logo-dark" : "logo-light"}
             src={isDark ? LogoPutih : LogoBiru}
             alt="Ibravia Logo"
-            className="h-11 w-auto transition-all duration-300 object-contain"
+            className="h-10 w-10 transition-all duration-300 object-contain pb-[6px] scale-110"
           />
-          <span className={`font-bold text-[20px] ${isDark ? "text-white" : "text-[#0A3764]"}`}>
+          <span className={`font-bold text-[24px] ${isDark ? "text-white" : "text-[#0A3764]"}`}>
             IBRAVIA
           </span>
         </Link>
