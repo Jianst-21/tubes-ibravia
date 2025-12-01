@@ -79,6 +79,18 @@
 /* =====================================
     ⚙️ UTILITIES
 ===================================== */
+@layer utilities {
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .font-subheader {
+    font-family: var(--font-subheader);
+  }
+  .font-headline {
+    font-family: var(--font-headline);
+  }
+}
+
 @utility border-dynamic {
   border-color: hsl(var(--border)) !important;
 }
