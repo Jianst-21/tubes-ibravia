@@ -13,18 +13,19 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   if (!slides.length) return null;
 
-  const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
+  const prevSlide = () =>
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  const nextSlide = () =>
+    setCurrent((prev) => (prev + 1) % slides.length);
 
   const { title, desc, img } = slides[current];
 
-  const isDark = blueTheme;
+  const isDark = blueTheme; // jika blueTheme maka teks selalu putih
 
   return (
     <div
-      className={`relative w-full transition-colors duration-500 
-        ${isDark ? "bg-[#003B73]" : "bg-transparent"}
-        text-white
+      className={`relative w-full transition-colors duration-500
+        ${isDark ? "bg-[#003B73] text-white" : "bg-transparent text-black"}
       `}
     >
       <div
@@ -37,18 +38,25 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         "
       >
         <div
-          className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
+          className={`flex flex-col md:flex-row items-center justify-center
+            gap-12 lg:gap-[64px] w-full max-w-[1400px]
             ${reversed ? "md:flex-row-reverse" : ""}
           `}
         >
           {/* TEXT */}
           <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-[42px] text-white">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-[42px]
+              ${isDark ? "text-white" : "text-black"}`}
+            >
               {title}
             </h2>
 
             {desc && (
-              <p className="text-[18px] leading-relaxed text-white text-justify">
+              <p
+                className={`text-[18px] leading-relaxed text-justify
+                  ${isDark ? "text-white" : "text-black"}
+                `}
+              >
                 {desc}
               </p>
             )}
@@ -67,36 +75,34 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* NAV BUTTON LEFT */}
+      {/* LEFT BUTTON */}
       <button
         onClick={prevSlide}
-        className={`absolute top-1/2 -translate-y-1/2 left-0 z-20
-          w-10 h-10 rounded-full flex items-center justify-center shadow-md
-          hover:scale-105 transition-all backdrop-blur
-          ${isDark ? "bg-white/20 text-white hover:bg-white/40" : "bg-white/20 text-white hover:bg-white/40"}
+        className={`
+          absolute top-1/2 -translate-y-1/2 z-20
+          w-10 h-10 rounded-full 
+          flex items-center justify-center backdrop-blur
+          transition-all hover:scale-105 shadow-md
+          ${isDark ? "bg-white/20 text-white hover:bg-white/40"
+                   : "bg-black/20 text-white hover:bg-black/40"}
+          left-4 md:left-6 lg:left-[100px] xl:left-[120px]
         `}
-        style={{
-          marginLeft:
-            window.innerWidth >= 1440 ? "64px" :
-            window.innerWidth >= 1280 ? "48px" : "16px",
-        }}
       >
         <ChevronLeft size={20} />
       </button>
 
-      {/* NAV BUTTON RIGHT */}
+      {/* RIGHT BUTTON */}
       <button
         onClick={nextSlide}
-        className={`absolute top-1/2 -translate-y-1/2 right-0 z-20
-          w-10 h-10 rounded-full flex items-center justify-center shadow-md
-          hover:scale-105 transition-all backdrop-blur
-          ${isDark ? "bg-white/20 text-white hover:bg-white/40" : "bg-white/20 text-white hover:bg-white/40"}
+        className={`
+          absolute top-1/2 -translate-y-1/2 z-20
+          w-10 h-10 rounded-full 
+          flex items-center justify-center backdrop-blur
+          transition-all hover:scale-105 shadow-md
+          ${isDark ? "bg-white/20 text-white hover:bg-white/40"
+                   : "bg-black/20 text-white hover:bg-black/40"}
+          right-4 md:right-6 lg:right-[100px] xl:right-[120px]
         `}
-        style={{
-          marginRight:
-            window.innerWidth >= 1440 ? "64px" :
-            window.innerWidth >= 1280 ? "48px" : "16px",
-        }}
       >
         <ChevronRight size={20} />
       </button>
