@@ -23,20 +23,11 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
   return (
     <div
       className={`relative w-full transition-colors duration-500 
-        ${blueTheme ? "bg-[#003B73]" : "bg-white"}
-        ${blueTheme ? "text-white" : "text-black"} 
-        dark:text-white
+        ${blueTheme ? "bg-[#003B73] text-white" : "bg-[#F8FBFF] text-black"} 
+        dark:bg-[#0B0F19] dark:text-white
       `}
     >
-      <div
-        className="
-          flex justify-center items-center py-10
-          px-6
-          md:px-10
-          lg:px-[100px]
-          xl:px-[120px]
-        "
-      >
+      <div className="flex justify-center items-center py-10 px-6 md:px-10 lg:px-[100px] xl:px-[120px]">
         <div
           className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
             ${reversed ? "md:flex-row-reverse" : ""}
@@ -44,17 +35,12 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         >
           {/* TEXT */}
           <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-[42px] text-current dark:text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-[42px]">
               {title}
             </h2>
 
             {desc && (
-              <p
-                className="
-                  text-[18px] leading-relaxed text-current dark:text-white
-                  text-justify
-                "
-              >
+              <p className="text-[18px] leading-relaxed text-justify opacity-90">
                 {desc}
               </p>
             )}
