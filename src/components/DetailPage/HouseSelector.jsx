@@ -72,13 +72,12 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
                   disabled={isSold}
                   className={`w-[80px] sm:w-full aspect-[2/3] flex items-center justify-center 
                   font-semibold text-sm sm:text-lg shadow-md transition-all duration-300 rounded-[8px]
-                  ${
-                    isSold
+                  ${isSold
                       ? "bg-gray-700 text-gray-300 cursor-not-allowed"
                       : isSelected
-                      ? "bg-blue-700 text-white scale-105 shadow-lg cursor-pointer"
-                      : "bg-white text-black hover:scale-105 hover:bg-gray-100 cursor-pointer active:scale-95"
-                  }`}
+                        ? "bg-blue-700 text-white scale-105 shadow-lg cursor-pointer"
+                        : "bg-white text-black hover:scale-105 hover:bg-gray-100 cursor-pointer active:scale-95"
+                    }`}
                 >
                   {house.number_block || `#${house.id_house}`}
                 </button>
@@ -92,13 +91,12 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center gap-3 mt-8 sm:mt-10">
+        <div className="flex items-center gap-3 mt-8 sm:mt-10 mb-6 sm:mb-10 md:mb-14">
           <button
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
-            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border transition-all duration-300 ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:scale-110"
-            }`}
+            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border transition-all duration-300 ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:scale-110"
+              }`}
           >
             <ChevronLeft size={22} />
           </button>
@@ -108,9 +106,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
-            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border transition-all duration-300 ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:scale-110"
-            }`}
+            className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border transition-all duration-300 ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:scale-110"
+              }`}
           >
             <ChevronRight size={22} />
           </button>
