@@ -65,7 +65,8 @@ export const WhyChooseUs = () => {
                   </div>
 
                   <div
-                    className="flex items-center justify-center font-semibold text-[20px] rounded-[20px] px-7 py-3.5 min-w-[320px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
+                    className="flex items-center justify-center font-semibold text-[20px] 
+                    rounded-[20px] px-7 py-3.5 min-w-[330px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
                     style={{
                       backgroundColor: fillColor,
                       color: textColor,
