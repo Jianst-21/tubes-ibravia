@@ -23,8 +23,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
   return (
     <div
       className={`relative w-full transition-colors duration-500 
-        ${blueTheme ? "bg-[#003B73] text-white" : "bg-[#F8FBFF] text-black"} 
-        dark:bg-[#0B0F19] dark:text-white
+        ${blueTheme ? "bg-[#003B73] text-white" : ""} 
+        dark:text-white
       `}
     >
       <div className="flex justify-center items-center py-10 px-6 md:px-10 lg:px-[100px] xl:px-[120px]">
@@ -59,7 +59,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* NAV BUTTON LEFT */}
+      {/* NAV LEFT */}
       <button
         onClick={prevSlide}
         className={`
@@ -68,7 +68,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
           hover:scale-105 transition-all
           ${blueTheme 
             ? "bg-white/20 text-white hover:bg-white/40"
-            : "bg-black/20 text-black hover:bg-black/40 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
+            : "bg-black/10 text-black hover:bg-black/20 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
           }
         `}
         style={{
@@ -80,7 +80,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         <ChevronLeft size={24} />
       </button>
 
-      {/* NAV BUTTON RIGHT */}
+      {/* NAV RIGHT */}
       <button
         onClick={nextSlide}
         className={`
@@ -89,7 +89,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
           hover:scale-105 transition-all
           ${blueTheme 
             ? "bg-white/20 text-white hover:bg-white/40"
-            : "bg-black/20 text-black hover:bg-black/40 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
+            : "bg-black/10 text-black hover:bg-black/20 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
           }
         `}
         style={{
@@ -101,15 +101,13 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         <ChevronRight size={24} />
       </button>
 
-      {/* DOT INDICATORS */}
+      {/* DOTS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <div
             key={i}
             className={`w-3 h-3 rounded-full transition-all
-              ${i === current
-                ? "bg-white dark:bg-white"
-                : "bg-white/40 dark:bg-white/40"}
+              ${i === current ? "bg-white" : "bg-white/40"}
             `}
           />
         ))}
