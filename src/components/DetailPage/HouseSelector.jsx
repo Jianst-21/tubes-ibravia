@@ -48,8 +48,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
           window.innerWidth <= 640
             ? "95vh"
             : window.innerWidth <= 1024
-            ? "98vh"
-            : "100vh",
+              ? "98vh"
+              : "100vh",
       }}
     >
       {/* Overlay gelap */}
@@ -62,9 +62,13 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
         </h2>
 
         {/* Grid Rumah */}
+        {/* Grid Rumah */}
         <div
-          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 
-          gap-3 sm:gap-6 justify-items-center max-w-7xl w-full"
+          className="grid gap-3 sm:gap-6 justify-items-center max-w-7xl w-full"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(75px, 1fr))",
+          }}
         >
           {currentHouses.length > 0 ? (
             currentHouses.map((house) => {
@@ -76,15 +80,14 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
                   key={house.id_house}
                   onClick={() => !isSold && onSelect(house)}
                   disabled={isSold}
-                  className={`w-[80px] sm:w-full aspect-[2/3] flex items-center justify-center 
-                    font-semibold text-sm sm:text-lg shadow-md transition-all duration-300 rounded-[8px]
-                  ${
-                    isSold
+                  className={`w-full max-w-[80px] aspect-[2/3] flex items-center justify-center 
+            font-semibold text-xs sm:text-base shadow-md transition-all duration-300 rounded-[8px]
+          ${isSold
                       ? "bg-gray-700 text-gray-300 cursor-not-allowed"
                       : isSelected
-                      ? "bg-blue-700 text-white scale-105 shadow-lg"
-                      : "bg-white text-black hover:scale-105 hover:bg-gray-100 active:scale-95"
-                  }`}
+                        ? "bg-blue-700 text-white scale-105 shadow-lg"
+                        : "bg-white text-black hover:scale-105 hover:bg-gray-100 active:scale-95"
+                    }`}
                 >
                   {house.number_block || `#${house.id_house}`}
                 </button>
@@ -111,10 +114,9 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
               disabled={currentPage === 1}
               className={`w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-300
-                ${
-                  currentPage === 1
-                    ? "opacity-40 cursor-not-allowed"
-                    : "hover:scale-110 hover:shadow-lg"
+                ${currentPage === 1
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:scale-110 hover:shadow-lg"
                 }
               `}
               style={{
@@ -131,10 +133,9 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
               onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
               disabled={currentPage === totalPages}
               className={`w-12 h-12 flex items-center justify-center rounded-full border transition-all duration-300
-                ${
-                  currentPage === totalPages
-                    ? "opacity-40 cursor-not-allowed"
-                    : "hover:scale-110 hover:shadow-lg"
+                ${currentPage === totalPages
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:scale-110 hover:shadow-lg"
                 }
               `}
               style={{
