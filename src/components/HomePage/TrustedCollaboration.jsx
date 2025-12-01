@@ -12,7 +12,8 @@ const partners = [
 export const TrustedCollaboration = () => {
   return (
     <section className="pt-12 pb-20 bg-[hsl(var(--background))] text-foreground">
-      <div className="container mx-auto px-4 md:px-6">
+      {/* Container dengan margin horizontal responsif */}
+      <div className="w-full px-4 sm:px-8 lg:px-[120px] mx-auto">
 
         {/* Heading */}
         <div className="text-center">
@@ -25,7 +26,7 @@ export const TrustedCollaboration = () => {
         </div>
 
         {/* Grid PT responsive */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-24 pt-16 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 md:gap-x-24 pt-16 justify-center">
           {partners.map((partner, i) => (
             <motion.div
               key={partner.id}
