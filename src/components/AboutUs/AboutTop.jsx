@@ -2,16 +2,8 @@ import backgroundImage from "@/assets/images/colection/property-page.png";
 
 export const AboutTop = () => {
   return (
-    <section
-      className="
-        relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden
-        px-6
-        md:px-[60px]
-        lg:px-[80px]
-        xl:px-[100px]
-        2xl:px-[120px]
-      "
-    >
+    <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden px-6">
+      
       {/* Background */}
       <img
         src={backgroundImage}
@@ -20,20 +12,25 @@ export const AboutTop = () => {
       />
       <div className="absolute inset-0 bg-black/40" />
 
-      {/* Konten utama */}
-      <div
-        className="
-          relative z-10 flex flex-col md:flex-row items-center
-          justify-center w-full max-w-[1400px]
-          gap-y-10 gap-x-[150px] /* jarak horizontal 150px */
-        "
-      >
-        {/* Gambar di kiri */}
+      {/* Content */}
+      <div className="
+        relative z-10 flex flex-col md:flex-row items-center justify-center
+        gap-10 lg:gap-16 xl:gap-20
+        w-full
+      ">
+
+        {/* LEFT IMAGE */}
         <div
           className="
-          w-[512px] aspect-[512/343]
-          rounded-3xl overflow-hidden shadow-2xl border border-white/30
-        "
+            rounded-3xl overflow-hidden shadow-2xl border border-white/30
+            w-[512px] max-w-full aspect-[512/344]
+            mx-auto
+            mt-[40px] mb-[40px]         /* mobile */
+            md:mt-[50px] md:mb-[50px]   /* tablet */
+            lg:mt-[60px] lg:mb-[60px]   /* laptop */
+            xl:mt-[50px] xl:mb-[50px]   /* 1280px turunin 20px */
+            2xl:mt-[70px] 2xl:mb-[70px] /* 1440+ sesuai Figma */
+          "
         >
           <img
             src="/images/block/A.png"
@@ -42,19 +39,18 @@ export const AboutTop = () => {
           />
         </div>
 
-
-        {/* Teks di kanan */}
-        <div
-          className="
-            text-white max-w-[600px] text-left flex flex-col justify-center
-            mb-[80px]
-            md:mb-[120px]
-            lg:mb-[150px]
-          "
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 md:mb-12">
+        {/* RIGHT TEXT */}
+        <div className="
+          text-white
+          max-w-[512px]  /* ⛔ teks tidak bisa melebihi gambar */
+          text-left
+          flex flex-col justify-center
+          px-2
+        ">
+          <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">
             About Us, IBRAVIA
           </h2>
+
           <p className="text-base md:text-lg leading-relaxed text-gray-100">
             Ibravia is a trusted property developer dedicated to creating modern,
             comfortable, and affordable homes for families. With a commitment to
@@ -62,6 +58,7 @@ export const AboutTop = () => {
             through their journey of finding the perfect home.
           </p>
         </div>
+
       </div>
     </section>
   );
