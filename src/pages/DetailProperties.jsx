@@ -45,7 +45,7 @@ export const DetailProperties = () => {
   }, [id_block]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
 
       {/* Konten utama → ini yang harus flex-grow */}
