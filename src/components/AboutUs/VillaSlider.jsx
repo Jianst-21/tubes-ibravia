@@ -68,17 +68,15 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* BUTTON LEFT */}
+      {/* Controls */}
       <button
-        onClick={() =>
-          setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-        }
+        onClick={prevSlide}
         className={`
-        cursor-pointer absolute top-1/2 -translate-y-1/2
-        left-1/2 
-        -translate-x-[calc(256px+32px)]     /* base: 32px */
-        lg:-translate-x-[calc(256px+48px)]  /* ≥1024px: 48px */
-        xl:-translate-x-[calc(256px+64px)]  /* ≥1280px: 64px */
+        absolute top-1/2 -translate-y-1/2
+        ${reversed
+                ? "right-[calc(50%+300px+64px)] xl:right-[calc(50%+300px+64px)] lg:right-[calc(50%+300px+48px)]"
+                : "left-[calc(50%-300px-64px)] xl:left-[calc(50%-300px-64px)] lg:left-[calc(50%-300px-48px)]"}
+        md:left-6 
         bg-white/40 hover:bg-white/70 text-black
         rounded-full p-2 shadow-md transition-all
       `}
@@ -86,21 +84,21 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         <ChevronLeft size={22} />
       </button>
 
-      {/* BUTTON RIGHT */}
       <button
-        onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+        onClick={nextSlide}
         className={`
-        cursor-pointer absolute top-1/2 -translate-y-1/2
-        right-1/2 
-        translate-x-[calc(256px+32px)]
-        lg:translate-x-[calc(256px+48px)]
-        xl:translate-x-[calc(256px+64px)]
+        absolute top-1/2 -translate-y-1/2
+        ${reversed
+                ? "left-[calc(50%-300px-64px)] xl:left-[calc(50%-300px-64px)] lg:left-[calc(50%-300px-48px)]"
+                : "right-[calc(50%+300px+64px)] xl:right-[calc(50%+300px+64px)] lg:right-[calc(50%+300px+48px)]"}
+        md:right-6 
         bg-white/40 hover:bg-white/70 text-black
         rounded-full p-2 shadow-md transition-all
-      `}
+       `}
       >
         <ChevronRight size={22} />
       </button>
+
 
       {/* DOTS */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
