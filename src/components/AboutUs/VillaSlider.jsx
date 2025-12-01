@@ -84,25 +84,28 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
       <button
         onClick={prevSlide}
         className="absolute top-1/2 -translate-y-1/2 left-0 z-20
-             transform hover:scale-105 transition-all"
+             w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center
+             hover:scale-105 transition-all"
         style={{
           marginLeft: window.innerWidth >= 1440 ? "64px" : "48px"
         }}
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft className="text-[#004a88]" size={20} />
       </button>
 
       {/* Chevron Right */}
       <button
         onClick={nextSlide}
         className="absolute top-1/2 -translate-y-1/2 right-0 z-20
-             transform hover:scale-105 transition-all"
+             w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center
+             hover:scale-105 transition-all"
         style={{
           marginRight: window.innerWidth >= 1440 ? "64px" : "48px"
         }}
       >
-        <ChevronRight size={24} />
+        <ChevronRight className="text-[#004a88]" size={20} />
       </button>
+
 
       {/* DOT INDICATORS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
