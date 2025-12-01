@@ -91,30 +91,19 @@ export const WhyChooseUs = () => {
             {images.map((img, index) => {
               const isCenter = index === 1;
 
-              // Ukuran gambar responsif
-              let width, height, xValue, zIndex;
-              if (isCenter) {
-                width = 512;
-                height = 344;
-                xValue = 0;
-                zIndex = 30; // paling depan
-              } else if (index === 0) {
-                width = 368;
-                height = 272;
-                xValue = -150;
-                zIndex = 20; // belakang
-              } else {
-                width = 368;
-                height = 272;
-                xValue = 150;
-                zIndex = 20; // belakang
-              }
+              // ukuran dan posisi gambar
+              const style = {
+                width: isCenter ? 520 : 360,
+                height: isCenter ? 350 : 265,
+                x: isCenter ? 0 : index === 0 ? -150 : 150,
+                zIndex: isCenter ? 30 : 20,
+              };
 
               return (
                 <motion.div
                   key={img}
-                  initial={{ opacity: 0, x: xValue }}
-                  animate={{ opacity: 1, x: xValue, zIndex: zIndex }}
+                  initial={{ opacity: 0, x: style.x }}
+                  animate={{ opacity: 1, x: style.x, zIndex: style.zIndex }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
                   className="absolute cursor-pointer"
@@ -123,14 +112,17 @@ export const WhyChooseUs = () => {
                   <img
                     src={img}
                     alt={`house-${index}`}
-                    className={`rounded-3xl border-2 border-white object-cover w-[${width}px] h-[${height}px]`}
+                    style={{
+                      width: style.width,
+                      height: style.height,
+                    }}
+                    className="rounded-3xl border-2 border-white object-cover shadow-lg"
                   />
                 </motion.div>
               );
             })}
           </AnimatePresence>
         </motion.div>
-
       </div>
     </section>
   );
