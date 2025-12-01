@@ -11,7 +11,7 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
     const updatePerPage = () => {
       if (window.innerWidth <= 640) {
         setHousesPerPage(4); // Mobile
-      } else if (window.innerWidth <= 1280) {
+      } else if (window.innerWidth < 1280) {
         setHousesPerPage(18); // Laptop Normal <= 1280px
       } else {
         setHousesPerPage(20); // Layar besar > 1280px
