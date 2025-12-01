@@ -57,46 +57,55 @@ export const HouseCollections = () => {
 
   return (
     <section className="py-20 bg-background text-foreground transition-colors duration-300 font-[var(--font-body)]">
-      <div className="container mx-auto px-6 text-center">
+      <div className="container mx-auto px-6">
         {/* Subheading */}
-        <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-2 font-[var(--font-subheader)]">
+        <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-2 font-[var(--font-subheader)] text-center">
           Find the home that fits your lifestyle and future
         </p>
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground font-[var(--font-headline)]">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground font-[var(--font-headline)] text-center">
           House Collections
         </h2>
 
         {/* Grid Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid gap-4 justify-items-center 
+            grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
+
+
           {houses.map((house) => (
             <Link
               key={house.id_house}
-              to={`/Detail-Properties/${house.id_block}`} // ← arahkan ke halaman detail
-              className="group card-hover bg-card rounded-xl text-left block font-[var(--font-body)] 
-              transition-all duration-300 h-[420px] flex flex-col p-4 shadow-md hover:shadow-lg"
+              to={`/Detail-Properties/${house.id_block}`}
+              className="group card-hover bg-card rounded-xl text-left block 
+              font-[var(--font-body)] transition-all duration-300 h-[456px] 
+              flex flex-col p-4 shadow-md hover:shadow-lg"
             >
               {/* Gambar */}
-              <div className="relative flex-shrink-0">
+              <div className="w-full h-[220px] overflow-hidden rounded-lg">
                 <img
                   src={house.image}
                   alt={house.title}
-                  className="w-full h-48 object-cover object-center rounded-lg"
+                  className="w-full h-full object-cover"
                 />
               </div>
 
               {/* Konten */}
               <div className="mt-4 flex-grow space-y-2">
-                <p className="text-sm text-primary font-medium">{house.category}</p>
+                <p className="text-sm text-primary font-medium">
+                  {house.category}
+                </p>
+
                 <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
                   {house.title}
                 </h3>
-                <p className="text-sm text-[hsl(var(--muted-foreground))] leading-snug">
+
+                {/* DESC — sudah diganti dari HSL ke text-muted-foreground */}
+                <p className="text-sm pt-4 text-muted-foreground leading-snug">
                   {house.desc}
                 </p>
 
-                <div className="pt-3 border-t border-border mt-auto">
+                <div className="pt-4 border-t border-border mt-auto">
                   <div className="flex items-center space-x-2">
                     <div className="w-8 h-8 rounded-full overflow-hidden">
                       <img
@@ -106,10 +115,15 @@ export const HouseCollections = () => {
                       />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">{house.price}</p>
-                      <p className="text-xs text-[hsl(var(--muted-foreground))]">
+                      <p className="text-sm font-semibold text-foreground">
+                        {house.price}
+                      </p>
+
+                      {/* Developer — ganti ke text-muted-foreground */}
+                      <p className="text-sm text-muted-foreground font-subheader">
                         {house.developer}
                       </p>
+
                     </div>
                   </div>
                 </div>
@@ -119,8 +133,11 @@ export const HouseCollections = () => {
         </div>
 
         {/* Tombol */}
-        <div className="mt-12">
-          <Link to="/properties" className="ibravia-button px-8 py-3 font-[var(--font-subheader)]">
+        <div className="mt-12 text-center">
+          <Link
+            to="/properties"
+            className="ibravia-button text-[20px] px-8 py-3 font-subheader"
+          >
             Explore More
           </Link>
         </div>

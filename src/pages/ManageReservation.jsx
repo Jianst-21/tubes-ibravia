@@ -171,7 +171,7 @@ const ManageReservation = () => {
                           Block {item.block_name} • No. {item.number_house}
                         </p>
 
-                        <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                        <h2 className="text-[30px] font-bold text-gray-900 mt-1">
                           {item.residence_name || "Unknown Residence"}
                         </h2>
                       </div>
