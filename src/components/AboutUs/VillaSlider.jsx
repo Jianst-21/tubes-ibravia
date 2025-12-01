@@ -83,29 +83,32 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
       {/* BUTTONS */}
       <button
         onClick={prevSlide}
-        className="
-          cursor-pointer absolute
-          left-4 sm:left-6 md:left-10 lg:left-[100px] xl:left-[120px]
-          top-1/2 -translate-y-1/2
-          bg-white/40 hover:bg-white/70
-          text-black rounded-full p-2 shadow-md transition-all
-        "
+        className={`
+    absolute top-1/2 -translate-y-1/2 z-20
+    ${reversed
+            ? "right-[184px] xl:right-[184px] lg:right-[148px]"
+            : "left-[184px] xl:left-[184px] lg:left-[148px]"}
+    bg-white/40 hover:bg-white/70 text-black rounded-full
+    p-2 shadow-md transition-all
+  `}
       >
         <ChevronLeft size={22} />
       </button>
 
       <button
         onClick={nextSlide}
-        className="
-          cursor-pointer absolute
-          right-4 sm:right-6 md:right-10 lg:right-[100px] xl:right-[120px]
-          top-1/2 -translate-y-1/2
-          bg-white/40 hover:bg-white/70
-          text-black rounded-full p-2 shadow-md transition-all
-        "
+        className={`
+    absolute top-1/2 -translate-y-1/2 z-20
+    ${reversed
+            ? "left-[184px] xl:left-[184px] lg:left-[148px]"
+            : "right-[184px] xl:right-[184px] lg:right-[148px]"}
+    bg-white/40 hover:bg-white/70 text-black rounded-full
+    p-2 shadow-md transition-all
+  `}
       >
         <ChevronRight size={22} />
       </button>
+
 
       {/* DOT INDICATORS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
