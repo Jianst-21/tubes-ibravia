@@ -295,7 +295,7 @@ const ManageReservation = () => {
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                           >
-                            Accepted
+                            Accept
                           </button>
                         </>
                       ) : (
@@ -347,7 +347,7 @@ const ManageReservation = () => {
                     disabled={isActionLoading}
                     className="w-36 py-3 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
-                    {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Accepted"}
+                    {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Accept"}
                   </button>
                 </>
               ) : (
