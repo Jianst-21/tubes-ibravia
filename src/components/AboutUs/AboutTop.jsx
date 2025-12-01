@@ -5,11 +5,11 @@ export const AboutTop = () => {
     <section
       className="
         relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden
-        px-6           /* mobile */
-        md:px-[60px]   /* tablet */
-        lg:px-[80px]   /* 1024px */
-        xl:px-[100px]  /* 1280px */
-        2xl:px-[120px] /* 1440px+ */
+        px-6
+        md:px-[60px]
+        lg:px-[80px]
+        xl:px-[100px]
+        2xl:px-[120px]
       "
     >
       {/* Background */}
@@ -21,12 +21,17 @@ export const AboutTop = () => {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Konten utama */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full gap-10">
-        
+      <div
+        className="
+          relative z-10 flex flex-col md:flex-row items-center
+          justify-center w-full max-w-[1400px]
+          gap-y-10 gap-x-[150px] /* jarak horizontal 150px */
+        "
+      >
         {/* Gambar di kiri */}
         <div
           className="
-            w-full max-w-[450px] 
+            w-[512px] aspect-[512/343]
             rounded-3xl overflow-hidden shadow-2xl border border-white/30
           "
         >
@@ -41,9 +46,9 @@ export const AboutTop = () => {
         <div
           className="
             text-white max-w-[600px] text-left flex flex-col justify-center
-            mb-[80px]    /* mobile */
-            md:mb-[120px] /* tablet */
-            lg:mb-[150px] /* laptop & desktop */
+            mb-[80px]
+            md:mb-[120px]
+            lg:mb-[150px]
           "
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 md:mb-12">
@@ -56,7 +61,6 @@ export const AboutTop = () => {
             through their journey of finding the perfect home.
           </p>
         </div>
-
       </div>
     </section>
   );
