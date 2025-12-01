@@ -31,9 +31,9 @@ export const AboutTop = () => {
         {/* Gambar di kiri */}
         <div
           className="
-            w-[512px] aspect-[512/343]
-            rounded-3xl overflow-hidden shadow-2xl border border-white/30
-          "
+          w-[512px] aspect-[512/343]
+          rounded-3xl overflow-hidden shadow-2xl border border-white/30
+        "
         >
           <img
             src="/images/block/A.png"
@@ -41,6 +41,7 @@ export const AboutTop = () => {
             className="w-full h-full object-cover"
           />
         </div>
+
 
         {/* Teks di kanan */}
         <div
