@@ -13,7 +13,7 @@ export const TrustedCollaboration = () => {
   return (
     <section className="pt-12 pb-20 bg-[hsl(var(--background))] text-foreground">
       {/* Container dengan margin horizontal responsif */}
-      <div className="w-full px-4 sm:px-8 lg:px-[120px] mx-auto">
+      <div className="w-full px-4 sm:px-8 lg:px-[80px] xl:px-[120px] mx-auto">
 
         {/* Heading */}
         <div className="text-center">
