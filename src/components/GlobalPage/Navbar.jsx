@@ -37,7 +37,7 @@ export const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Efek sticky dan theme
+  // Efek sticky, theme, dan login
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
@@ -108,9 +108,11 @@ export const Navbar = () => {
         isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" : "py-5"
       )}
     >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+      {/* Container full width dengan margin kiri-kanan 8px */}
+      <div className="w-full px-2 flex items-center justify-between">
+
         {/* LOGO */}
-        <Link to="/" className="flex items-end space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <img
             key={isDark ? "logo-dark" : "logo-light"}
             src={isDark ? LogoPutih : LogoBiru}
@@ -142,17 +144,14 @@ export const Navbar = () => {
               <div className="relative" ref={dropdownRef}>
                 <button
                   type="button"
-                  className="cursor-pointer w-10 h-10 rounded-full bg-gradient-to-r 
-          from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
+                  className="cursor-pointer w-10 h-10 rounded-full bg-gradient-to-r from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
                   onClick={() => setOpen((prev) => !prev)}
                 >
-                {(userData?.name || "U").trim().charAt(0).toUpperCase()}
+                  {(userData?.name || "U").trim().charAt(0).toUpperCase()}
                 </button>
 
                 {open && (
-                  <div className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg 
-          rounded-md z-50 transition-all duration-200"
-                  >
+                  <div className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg rounded-md z-50 transition-all duration-200">
                     <p className="px-4 py-2 text-sm border-b border-border truncate">
                       {userData?.email}
                     </p>
@@ -161,8 +160,7 @@ export const Navbar = () => {
                         navigate("/EditProfile");
                         setOpen(false);
                       }}
-                      className="cursor-pointer w-full text-left px-4 py-2 text-sm 
-              hover:bg-secondary flex items-center gap-2"
+                      className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center gap-2"
                     >
                       <UserCog size={16} /> Edit Profile
                     </button>
@@ -171,8 +169,7 @@ export const Navbar = () => {
                         handleLogout();
                         setOpen(false);
                       }}
-                      className="cursor-pointer w-full text-left px-4 py-2 text-sm 
-              hover:bg-secondary flex items-center gap-2 border-t border-border"
+                      className="cursor-pointer w-full text-left px-4 py-2 text-sm hover:bg-secondary flex items-center gap-2 border-t border-border"
                     >
                       <LogOut size={16} /> Logout
                     </button>
@@ -183,15 +180,13 @@ export const Navbar = () => {
               <>
                 <Link
                   to="/Login"
-                  className="px-4 py-2 rounded-md border border-primary 
-          text-primary hover:bg-primary/10 transition-colors"
+                  className="px-4 py-2 rounded-md border border-primary text-primary hover:bg-primary/10 transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   to="/SignUp"
-                  className="px-4 py-2 rounded-md bg-primary 
-          text-white hover:bg-primary/90 transition-colors"
+                  className="px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90 transition-colors"
                 >
                   Sign Up
                 </Link>
@@ -212,11 +207,8 @@ export const Navbar = () => {
       {/* MOBILE MENU */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 
-          backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto"
-          style={{
-            WebkitOverflowScrolling: "touch",
-          }}
+          className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto"
+          style={{ WebkitOverflowScrolling: "touch" }}
         >
           {/* NAV ITEMS */}
           <ul className="flex flex-col items-center space-y-6 text-lg font-medium mt-24">
@@ -237,55 +229,46 @@ export const Navbar = () => {
 
           {/* AUTH BUTTONS */}
           <div className="flex flex-col gap-4 w-[200px] mb-12">
-            {isReady && (
-              <>
-                {isLoggedIn ? (
-                  <>
-                    <button
-                      onClick={() => {
-                        navigate("/EditProfile");
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full px-5 py-2 rounded-lg font-semibold border 
-                      border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all"
-                    >
-                      Edit Profile
-                    </button>
-                    <button
-                      onClick={() => {
-                        handleLogout();
-                        setIsMenuOpen(false);
-                      }}
-                      className="w-full px-5 py-2 rounded-lg font-semibold border 
-                      border-destructive text-destructive bg-transparent hover:bg-destructive 
-                      hover:text-white transition-all"
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      to="/Login"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="w-full px-5 py-2 rounded-lg font-semibold bg-primary 
-                      text-white hover:bg-primary/90 transition-all text-center"
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      to="/SignUp"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="w-full px-5 py-2 rounded-lg font-semibold border 
-                      border-primary text-primary bg-transparent hover:bg-primary hover:text-white 
-                      transition-all text-center"
-                    >
-                      Sign Up
-                    </Link>
-                  </>
-                )}
-              </>
-            )}
+            {isReady &&
+              (isLoggedIn ? (
+                <>
+                  <button
+                    onClick={() => {
+                      navigate("/EditProfile");
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all"
+                  >
+                    Edit Profile
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-destructive text-destructive bg-transparent hover:bg-destructive hover:text-white transition-all"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/Login"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="w-full px-5 py-2 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 transition-all text-center"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/SignUp"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all text-center"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              ))}
           </div>
         </div>
       )}
