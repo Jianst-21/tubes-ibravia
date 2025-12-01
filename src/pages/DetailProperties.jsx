@@ -45,24 +45,28 @@ export const DetailProperties = () => {
   }, [id_block]);
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/*  Loading text dihapus, biarkan kosong saat loading */}
-      {error && <p className="text-center mt-6 text-red-500">{error}</p>}
+      {/* Konten utama → ini yang harus flex-grow */}
+      <div className="flex-grow">
+        {error && (
+          <p className="text-center mt-6 text-red-500">{error}</p>
+        )}
 
-      {/*  Hanya tampilkan isi jika data sudah siap */}
-      {!loading && !error && houses.length > 0 && (
-        <>
-          <HouseSelector
-            houses={houses}
-            selectedHouseId={selectedHouse?.id_house}
-            onSelect={(house) => setSelectedHouse(house)}
-          />
-          <HouseDetail house={selectedHouse} />
-        </>
-      )}
+        {!loading && !error && houses.length > 0 && (
+          <>
+            <HouseSelector
+              houses={houses}
+              selectedHouseId={selectedHouse?.id_house}
+              onSelect={(house) => setSelectedHouse(house)}
+            />
+            <HouseDetail house={selectedHouse} />
+          </>
+        )}
+      </div>
 
+      {/* Footer selalu di bawah */}
       <Footer />
     </div>
   );
