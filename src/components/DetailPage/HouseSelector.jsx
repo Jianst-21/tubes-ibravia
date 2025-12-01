@@ -58,7 +58,7 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
         {/* Grid rumah */}
         <div
           className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 
-          gap-3 sm:gap-6 justify-items-center max-w-7xl w-full"
+          gap-4 sm:gap-6 justify-items-center max-w-7xl w-full"
         >
           {currentHouses.length > 0 ? (
             currentHouses.map((house) => {
