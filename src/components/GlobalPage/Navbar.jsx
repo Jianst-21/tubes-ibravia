@@ -109,7 +109,7 @@ export const Navbar = () => {
       )}
     >
       {/* Container full width dengan margin kiri-kanan 8px */}
-      <div className="w-full px-2 flex items-center justify-between">
+      <div className="w-full px-16 flex items-center justify-between">
 
         {/* LOGO */}
         <Link to="/" className="flex items-center space-x-2">
