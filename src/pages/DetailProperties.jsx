@@ -49,12 +49,12 @@ export const DetailProperties = () => {
       <Navbar />
 
       {/* Konten utama → ini yang harus flex-grow */}
-      <div className="flex-grow flex items-center justify-center">
-        {loading ? (
-          <p className="text-gray-500">Loading...</p>
-        ) : error ? (
+      <div className="flex-grow">
+        {error && (
           <p className="text-center mt-6 text-red-500">{error}</p>
-        ) : (
+        )}
+
+        {!loading && !error && houses.length > 0 && (
           <>
             <HouseSelector
               houses={houses}
