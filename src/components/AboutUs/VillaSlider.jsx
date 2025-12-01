@@ -80,35 +80,29 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* BUTTONS */}
+      {/* Chevron Left */}
       <button
         onClick={prevSlide}
-        className={`
-    absolute top-1/2 -translate-y-1/2 z-20
-    ${reversed
-            ? "right-[184px] xl:right-[184px] lg:right-[148px]"
-            : "left-[184px] xl:left-[184px] lg:left-[148px]"}
-    bg-white/40 hover:bg-white/70 text-black rounded-full
-    p-2 shadow-md transition-all
-  `}
+        className="absolute top-1/2 -translate-y-1/2 left-0 z-20
+             transform hover:scale-105 transition-all"
+        style={{
+          marginLeft: window.innerWidth >= 1440 ? "64px" : "48px"
+        }}
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={24} />
       </button>
 
+      {/* Chevron Right */}
       <button
         onClick={nextSlide}
-        className={`
-    absolute top-1/2 -translate-y-1/2 z-20
-    ${reversed
-            ? "left-[184px] xl:left-[184px] lg:left-[148px]"
-            : "right-[184px] xl:right-[184px] lg:right-[148px]"}
-    bg-white/40 hover:bg-white/70 text-black rounded-full
-    p-2 shadow-md transition-all
-  `}
+        className="absolute top-1/2 -translate-y-1/2 right-0 z-20
+             transform hover:scale-105 transition-all"
+        style={{
+          marginRight: window.innerWidth >= 1440 ? "64px" : "48px"
+        }}
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={24} />
       </button>
-
 
       {/* DOT INDICATORS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
