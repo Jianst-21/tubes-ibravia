@@ -93,8 +93,8 @@ export const WhyChooseUs = () => {
 
               // ukuran dan posisi gambar
               const style = {
-                width: isCenter ? 520 : 360,
-                height: isCenter ? 350 : 265,
+                width: isCenter ? 472 : 304,
+                height: isCenter ? 304 : 232,
                 x: isCenter ? 0 : index === 0 ? -130 : 130,
                 zIndex: isCenter ? 30 : 20,
               };
