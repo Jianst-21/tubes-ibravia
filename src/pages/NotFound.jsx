@@ -58,8 +58,7 @@ const NotFound = () => {
           className="mt-6 text-base text-gray-600 max-w-md"
           variants={itemVariants}
         >
-          Maaf, halaman yang Anda cari tidak dapat ditemukan. Mungkin sudah dipindahkan atau alamatnya salah.
-        </motion.p>
+          Sorry, the page you are looking for cannot be found. It may have been moved or the address may be incorrect.        </motion.p>
 
         {/* Tombol Kembali */}
         <motion.div variants={itemVariants} className="mt-8">
@@ -71,8 +70,7 @@ const NotFound = () => {
               whileHover={{ scale: 1.05, backgroundColor: "#1d4ed8" }}
               whileTap={{ scale: 0.95 }}
             >
-              Kembali ke Beranda
-            </motion.button>
+              Back to Home            </motion.button>
           </Link>
         </motion.div>
 
