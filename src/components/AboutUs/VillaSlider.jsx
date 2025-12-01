@@ -20,16 +20,39 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   const { title, desc, img } = slides[current];
 
-  // ===== TEXT COLOR FORCE =====
-  const textColor = blueTheme ? "#FFFFFF" : "#000000";
+  // ===== SYSTEM MODE CHECK =====
+  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  // ===== FIXED TEXT COLOR =====
+  const textColor = blueTheme 
+    ? "#FFFFFF"
+    : isDarkMode 
+    ? "#FFFFFF"
+    : "#000000";
+
+  // ===== DOT / ICON COLOR =====
+  const iconColor = blueTheme 
+    ? "#FFFFFF"
+    : isDarkMode
+    ? "#FFFFFF"
+    : "#000000";
+
+  const dotActive = blueTheme || isDarkMode ? "#FFFFFF" : "#000000";
+  const dotInactive = blueTheme || isDarkMode
+    ? "rgba(255,255,255,0.4)"
+    : "rgba(0,0,0,0.3)";
 
   return (
-    <div className={`relative w-full transition-colors duration-500 ${blueTheme ? "bg-[#003B73]" : ""}`}>
+    <div
+      className={`relative w-full transition-colors duration-500 ${
+        blueTheme ? "bg-[#003B73]" : ""
+      }`}
+    >
       <div className="flex justify-center items-center py-10 px-6 md:px-10 lg:px-[100px] xl:px-[120px]">
         <div
-          className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
-            ${reversed ? "md:flex-row-reverse" : ""}
-          `}
+          className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px] ${
+            reversed ? "md:flex-row-reverse" : ""
+          }`}
         >
           {/* TEXT */}
           <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
@@ -68,9 +91,18 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         onClick={prevSlide}
         className="absolute top-1/2 -translate-y-1/2 left-0 z-20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md hover:scale-105 transition-all"
         style={{
-          marginLeft: window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
-          background: blueTheme ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
-          color: blueTheme ? "#fff" : "#000",
+          marginLeft:
+            window.innerWidth >= 1440
+              ? "64px"
+              : window.innerWidth >= 1280
+              ? "48px"
+              : "16px",
+          background: blueTheme
+            ? "rgba(255,255,255,0.2)"
+            : isDarkMode
+            ? "rgba(255,255,255,0.15)"
+            : "rgba(0,0,0,0.1)",
+          color: iconColor,
         }}
       >
         <ChevronLeft size={24} />
@@ -81,9 +113,18 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         onClick={nextSlide}
         className="absolute top-1/2 -translate-y-1/2 right-0 z-20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md hover:scale-105 transition-all"
         style={{
-          marginRight: window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
-          background: blueTheme ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
-          color: blueTheme ? "#fff" : "#000",
+          marginRight:
+            window.innerWidth >= 1440
+              ? "64px"
+              : window.innerWidth >= 1280
+              ? "48px"
+              : "16px",
+          background: blueTheme
+            ? "rgba(255,255,255,0.2)"
+            : isDarkMode
+            ? "rgba(255,255,255,0.15)"
+            : "rgba(0,0,0,0.1)",
+          color: iconColor,
         }}
       >
         <ChevronRight size={24} />
@@ -95,7 +136,9 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
           <div
             key={i}
             className="w-3 h-3 rounded-full transition-all"
-            style={{ background: i === current ? "#fff" : "rgba(255,255,255,0.4)" }}
+            style={{
+              background: i === current ? dotActive : dotInactive,
+            }}
           />
         ))}
       </div>
