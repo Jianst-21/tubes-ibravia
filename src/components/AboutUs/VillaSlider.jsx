@@ -20,8 +20,21 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   const { title, desc, img } = slides[current];
 
-  // ===== TEXT COLOR FORCE =====
-  const textColor = blueTheme ? "#FFFFFF" : "#000000";
+  // ===== FIX: Warna Automatis Light / Dark =====
+  const isDark = document.documentElement.classList.contains("dark");
+  const textColor = blueTheme 
+    ? "#FFFFFF" 
+    : isDark 
+      ? "#FFFFFF" 
+      : "#000000";
+
+  const navBg = blueTheme 
+    ? "rgba(255,255,255,0.25)" 
+    : isDark 
+      ? "rgba(255,255,255,0.2)" 
+      : "rgba(0,0,0,0.1)";
+
+  const navIconColor = textColor;
 
   return (
     <div className={`relative w-full transition-colors duration-500 ${blueTheme ? "bg-[#003B73]" : ""}`}>
@@ -69,8 +82,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         className="absolute top-1/2 -translate-y-1/2 left-0 z-20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md hover:scale-105 transition-all"
         style={{
           marginLeft: window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
-          background: blueTheme ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
-          color: blueTheme ? "#fff" : "#000",
+          background: navBg,
+          color: navIconColor,
         }}
       >
         <ChevronLeft size={24} />
@@ -82,8 +95,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         className="absolute top-1/2 -translate-y-1/2 right-0 z-20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md hover:scale-105 transition-all"
         style={{
           marginRight: window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
-          background: blueTheme ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)",
-          color: blueTheme ? "#fff" : "#000",
+          background: navBg,
+          color: navIconColor,
         }}
       >
         <ChevronRight size={24} />
@@ -95,7 +108,13 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
           <div
             key={i}
             className="w-3 h-3 rounded-full transition-all"
-            style={{ background: i === current ? "#fff" : "rgba(255,255,255,0.4)" }}
+            style={{
+              background: i === current 
+                ? textColor 
+                : isDark 
+                  ? "rgba(255,255,255,0.4)"
+                  : "rgba(0,0,0,0.3)",
+            }}
           />
         ))}
       </div>

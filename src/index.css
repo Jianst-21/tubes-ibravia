@@ -170,6 +170,14 @@
   width: 100%;
 }
 
+.villa-text {
+  color: #000 !important;
+}
+
+.dark .villa-text {
+  color: #fff !important;
+}
+
 
 /* =====================================
    🏠 CUSTOM VILLA BUTTON
