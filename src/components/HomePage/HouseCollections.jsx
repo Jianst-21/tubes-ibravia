@@ -69,8 +69,9 @@ export const HouseCollections = () => {
         </h2>
 
         {/* Grid Cards */}
-         <div className="grid justify-items-center gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
-                    lg:grid-cols-[repeat(4,minmax(280px,1fr))] mx-auto">
+        <div className="grid gap-4 justify-items-center 
+            grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
+
 
           {houses.map((house) => (
             <Link
