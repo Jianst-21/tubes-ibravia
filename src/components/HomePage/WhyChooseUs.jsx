@@ -35,7 +35,7 @@ export const WhyChooseUs = () => {
           viewport={{ once: true }}
           className="flex-1 text-center lg:text-left"
         >
-          <h2 className="text-[50px] font-extrabold mb-12 tracking-tight drop-shadow-[0_4px_5px_rgba(0,0,0,0.3)]">
+          <h2 className="text-[54px] font-extrabold mb-12 tracking-tight drop-shadow-[0_4px_5px_rgba(0,0,0,0.3)]">
             Why Choose Us
           </h2>
 
@@ -65,7 +65,7 @@ export const WhyChooseUs = () => {
                   </div>
 
                   <div
-                    className="flex items-center justify-center font-semibold text-[20px] rounded-[20px] px-7 py-3.5 min-w-[350px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
+                    className="flex items-center justify-center font-semibold text-[20px] rounded-[20px] px-7 py-3.5 min-w-[320px] shadow-[0_4px_10px_rgba(0,0,0,0.25)] border-2 border-white"
                     style={{
                       backgroundColor: fillColor,
                       color: textColor,
