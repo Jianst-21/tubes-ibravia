@@ -8,49 +8,47 @@ import apiAdmin from "../api/apiadmin";
 import herobg from "../assets/images/colection/hero-bg.jpg";
 
 export const Login = () => {
-  const [identifier, setIdentifier] = useState(""); // email / username
+  const [identifier, setIdentifier] = useState(""); 
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
-  /* ========================================
-     FIX: HAPUS DATA ADMIN YANG MASIH TERSEDIA
-     Agar admin tidak auto-login sebagai user
-  ========================================== */
+  /* =====================================================
+        FIX 1 — BERSIHKAN JEJAK ADMIN DI HALAMAN USER
+     ===================================================== */
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
-
-    if (storedUser?.role === "admin") {
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
-      localStorage.setItem("isLoggedIn", "false");
+    const stored = JSON.parse(localStorage.getItem("user") || "{}");
+    if (stored?.role === "admin") {
+      localStorage.clear();        // Aman, semua bersih
     }
   }, []);
 
-  /* ========================================
-     AUTO REDIRECT JIKA SUDAH LOGIN
-  ========================================== */
+  /* =====================================================
+        FIX 2 — AUTO REDIRECT 
+     ===================================================== */
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const userData = JSON.parse(localStorage.getItem("user") || "{}");
 
     if (isLoggedIn === "true") {
-      if (userData?.role === "admin") navigate("/admin/dashboard");
-      else navigate("/");
+      if (userData?.role === "admin") {
+        navigate("/admin/dashboard");   // Admin → dashboard
+      } else if (userData?.role === "user") {
+        navigate("/");                  // User → homepage
+      }
     }
   }, [navigate]);
 
-  /* ========================================
-     HANDLE LOGIN SUBMIT
-  ========================================== */
+  /* =====================================================
+        HANDLE LOGIN SUBMIT
+     ===================================================== */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
 
     try {
       let res, role, token, currentUser;
-
       const isEmail = identifier.includes("@");
 
       // ===========================
@@ -62,6 +60,7 @@ export const Login = () => {
         token = res.data.token;
         currentUser = res.data.user;
       }
+
       // ===========================
       // ADMIN LOGIN (USERNAME)
       // ===========================
@@ -81,14 +80,17 @@ export const Login = () => {
         role,
       };
 
+      // Simpan session
       localStorage.setItem("user", JSON.stringify(userToStore));
       localStorage.setItem("token", token);
       localStorage.setItem("isLoggedIn", "true");
 
       toast.success("Login successful!");
+
       setTimeout(() => {
         navigate(role === "admin" ? "/admin/dashboard" : "/");
       }, 1000);
+
     } catch (err) {
       console.error("❌ Login error:", err.response?.data || err.message);
       toast.error(err.response?.data?.error || "Incorrect email or password.");
@@ -104,6 +106,7 @@ export const Login = () => {
       {/* LEFT FORM */}
       <div className="flex items-center justify-center px-6 md:pl-[80px] md:pr-0">
         <div className="w-full max-w-md animate-[fade-in_0.8s_ease-out_forwards] text-left">
+
           <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">
             Welcome Back
           </h2>
@@ -111,8 +114,10 @@ export const Login = () => {
             Log in to access your account and explore properties.
           </p>
 
+          {/* FORM */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* EMAIL / USERNAME */}
+
+            {/* IDENTIFIER */}
             <div>
               <label className="block text-sm font-medium mb-1 text-foreground">
                 Email / Username
@@ -143,8 +148,8 @@ export const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   className="w-full pr-10 border border-border rounded-md px-4 py-2 text-sm bg-card 
-                  text-foreground shadow-sm outline-none transition-all duration-300 focus:ring-2 focus:ring-primary 
-                  focus:ring-offset-2"
+                  text-foreground shadow-sm outline-none transition-all duration-300 focus:ring-2 
+                  focus:ring-primary focus:ring-offset-2"
                   required
                 />
                 <button
@@ -159,7 +164,7 @@ export const Login = () => {
               </div>
             </div>
 
-            {/* REMEMBER ME & FORGOT PASSWORD */}
+            {/* OPTIONS */}
             <div className="flex items-center justify-between text-sm text-foreground">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className="accent-primary w-4 h-4 rounded-sm" />
@@ -173,7 +178,7 @@ export const Login = () => {
               </a>
             </div>
 
-            {/* LOGIN BUTTON */}
+            {/* SUBMIT */}
             <button
               type="submit"
               disabled={submitted}
