@@ -20,12 +20,12 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   const { title, desc, img } = slides[current];
 
-  const isDark = blueTheme; // jika blueTheme maka teks selalu putih
-
   return (
     <div
-      className={`relative w-full transition-colors duration-500
-        ${isDark ? "bg-[#003B73] text-white" : "bg-transparent text-black"}
+      className={`relative w-full transition-colors duration-500 
+        ${blueTheme ? "bg-[#003B73]" : "bg-white"}
+        ${blueTheme ? "text-white" : "text-black"} 
+        dark:text-white
       `}
     >
       <div
@@ -38,24 +38,22 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         "
       >
         <div
-          className={`flex flex-col md:flex-row items-center justify-center
-            gap-12 lg:gap-[64px] w-full max-w-[1400px]
+          className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
             ${reversed ? "md:flex-row-reverse" : ""}
           `}
         >
           {/* TEXT */}
           <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
-            <h2 className={`text-3xl md:text-4xl font-bold mb-[42px]
-              ${isDark ? "text-white" : "text-black"}`}
-            >
+            <h2 className="text-3xl md:text-4xl font-bold mb-[42px] text-current dark:text-white">
               {title}
             </h2>
 
             {desc && (
               <p
-                className={`text-[18px] leading-relaxed text-justify
-                  ${isDark ? "text-white" : "text-black"}
-                `}
+                className="
+                  text-[18px] leading-relaxed text-current dark:text-white
+                  text-justify
+                "
               >
                 {desc}
               </p>
@@ -75,45 +73,57 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* LEFT BUTTON */}
+      {/* NAV BUTTON LEFT */}
       <button
         onClick={prevSlide}
         className={`
-          absolute top-1/2 -translate-y-1/2 z-20
-          w-10 h-10 rounded-full 
-          flex items-center justify-center backdrop-blur
-          transition-all hover:scale-105 shadow-md
-          ${isDark ? "bg-white/20 text-white hover:bg-white/40"
-                   : "bg-black/20 text-white hover:bg-black/40"}
-          left-4 md:left-6 lg:left-[100px] xl:left-[120px]
+          absolute top-1/2 -translate-y-1/2 left-0 z-20
+          w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md
+          hover:scale-105 transition-all
+          ${blueTheme 
+            ? "bg-white/20 text-white hover:bg-white/40"
+            : "bg-black/20 text-black hover:bg-black/40 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
+          }
         `}
+        style={{
+          marginLeft:
+            window.innerWidth >= 1440 ? "64px" :
+            window.innerWidth >= 1280 ? "48px" : "16px",
+        }}
       >
-        <ChevronLeft size={20} />
+        <ChevronLeft size={24} />
       </button>
 
-      {/* RIGHT BUTTON */}
+      {/* NAV BUTTON RIGHT */}
       <button
         onClick={nextSlide}
         className={`
-          absolute top-1/2 -translate-y-1/2 z-20
-          w-10 h-10 rounded-full 
-          flex items-center justify-center backdrop-blur
-          transition-all hover:scale-105 shadow-md
-          ${isDark ? "bg-white/20 text-white hover:bg-white/40"
-                   : "bg-black/20 text-white hover:bg-black/40"}
-          right-4 md:right-6 lg:right-[100px] xl:right-[120px]
+          absolute top-1/2 -translate-y-1/2 right-0 z-20
+          w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md
+          hover:scale-105 transition-all
+          ${blueTheme 
+            ? "bg-white/20 text-white hover:bg-white/40"
+            : "bg-black/20 text-black hover:bg-black/40 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
+          }
         `}
+        style={{
+          marginRight:
+            window.innerWidth >= 1440 ? "64px" :
+            window.innerWidth >= 1280 ? "48px" : "16px",
+        }}
       >
-        <ChevronRight size={20} />
+        <ChevronRight size={24} />
       </button>
 
-      {/* DOTS */}
+      {/* DOT INDICATORS */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <div
             key={i}
             className={`w-3 h-3 rounded-full transition-all
-              ${i === current ? "bg-white" : "bg-white/40"}
+              ${i === current
+                ? "bg-white dark:bg-white"
+                : "bg-white/40 dark:bg-white/40"}
             `}
           />
         ))}
