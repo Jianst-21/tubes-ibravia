@@ -146,7 +146,7 @@ export const Navbar = () => {
           from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
                   onClick={() => setOpen((prev) => !prev)}
                 >
-                  {userData?.email ? userData.email.charAt(0).toUpperCase() : "U"}
+                {(userData?.name || "U").trim().charAt(0).toUpperCase()}
                 </button>
 
                 {open && (

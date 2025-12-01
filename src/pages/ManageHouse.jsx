@@ -203,12 +203,15 @@ const ManageHouse = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans relative">
+      <div
+      className="flex min-h-screen bg-gray-50 relative"
+      style={{ fontFamily: "Roboto, sans-serif" }}
+      >
       <Sidebar />
 
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Manage House</h1>
+          <h1 className="text-3xl font-bold text-gray-900 -mt-1 mb-8">Manage House</h1>
 
           {/* FILTER AREA */}
           <div className="flex gap-6 mb-8 relative z-10">
@@ -336,43 +339,54 @@ const ManageHouse = () => {
                       backdrop-blur-sm animate-in fade-in duration-200"
         >
           <div
-            className="bg-white rounded-xl shadow-xl w-full max-w-md p-6 scale-100 
-                      animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 scale-100 
+                        animate-in zoom-in-95 duration-200"
           >
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Confirm Status Change</h3>
+            {/* Title */}
+            <h3 className="text-xl font-bold text-center text-gray-900 mb-2">
+              Confirm Status Change
+            </h3>
+
             <div className="w-full h-px bg-gray-200 my-4"></div>
-            <p className="text-gray-600 mb-8 leading-relaxed">
+
+            {/* Message */}
+            <p className="text-gray-600 text-center mb-8 text-lg leading-relaxed">
               {targetStatus === "available"
                 ? "Are you sure you want to change the status to available?"
                 : "Are you sure you want to change the status to sold?"}
             </p>
-            <div className="flex justify-end gap-3">
+
+            <div className="flex justify-evenly mx-1 mt-4">
+
               <button
                 onClick={() => setShowModal(false)}
                 disabled={updating}
-                className="px-4 py-2 rounded-lg font-semibold text-gray-700 bg-gray-100
-                 hover:bg-gray-200 transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-36 py-3 rounded-lg font-semibold text-gray-700 bg-gray-100
+                          hover:bg-gray-200 transition-colors disabled:opacity-50 cursor-pointer"
               >
                 Cancel
               </button>
+
               <button
                 onClick={handleConfirmUpdate}
                 disabled={updating}
-                className={`px-5 py-2 rounded-lg font-semibold text-white transition-all
-                   shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center
-                    gap-2 ${
-                      targetStatus === "available"
-                        ? "bg-green-600 hover:bg-green-700"
-                        : "bg-[#0B3C78] hover:opacity-90"
-                    }`}
+                className={`w-36 py-3 rounded-lg font-semibold text-white transition-all
+                          shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center
+                          justify-center gap-2 ${
+                            targetStatus === "available"
+                              ? "bg-green-600 hover:bg-green-700"
+                              : "bg-[#0B3C78] hover:opacity-90"
+                          }`}
               >
                 {updating && <Loader2 className="w-4 h-4 animate-spin" />}
                 {updating ? "Updating..." : capitalize(targetStatus)}
               </button>
+
             </div>
           </div>
         </div>
       )}
+
 
       {/* --- SUCCESS POPUP MODAL --- */}
       {successModal.isOpen && (
