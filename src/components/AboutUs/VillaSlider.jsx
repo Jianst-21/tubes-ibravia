@@ -20,44 +20,25 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   const { title, desc, img } = slides[current];
 
-  // ===== FIX: Warna Automatis Light / Dark =====
-  const isDark = document.documentElement.classList.contains("dark");
-  const textColor = blueTheme 
-    ? "#FFFFFF" 
-    : isDark 
-      ? "#FFFFFF" 
-      : "#000000";
-
-  const navBg = blueTheme 
-    ? "rgba(255,255,255,0.25)" 
-    : isDark 
-      ? "rgba(255,255,255,0.2)" 
-      : "rgba(0,0,0,0.1)";
-
-  const navIconColor = textColor;
-
   return (
-    <div className={`relative w-full transition-colors duration-500 ${blueTheme ? "bg-[#003B73]" : ""}`}>
+    <div className={`relative w-full transition-colors duration-500 
+      ${blueTheme ? "bg-[#003B73]" : "bg-background text-foreground"}`}>
+      
       <div className="flex justify-center items-center py-10 px-6 md:px-10 lg:px-[100px] xl:px-[120px]">
         <div
           className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
             ${reversed ? "md:flex-row-reverse" : ""}
           `}
         >
+
           {/* TEXT */}
           <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-[42px]"
-              style={{ color: textColor }}
-            >
+            <h2 className="text-3xl md:text-4xl font-bold mb-[42px]">
               {title}
             </h2>
 
             {desc && (
-              <p
-                className="text-[18px] leading-relaxed text-justify opacity-90"
-                style={{ color: textColor }}
-              >
+              <p className="text-[18px] leading-relaxed text-muted-foreground text-justify">
                 {desc}
               </p>
             )}
@@ -79,11 +60,16 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
       {/* NAV LEFT */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 left-0 z-20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md hover:scale-105 transition-all"
+        className="absolute top-1/2 -translate-y-1/2 left-0 z-20 
+        w-10 h-10 rounded-full flex items-center justify-center 
+        backdrop-blur shadow-md hover:scale-105 transition-all 
+        bg-background/30 text-foreground"
         style={{
-          marginLeft: window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
-          background: navBg,
-          color: navIconColor,
+          marginLeft: window.innerWidth >= 1440 
+            ? "64px" 
+            : window.innerWidth >= 1280 
+            ? "48px" 
+            : "16px",
         }}
       >
         <ChevronLeft size={24} />
@@ -92,11 +78,16 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
       {/* NAV RIGHT */}
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 -translate-y-1/2 right-0 z-20 w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md hover:scale-105 transition-all"
+        className="absolute top-1/2 -translate-y-1/2 right-0 z-20 
+        w-10 h-10 rounded-full flex items-center justify-center 
+        backdrop-blur shadow-md hover:scale-105 transition-all 
+        bg-background/30 text-foreground"
         style={{
-          marginRight: window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
-          background: navBg,
-          color: navIconColor,
+          marginRight: window.innerWidth >= 1440 
+            ? "64px" 
+            : window.innerWidth >= 1280 
+            ? "48px" 
+            : "16px",
         }}
       >
         <ChevronRight size={24} />
@@ -107,14 +98,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         {slides.map((_, i) => (
           <div
             key={i}
-            className="w-3 h-3 rounded-full transition-all"
-            style={{
-              background: i === current 
-                ? textColor 
-                : isDark 
-                  ? "rgba(255,255,255,0.4)"
-                  : "rgba(0,0,0,0.3)",
-            }}
+            className={`w-3 h-3 rounded-full transition-all 
+              ${i === current ? "bg-primary" : "bg-foreground/30"}`}
           />
         ))}
       </div>
