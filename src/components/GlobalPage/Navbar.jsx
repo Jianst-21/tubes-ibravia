@@ -22,14 +22,16 @@ export const Navbar = () => {
   const [userData, setUserData] = useState(null);
   const [isDark, setIsDark] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [open, setOpen] = useState(false); // Dropdown toggle
+  const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  // Tutup dropdown saat klik di luar
+  /* ============================
+        Click Outside Dropdown
+  ============================ */
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setOpen(false);
       }
     };
@@ -37,11 +39,15 @@ export const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Efek sticky, theme, dan login
+  /* ============================
+        Main Init: theme, scroll,
+        login, userData
+  ============================ */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
 
+    // Theme setup
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setIsDark(savedTheme === "dark");
@@ -56,13 +62,24 @@ export const Navbar = () => {
     });
     observer.observe(document.documentElement, { attributes: true });
 
+    // Login state
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     setIsLoggedIn(loggedIn);
 
+    // User Data
     const stored = localStorage.getItem("user");
+
     if (stored) {
       try {
-        setUserData(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+
+        // 🔥 FILTER: If admin → treat as loggedOut for user navbar
+        if (parsed.role === "admin") {
+          setUserData(null);
+          setIsLoggedIn(false);
+        } else {
+          setUserData(parsed);
+        }
       } catch {
         setUserData(null);
       }
@@ -76,7 +93,9 @@ export const Navbar = () => {
     };
   }, []);
 
-  // 🔒 Kunci scroll body saat menu mobile terbuka
+  /* ============================
+        Lock Scroll on Mobile
+  ============================ */
   useEffect(() => {
     if (isMenuOpen) {
       const scrollY = window.scrollY;
@@ -92,6 +111,9 @@ export const Navbar = () => {
     }
   }, [isMenuOpen]);
 
+  /* ============================
+              LOGOUT
+  ============================ */
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("user");
@@ -101,6 +123,16 @@ export const Navbar = () => {
     navigate("/Login");
   };
 
+  /* ============================
+           AVATAR INITIAL FIX
+  ============================ */
+  const getAvatarLetter = () => {
+    if (!userData) return ""; // 🔥 Fix U muncul
+    const nameLetter = userData.name?.trim()?.charAt(0)?.toUpperCase();
+    const emailLetter = userData.email?.trim()?.charAt(0)?.toUpperCase();
+    return nameLetter || emailLetter || "";
+  };
+
   return (
     <nav
       className={cn(
@@ -108,7 +140,6 @@ export const Navbar = () => {
         isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" : "py-5"
       )}
     >
-      {/* Container full width dengan margin kiri-kanan 8px */}
       <div className="w-full px-16 flex items-center justify-between">
 
         {/* LOGO */}
@@ -119,16 +150,16 @@ export const Navbar = () => {
             alt="Ibravia Logo"
             className="h-10 w-10 transition-all duration-300 object-contain pb-[6px] scale-110"
           />
-          <span className={`font-bold text-[24px] ${isDark ? "text-white" : "text-[#0A3764]"}`}>
+          <span className={`font-bold text-[24px] ${isDark ? "text-white" : "text-[#0A3764]"} `}>
             IBRAVIA
           </span>
         </Link>
 
         {/* DESKTOP NAV */}
         <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item, key) => (
+          {navItems.map((item, idx) => (
             <Link
-              key={key}
+              key={idx}
               to={item.href}
               className="text-foreground/80 font-bold hover:text-primary transition-colors duration-300"
             >
@@ -142,20 +173,17 @@ export const Navbar = () => {
           {isReady &&
             (isLoggedIn ? (
               <div className="relative" ref={dropdownRef}>
-             <button
-              type="button"
-              className="cursor-pointer w-10 h-10 rounded-full bg-gradient-to-r 
-              from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
-              onClick={() => setOpen((prev) => !prev)}
-            >
-              {userData?.name
-                ? userData.name.trim().charAt(0).toUpperCase()
-                : userData?.email
-                ? userData.email.trim().charAt(0).toUpperCase()
-                : "U"}
-            </button>
+                {/* AVATAR BUTTON */}
+                <button
+                  type="button"
+                  className="cursor-pointer w-10 h-10 rounded-full bg-gradient-to-r 
+                  from-blue-700 to-primary text-white font-semibold flex items-center justify-center"
+                  onClick={() => setOpen((prev) => !prev)}
+                >
+                  {getAvatarLetter()}
+                </button>
 
-
+                {/* DROPDOWN */}
                 {open && (
                   <div className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg rounded-md z-50 transition-all duration-200">
                     <p className="px-4 py-2 text-sm border-b border-border truncate">
@@ -214,12 +242,10 @@ export const Navbar = () => {
       {isMenuOpen && (
         <div
           className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto"
-          style={{ WebkitOverflowScrolling: "touch" }}
         >
-          {/* NAV ITEMS */}
           <ul className="flex flex-col items-center space-y-6 text-lg font-medium mt-24">
-            {navItems.map((item, key) => (
-              <li key={key}>
+            {navItems.map((item, idx) => (
+              <li key={idx}>
                 <Link
                   to={item.href}
                   className="text-foreground/80 hover:text-primary transition-colors duration-300"
@@ -233,7 +259,7 @@ export const Navbar = () => {
 
           <div className="w-32 border-t border-border my-8" />
 
-          {/* AUTH BUTTONS */}
+          {/* MOBILE AUTH BUTTONS */}
           <div className="flex flex-col gap-4 w-[200px] mb-12">
             {isReady &&
               (isLoggedIn ? (
@@ -243,7 +269,7 @@ export const Navbar = () => {
                       navigate("/EditProfile");
                       setIsMenuOpen(false);
                     }}
-                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all"
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary hover:bg-primary hover:text-white transition-all"
                   >
                     Edit Profile
                   </button>
@@ -252,7 +278,7 @@ export const Navbar = () => {
                       handleLogout();
                       setIsMenuOpen(false);
                     }}
-                    className="w-full px-5 py-2 rounded-lg font-semibold border border-destructive text-destructive bg-transparent hover:bg-destructive hover:text-white transition-all"
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-destructive text-destructive hover:bg-destructive hover:text-white transition-all"
                   >
                     Logout
                   </button>
@@ -269,7 +295,7 @@ export const Navbar = () => {
                   <Link
                     to="/SignUp"
                     onClick={() => setIsMenuOpen(false)}
-                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary bg-transparent hover:bg-primary hover:text-white transition-all text-center"
+                    className="w-full px-5 py-2 rounded-lg font-semibold border border-primary text-primary hover:bg-primary hover:text-white transition-all text-center"
                   >
                     Sign Up
                   </Link>
