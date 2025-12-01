@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { NotFound } from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import OauthSuccess from "./pages/OauthSuccess";
 import { Properties } from "./pages/Properties";
@@ -42,33 +42,40 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public routes */}
+
+        {/* ===========================
+                 PUBLIC ROUTES
+        ============================ */}
         <Route index element={<Home />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/AboutUs" element={<AboutUs />} />
-        <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/VerifyOTP" element={<VerifyOTP />} />
-        <Route path="/EditProfile" element={<EditProfile />} />
-        <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        <Route path="/ResetPassword" element={<ResetPassword />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/verifyotp" element={<VerifyOTP />} />
+        <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/oauth-success" element={<OauthSuccess />} />
 
-        {/* Other pages */}
-        <Route path="/Block" element={<Block />} />
-        <Route path="/Detail-Properties/:id_block" element={<DetailProperties />} />
+        {/* ===========================
+                  OTHER PAGES
+        ============================ */}
+        <Route path="/block" element={<Block />} />
+        <Route path="/detail-properties/:id_block" element={<DetailProperties />} />
 
-        {/* User protected routes */}
+        {/* ===========================
+             USER PROTECTED ROUTES
+        ============================ */}
         <Route
-          path="/Properties"
+          path="/properties"
           element={
             <UserProtectedRoute>
               <Properties />
             </UserProtectedRoute>
           }
         />
+
         <Route
-          path="/Reservation"
+          path="/reservation"
           element={
             <UserProtectedRoute>
               <Reservation />
@@ -76,7 +83,9 @@ function App() {
           }
         />
 
-        {/* Admin protected routes */}
+        {/* ===========================
+             ADMIN PROTECTED ROUTES
+        ============================ */}
         <Route
           path="/admin/dashboard"
           element={
@@ -85,6 +94,7 @@ function App() {
             </AdminProtectedRoute>
           }
         />
+
         <Route
           path="/admin/manage-house"
           element={
@@ -93,6 +103,7 @@ function App() {
             </AdminProtectedRoute>
           }
         />
+
         <Route
           path="/admin/data-report"
           element={
@@ -101,6 +112,7 @@ function App() {
             </AdminProtectedRoute>
           }
         />
+
         <Route
           path="/admin/notification"
           element={
@@ -109,6 +121,7 @@ function App() {
             </AdminProtectedRoute>
           }
         />
+
         <Route
           path="/admin/manage-reservation"
           element={
@@ -117,6 +130,12 @@ function App() {
             </AdminProtectedRoute>
           }
         />
+
+        {/* ===========================
+            CATCH-ALL → NOT FOUND
+        ============================ */}
+        <Route path="*" element={<NotFound />} />
+
       </Routes>
     </BrowserRouter>
   );
