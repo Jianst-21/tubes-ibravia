@@ -13,37 +13,47 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   if (!slides.length) return null;
 
+  const prevSlide = () =>
+    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  const nextSlide = () =>
+    setCurrent((prev) => (prev + 1) % slides.length);
+
   const { title, desc, img } = slides[current];
 
   return (
     <div
       className={`relative w-full transition-colors duration-500 
-      ${blueTheme ? "bg-[#003B73] text-white" : "bg-transparent text-black"}`}
+        ${blueTheme ? "bg-[#003B73]" : "bg-white"}
+        ${blueTheme ? "text-white" : "text-black"} 
+        dark:text-white
+      `}
     >
-      <div className="flex justify-center items-center py-16">
+      <div
+        className="
+          flex justify-center items-center py-10
+          px-6
+          md:px-10
+          lg:px-[100px]
+          xl:px-[120px]
+        "
+      >
         <div
-          className={`flex flex-col md:flex-row items-center justify-center gap-[75px] max-w-7xl w-full
-          ${reversed ? "md:flex-row-reverse" : ""}`}
+          className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
+            ${reversed ? "md:flex-row-reverse" : ""}
+          `}
         >
           {/* TEXT */}
-          <div
-            className={`max-w-2xl text-center md:text-left
-            px-6 
-            lg:px-[100px]     /* ≥1280px: margin text = 100px */
-            xl:px-[120px]     /* ≥1440px: margin text = 120px */
-          `}
-          >
-            <h2
-              className={`text-3xl md:text-4xl font-bold mb-[42px]
-              ${blueTheme ? "text-white" : "text-[#003B73]"}`}
-            >
+          <div className="flex flex-col justify-center max-w-[512px] text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-[42px] text-current dark:text-white">
               {title}
             </h2>
 
             {desc && (
               <p
-                className={`text-[18px] leading-snug text-justify
-                ${blueTheme ? "text-white/80" : "text-gray-600"}`}
+                className="
+                  text-[18px] leading-relaxed text-current dark:text-white
+                  text-justify
+                "
               >
                 {desc}
               </p>
@@ -51,53 +61,71 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
           </div>
 
           {/* IMAGE */}
-          <div className="relative w-[512px] h-[344px] rounded-[20px] overflow-hidden flex-shrink-0">
-            <img
-              src={img}
-              alt={title}
-              className="w-full h-full object-cover rounded-[20px]"
-            />
-            <div
-              className="absolute inset-0 rounded-[20px] pointer-events-none"
-              style={{ border: `2px solid hsl(var(--border))` }}
-            ></div>
+          <div className="relative flex-shrink-0">
+            <div className="w-[512px] max-w-full aspect-[512/344] overflow-hidden rounded-2xl">
+              <img
+                src={img}
+                alt={title}
+                className="w-full h-full object-cover rounded-2xl transition-all duration-500"
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Chevron Left */}
+      {/* NAV BUTTON LEFT */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 left-0 z-20
-             transform hover:scale-105 transition-all"
+        className={`
+          absolute top-1/2 -translate-y-1/2 left-0 z-20
+          w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md
+          hover:scale-105 transition-all
+          ${blueTheme 
+            ? "bg-white/20 text-white hover:bg-white/40"
+            : "bg-black/20 text-black hover:bg-black/40 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
+          }
+        `}
         style={{
-          marginLeft: window.innerWidth >= 1440 ? "64px" : "48px"
+          marginLeft:
+            window.innerWidth >= 1440 ? "64px" :
+            window.innerWidth >= 1280 ? "48px" : "16px",
         }}
       >
         <ChevronLeft size={24} />
       </button>
 
-      {/* Chevron Right */}
+      {/* NAV BUTTON RIGHT */}
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 -translate-y-1/2 right-0 z-20
-             transform hover:scale-105 transition-all"
+        className={`
+          absolute top-1/2 -translate-y-1/2 right-0 z-20
+          w-10 h-10 rounded-full flex items-center justify-center backdrop-blur shadow-md
+          hover:scale-105 transition-all
+          ${blueTheme 
+            ? "bg-white/20 text-white hover:bg-white/40"
+            : "bg-black/20 text-black hover:bg-black/40 dark:bg-white/20 dark:text-white dark:hover:bg-white/40"
+          }
+        `}
         style={{
-          marginRight: window.innerWidth >= 1440 ? "64px" : "48px"
+          marginRight:
+            window.innerWidth >= 1440 ? "64px" :
+            window.innerWidth >= 1280 ? "48px" : "16px",
         }}
       >
         <ChevronRight size={24} />
       </button>
 
-
-      {/* DOTS */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      {/* DOT INDICATORS */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <div
             key={i}
-            className={`w-3 h-3 rounded-full transition-all 
-            ${i === current ? "bg-white" : "bg-white/40"}`}
-          ></div>
+            className={`w-3 h-3 rounded-full transition-all
+              ${i === current
+                ? "bg-white dark:bg-white"
+                : "bg-white/40 dark:bg-white/40"}
+            `}
+          />
         ))}
       </div>
     </div>
