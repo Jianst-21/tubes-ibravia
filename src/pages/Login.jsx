@@ -14,7 +14,23 @@ export const Login = () => {
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
-  // Auto redirect if already logged in
+  /* ========================================
+     FIX: HAPUS DATA ADMIN YANG MASIH TERSEDIA
+     Agar admin tidak auto-login sebagai user
+  ========================================== */
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+    if (storedUser?.role === "admin") {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.setItem("isLoggedIn", "false");
+    }
+  }, []);
+
+  /* ========================================
+     AUTO REDIRECT JIKA SUDAH LOGIN
+  ========================================== */
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const userData = JSON.parse(localStorage.getItem("user") || "{}");
@@ -25,6 +41,9 @@ export const Login = () => {
     }
   }, [navigate]);
 
+  /* ========================================
+     HANDLE LOGIN SUBMIT
+  ========================================== */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
@@ -43,7 +62,6 @@ export const Login = () => {
         token = res.data.token;
         currentUser = res.data.user;
       }
-
       // ===========================
       // ADMIN LOGIN (USERNAME)
       // ===========================
@@ -82,10 +100,13 @@ export const Login = () => {
   return (
     <section className="min-h-screen grid md:grid-cols-2 md:gap-x-[80px] bg-[hsl(var(--background))] font-sans">
       <Toaster position="top-right" reverseOrder={false} />
+
       {/* LEFT FORM */}
       <div className="flex items-center justify-center px-6 md:pl-[80px] md:pr-0">
         <div className="w-full max-w-md animate-[fade-in_0.8s_ease-out_forwards] text-left">
-          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">Welcome Back</h2>
+          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">
+            Welcome Back
+          </h2>
           <p className="text-sm text-muted-foreground mb-8">
             Log in to access your account and explore properties.
           </p>
@@ -111,7 +132,9 @@ export const Login = () => {
 
             {/* PASSWORD */}
             <div className="relative">
-              <label className="block text-sm font-medium mb-1 text-foreground">Password</label>
+              <label className="block text-sm font-medium mb-1 text-foreground">
+                Password
+              </label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -165,7 +188,9 @@ export const Login = () => {
           {/* Divider */}
           <div className="flex items-center my-8">
             <hr className="flex-1 border-border" />
-            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">or continue with</span>
+            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">
+              or continue with
+            </span>
             <hr className="flex-1 border-border" />
           </div>
 
