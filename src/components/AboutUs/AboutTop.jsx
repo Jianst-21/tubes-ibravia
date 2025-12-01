@@ -2,7 +2,16 @@ import backgroundImage from "@/assets/images/colection/property-page.png";
 
 export const AboutTop = () => {
   return (
-    <section className="relative w-full h-[80vh] flex items-center justify-center overflow-hidden">
+    <section
+      className="
+        relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden
+        px-6           /* mobile */
+        md:px-[60px]   /* tablet */
+        lg:px-[80px]   /* 1024px */
+        xl:px-[100px]  /* 1280px */
+        2xl:px-[120px] /* 1440px+ */
+      "
+    >
       {/* Background */}
       <img
         src={backgroundImage}
@@ -12,17 +21,14 @@ export const AboutTop = () => {
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Konten utama */}
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full">
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full gap-10">
+        
         {/* Gambar di kiri */}
         <div
-          className="flex-shrink-0 rounded-3xl overflow-hidden shadow-2xl border 
-          border-white/30 max-w-sm md:max-w-md lg:max-w-lg"
-          style={{
-            marginLeft: "52px",
-            marginRight: "105px",
-            marginTop: "70px",
-            marginBottom: "70px",
-          }}
+          className="
+            w-full max-w-[450px] 
+            rounded-3xl overflow-hidden shadow-2xl border border-white/30
+          "
         >
           <img
             src="/images/block/A.png"
@@ -32,14 +38,25 @@ export const AboutTop = () => {
         </div>
 
         {/* Teks di kanan */}
-        <div className="text-white max-w-[600px] text-left flex flex-col justify-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">About Us, IBRAVIA</h2>
+        <div
+          className="
+            text-white max-w-[600px] text-left flex flex-col justify-center
+            mb-[80px]    /* mobile */
+            md:mb-[120px] /* tablet */
+            lg:mb-[150px] /* laptop & desktop */
+          "
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 md:mb-12">
+            About Us, IBRAVIA
+          </h2>
           <p className="text-base md:text-lg leading-relaxed text-gray-100">
-            Ibravia is a trusted property developer dedicated to creating modern, comfortable, and
-            affordable homes for families. With a commitment to quality and customer satisfaction,
-            we strive to guide every client through their journey of finding the perfect home.
+            Ibravia is a trusted property developer dedicated to creating modern,
+            comfortable, and affordable homes for families. With a commitment to
+            quality and customer satisfaction, we strive to guide every client
+            through their journey of finding the perfect home.
           </p>
         </div>
+
       </div>
     </section>
   );
