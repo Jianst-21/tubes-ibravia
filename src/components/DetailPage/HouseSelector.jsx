@@ -50,7 +50,7 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center h-full px-4 sm:px-10 md:px-[120px] text-center text-white">
+      <div className="relative z-10 flex flex-col justify-center items-center h-full px-4 sm:px-10 md:px-[120px] text-center text-white mt-6 md:mt-10">
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-8 sm:mb-12 drop-shadow-lg">
           Choose Your House!
         </h2>
