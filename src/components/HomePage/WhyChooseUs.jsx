@@ -35,7 +35,7 @@ export const WhyChooseUs = () => {
           viewport={{ once: true }}
           className="flex-1 text-center lg:text-left"
         >
-          <h2 className="text-[54px] font-extrabold mb-12 tracking-tight drop-shadow-[0_4px_5px_rgba(0,0,0,0.3)]">
+          <h2 className="text-[50px] font-extrabold mb-12 tracking-tight drop-shadow-[0_4px_5px_rgba(0,0,0,0.3)]">
             Why Choose Us
           </h2>
 
@@ -116,7 +116,7 @@ export const WhyChooseUs = () => {
                       width: style.width,
                       height: style.height,
                     }}
-                    className="rounded-3xl border-2 border-white object-cover shadow-lg"
+                    className="rounded-[20px] border-2 border-white object-cover shadow-lg"
                   />
                 </motion.div>
               );
