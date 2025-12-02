@@ -20,7 +20,6 @@ export const HeroSection = () => {
       {/* WRAPPER AGAR SEJAJAR NAVBAR */}
       <div className="relative z-10 w-full">
         <div className="w-full px-4 md:px-6 lg:px-[80px] xl:px-[120px] 2xl:px-[160px] text-left text-white">
-
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
             Welcome to Your Future Home,
             <br />
@@ -40,7 +39,6 @@ export const HeroSection = () => {
           >
             Find Your Home
           </button>
-
         </div>
       </div>
     </section>

@@ -9,9 +9,7 @@ import apiadmin from "../api/apiadmin";
 ================================= */
 const StatCard = ({ title, value, type, className = "" }) => {
   const icons = {
-    reserved: (
-      <BookText size={65} strokeWidth={1.5} className="text-white/90" />
-    ),
+    reserved: <BookText size={65} strokeWidth={1.5} className="text-white/90" />,
     sold: <BookCheck size={65} strokeWidth={1.5} className="text-white/90" />,
     cancelled: <BookX size={65} strokeWidth={1.5} className="text-white/90" />,
   };
@@ -112,9 +110,7 @@ const AdminDashboard = () => {
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div className="max-w-[1100px] mx-auto w-full">
             {/* TITLE */}
-            <h1 className="text-3xl font-bold text-gray-900 mt- mb-8">
-              Dashboard {residenceName}
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-900 mt- mb-8">Dashboard {residenceName}</h1>
 
             {/* CHART */}
             <div className="mb-12 sm:mb-14 md:mb-20 lg:mb-[70px]">

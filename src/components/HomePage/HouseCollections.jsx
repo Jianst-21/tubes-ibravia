@@ -69,10 +69,10 @@ export const HouseCollections = () => {
         </h2>
 
         {/* Grid Cards */}
-        <div className="grid gap-4 justify-items-center 
-            grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-
-
+        <div
+          className="grid gap-4 justify-items-center 
+            grid-cols-[repeat(auto-fit,minmax(280px,1fr))]"
+        >
           {houses.map((house) => (
             <Link
               key={house.id_house}
@@ -83,27 +83,19 @@ export const HouseCollections = () => {
             >
               {/* Gambar */}
               <div className="w-full h-[220px] overflow-hidden rounded-lg">
-                <img
-                  src={house.image}
-                  alt={house.title}
-                  className="w-full h-full object-cover"
-                />
+                <img src={house.image} alt={house.title} className="w-full h-full object-cover" />
               </div>
 
               {/* Konten */}
               <div className="mt-4 flex-grow space-y-2">
-                <p className="text-sm text-primary font-medium">
-                  {house.category}
-                </p>
+                <p className="text-sm text-primary font-medium">{house.category}</p>
 
                 <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
                   {house.title}
                 </h3>
 
                 {/* DESC — sudah diganti dari HSL ke text-muted-foreground */}
-                <p className="text-sm pt-4 text-muted-foreground leading-snug">
-                  {house.desc}
-                </p>
+                <p className="text-sm pt-4 text-muted-foreground leading-snug">{house.desc}</p>
 
                 <div className="pt-4 border-t border-border mt-auto">
                   <div className="flex items-center space-x-2">
@@ -115,15 +107,12 @@ export const HouseCollections = () => {
                       />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">
-                        {house.price}
-                      </p>
+                      <p className="text-sm font-semibold text-foreground">{house.price}</p>
 
                       {/* Developer — ganti ke text-muted-foreground */}
                       <p className="text-sm text-muted-foreground font-subheader">
                         {house.developer}
                       </p>
-
                     </div>
                   </div>
                 </div>
@@ -134,10 +123,7 @@ export const HouseCollections = () => {
 
         {/* Tombol */}
         <div className="mt-12 text-center">
-          <Link
-            to="/properties"
-            className="ibravia-button text-[20px] px-8 py-3 font-subheader"
-          >
+          <Link to="/properties" className="ibravia-button text-[20px] px-8 py-3 font-subheader">
             Explore More
           </Link>
         </div>

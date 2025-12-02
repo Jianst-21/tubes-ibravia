@@ -50,9 +50,7 @@ export const DetailProperties = () => {
 
       {/* Konten utama → ini yang harus flex-grow */}
       <div className="flex-grow">
-        {error && (
-          <p className="text-center mt-6 text-red-500">{error}</p>
-        )}
+        {error && <p className="text-center mt-6 text-red-500">{error}</p>}
 
         {!loading && !error && houses.length > 0 && (
           <>

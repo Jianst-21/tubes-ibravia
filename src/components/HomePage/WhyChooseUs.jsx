@@ -26,7 +26,6 @@ export const WhyChooseUs = () => {
   return (
     <section className="bg-[#003B73] text-white py-20 px-4 md:px-6 lg:px-[80px] xl:px-[120px] overflow-hidden">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-20">
-
         {/* ================= LEFT SIDE ================= */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}

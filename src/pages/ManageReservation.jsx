@@ -199,10 +199,7 @@ const ManageReservation = () => {
                             {/* Reservation */}
                             <span>Reservation</span>
                             <span>
-                              :{" "}
-                              {new Date(
-                                item.reservation_date
-                              ).toLocaleDateString("en-GB")}
+                              : {new Date(item.reservation_date).toLocaleDateString("en-GB")}
                             </span>
 
                             {/* Deadline */}
@@ -222,18 +219,14 @@ const ManageReservation = () => {
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Customer Info
                           </span>
-                          <p className="text-gray-700 font-medium">
-                            {item.name}
-                          </p>
+                          <p className="text-gray-700 font-medium">{item.name}</p>
                           <p className="text-sm text-gray-500">{item.email}</p>
                         </div>
                         <div>
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Address
                           </span>
-                          <p className="text-sm leading-relaxed">
-                            {item.address}
-                          </p>
+                          <p className="text-sm leading-relaxed">{item.address}</p>
                         </div>
                       </div>
                       <div className="space-y-3 md:border-l md:pl-6 border-gray-100">
@@ -241,26 +234,20 @@ const ManageReservation = () => {
                           <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                             Property Details
                           </span>
-                          <p className="text-sm leading-relaxed">
-                            {item.description}
-                          </p>
+                          <p className="text-sm leading-relaxed">{item.description}</p>
                         </div>
                         <div className="flex gap-6">
                           <div>
                             <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                               Land Area
                             </span>
-                            <p className="text-sm leading-relaxed">
-                              {item.land_area} m²
-                            </p>
+                            <p className="text-sm leading-relaxed">{item.land_area} m²</p>
                           </div>
                           <div>
                             <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
                               House Area
                             </span>
-                            <p className="text-sm leading-relaxed">
-                              {item.building_area} m²
-                            </p>
+                            <p className="text-sm leading-relaxed">{item.building_area} m²</p>
                           </div>
                         </div>
                       </div>
@@ -271,13 +258,7 @@ const ManageReservation = () => {
                       {isPending ? (
                         <>
                           <button
-                            onClick={() =>
-                              openModal(
-                                "cancel",
-                                item.id_reservasi,
-                                item.id_house
-                              )
-                            }
+                            onClick={() => openModal("cancel", item.id_reservasi, item.id_house)}
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-red-600 border border-red-600 bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                           >
@@ -285,13 +266,7 @@ const ManageReservation = () => {
                           </button>
 
                           <button
-                            onClick={() =>
-                              openModal(
-                                "accept",
-                                item.id_reservasi,
-                                item.id_house
-                              )
-                            }
+                            onClick={() => openModal("accept", item.id_reservasi, item.id_house)}
                             disabled={isActionLoading}
                             className="px-6 py-2.5 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
                           >

@@ -203,10 +203,10 @@ const ManageHouse = () => {
   }
 
   return (
-      <div
+    <div
       className="flex min-h-screen bg-gray-50 relative"
       style={{ fontFamily: "Roboto, sans-serif" }}
-      >
+    >
       <Sidebar />
 
       <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
@@ -357,7 +357,6 @@ const ManageHouse = () => {
             </p>
 
             <div className="flex justify-evenly mx-1 mt-4">
-
               <button
                 onClick={() => setShowModal(false)}
                 disabled={updating}
@@ -381,12 +380,10 @@ const ManageHouse = () => {
                 {updating && <Loader2 className="w-4 h-4 animate-spin" />}
                 {updating ? "Updating..." : capitalize(targetStatus)}
               </button>
-
             </div>
           </div>
         </div>
       )}
-
 
       {/* --- SUCCESS POPUP MODAL --- */}
       {successModal.isOpen && (

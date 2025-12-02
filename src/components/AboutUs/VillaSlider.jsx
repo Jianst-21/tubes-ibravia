@@ -13,10 +13,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
 
   if (!slides.length) return null;
 
-  const prevSlide = () =>
-    setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  const nextSlide = () =>
-    setCurrent((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
 
   const { title, desc, img } = slides[current];
 
@@ -75,11 +73,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         ${blueTheme ? "bg-white/20 text-white" : "bg-background/30 text-foreground"}`}
         style={{
           marginLeft:
-            window.innerWidth >= 1440
-              ? "64px"
-              : window.innerWidth >= 1280
-              ? "48px"
-              : "16px",
+            window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
         }}
       >
         <ChevronLeft size={24} />
@@ -94,11 +88,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         ${blueTheme ? "bg-white/20 text-white" : "bg-background/30 text-foreground"}`}
         style={{
           marginRight:
-            window.innerWidth >= 1440
-              ? "64px"
-              : window.innerWidth >= 1280
-              ? "48px"
-              : "16px",
+            window.innerWidth >= 1440 ? "64px" : window.innerWidth >= 1280 ? "48px" : "16px",
         }}
       >
         <ChevronRight size={24} />
@@ -116,8 +106,8 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
                   ? "bg-white"
                   : "bg-primary"
                 : blueTheme
-                ? "bg-white/40"
-                : "bg-foreground/30"
+                  ? "bg-white/40"
+                  : "bg-foreground/30"
             }`}
           />
         ))}

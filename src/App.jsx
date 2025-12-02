@@ -24,7 +24,6 @@ import { AdminProtectedRoute, UserProtectedRoute } from "./lib/ProtectedRoute";
 import { useEffect } from "react";
 
 function App() {
-
   // ============================
   // 🚫 Auto-clear session admin
   // ============================
@@ -42,7 +41,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         {/* ===========================
                  PUBLIC ROUTES
         ============================ */}
@@ -52,7 +50,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/verifyotp" element={<VerifyOTP />} />
         <Route path="/editprofile" element={<EditProfile />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/oauth-success" element={<OauthSuccess />} />
 
@@ -135,7 +133,6 @@ function App() {
             CATCH-ALL → NOT FOUND
         ============================ */}
         <Route path="*" element={<NotFound />} />
-
       </Routes>
     </BrowserRouter>
   );

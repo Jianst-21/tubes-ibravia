@@ -15,10 +15,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  show: { 
-    opacity: 1, 
+  show: {
+    opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100, damping: 20 }
+    transition: { type: "spring", stiffness: 100, damping: 20 },
   },
 };
 
@@ -27,17 +27,15 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-white flex flex-col overflow-hidden">
-      
       {/* Kontainer Utama */}
-      <motion.main 
+      <motion.main
         className="flex-grow flex flex-col items-center justify-center px-4 text-center"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        
         {/* Angka 404 */}
-        <motion.h1 
+        <motion.h1
           className="text-9xl font-extrabold"
           style={{ color: bluePrimary }}
           variants={itemVariants}
@@ -46,7 +44,7 @@ const NotFound = () => {
         </motion.h1>
 
         {/* Text Heading */}
-        <motion.h2 
+        <motion.h2
           className="mt-4 text-3xl font-bold text-gray-900 md:text-4xl"
           variants={itemVariants}
         >
@@ -54,11 +52,10 @@ const NotFound = () => {
         </motion.h2>
 
         {/* Deskripsi */}
-        <motion.p 
-          className="mt-6 text-base text-gray-600 max-w-md"
-          variants={itemVariants}
-        >
-          Sorry, the page you are looking for cannot be found. It may have been moved or the address may be incorrect.        </motion.p>
+        <motion.p className="mt-6 text-base text-gray-600 max-w-md" variants={itemVariants}>
+          Sorry, the page you are looking for cannot be found. It may have been moved or the address
+          may be incorrect.{" "}
+        </motion.p>
 
         {/* Tombol Kembali */}
         <motion.div variants={itemVariants} className="mt-8">
@@ -66,14 +63,14 @@ const NotFound = () => {
           <Link to="/">
             <motion.button
               className="px-8 py-3 text-white rounded-md font-semibold"
-              style={{ backgroundColor: bluePrimary, border: 'none', cursor: 'pointer' }}
+              style={{ backgroundColor: bluePrimary, border: "none", cursor: "pointer" }}
               whileHover={{ scale: 1.05, backgroundColor: "#1d4ed8" }}
               whileTap={{ scale: 0.95 }}
             >
-              Back to Home            </motion.button>
+              Back to Home{" "}
+            </motion.button>
           </Link>
         </motion.div>
-
       </motion.main>
     </div>
   );

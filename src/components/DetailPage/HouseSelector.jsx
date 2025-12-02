@@ -9,8 +9,10 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
   // Responsif jumlah item per halaman
   useEffect(() => {
     const updatePerPage = () => {
-      if (window.innerWidth <= 640) setHousesPerPage(4); // Mobile
-      else if (window.innerWidth < 1280) setHousesPerPage(18); // Laptop Normal <1280px
+      if (window.innerWidth <= 640)
+        setHousesPerPage(4); // Mobile
+      else if (window.innerWidth < 1280)
+        setHousesPerPage(18); // Laptop Normal <1280px
       else setHousesPerPage(20); // Layar besar >1280px
     };
 
@@ -48,8 +50,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
       <div
         className="relative z-10 flex flex-col justify-start items-center px-4 sm:px-10 md:px-[120px] text-center text-white"
         style={{
-          paddingTop: "7rem",  // jarak dari navbar
-          paddingBottom: "4rem" // jarak dari bawah agar pagination tidak crop
+          paddingTop: "7rem", // jarak dari navbar
+          paddingBottom: "4rem", // jarak dari bawah agar pagination tidak crop
         }}
       >
         {/* Judul */}
@@ -58,9 +60,7 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
         </h2>
 
         {/* Grid rumah */}
-        <div
-          className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 xl:grid-cols-10 gap-3 sm:gap-6 md:gap-4 justify-items-center max-w-7xl w-full"
-        >
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 xl:grid-cols-10 gap-3 sm:gap-6 md:gap-4 justify-items-center max-w-7xl w-full">
           {currentHouses.length > 0 ? (
             currentHouses.map((house) => {
               const isSelected = selectedHouseId === house.id_house;
@@ -77,8 +77,8 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
                     isSold
                       ? "bg-gray-700 text-gray-300 cursor-not-allowed"
                       : isSelected
-                      ? "bg-blue-700 text-white scale-105 shadow-lg cursor-pointer"
-                      : "bg-white text-black hover:scale-105 hover:bg-gray-100 cursor-pointer active:scale-95"
+                        ? "bg-blue-700 text-white scale-105 shadow-lg cursor-pointer"
+                        : "bg-white text-black hover:scale-105 hover:bg-gray-100 cursor-pointer active:scale-95"
                   }`}
                 >
                   {house.number_block || `#${house.id_house}`}
@@ -98,7 +98,9 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
             disabled={currentPage === 1}
             className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:scale-110 hover:shadow-md"
+              currentPage === 1
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:scale-110 hover:shadow-md"
             }`}
             style={{
               backgroundColor: "hsl(var(--card))",
@@ -108,7 +110,10 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             <ChevronLeft size={22} />
           </button>
 
-          <span className="font-semibold text-base sm:text-lg" style={{ color: "hsl(var(--foreground))" }}>
+          <span
+            className="font-semibold text-base sm:text-lg"
+            style={{ color: "hsl(var(--foreground))" }}
+          >
             {currentPage}
           </span>
 
@@ -116,7 +121,9 @@ export default function HouseSelector({ houses = [], selectedHouseId, onSelect }
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
             className={`cursor-pointer flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border transition-all duration-300 ${
-              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:scale-110 hover:shadow-md"
+              currentPage === totalPages
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:scale-110 hover:shadow-md"
             }`}
             style={{
               backgroundColor: "hsl(var(--card))",

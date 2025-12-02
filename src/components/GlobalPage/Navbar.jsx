@@ -141,7 +141,6 @@ export const Navbar = () => {
       )}
     >
       <div className="w-full px-16 flex items-center justify-between">
-
         {/* LOGO */}
         <Link to="/" className="flex items-center space-x-2">
           <img
@@ -240,9 +239,7 @@ export const Navbar = () => {
 
       {/* MOBILE MENU */}
       {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto"
-        >
+        <div className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto">
           <ul className="flex flex-col items-center space-y-6 text-lg font-medium mt-24">
             {navItems.map((item, idx) => (
               <li key={idx}>

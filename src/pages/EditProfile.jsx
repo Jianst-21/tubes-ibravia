@@ -126,12 +126,7 @@ export default function EditProfile() {
             value={user.phone_number}
             onChange={(val) => setUser({ ...user, phone_number: val })}
           />
-          <InputField
-            label="Email Address"
-            value={user.email}
-            onChange={() => {}}
-            disabled
-          />
+          <InputField label="Email Address" value={user.email} onChange={() => {}} disabled />
           <TextAreaField
             label="Address"
             value={user.address}

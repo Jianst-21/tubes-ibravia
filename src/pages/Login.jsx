@@ -8,7 +8,7 @@ import apiAdmin from "../api/apiadmin";
 import herobg from "../assets/images/colection/hero-bg.jpg";
 
 export const Login = () => {
-  const [identifier, setIdentifier] = useState(""); 
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -20,7 +20,7 @@ export const Login = () => {
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("user") || "{}");
     if (stored?.role === "admin") {
-      localStorage.clear();        // Aman, semua bersih
+      localStorage.clear(); // Aman, semua bersih
     }
   }, []);
 
@@ -33,9 +33,9 @@ export const Login = () => {
 
     if (isLoggedIn === "true") {
       if (userData?.role === "admin") {
-        navigate("/admin/dashboard");   // Admin → dashboard
+        navigate("/admin/dashboard"); // Admin → dashboard
       } else if (userData?.role === "user") {
-        navigate("/");                  // User → homepage
+        navigate("/"); // User → homepage
       }
     }
   }, [navigate]);
@@ -90,7 +90,6 @@ export const Login = () => {
       setTimeout(() => {
         navigate(role === "admin" ? "/admin/dashboard" : "/");
       }, 1000);
-
     } catch (err) {
       console.error("❌ Login error:", err.response?.data || err.message);
       toast.error(err.response?.data?.error || "Incorrect email or password.");
@@ -106,17 +105,13 @@ export const Login = () => {
       {/* LEFT FORM */}
       <div className="flex items-center justify-center px-6 md:pl-[80px] md:pr-0">
         <div className="w-full max-w-md animate-[fade-in_0.8s_ease-out_forwards] text-left">
-
-          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">
-            Welcome Back
-          </h2>
+          <h2 className="text-4xl font-bold mb-2 text-foreground font-subheader">Welcome Back</h2>
           <p className="text-sm text-muted-foreground mb-8">
             Log in to access your account and explore properties.
           </p>
 
           {/* FORM */}
           <form onSubmit={handleSubmit} className="space-y-6">
-
             {/* IDENTIFIER */}
             <div>
               <label className="block text-sm font-medium mb-1 text-foreground">
@@ -137,9 +132,7 @@ export const Login = () => {
 
             {/* PASSWORD */}
             <div className="relative">
-              <label className="block text-sm font-medium mb-1 text-foreground">
-                Password
-              </label>
+              <label className="block text-sm font-medium mb-1 text-foreground">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -193,9 +186,7 @@ export const Login = () => {
           {/* Divider */}
           <div className="flex items-center my-8">
             <hr className="flex-1 border-border" />
-            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">
-              or continue with
-            </span>
+            <span className="px-3 text-sm text-gray-500 dark:text-gray-400">or continue with</span>
             <hr className="flex-1 border-border" />
           </div>
 

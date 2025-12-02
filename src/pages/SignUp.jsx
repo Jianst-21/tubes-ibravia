@@ -241,7 +241,7 @@ export const SignUp = () => {
             message={popupMessage}
             onClose={() => {
               setShowPopup(false);
-              navigate("/VerifyOTP", { state: { email: formData.email, purpose: "signup" } });
+              navigate("/verifyotp", { state: { email: formData.email, purpose: "signup" } });
             }}
           />
         </div>

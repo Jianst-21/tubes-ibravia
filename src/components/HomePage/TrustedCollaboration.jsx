@@ -14,15 +14,12 @@ export const TrustedCollaboration = () => {
     <section className="pt-12 pb-20 bg-[hsl(var(--background))] text-foreground">
       {/* Container dengan margin horizontal responsif */}
       <div className="w-full px-4 sm:px-8 lg:px-[80px] xl:px-[120px] mx-auto">
-
         {/* Heading */}
         <div className="text-center">
           <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
             We Proudly Present
           </p>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-12">
-            Our Trusted Collaboration
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-12">Our Trusted Collaboration</h2>
         </div>
 
         {/* Grid PT responsive */}

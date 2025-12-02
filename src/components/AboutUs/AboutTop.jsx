@@ -28,7 +28,6 @@ export const AboutTop = () => {
           w-full
         "
       >
-
         {/* Left Image */}
         <div
           className="
@@ -50,16 +49,12 @@ export const AboutTop = () => {
 
         {/* Right Text */}
         <div className="text-white max-w-[512px] text-left flex flex-col justify-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">
-            About Us, IBRAVIA
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">About Us, IBRAVIA</h2>
 
           <p className="text-base md:text-lg leading-relaxed text-gray-100 text-justify">
-            Ibravia is a trusted property developer dedicated to creating
-            modern, comfortable, and affordable homes for families. With a
-            commitment to quality and customer satisfaction, we strive to
-            guide every client through their journey of finding the perfect
-            home.
+            Ibravia is a trusted property developer dedicated to creating modern, comfortable, and
+            affordable homes for families. With a commitment to quality and customer satisfaction,
+            we strive to guide every client through their journey of finding the perfect home.
           </p>
         </div>
       </div>
