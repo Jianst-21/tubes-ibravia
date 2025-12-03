@@ -105,8 +105,8 @@ export const Login = () => {
       {/* LEFT FORM */}
       <div className="flex items-center justify-center px-6 md:pl-[80px] md:pr-0">
         <div className="w-full max-w-md animate-[fade-in_0.8s_ease-out_forwards] text-left">
-          <h2 className="text-[54px] font-bold mb-2 text-foreground font-subheader">Welcome Back</h2>
-          <p className="text-sm text-muted-foreground mb-8">
+          <h2 className="text-[56px] font-bold mb-2 text-foreground font-subheader">Welcome Back</h2>
+          <p className="text-[16px] text-muted-foreground mb-8">
             Log in to access your account and explore properties.
           </p>
 
@@ -158,7 +158,7 @@ export const Login = () => {
             </div>
 
             {/* OPTIONS */}
-            <div className="flex items-center justify-between text-sm text-foreground">
+            <div className="flex items-center justify-between text-[16px] text-foreground">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className="accent-primary w-4 h-4 rounded-sm" />
                 Remember me
@@ -203,7 +203,7 @@ export const Login = () => {
             <FcGoogle className="text-xl" /> Log in with Google
           </button>
 
-          <p className="text-sm text-foreground mt-6 text-center md:text-left">
+          <p className="text-[16px] text-foreground mt-6 text-center md:text-left">
             No account yet?{" "}
             <Link to="/SignUp" className="text-primary hover:underline">
               Sign Up
