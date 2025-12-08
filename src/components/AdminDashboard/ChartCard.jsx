@@ -10,44 +10,54 @@ import {
 
 const ChartCard = ({ data = [] }) => {
   return (
-    <div className="w-full bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+    <div className="w-full bg-white rounded-2xl shadow-md border border-gray-200 p-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+      <div className="flex items-center justify-between mb-6">
         <h2 className="text-gray-800 font-semibold text-lg">Weekly Report</h2>
-        <p className="text-sm text-gray-500 flex items-center gap-1">
-          <span className="w-2 h-2 bg-black rounded-full inline-block" />
+
+        <div className="flex items-center gap-2 text-gray-600 text-sm">
+          <span className="w-2 h-2 bg-black rounded-full" />
           Current Week
-        </p>
+        </div>
       </div>
 
       {/* Chart */}
-      <div className="w-full h-[190px]">
-        {" "}
-        {/* ⬅️ tinggi dikurangi dari 320px ke 220px */}
+      <div className="w-full h-[250px]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+          <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 10 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#D1D5DB" />
+
             <XAxis
               dataKey="name"
               tick={{ fill: "#6B7280", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
             />
-            <YAxis tick={{ fill: "#6B7280", fontSize: 12 }} axisLine={false} tickLine={false} />
+
+            <YAxis
+              tick={{ fill: "#6B7280", fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
+
             <Tooltip
+              cursor={{ stroke: "#9CA3AF", strokeWidth: 1 }}
               contentStyle={{
-                borderRadius: "8px",
+                borderRadius: "10px",
                 border: "1px solid #E5E7EB",
+                backgroundColor: "#FFFFFF",
                 fontSize: "12px",
+                padding: "6px 10px",
               }}
             />
+
             <Line
               type="monotone"
               dataKey="value"
-              stroke="#4B5563" // abu-abu gelap, seperti contoh
-              strokeWidth={1.8}
+              stroke="#4B5563"      // warna garis sesuai figma (abu gelap)
+              strokeWidth={2}
               dot={false}
-              activeDot={{ r: 3, fill: "#111827" }}
+              activeDot={{ r: 4, fill: "#111827" }}
             />
           </LineChart>
         </ResponsiveContainer>

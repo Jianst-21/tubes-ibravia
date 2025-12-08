@@ -74,15 +74,31 @@ const AdminDashboard = () => {
         const res = await apiadmin.get("/dashboard");
         const result = res.data?.data || {};
 
+        const all = result.all_reservations || [];
+
+        // ==========================
+        // CHART → hitung jumlah reservasi per status
+        // ==========================
+        const chartData = [
+          {
+            name: "Active",
+            value: all.filter((r) => r.reservation_status === "active").length,
+          },
+          {
+            name: "Cancelled",
+            value: all.filter((r) => r.reservation_status === "cancelled").length,
+          },
+          {
+            name: "Pending",
+            value: all.filter((r) => r.reservation_status === "pending").length,
+          },
+        ];
+
         setStats({
           reserved: result.reserved_houses ?? 0,
           sold: result.total_houses ?? 0,
           cancelled: result.cancelled_reservations ?? 0,
-          weeklydata:
-            result.latest_reservations?.map((r, i) => ({
-              name: `Week ${i + 1}`,
-              value: parseInt(r?.house?.number_block || 0),
-            })) ?? [],
+          weeklydata: chartData, // <-- MENGIRIM DATA CHART BARU
         });
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -110,7 +126,9 @@ const AdminDashboard = () => {
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div className="max-w-[1100px] mx-auto w-full">
             {/* TITLE */}
-            <h1 className="text-[48px] font-bold text-gray-900 -mt-8 mb-8">Dashboard {residenceName}</h1>
+            <h1 className="text-[48px] font-bold text-gray-900 -mt-8 mb-8">
+              Dashboard {residenceName}
+            </h1>
 
             {/* CHART */}
             <div className="mb-12 sm:mb-14 md:mb-20 lg:mb-[70px]">
