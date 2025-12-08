@@ -148,7 +148,7 @@ const ManageReservation = () => {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               {reservations.map((item) => {
                 const deadlineDate = new Date(item.deadline_date).toLocaleDateString("en-GB");
                 const isPending = item.status && item.status.toLowerCase() === "pending";
