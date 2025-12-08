@@ -64,7 +64,7 @@ export default function AdminDataReport() {
       <main className="flex-1 p-8 ml-64 transition-all duration-300 print:ml-0 print:p-0 print:w-full">
         <div className="flex items-center justify-between mb-8 print:mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 print:text-2xl -mt-2">
+            <h1 className="text-[48px] font-bold text-gray-900 print:text-2xl -mt-2">
               Reservation Report
             </h1>
             <p className="text-gray-500 mt-1 print:text-sm">

@@ -130,7 +130,7 @@ const ManageReservation = () => {
       <Sidebar />
       <main className="flex-1 pl-72 pr-8 py-8 bg-[#F5FAFF]font-sans">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-[56px] font-bold text-[#0E1315] -mt-8 mb-4">Manage Reservation</h1>
+          <h1 className="text-[48px] font-bold text-[#0E1315] -mt-8 mb-4">Manage Reservation</h1>
 
           {isLoading ? (
             <div className="flex justify-center items-center mt-10">
@@ -171,7 +171,7 @@ const ManageReservation = () => {
                           Block {item.block_name} • No. {item.number_house}
                         </p>
 
-                        <h2 className="text-[48px] font-bold text-0E1315 mt-1">
+                        <h2 className="text-[40px] font-bold text-0E1315 mt-1">
                           {item.residence_name || "Unknown Residence"}
                         </h2>
                       </div>
