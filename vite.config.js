@@ -11,4 +11,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
+  // ⬇⬇⬇ Tambahkan bagian ini ⬇⬇⬇
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./setupTests.js",
+  },
 });
