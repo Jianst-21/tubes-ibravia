@@ -243,7 +243,7 @@ const ManageHouse = () => {
             >
               <div className="flex justify-between items-start mb-5">
                 <div>
-                  <p className="text-[#0B3C78] font-bold text-[24px] tracking-wide uppercase">
+                  <p className="text-[#0B3C78] font-bold text-[24px] uppercase">
                     Block {filteredHouse.block?.block_name} • No. {filteredHouse.number_block}
                   </p>
                   <h2 className="text-[48px] font-bold text-[#0E1315] mt-1">
