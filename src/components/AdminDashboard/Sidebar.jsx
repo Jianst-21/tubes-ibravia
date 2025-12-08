@@ -89,7 +89,7 @@ const Sidebar = () => {
               alt="Ibravia Logo"
               className="w-10 h-10 object-contain pb-[6px] scale-160 transition-transform duration-300"
             />
-            <h1 className="text-2xl font-bold tracking-wide">IBRAVIA</h1>
+            <h1 className="text-[32px] font-bold tracking-wide">IBRAVIA</h1>
           </div>
 
           {/* 📋 Navigation */}

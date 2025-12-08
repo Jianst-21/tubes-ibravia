@@ -211,7 +211,7 @@ const ManageHouse = () => {
 
       <main className="flex-1 pl-72 pr-8 py-8 bg-[#F5FAFF]">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-[56px] font-bold text-[#0E1315] -mt-1 mb-8">Manage House</h1>
+          <h1 className="text-[56px] font-bold text-[#0E1315] -mt-8 mb-8">Manage House</h1>
 
           {/* FILTER AREA */}
           <div className="flex gap-6 mb-8 relative z-10">
