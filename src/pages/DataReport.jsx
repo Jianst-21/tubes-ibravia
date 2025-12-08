@@ -56,8 +56,8 @@ export default function AdminDataReport() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans print:bg-white">
-      <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-20 print:hidden">
+    <div className="flex min-h-screen bg-[#F5FAFF] font-sans print:bg-white">
+      <div className="fixed top-0 left-0 h-full w-64 bg-[#F5FAFF] shadow-lg z-20 print:hidden">
         <Sidebar />
       </div>
 

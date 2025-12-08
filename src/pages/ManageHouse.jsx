@@ -63,7 +63,7 @@ const Dropdown = ({ label, options, value, onChange, disabled, placeholder }) =>
                 key={option.value}
                 onClick={() => handleSelect(option.value)}
                 className={`cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-50 transition-colors ${
-                  option.value === value ? "text-blue-900 bg-blue-50 font-medium" : "text-gray-900"
+                  option.value === value ? "text-blue-900 bg-blue-50 font-medium" : "text-[#0E1315]"
                 }`}
               >
                 <span className="block truncate">{option.label}</span>
@@ -204,14 +204,14 @@ const ManageHouse = () => {
 
   return (
     <div
-      className="flex min-h-screen bg-gray-50 relative"
+      className="flex min-h-screen bg-[#F5FAFF] relative"
       style={{ fontFamily: "Roboto, sans-serif" }}
     >
       <Sidebar />
 
-      <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50">
+      <main className="flex-1 pl-72 pr-8 py-8 bg-[#F5FAFF]">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 -mt-1 mb-8">Manage House</h1>
+          <h1 className="text-[56px] font-bold text-[#0E1315] -mt-1 mb-8">Manage House</h1>
 
           {/* FILTER AREA */}
           <div className="flex gap-6 mb-8 relative z-10">
@@ -243,10 +243,10 @@ const ManageHouse = () => {
             >
               <div className="flex justify-between items-start mb-5">
                 <div>
-                  <p className="text-[#0B3C78] font-semibold text-sm tracking-wide uppercase">
+                  <p className="text-[#0B3C78] font-bold text-[24px] tracking-wide uppercase">
                     Block {filteredHouse.block?.block_name} • No. {filteredHouse.number_block}
                   </p>
-                  <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                  <h2 className="text-[48px] font-bold text-[#0E1315] mt-1">
                     {filteredHouse.residence?.residence_name || "Nama Residence"}
                   </h2>
                 </div>
@@ -273,31 +273,31 @@ const ManageHouse = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
                 <div className="space-y-3">
                   <div>
-                    <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                    <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                       House Description
                     </span>
-                    <p className="text-sm leading-relaxed">{houseDescription}</p>
+                    <p className="text-[16px] text-[#0E1315] leading-relaxed">{houseDescription}</p>
                   </div>
                   <div>
-                    <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                    <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                       Address
                     </span>
-                    <p className="text-sm leading-relaxed">{fullAddress}</p>
+                    <p className="text-[16px] text-[#0E1315] leading-relaxed">{fullAddress}</p>
                   </div>
                 </div>
                 <div className="space-y-3 md:border-l md:pl-6 border-gray-100">
                   <div className="flex gap-6">
                     <div>
-                      <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                      <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                         Land Area
                       </span>
-                      <p className="text-sm leading-relaxed">{filteredHouse.land_area ?? "-"} m²</p>
+                      <p className="text-[16px] text-[#0E1315] leading-relaxed">{filteredHouse.land_area ?? "-"} m²</p>
                     </div>
                     <div>
-                      <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                      <span className="block text-[16px] font-semibold text-[#0B3C78] uppercase tracking-wider">
                         House Area
                       </span>
-                      <p className="text-sm leading-relaxed">
+                      <p className="text-[16px] text-[#0E1315] leading-relaxed">
                         {filteredHouse.house_area ?? "-"} m²
                       </p>
                     </div>
@@ -343,7 +343,7 @@ const ManageHouse = () => {
                         animate-in zoom-in-95 duration-200"
           >
             {/* Title */}
-            <h3 className="text-xl font-bold text-center text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-center text-[#0E1315] mb-2">
               Confirm Status Change
             </h3>
 
@@ -408,14 +408,14 @@ const ManageHouse = () => {
             </div>
 
             {/* Teks Judul */}
-            <h2 className="text-2xl font-extrabold text-gray-900 text-center mb-3">
+            <h2 className="text-2xl font-extrabold text-[#0E1315] text-center mb-3">
               Status Updated!
             </h2>
 
             {/* Teks Deskripsi */}
             <p className="text-gray-500 text-center text-base leading-relaxed">
               Status has been changed to{" "}
-              <strong className="text-gray-900 font-semibold">{successModal.status}</strong>{" "}
+              <strong className="text-[#0E1315] font-semibold">{successModal.status}</strong>{" "}
               successfully.
             </p>
           </div>
