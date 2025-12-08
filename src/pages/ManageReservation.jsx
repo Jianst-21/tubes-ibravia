@@ -236,7 +236,7 @@ const ManageReservation = () => {
                           </span>
                           <p className="text-[16px] text-[#0E1315] text-normal leading-relaxed">{item.description}</p>
                         </div>
-                        <div className="flex gap-6 mt-6">
+                        <div className="flex gap-6 mt-8">
                           <div>
                             <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                               Land Area
