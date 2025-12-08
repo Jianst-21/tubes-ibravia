@@ -76,7 +76,7 @@ const Notification = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-8 ml-[260px] transition-all duration-300">
-        <h1 className="text-[48px] font-bold text-gray-900 -mt-2 mb-8">Notification</h1>
+        <h1 className="text-[48px] font-bold text-gray-900 -mt-8 mb-8">Notification</h1>
 
         {/* Daftar Notifikasi */}
         <div className="space-y-5">
