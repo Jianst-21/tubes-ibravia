@@ -167,7 +167,7 @@ const ManageReservation = () => {
                     <div className="flex justify-between items-start mb-5">
                       {/* LEFT */}
                       <div>
-                        <p className="text-[#0B3C78] font-semibold text-[24px] tracking-wide uppercase">
+                        <p className="text-[#0B3C78] font-bold text-[24px] tracking-wide uppercase">
                           Block {item.block_name} • No. {item.number_house}
                         </p>
 
