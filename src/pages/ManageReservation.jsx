@@ -260,7 +260,7 @@ const ManageReservation = () => {
                           <button
                             onClick={() => openModal("cancel", item.id_reservasi, item.id_house)}
                             disabled={isActionLoading}
-                            className="px-6 py-2.5 rounded-lg font-semibold text-red-600 border border-red-600 bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                            className="px-6 py-2.5 rounded-lg font-semibold text-[#B93227] border border-[#B93227] bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -340,7 +340,7 @@ const ManageReservation = () => {
                   <button
                     onClick={executeAction}
                     disabled={isActionLoading}
-                    className="w-36 py-3 rounded-lg font-semibold text-white bg-red-600 hover:bg-red-700 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-semibold text-white bg-[#B93227] hover:bg-red-700 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
                     {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Cancelled"}
                   </button>

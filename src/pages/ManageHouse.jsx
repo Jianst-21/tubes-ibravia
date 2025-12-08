@@ -259,7 +259,7 @@ const ManageHouse = () => {
                           : filteredHouse.status === "available"
                             ? "border-green-200 text-green-700 bg-green-50"
                             : filteredHouse.status === "reserved"
-                              ? "border-yellow-200 text-yellow-700 bg-yellow-50"
+                              ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
                               : "border-gray-200 text-gray-600 bg-gray-50"
                       }`}
                   >
