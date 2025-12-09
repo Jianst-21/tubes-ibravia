@@ -14,8 +14,8 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
   const navigate = useNavigate();
 
   // Ambil email & purpose dari state atau localStorage
-  const [email, setEmail] = useState(location.state?.email || localStorage.getItem("email") || "");
-  const [purpose, setPurpose] = useState(
+  const [email] = useState(location.state?.email || localStorage.getItem("email") || "");
+  const [purpose] = useState(
     location.state?.purpose || localStorage.getItem("otpPurpose") || "signup"
   );
 
