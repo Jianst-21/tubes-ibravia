@@ -70,13 +70,13 @@ const Notification = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans relative">
+    <div className="flex min-h-screen bg-[#F5FAFF] font-sans relative">
       {/* Sidebar  */}
       <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-8 ml-[260px] transition-all duration-300">
-        <h1 className="text-3xl font-bold text-gray-900 -mt-2 mb-8">Notification</h1>
+        <h1 className="text-[48px] font-bold text-gray-900 -mt-8 mb-8">Notification</h1>
 
         {/* Daftar Notifikasi */}
         <div className="space-y-5">

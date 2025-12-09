@@ -118,7 +118,7 @@ const ManageReservation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex relative font-sans">
+    <div className="min-h-screen bg-[#F5FAFF] flex relative font-sans">
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -128,9 +128,9 @@ const ManageReservation = () => {
       />
 
       <Sidebar />
-      <main className="flex-1 pl-72 pr-8 py-8 bg-gray-50 font-sans">
+      <main className="flex-1 pl-72 pr-8 py-8 bg-[#F5FAFF]font-sans">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 -mt-2 mb-8">Manage Reservation</h1>
+          <h1 className="text-[48px] font-bold text-[#0E1315] -mt-8 mb-4">Manage Reservation</h1>
 
           {isLoading ? (
             <div className="flex justify-center items-center mt-10">
@@ -148,7 +148,7 @@ const ManageReservation = () => {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
               {reservations.map((item) => {
                 const deadlineDate = new Date(item.deadline_date).toLocaleDateString("en-GB");
                 const isPending = item.status && item.status.toLowerCase() === "pending";
@@ -167,11 +167,11 @@ const ManageReservation = () => {
                     <div className="flex justify-between items-start mb-5">
                       {/* LEFT */}
                       <div>
-                        <p className="text-[#0B3C78] font-semibold text-sm tracking-wide uppercase">
+                        <p className="text-[#0B3C78] font-bold text-[24px] tracking-wide uppercase">
                           Block {item.block_name} • No. {item.number_house}
                         </p>
 
-                        <h2 className="text-[30px] font-bold text-gray-900 mt-1">
+                        <h2 className="text-[40px] font-bold text-0E1315 mt-1">
                           {item.residence_name || "Unknown Residence"}
                         </h2>
                       </div>
@@ -180,11 +180,11 @@ const ManageReservation = () => {
                       <div className="flex flex-col items-end gap-3">
                         {/* STATUS */}
                         <span
-                          className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider ${
+                          className={`border px-3 py-1 rounded-full text-[16px] font-semibold tracking-wider ${
                             item.status?.toLowerCase() === "pending"
-                              ? "border-yellow-200 text-[#C5880A] bg-white"
+                              ? "border-[#C5880A] text-[#C5880A] bg-white"
                               : item.status?.toLowerCase() === "accepted"
-                                ? "border-green-200 text-green-700 bg-green-50"
+                                ? "border-[#249A42] text-[#249A42] bg-green-50"
                                 : item.status?.toLowerCase() === "expired"
                                   ? "border-orange-200 text-orange-700 bg-orange-50"
                                   : "border-red-200 text-red-700 bg-red-50"
@@ -195,7 +195,7 @@ const ManageReservation = () => {
 
                         {/* DATE CARD (RESERVATION DATE + DEADLINE) */}
                         <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 shadow-sm w-full">
-                          <div className="grid grid-cols-[auto_1fr] gap-x-2 text-sm font-medium text-gray-700">
+                          <div className="grid grid-cols-[auto_1fr] gap-x-2 text-sm font-medium text-[#0E1315]">
                             {/* Reservation */}
                             <span>Reservation</span>
                             <span>
@@ -216,38 +216,38 @@ const ManageReservation = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
                       <div className="space-y-3">
                         <div>
-                          <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                          <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                             Customer Info
                           </span>
-                          <p className="text-gray-700 font-medium">{item.name}</p>
-                          <p className="text-sm text-gray-500">{item.email}</p>
+                          <p className="text-[#0E1315] text-[16px] font-normal">{item.name}</p>
+                          <p className="text-[16px] text-[#0E1315]">{item.email}</p>
                         </div>
                         <div>
-                          <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                          <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                             Address
                           </span>
-                          <p className="text-sm leading-relaxed">{item.address}</p>
+                          <p className="text-[16px] font-normal text-[#0E1315] leading-relaxed">{item.address}</p>
                         </div>
                       </div>
                       <div className="space-y-3 md:border-l md:pl-6 border-gray-100">
                         <div>
-                          <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                          <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                             Property Details
                           </span>
-                          <p className="text-sm leading-relaxed">{item.description}</p>
+                          <p className="text-[16px] text-[#0E1315] text-normal leading-relaxed">{item.description}</p>
                         </div>
-                        <div className="flex gap-6">
+                        <div className="flex gap-6 mt-8">
                           <div>
-                            <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                            <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                               Land Area
                             </span>
-                            <p className="text-sm leading-relaxed">{item.land_area} m²</p>
+                            <p className="text-[16px] font-normal text-[#0E1315] leading-relaxed">{item.land_area} m²</p>
                           </div>
                           <div>
-                            <span className="block text-xs font-semibold text-[#0B3C78] uppercase tracking-wider">
+                            <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                               House Area
                             </span>
-                            <p className="text-sm leading-relaxed">{item.building_area} m²</p>
+                            <p className="text-[16px] text-[#0E1315] font-normal leading-relaxed">{item.building_area} m²</p>
                           </div>
                         </div>
                       </div>
@@ -260,7 +260,7 @@ const ManageReservation = () => {
                           <button
                             onClick={() => openModal("cancel", item.id_reservasi, item.id_house)}
                             disabled={isActionLoading}
-                            className="px-6 py-2.5 rounded-lg font-semibold text-red-600 border border-red-600 bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                            className="px-6 py-2.5 rounded-lg font-semibold text-[#B93227] border border-[#B93227] bg-transparent hover:bg-red-50 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -293,7 +293,7 @@ const ManageReservation = () => {
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
           {/* ... (ISI MODAL KONFIRMASI SAMA SEPERTI SEBELUMNYA) ... */}
           <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl scale-100 animate-in zoom-in-95 duration-200">
-            <h3 className="text-xl font-bold text-center text-gray-900 mb-2">
+            <h3 className="text-xl font-bold text-center text-[#0E1315] mb-2">
               {actionModal.type === "accept" ? "Accept Reservation" : "Cancel Reservation"}
             </h3>
             <div className="w-full h-px bg-gray-200 my-4"></div>
@@ -311,7 +311,7 @@ const ManageReservation = () => {
                   <button
                     onClick={closeModal}
                     disabled={isActionLoading}
-                    className="w-36 py-3 rounded-lg font-semibold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-bold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center cursor-pointer"
                   >
                     Dismiss
                   </button>
@@ -320,7 +320,7 @@ const ManageReservation = () => {
                   <button
                     onClick={executeAction}
                     disabled={isActionLoading}
-                    className="w-36 py-3 rounded-lg font-semibold text-white bg-[#0F62FF] hover:opacity-90 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-bold text-white bg-[#0F62FF] hover:opacity-90 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
                     {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Accept"}
                   </button>
@@ -331,7 +331,7 @@ const ManageReservation = () => {
                   <button
                     onClick={closeModal}
                     disabled={isActionLoading}
-                    className="w-36 py-3 rounded-lg font-semibold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-bold text-[#0B3C78] bg-blue-50 hover:bg-blue-100 transition flex items-center justify-center cursor-pointer"
                   >
                     Keep
                   </button>
@@ -340,7 +340,7 @@ const ManageReservation = () => {
                   <button
                     onClick={executeAction}
                     disabled={isActionLoading}
-                    className="w-36 py-3 rounded-lg font-semibold text-white bg-red-600 hover:bg-red-700 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
+                    className="w-36 py-3 rounded-lg font-bold text-white bg-[#B93227] hover:bg-red-700 transition flex items-center justify-center disabled:opacity-70 cursor-pointer"
                   >
                     {isActionLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Cancelled"}
                   </button>
@@ -368,7 +368,7 @@ const ManageReservation = () => {
             </div>
 
             {/* Teks Judul */}
-            <h2 className="text-2xl font-extrabold text-gray-900 text-center mb-3">
+            <h2 className="text-2xl font-extrabold text-[#0E1315] text-center mb-3">
               {successModal.type === "accept" ? "Reservation Accepted!" : "Reservation Canceled"}
             </h2>
 

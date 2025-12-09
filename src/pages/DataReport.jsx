@@ -56,15 +56,15 @@ export default function AdminDataReport() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 font-sans print:bg-white">
-      <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-20 print:hidden">
+    <div className="flex min-h-screen bg-[#F5FAFF] font-sans print:bg-white">
+      <div className="fixed top-0 left-0 h-full w-64 bg-[#F5FAFF] shadow-lg z-20 print:hidden">
         <Sidebar />
       </div>
 
       <main className="flex-1 p-8 ml-64 transition-all duration-300 print:ml-0 print:p-0 print:w-full">
         <div className="flex items-center justify-between mb-8 print:mb-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 print:text-2xl -mt-2">
+            <h1 className="text-[48px] font-bold text-gray-900 print:text-2xl -mt-8">
               Reservation Report
             </h1>
             <p className="text-gray-500 mt-1 print:text-sm">
