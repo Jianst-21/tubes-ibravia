@@ -61,10 +61,10 @@ export const Block = () => {
     >
       {/* Header */}
       <div className="text-center mb-10 px-4">
-        <h3 className="text-sm font-medium opacity-80">
+        <h3 className="text-[16px] font-medium opacity-80 uppercase tracking-wider text-primary font-semibold">
           Find the home that fits your lifestyle and future
         </h3>
-        <h1 className="text-3xl font-bold mt-2 text-primary ">House Collections</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mt-2 ">House Collections</h1>
       </div>
 
       {/* Tombol Villa (pakai komponen VillaButton) */}

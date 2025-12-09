@@ -101,7 +101,7 @@ export const VillaSection = () => {
     <section className="w-full bg-background text-foreground py-16 transition-colors duration-500">
       {/* Header */}
       <div className="text-center mb-10 px-6 md:px-16">
-        <h3 className="text-[16px] font-medium opacity-80 text-primary">
+        <h3 className="text-[16px] font-semibold uppercase tracking-wider font-medium opacity-80 text-primary">
           Find the home that fits your lifestyle and future
         </h3>
         <h1 className="text-3xl md:text-4xl font-bold mt-2">House Collections</h1>
