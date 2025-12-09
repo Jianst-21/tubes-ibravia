@@ -291,7 +291,9 @@ const ManageHouse = () => {
                       <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                         Land Area
                       </span>
-                      <p className="text-[16px] text-[#0E1315] leading-relaxed">{filteredHouse.land_area ?? "-"} m²</p>
+                      <p className="text-[16px] text-[#0E1315] leading-relaxed">
+                        {filteredHouse.land_area ?? "-"} m²
+                      </p>
                     </div>
                     <div>
                       <span className="block text-[16px] font-semibold text-[#0B3C78] uppercase tracking-wider">

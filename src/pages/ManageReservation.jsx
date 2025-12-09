@@ -226,7 +226,9 @@ const ManageReservation = () => {
                           <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                             Address
                           </span>
-                          <p className="text-[16px] font-normal text-[#0E1315] leading-relaxed">{item.address}</p>
+                          <p className="text-[16px] font-normal text-[#0E1315] leading-relaxed">
+                            {item.address}
+                          </p>
                         </div>
                       </div>
                       <div className="space-y-3 md:border-l md:pl-6 border-gray-100">
@@ -234,20 +236,26 @@ const ManageReservation = () => {
                           <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                             Property Details
                           </span>
-                          <p className="text-[16px] text-[#0E1315] text-normal leading-relaxed">{item.description}</p>
+                          <p className="text-[16px] text-[#0E1315] text-normal leading-relaxed">
+                            {item.description}
+                          </p>
                         </div>
                         <div className="flex gap-6 mt-8">
                           <div>
                             <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                               Land Area
                             </span>
-                            <p className="text-[16px] font-normal text-[#0E1315] leading-relaxed">{item.land_area} m²</p>
+                            <p className="text-[16px] font-normal text-[#0E1315] leading-relaxed">
+                              {item.land_area} m²
+                            </p>
                           </div>
                           <div>
                             <span className="block text-[16px] font-bold text-[#0B3C78] uppercase tracking-wider">
                               House Area
                             </span>
-                            <p className="text-[16px] text-[#0E1315] font-normal leading-relaxed">{item.building_area} m²</p>
+                            <p className="text-[16px] text-[#0E1315] font-normal leading-relaxed">
+                              {item.building_area} m²
+                            </p>
                           </div>
                         </div>
                       </div>
