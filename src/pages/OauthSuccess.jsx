@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Loader2, CheckCircle, XCircle } from "lucide-react"; // Ikon Loader2 akan kita pakai
+import { Loader2 } from "lucide-react"; // Ikon Loader2 akan kita pakai
 
 export default function OauthSuccess() {
   const navigate = useNavigate();
