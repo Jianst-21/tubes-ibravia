@@ -119,7 +119,15 @@ export const BlockPreview = ({ selectedVilla }) => {
           }}
         />
       ) : (
-        <span className="opacity-50 text-sm">[ Image Preview ]</span>
+        <span
+          role="button"
+          tabIndex={0}
+          onClick={() => alert("Clicked!")}
+          onKeyDown={(e) => e.key === "Enter" && alert("Clicked!")}
+          className="opacity-50 text-sm cursor-pointer"
+        >
+          [ Image Preview ]
+        </span>
       )}
     </div>
   );

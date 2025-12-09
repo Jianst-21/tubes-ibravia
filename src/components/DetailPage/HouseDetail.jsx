@@ -29,6 +29,7 @@ export default function HouseDetail({ house, setSelectedHouse }) {
     if (defaultIndex !== -1) setCurrentIndex(defaultIndex);
   }, [house]);
 
+
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
   useEffect(() => {
@@ -119,15 +120,14 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                 alt={`House ${index}`}
                 onClick={() => handleImageClick(index)}
                 className={`absolute rounded-2xl object-cover shadow-2xl transition-all duration-700 ease-in-out cursor-pointer
-        ${
-          isActive
-            ? "w-[600px] h-[400px] z-50 opacity-100 scale-100 pointer-events-auto"
-            : isLeft
-              ? "w-[460px] h-[320px] -translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
-              : isRight
-                ? "w-[460px] h-[320px] translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
-                : "hidden pointer-events-none"
-        }`}
+        ${isActive
+                    ? "w-[600px] h-[400px] z-50 opacity-100 scale-100 pointer-events-auto"
+                    : isLeft
+                      ? "w-[460px] h-[320px] -translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
+                      : isRight
+                        ? "w-[460px] h-[320px] translate-x-64 scale-90 opacity-70 z-10 pointer-events-none"
+                        : "hidden pointer-events-none"
+                  }`}
               />
             );
           })}
@@ -207,13 +207,12 @@ export default function HouseDetail({ house, setSelectedHouse }) {
                 whileTap={!buttonDisabled ? { scale: 0.95 } : {}}
                 transition={{ duration: 0.2 }}
                 className={`h-[46px] px-8 rounded-[8px] font-semibold text-white shadow-md transition-all duration-500 
-                ${
-                  bookingStatus === "sold"
+                ${bookingStatus === "sold"
                     ? "bg-gray-700 cursor-not-allowed opacity-70"
                     : bookingStatus === "reserved"
                       ? "bg-yellow-500 cursor-not-allowed opacity-90"
                       : "bg-primary hover:bg-primary/90 active:bg-primary/80 cursor-pointer"
-                }`}
+                  }`}
               >
                 {buttonText}
               </motion.button>

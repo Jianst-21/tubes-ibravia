@@ -1,4 +1,3 @@
-import { ThemeToggle } from "../components/GlobalPage/ThemeTooggle";
 import { Navbar } from "../components/GlobalPage/Navbar";
 import { HeroSection } from "../components/HomePage/HeroSection";
 import { TrustedCollaboration } from "../components/HomePage/TrustedCollaboration";
