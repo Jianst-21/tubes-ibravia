@@ -34,11 +34,7 @@ const ChartCard = ({ data = [] }) => {
               tickLine={false}
             />
 
-            <YAxis
-              tick={{ fill: "#6B7280", fontSize: 12 }}
-              axisLine={false}
-              tickLine={false}
-            />
+            <YAxis tick={{ fill: "#6B7280", fontSize: 12 }} axisLine={false} tickLine={false} />
 
             <Tooltip
               cursor={{ stroke: "#9CA3AF", strokeWidth: 1 }}
@@ -54,7 +50,7 @@ const ChartCard = ({ data = [] }) => {
             <Line
               type="monotone"
               dataKey="value"
-              stroke="#4B5563"      // warna garis sesuai figma (abu gelap)
+              stroke="#4B5563" // warna garis sesuai figma (abu gelap)
               strokeWidth={2}
               dot={false}
               activeDot={{ r: 4, fill: "#111827" }}
