@@ -64,7 +64,7 @@ export const HouseCollections = () => {
         </p>
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground font-[var(--font-headline)] text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground font-headline text-center">
           House Collections
         </h2>
 
