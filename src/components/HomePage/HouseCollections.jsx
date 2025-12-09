@@ -59,7 +59,7 @@ export const HouseCollections = () => {
     <section className="py-20 bg-background text-foreground transition-colors duration-300 font-[var(--font-body)]">
       <div className="container mx-auto px-6">
         {/* Subheading */}
-        <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-2 font-[var(--font-subheader)] text-center">
+        <p className="text-[16px] font-semibold text-primary uppercase tracking-wide mb-2 font-[var(--font-subheader)] text-center">
           Find the home that fits your lifestyle and future
         </p>
 

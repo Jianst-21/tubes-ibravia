@@ -16,7 +16,7 @@ export const TrustedCollaboration = () => {
       <div className="w-full px-4 sm:px-8 lg:px-[80px] xl:px-[120px] mx-auto">
         {/* Heading */}
         <div className="text-center">
-          <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
+          <p className="text-[16px] font-semibold text-primary uppercase tracking-wider mb-2">
             We Proudly Present
           </p>
           <h2 className="text-3xl md:text-4xl font-extrabold mb-12">Our Trusted Collaboration</h2>
