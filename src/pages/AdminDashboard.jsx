@@ -3,10 +3,9 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import { BookText, BookCheck, BookX } from "lucide-react";
 import ChartCard from "../components/AdminDashboard/ChartCard";
 import apiadmin from "../api/apiadmin";
+// optional realtime (kalau kamu mau sama seperti localhost):
+import supabaseRealtime from "../config/supabaseclientFrontend";
 
-/* ===============================
-   STAT CARD (DARI DASHBOARD 1)
-================================= */
 const StatCard = ({ title, value, type, className = "" }) => {
   const icons = {
     reserved: <BookText size={65} strokeWidth={1.5} className="text-white/90" />,
@@ -46,9 +45,6 @@ const StatCard = ({ title, value, type, className = "" }) => {
   );
 };
 
-/* ===============================
-   ADMIN DASHBOARD
-================================= */
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
     reserved: 0,
@@ -59,7 +55,6 @@ const AdminDashboard = () => {
 
   const [residenceName, setResidenceName] = useState("");
 
-  // Lock body scroll
   useLayoutEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -74,31 +69,11 @@ const AdminDashboard = () => {
         const res = await apiadmin.get("/dashboard");
         const result = res.data?.data || {};
 
-        const all = result.all_reservations || [];
-
-        // ==========================
-        // CHART → hitung jumlah reservasi per status
-        // ==========================
-        const chartData = [
-          {
-            name: "Active",
-            value: all.filter((r) => r.reservation_status === "active").length,
-          },
-          {
-            name: "Cancelled",
-            value: all.filter((r) => r.reservation_status === "cancelled").length,
-          },
-          {
-            name: "Pending",
-            value: all.filter((r) => r.reservation_status === "pending").length,
-          },
-        ];
-
         setStats({
           reserved: result.reserved_houses ?? 0,
           sold: result.total_houses ?? 0,
           cancelled: result.cancelled_reservations ?? 0,
-          weeklydata: chartData, // <-- MENGIRIM DATA CHART BARU
+          weeklydata: result.weeklydata ?? [], // ✅ ambil dari backend
         });
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -116,6 +91,24 @@ const AdminDashboard = () => {
 
     fetchDashboard();
     fetchResidenceName();
+
+    // ✅ realtime OPTIONAL (kalau kamu mau update otomatis seperti localhost)
+    const channel = supabaseRealtime
+      ?.channel?.("admin-dashboard-reservation-realtime")
+      ?.on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "reservation" },
+        () => fetchDashboard()
+      )
+      ?.subscribe?.();
+
+    return () => {
+      try {
+        if (channel) supabaseRealtime.removeChannel(channel);
+      } catch (err) {
+        console.warn("Gagal remove channel:", err);
+      }
+    };
   }, []);
 
   return (
@@ -125,46 +118,25 @@ const AdminDashboard = () => {
       <div className="fixed inset-y-0 left-64 right-0 bg-gray-50 flex flex-col justify-between overflow-hidden">
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div className="max-w-[1100px] mx-auto w-full">
-            {/* TITLE */}
             <h1 className="text-[48px] font-bold text-gray-900 -mt-4 mb-8">
               Dashboard {residenceName}
             </h1>
 
-            {/* CHART */}
             <div className="mb-12 sm:mb-14 md:mb-20 lg:mb-[70px]">
               <ChartCard data={stats.weeklydata} />
             </div>
 
-            {/* STAT CARDS */}
             <div
               className="
                 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
                 gap-6 sm:gap-10 md:gap-14 lg:gap-[54px]
               "
             >
-              <StatCard
-                title="RESERVED"
-                value={stats.reserved}
-                type="reserved"
-                className="justify-self-start"
-              />
-
-              <StatCard
-                title="SOLD"
-                value={stats.sold}
-                type="sold"
-                className="justify-self-center"
-              />
-
-              <StatCard
-                title="CANCELLED"
-                value={stats.cancelled}
-                type="cancelled"
-                className="justify-self-end"
-              />
+              <StatCard title="RESERVED" value={stats.reserved} type="reserved" className="justify-self-start" />
+              <StatCard title="SOLD" value={stats.sold} type="sold" className="justify-self-center" />
+              <StatCard title="CANCELLED" value={stats.cancelled} type="cancelled" className="justify-self-end" />
             </div>
 
-            {/* BOTTOM SPACING */}
             <div className="mt-12 sm:mt-14 md:mt-20 lg:mt-[70px]" />
           </div>
         </div>
