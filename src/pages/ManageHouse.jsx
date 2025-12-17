@@ -260,7 +260,7 @@ const ManageHouse = () => {
                       filteredHouse.status === "sold"
                         ? "border-[#0B3C78] text-[#0B3C78] bg-white"
                         : filteredHouse.status === "available"
-                          ? "border-green-200 text-green-700 bg-white"
+                          ? "border-[#249A42] text-[#249A42] bg-white"
                           : filteredHouse.status === "reserved"
                             ? "border-[#C5880A] text-[#C5880A] bg-white"
                             : "border-gray-200 text-gray-600 bg-white"

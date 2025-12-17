@@ -175,23 +175,25 @@ const ManageReservation = () => {
                       {/* RIGHT: STATUS + DATE INFO */}
                       <div className="flex flex-col items-end gap-3">
                         {/* STATUS */}
-                        <span
-                          className={`rounded-full capitalize
-                            inline-flex items-center justify-center text-center
-                            h-8 min-w-[96px] px-4
-                            text-[16px] font-semibold tracking-wider leading-none
-                            bg-white border border-[1.5px] border-current${
-                            item.status?.toLowerCase() === "pending"
-                              ? "border-[#C5880A] text-[#C5880A] bg-white"
-                              : item.status?.toLowerCase() === "accepted"
-                                ? "border-[#249A42] text-[#249A42] bg-green-50"
-                                : item.status?.toLowerCase() === "expired"
-                                  ? "border-orange-200 text-orange-700 bg-orange-50"
-                                  : "border-red-200 text-red-700 bg-red-50"
-                          }`}
-                        >
-                          {displayStatus}
-                        </span>
+                      <span
+                      className={`rounded-full capitalize
+                        inline-flex items-center justify-center text-center
+                        h-8 min-w-[96px] px-4
+                        text-[16px] font-semibold tracking-wider leading-none
+                        bg-white border border-[1.5px] border-current
+                        ${
+                          item.status?.toLowerCase() === "pending"
+                            ? "text-[#C5880A] bg-white"
+                            : item.status?.toLowerCase() === "accepted"
+                              ? "text-[#249A42] bg-green-50"
+                              : item.status?.toLowerCase() === "expired"
+                                ? "text-orange-700 bg-orange-50"
+                                : "text-red-700 bg-red-50"
+                        }`}
+                    >
+                      {displayStatus}
+                    </span>
+
 
                         {/* DATE CARD (RESERVATION DATE + DEADLINE) */}
                         <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 shadow-sm w-full">
