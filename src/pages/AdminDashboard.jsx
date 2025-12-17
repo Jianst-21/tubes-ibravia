@@ -118,7 +118,7 @@ const AdminDashboard = () => {
       <div className="fixed inset-y-0 left-64 right-0 bg-gray-50 flex flex-col justify-between overflow-hidden">
         <div className="px-6 sm:px-8 py-6 flex-1 flex flex-col">
           <div className="max-w-[1100px] mx-auto w-full">
-            <h1 className="text-[48px] font-bold text-gray-900 -mt-4 mb-4">
+            <h1 className="text-[48px] font-bold text-gray-900 -mt-6 mb-4">
               Dashboard {residenceName}
             </h1>
 
