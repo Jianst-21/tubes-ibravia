@@ -26,6 +26,7 @@ function buildTicks(upper, step) {
   return ticks;
 }
 
+// Border kotak plot-area
 const ChartBorder = ({ offset }) => {
   if (!offset) return null;
   const { left, top, width, height } = offset;
@@ -59,17 +60,18 @@ const ChartCard = ({ data = [] }) => {
   const weekOfMonth = Math.ceil(now.getDate() / 7);
 
   return (
-    <div className="w-full bg-white rounded-2xl shadow-md border border-gray-200 p-8">
-      {/* Header (ikut style Vercel) */}
-      <div className="flex items-center justify-between mb-6">
+    // ✅ ukuran ikut localhost
+    <div className="w-full bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+      {/* Header (bold ikut Vercel) */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
         <h2 className="text-gray-800 font-semibold text-lg">Week {weekOfMonth}</h2>
-        <div className="text-gray-800 text-sm font-bold">{monthYear}</div>
+        <p className="text-sm font-bold text-gray-700">{monthYear}</p>
       </div>
 
-      {/* Chart (ikut height Vercel) */}
-      <div className="w-full h-[250px]">
+      {/* ✅ tinggi chart ikut localhost */}
+      <div className="w-full h-[190px]">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 10 }}>
+          <LineChart data={data} margin={{ top: 12, right: 20, left: 0, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#D1D5DB" vertical horizontal />
 
             <XAxis
@@ -110,9 +112,10 @@ const ChartCard = ({ data = [] }) => {
               type="monotone"
               dataKey="value"
               stroke="#4B5563"
-              strokeWidth={2}   // ikut Vercel
+              strokeWidth={1.8}
               dot={false}
-              activeDot={{ r: 4, fill: "#111827" }} // ikut Vercel
+              activeDot={{ r: 3, fill: "#111827" }}
+              isAnimationActive={true}
             />
           </LineChart>
         </ResponsiveContainer>
