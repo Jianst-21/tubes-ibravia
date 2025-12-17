@@ -190,6 +190,7 @@ const ManageReservation = () => {
                       >
                         {displayStatus}
                       </span>
+
                         {/* DATE CARD (RESERVATION DATE + DEADLINE) */}
                         <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 shadow-sm w-full">
                           <div className="grid grid-cols-[auto_1fr] gap-x-2 text-sm font-medium text-[#0E1315]">

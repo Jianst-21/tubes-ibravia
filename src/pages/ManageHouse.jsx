@@ -251,21 +251,23 @@ const ManageHouse = () => {
                   </h2>
                 </div>
                 <div className="flex flex-col items-end gap-2">
-                  <span
-                    className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider capitalize
-                      inline-flex items-center justify-center text-center min-w-[110px]
-                      ${
-                        filteredHouse.status === "sold"
-                          ? "border-blue-200 text-blue-800 bg-blue-50"
-                          : filteredHouse.status === "available"
-                            ? "border-green-200 text-green-700 bg-green-50"
-                            : filteredHouse.status === "reserved"
-                              ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
-                              : "border-gray-200 text-gray-600 bg-gray-50"
-                      }`}
-                  >
-                    {filteredHouse.status}
-                  </span>
+                <span
+                  className={`border rounded-full text-xs font-semibold tracking-wider capitalize
+                    inline-flex items-center justify-center text-center
+                    h-6 min-w-[110px] px-3 shrink-0 whitespace-nowrap
+                    ${
+                      filteredHouse.status === "sold"
+                        ? "border-blue-200 text-blue-800 bg-blue-50"
+                        : filteredHouse.status === "available"
+                          ? "border-green-200 text-green-700 bg-green-50"
+                          : filteredHouse.status === "reserved"
+                            ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
+                            : "border-gray-200 text-gray-600 bg-gray-50"
+                    }`}
+                >
+                  {filteredHouse.status}
+                </span>
+
                 </div>
               </div>
 
