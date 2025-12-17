@@ -253,6 +253,7 @@ const ManageHouse = () => {
                 <div className="flex flex-col items-end gap-2">
                   <span
                     className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider capitalize
+                      inline-flex items-center justify-center text-center min-w-[110px]
                       ${
                         filteredHouse.status === "sold"
                           ? "border-blue-200 text-blue-800 bg-blue-50"
