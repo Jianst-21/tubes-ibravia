@@ -254,15 +254,15 @@ const ManageHouse = () => {
                 <span
                   className={`border rounded-full text-xs font-semibold tracking-wider capitalize
                     inline-flex items-center justify-center text-center
-                    h-6 min-w-[110px] px-3 shrink-0 whitespace-nowrap
+                    w-[96px] h-[24px] px-0 leading-none
                     ${
                       filteredHouse.status === "sold"
-                        ? "border-blue-200 text-blue-800 bg-blue-50"
+                        ? "border-[#0B3C78] text-[#0B3C78] bg-white"
                         : filteredHouse.status === "available"
-                          ? "border-green-200 text-green-700 bg-green-50"
+                          ? "border-green-200 text-green-700 bg-white"
                           : filteredHouse.status === "reserved"
-                            ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
-                            : "border-gray-200 text-gray-600 bg-gray-50"
+                            ? "border-[#C5880A] text-[#C5880A] bg-white"
+                            : "border-gray-200 text-gray-600 bg-white"
                     }`}
                 >
                   {filteredHouse.status}

@@ -175,21 +175,21 @@ const ManageReservation = () => {
                       {/* RIGHT: STATUS + DATE INFO */}
                       <div className="flex flex-col items-end gap-3">
                         {/* STATUS */}
-                      <span
-                        className={`border px-3 py-1 rounded-full text-xs font-semibold tracking-wider capitalize
-                          inline-flex items-center justify-center text-center min-w-[110px]
-                          ${
+                        <span
+                          className={`border rounded-full text-xs font-semibold tracking-wider capitalize
+                            inline-flex items-center justify-center text-center
+                            w-[96px] h-[24px] px-0 leading-none${
                             item.status?.toLowerCase() === "pending"
-                              ? "border-yellow-200 text-[#C5880A] bg-yellow-50"
+                              ? "border-[#C5880A] text-[#C5880A] bg-white"
                               : item.status?.toLowerCase() === "accepted"
-                                ? "border-green-200 text-green-700 bg-green-50"
+                                ? "border-[#249A42] text-[#249A42] bg-green-50"
                                 : item.status?.toLowerCase() === "expired"
                                   ? "border-orange-200 text-orange-700 bg-orange-50"
                                   : "border-red-200 text-red-700 bg-red-50"
                           }`}
-                      >
-                        {displayStatus}
-                      </span>
+                        >
+                          {displayStatus}
+                        </span>
 
                         {/* DATE CARD (RESERVATION DATE + DEADLINE) */}
                         <div className="bg-gray-50 px-4 py-2 rounded-xl border border-gray-200 shadow-sm w-full">
