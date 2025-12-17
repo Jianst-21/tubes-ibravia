@@ -252,10 +252,11 @@ const ManageHouse = () => {
                 </div>
                 <div className="flex flex-col items-end gap-2">
                 <span
-                  className={`border rounded-full text-xs font-semibold tracking-wider capitalize
+                  className={`rounded-full capitalize
                     inline-flex items-center justify-center text-center
-                    w-[96px] h-[24px] px-0 leading-none
-                    ${
+                    h-8 min-w-[96px] px-4
+                    text-[16px] font-semibold tracking-wider leading-none
+                    border border-[1.5px] bg-white ${
                       filteredHouse.status === "sold"
                         ? "border-[#0B3C78] text-[#0B3C78] bg-white"
                         : filteredHouse.status === "available"
