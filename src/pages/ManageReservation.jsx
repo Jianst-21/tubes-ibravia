@@ -176,7 +176,11 @@ const ManageReservation = () => {
                       <div className="flex flex-col items-end gap-3">
                         {/* STATUS */}
                         <span
-                          className={`border px-3 py-1 rounded-full text-[16px] font-semibold tracking-wider ${
+                          className={`rounded-full capitalize
+                            inline-flex items-center justify-center text-center
+                            h-8 min-w-[96px] px-4
+                            text-[16px] font-semibold tracking-wider leading-none
+                            bg-white border border-[1.5px] border-current${
                             item.status?.toLowerCase() === "pending"
                               ? "border-[#C5880A] text-[#C5880A] bg-white"
                               : item.status?.toLowerCase() === "accepted"

@@ -256,7 +256,7 @@ const ManageHouse = () => {
                     inline-flex items-center justify-center text-center
                     h-8 min-w-[96px] px-4
                     text-[16px] font-semibold tracking-wider leading-none
-                    border border-[1.5px] bg-white ${
+                    border border-[1.5px] bg-white border-current ${
                       filteredHouse.status === "sold"
                         ? "border-[#0B3C78] text-[#0B3C78] bg-white"
                         : filteredHouse.status === "available"
