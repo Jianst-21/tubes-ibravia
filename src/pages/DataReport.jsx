@@ -47,9 +47,9 @@ export default function AdminDataReport() {
   const getStatusColorClass = (status) => {
     switch (status?.toLowerCase()) {
       case "accepted":
-        return "text-green-600 bg-green-50 border-green-100";
+        return "text-[#249A42] bg-white border-[#249A42]";
       case "cancelled":
-        return "text-red-600 bg-red-50 border-red-100";
+        return "text-[#B93227] bg-white border-[#B93227]";
       default:
         return "text-gray-600 bg-gray-50 border-gray-100";
     }
