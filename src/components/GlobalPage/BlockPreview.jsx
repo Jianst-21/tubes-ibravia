@@ -1,14 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 
+/**
+ * Komponen BlockPreview
+ * Berfungsi untuk menampilkan preview denah blok perumahan.
+ * Dilengkapi dengan fitur Zoom (menggunakan mouse wheel) dan Pan (klik dan geser).
+ */
 export const BlockPreview = ({ selectedVilla }) => {
-  const [zoom, setZoom] = useState(1);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [dragging, setDragging] = useState(false);
-  const [start, setStart] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
-  const imgRef = useRef(null);
+  // 1. STATE MANAGEMENT
+  const [zoom, setZoom] = useState(1); // Tingkat perbesaran gambar
+  const [offset, setOffset] = useState({ x: 0, y: 0 }); // Posisi pergeseran gambar (X dan Y)
+  const [dragging, setDragging] = useState(false); // Status apakah user sedang menggeser gambar
+  const [start, setStart] = useState({ x: 0, y: 0 }); // Titik awal koordinat saat klik dimulai
+  
+  const containerRef = useRef(null); // Referensi untuk container pembungkus
+  const imgRef = useRef(null); // Referensi untuk elemen gambar
 
-  //  Mencegah scroll halaman
+  // 2. SCROLL PREVENTION: Mencegah halaman utama ikut scroll saat mouse berada di area preview
   useEffect(() => {
     const handleWheelBlock = (e) => {
       if (containerRef.current && containerRef.current.contains(e.target)) {
@@ -19,15 +26,17 @@ export const BlockPreview = ({ selectedVilla }) => {
     return () => window.removeEventListener("wheel", handleWheelBlock);
   }, []);
 
-  //  Zoom pakai scroll
+  // 3. ZOOM HANDLER: Mengatur perbesaran gambar berdasarkan putaran wheel mouse
   const handleWheel = (e) => {
     e.preventDefault();
-    const delta = e.deltaY < 0 ? 0.2 : -0.2;
-    setZoom((z) => Math.min(Math.max(0.5, z + delta), 5)); // min 0.5 biar bisa zoom out dikit
+    const delta = e.deltaY < 0 ? 0.2 : -0.2; // Zoom in jika scroll ke atas, zoom out jika ke bawah
+    setZoom((z) => Math.min(Math.max(0.5, z + delta), 5)); // Batas zoom minimal 0.5x dan maksimal 5x
   };
 
+  // 4. PANNING HANDLERS (Mouse Events): Logika untuk menggeser gambar
   const handleMouseDown = (e) => {
     setDragging(true);
+    // Menyimpan posisi mouse dikurangi offset saat ini agar pergerakan sinkron
     setStart({ x: e.clientX - offset.x, y: e.clientY - offset.y });
   };
 
@@ -44,13 +53,14 @@ export const BlockPreview = ({ selectedVilla }) => {
     const imgWidth = img.naturalWidth * zoom;
     const imgHeight = img.naturalHeight * zoom;
 
+    // Menghitung batas maksimal pergeseran agar gambar tidak hilang dari layar
     const maxX = Math.max(0, (imgWidth - rect.width) / 2);
     const maxY = Math.max(0, (imgHeight - rect.height) / 2);
 
     let newX = e.clientX - start.x;
     let newY = e.clientY - start.y;
 
-    // gambar bebas (tidak dikunci)
+    // Membatasi pergerakan X dan Y jika ukuran gambar lebih besar dari container
     if (imgWidth > rect.width) {
       newX = Math.max(-maxX, Math.min(maxX, newX));
     }
@@ -61,7 +71,7 @@ export const BlockPreview = ({ selectedVilla }) => {
     setOffset({ x: newX, y: newY });
   };
 
-  //  Auto-fit (gambar masuk penuh tanpa potong)
+  // 5. AUTO-FIT LOGIC: Menyesuaikan ukuran gambar pertama kali agar pas di dalam container
   useEffect(() => {
     const fitImage = () => {
       const container = containerRef.current;
@@ -73,8 +83,9 @@ export const BlockPreview = ({ selectedVilla }) => {
       const iw = img.naturalWidth;
       const ih = img.naturalHeight;
 
-      const scale = Math.min(cw / iw, ch / ih); // skala untuk fit
-      setZoom(scale * 2.8);
+      // Mencari skala terkecil agar seluruh gambar masuk ke dalam kotak
+      const scale = Math.min(cw / iw, ch / ih); 
+      setZoom(scale * 2.8); // Dikalikan 2.8 agar gambar terlihat cukup besar secara default
       setOffset({ x: 0, y: 0 });
     };
 
@@ -99,26 +110,31 @@ export const BlockPreview = ({ selectedVilla }) => {
         overscrollBehavior: "contain",
       }}
     >
+      {/* 6. RENDER GAMBAR: Menampilkan gambar villa berdasarkan prop yang dipilih */}
       {selectedVilla ? (
         <img
           ref={imgRef}
           src={`/images/residence/${selectedVilla}.png`}
           alt={selectedVilla}
-          draggable={false}
+          draggable={false} // Mencegah fitur drag default browser
           style={{
+            // Menggabungkan posisi offset (pan) dan skala (zoom) dalam satu transform
             transform: `translate(${offset.x}px, ${offset.y}px) scale(${zoom})`,
             transformOrigin: "center center",
+            // Transition dimatikan saat dragging agar pergerakan terasa instan dan responsif
             transition: dragging ? "none" : "transform 0.25s ease-out",
             userSelect: "none",
             pointerEvents: "none",
             maxWidth: "none",
             maxHeight: "none",
           }}
+          // Fallback jika gambar gagal dimuat
           onError={(e) => {
             e.target.src = "https://placehold.co/400x300?text=No+Image";
           }}
         />
       ) : (
+        // Placeholder jika belum ada villa yang dipilih
         <span
           role="button"
           tabIndex={0}

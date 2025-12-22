@@ -1,4 +1,15 @@
+/**
+ * Komponen ReservationCard
+ * Menampilkan detail spesifik dari sebuah reservasi rumah.
+ * Menyertakan informasi blok, perumahan, deskripsi, serta rentang waktu reservasi.
+ */
 export default function ReservationCard({ data }) {
+  
+  /**
+   * 1. FUNGSI FORMAT TANGGAL: formatDate
+   * Mengubah format tanggal mentah (ISO string) menjadi format yang lebih manusiawi.
+   * Contoh: "Monday, 12/23/2025 at 03:53 AM"
+   */
   const formatDate = (dateString) => {
     const date = new Date(dateString);
 
@@ -15,7 +26,11 @@ export default function ReservationCard({ data }) {
     return `${weekday}, ${month}/${day}/${year} at ${time}`;
   };
 
-  // Status colors (text & border) with !important to prevent Tailwind override
+  /**
+   * 2. HELPER WARNA: getStatusClasses
+   * Menentukan class Tailwind untuk warna teks dan border berdasarkan status reservasi.
+   * (Pending: Kuning/Emas, Accepted: Hijau, Canceled: Merah).
+   */
   const getStatusClasses = (status) => {
     switch (status) {
       case "pending":
@@ -29,7 +44,10 @@ export default function ReservationCard({ data }) {
     }
   };
 
-  // Left border color based on reservation status
+  /**
+   * 3. HELPER WARNA: getLeftBarColor
+   * Menentukan warna latar belakang untuk garis dekoratif (status bar) di sisi paling kiri kartu.
+   */
   const getLeftBarColor = (status) => {
     switch (status) {
       case "pending":
@@ -50,7 +68,7 @@ export default function ReservationCard({ data }) {
         shadow-lg transition-all duration-300
       "
     >
-      {/* Left status bar */}
+      {/* 4. LEFT STATUS BAR: Garis vertikal di sisi kiri yang menunjukkan status secara visual cepat */}
       <div
         className={`absolute left-0 top-0 bottom-0 w-2 rounded-l-2xl ${getLeftBarColor(
           data.reservation_status
@@ -58,15 +76,20 @@ export default function ReservationCard({ data }) {
       ></div>
 
       <div className="flex justify-between items-center p-6">
-        {/* Main content */}
+        
+        {/* 5. MAIN CONTENT: Informasi teks detail perumahan */}
         <div className="ml-6 flex flex-col text-left flex-1">
+          {/* Info Blok */}
           <h3 className="font-bold text-blue-800 dark:text-blue-400 text-sm">
             Block {data.block_name} {data.number_block}
           </h3>
+          {/* Nama Perumahan */}
           <p className="font-semibold text-lg text-foreground">{data.residence_name}</p>
 
+          {/* Deskripsi Properti */}
           <p className="text-sm text-muted-foreground mt-1">{data.description}</p>
 
+          {/* Informasi Waktu: Start & End Date */}
           <div className="mt-3 text-xs text-muted-foreground space-y-1">
             <p>
               <span className="font-semibold text-foreground">Start:</span>{" "}
@@ -79,7 +102,7 @@ export default function ReservationCard({ data }) {
           </div>
         </div>
 
-        {/* Reservation status */}
+        {/* 6. STATUS BADGE: Label status di sisi kanan kartu dengan styling dinamis (inline style) */}
         <div className="ml-8 flex-shrink-0">
           <span
             className={`inline-block min-w-[120px] text-center px-6 py-2 rounded-lg font-semibold text-base`}
@@ -105,6 +128,7 @@ export default function ReservationCard({ data }) {
               borderWidth: "1px",
             }}
           >
+            {/* Format teks: Mengubah status menjadi kapital di awal (misal: "pending" -> "Pending") */}
             {data.reservation_status.charAt(0).toUpperCase() + data.reservation_status.slice(1)}
           </span>
         </div>

@@ -1,26 +1,33 @@
 import backgroundImage from "@/assets/images/colection/property-page.png";
 
+/**
+ * Komponen AboutTop
+ * Berfungsi sebagai section "Hero" atau bagian paling atas pada halaman About Us.
+ * Menggunakan layout flexbox yang responsif (kolom di mobile, baris di desktop).
+ */
 export const AboutTop = () => {
   return (
     <section
       className="
         relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden
-        px-6                 /* Mobile */
+        px-6                 /* Padding Horizontal Mobile */
         md:px-12             /* Tablet */
-        lg:px-[80px]         /* 1024px */
-        xl:px-[100px]        /* 1280px */
-        2xl:px-[120px]       /* 1440px+ */
+        lg:px-[80px]         /* Desktop 1024px */
+        xl:px-[100px]        /* Desktop 1280px */
+        2xl:px-[120px]       /* Layar Ultra Wide 1440px+ */
       "
     >
-      {/* Background */}
+      {/* 1. BAGIAN BACKGROUND: Menampilkan gambar utama sebagai latar belakang section */}
       <img
         src={backgroundImage}
         alt="Background Bedroom"
         className="absolute inset-0 w-full h-full object-cover"
       />
+      
+      {/* 2. OVERLAY: Lapisan hitam transparan agar teks di atasnya tetap kontras dan mudah dibaca */}
       <div className="absolute inset-0 bg-black/40" />
 
-      {/* Main Content */}
+      {/* 3. MAIN CONTENT WRAPPER: Container utama untuk konten (Gambar & Teks) */}
       <div
         className="
           relative z-10 flex flex-col md:flex-row items-center justify-between
@@ -28,7 +35,7 @@ export const AboutTop = () => {
           w-full
         "
       >
-        {/* Left Image */}
+        {/* 4. LEFT IMAGE: Bagian untuk menampilkan foto profil/produk rumah di sisi kiri */}
         <div
           className="
             rounded-3xl overflow-hidden shadow-2xl border border-white/30
@@ -47,7 +54,7 @@ export const AboutTop = () => {
           />
         </div>
 
-        {/* Right Text */}
+        {/* 5. RIGHT TEXT: Bagian informasi teks (Judul dan Deskripsi Ibravia) */}
         <div className="text-white max-w-[512px] text-left flex flex-col justify-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-[48px]">About Us, IBRAVIA</h2>
 

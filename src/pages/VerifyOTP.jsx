@@ -2,30 +2,42 @@ import React, { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import api from "../api/api";
 
+/**
+ * Komponen VerifyOTP
+ * Berfungsi untuk memverifikasi kode OTP yang dikirim ke email pengguna.
+ * Digunakan untuk dua tujuan utama: pendaftaran akun (signup) dan reset password.
+ */
 export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
-  const [values, setValues] = useState(Array(length).fill(""));
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [error, setError] = useState("");
-  const [timeLeft, setTimeLeft] = useState(resendCooldown);
-  const [canResend, setCanResend] = useState(false);
-  const inputsRef = useRef([]);
+  // 1. STATE MANAGEMENT
+  const [values, setValues] = useState(Array(length).fill("")); // Array untuk menampung tiap digit OTP
+  const [isVerifying, setIsVerifying] = useState(false);        // Status loading saat verifikasi ke server
+  const [error, setError] = useState("");                       // Menyimpan pesan kesalahan
+  const [timeLeft, setTimeLeft] = useState(resendCooldown);     // Sisa waktu untuk kirim ulang (countdown)
+  const [canResend, setCanResend] = useState(false);           // Status apakah tombol resend aktif
+  const inputsRef = useRef([]);                                 // Referensi DOM untuk kontrol fokus input
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Ambil email & purpose dari state atau localStorage
+  // Mengambil data email dan tujuan (purpose) dari state router atau memori lokal
   const [email] = useState(location.state?.email || localStorage.getItem("email") || "");
   const [purpose] = useState(
     location.state?.purpose || localStorage.getItem("otpPurpose") || "signup"
   );
 
-  // Simpan ke localStorage agar tetap tersedia setelah refresh
+  /**
+   * 2. PERSISTENCE EFFECT:
+   * Menyimpan email dan purpose ke localStorage agar data tidak hilang saat halaman di-refresh.
+   */
   useEffect(() => {
     if (email) localStorage.setItem("email", email);
     if (purpose) localStorage.setItem("otpPurpose", purpose);
   }, [email, purpose]);
 
-  // Redirect jika email tidak ditemukan
+  /**
+   * 3. PROTECTION EFFECT:
+   * Mengalihkan pengguna kembali ke halaman awal jika data email tidak ditemukan.
+   */
   useEffect(() => {
     if (!email) {
       alert("Email not found. Please restart the process.");
@@ -33,7 +45,10 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     }
   }, [email, navigate, purpose]);
 
-  // Timer resend OTP
+  /**
+   * 4. TIMER EFFECT:
+   * Menjalankan hitung mundur (countdown) untuk fitur Kirim Ulang Kode.
+   */
   useEffect(() => {
     if (timeLeft <= 0) {
       setCanResend(true);
@@ -43,20 +58,33 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
+  // Fungsi pembantu untuk memindahkan fokus kursor ke kotak input tertentu
   const focusInput = (idx) => {
     const el = inputsRef.current[idx];
     if (el) el.focus();
   };
 
+  /**
+   * 5. INPUT HANDLERS:
+   * Mengelola perpindahan fokus otomatis saat pengguna mengetik digit.
+   */
   const handleChange = (e, idx) => {
     const val = e.target.value.replace(/[^0-9]/g, "").slice(0, 1);
     const next = [...values];
     next[idx] = val;
     setValues(next);
+
+    // Pindah ke kotak selanjutnya jika kotak saat ini sudah terisi
     if (val && idx < length - 1) focusInput(idx + 1);
+    
+    // Otomatis submit jika semua kotak sudah terisi
     if (idx === length - 1 && next.every((v) => v)) submitCode(next.join(""));
   };
 
+  /**
+   * 6. KEYDOWN HANDLER:
+   * Mengelola penghapusan karakter menggunakan Backspace dan memundurkan fokus kursor.
+   */
   const handleKeyDown = (e, idx) => {
     if (e.key === "Backspace") {
       e.preventDefault();
@@ -72,6 +100,10 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     }
   };
 
+  /**
+   * 7. PASTE HANDLER:
+   * Memungkinkan pengguna menempelkan (paste) kode OTP lengkap sekaligus ke dalam kotak input.
+   */
   const handlePaste = (e) => {
     e.preventDefault();
     const digits = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, length).split("");
@@ -82,6 +114,10 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     if (digits.length === length) submitCode(next.join(""));
   };
 
+  /**
+   * 8. VERIFY API CALL:
+   * Mengirim kode OTP ke server untuk divalidasi.
+   */
   const submitCode = async (code) => {
     if (!email) return alert("Email not found.");
     setIsVerifying(true);
@@ -96,22 +132,28 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
 
       alert(res.data.message);
 
+      // Membersihkan memori sementara setelah verifikasi berhasil
       localStorage.removeItem("email");
       localStorage.removeItem("otpPurpose");
 
+      // Navigasi ke rute tujuan berdasarkan konteks (Login atau Reset Password)
       navigate(purpose === "signup" ? "/Login" : "/ResetPassword", {
         state: { email },
       });
     } catch (err) {
-      console.error("❌ Verify error:", err.response?.data || err);
+      console.error(" Verify error:", err.response?.data || err);
       setError(err.response?.data?.error || "Verification failed. Please try again.");
-      setValues(Array(length).fill(""));
+      setValues(Array(length).fill("")); // Reset input jika gagal
       focusInput(0);
     } finally {
       setIsVerifying(false);
     }
   };
 
+  /**
+   * 9. RESEND API CALL:
+   * Meminta server mengirim ulang kode OTP baru ke email pengguna.
+   */
   const handleResend = async () => {
     if (!email) {
       alert("Email not found, please restart the process.");
@@ -120,17 +162,16 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
     }
 
     try {
-      console.log("🔁 Resend OTP payload:", { email, purpose });
       const res = await api.post("/auth/resend-otp", {
         email,
         purpose,
       });
 
       alert(res.data.message);
-      setTimeLeft(resendCooldown);
+      setTimeLeft(resendCooldown); // Reset timer countdown
       setCanResend(false);
     } catch (err) {
-      console.error("❌ Resend OTP error:", err.response?.data || err);
+      console.error(" Resend OTP error:", err.response?.data || err);
       alert(err.response?.data?.error || "Failed to resend OTP.");
     }
   };
@@ -149,6 +190,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
             else setError("Isi semua digit OTP.");
           }}
         >
+          {/* OTP INPUT GRID */}
           <div className="flex gap-3" onPaste={handlePaste}>
             {values.map((v, i) => (
               <input
@@ -169,6 +211,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
             ))}
           </div>
 
+          {/* ACTION BUTTONS & FEEDBACK */}
           <div className="w-full mt-2">
             {error && <div className="text-sm text-red-600 mb-2">{error}</div>}
             <button
@@ -180,6 +223,7 @@ export const VerifyOTP = ({ length = 6, resendCooldown = 30 }) => {
             </button>
           </div>
 
+          {/* RESEND SECTION */}
           <div className="text-center mt-4 text-sm text-slate-600">
             <button
               type="button"

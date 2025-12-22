@@ -4,11 +4,19 @@ import { Eye, EyeOff } from "lucide-react";
 import api from "../api/api";
 import PopupResetPasswordSuccess from "../components/PopUp/PopupResetPasswordSuccess";
 
+/**
+ * Komponen ResetPassword
+ * Halaman akhir dari alur lupa kata sandi di mana pengguna memasukkan password baru.
+ * Memeriksa kekuatan password secara real-time dan mencocokkan konfirmasi password.
+ */
 export const ResetPassword = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Mengambil email dari state router atau localStorage sebagai identitas akun yang akan di-reset
   const email = location.state?.email || localStorage.getItem("email");
 
+  // State untuk input, error, dan visibilitas password
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState({ password: "", confirm: "" });
@@ -17,10 +25,19 @@ export const ResetPassword = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState(null);
 
+  /**
+   * REGEX PASSWORD:
+   * Mengharuskan minimal 8 karakter, terdapat huruf, angka, dan simbol khusus.
+   */
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
-  // ✅ Real-time validation seperti di SignUp.jsx
+  /**
+   * VALIDASI REAL-TIME:
+   * Berjalan setiap kali nilai 'password' atau 'confirm' berubah.
+   * Memberikan feedback instan kepada pengguna tanpa harus menekan tombol submit.
+   */
   useEffect(() => {
+    // Validasi kompleksitas password
     if (password && !passwordRegex.test(password)) {
       setError((prev) => ({
         ...prev,
@@ -30,6 +47,7 @@ export const ResetPassword = () => {
       setError((prev) => ({ ...prev, password: "" }));
     }
 
+    // Validasi kecocokan password dengan konfirmasi
     if (confirm && confirm !== password) {
       setError((prev) => ({
         ...prev,
@@ -40,9 +58,14 @@ export const ResetPassword = () => {
     }
   }, [password, confirm]);
 
+  /**
+   * HANDLER SUBMIT:
+   * Memvalidasi ulang data sebelum dikirim ke server melalui API.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Cek keberadaan email context
     if (!email) {
       setPopupMessage({
         title: "Email Not Found",
@@ -52,6 +75,7 @@ export const ResetPassword = () => {
       return;
     }
 
+    // Cek apakah field kosong
     if (!password || !confirm) {
       setError({
         password: !password ? "Please enter your new password." : "",
@@ -60,10 +84,11 @@ export const ResetPassword = () => {
       return;
     }
 
-    // Cegah submit jika ada error
+    // Mencegah request jika masih ada pesan error validasi
     if (error.password || error.confirm) return;
 
     try {
+      // Mengirimkan password baru ke backend Ibravia
       await api.post("/auth/reset-password", { email, newPassword: password });
 
       setPopupMessage({
@@ -83,6 +108,7 @@ export const ResetPassword = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      {/* FORM CONTAINER */}
       <form
         onSubmit={handleSubmit}
         className="bg-white rounded-2xl shadow-lg flex flex-col justify-center items-stretch"
@@ -97,7 +123,7 @@ export const ResetPassword = () => {
           Enter your new password below and confirm it to reset your account access.
         </p>
 
-        {/* New Password */}
+        {/* INPUT PASSWORD BARU */}
         <div className="mt-[45px]">
           <label className="block text-sm font-medium text-gray-800 mb-[4px]">New Password</label>
           <div className="relative">
@@ -114,6 +140,7 @@ export const ResetPassword = () => {
                 }`}
               required
             />
+            {/* Toggle untuk melihat/menyembunyikan password */}
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
@@ -124,6 +151,7 @@ export const ResetPassword = () => {
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+          {/* Pesan Error Password */}
           {error.password && (
             <p className="text-xs text-red-500 mt-2 animate-[fade-in_0.3s_ease-out]">
               {error.password}
@@ -131,7 +159,7 @@ export const ResetPassword = () => {
           )}
         </div>
 
-        {/* Confirm Password */}
+        {/* INPUT KONFIRMASI PASSWORD */}
         <div className="mt-[14px]">
           <label className="block text-sm font-medium text-gray-800 mb-[4px]">
             Confirm New Password
@@ -160,6 +188,7 @@ export const ResetPassword = () => {
               {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+          {/* Pesan Error Konfirmasi */}
           {error.confirm && (
             <p className="text-xs text-red-500 mt-2 animate-[fade-in_0.3s_ease-out]">
               {error.confirm}
@@ -167,7 +196,7 @@ export const ResetPassword = () => {
           )}
         </div>
 
-        {/* Submit Button */}
+        {/* TOMBOL SUBMIT */}
         <button
           type="submit"
           className="cursor-pointer w-full bg-[#0056FF] text-white p-3 rounded-md font-medium mt-6 
@@ -177,6 +206,9 @@ export const ResetPassword = () => {
         </button>
       </form>
 
+      {/* POPUP SUKSES/GAGAL:
+          Jika reset berhasil, data email di localStorage dihapus demi keamanan dan diarahkan ke Login.
+      */}
       <PopupResetPasswordSuccess
         show={showPopup}
         message={popupMessage}

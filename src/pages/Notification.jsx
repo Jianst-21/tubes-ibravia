@@ -3,10 +3,19 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import adminApi from "../api/apiadmin";
 import { BellRing, CircleArrowRight } from "lucide-react";
 
+/**
+ * Komponen Notification
+ * Berfungsi untuk menampilkan daftar pemberitahuan sistem kepada Admin.
+ * Memiliki fitur penandaan "sudah dibaca" secara otomatis saat detail notifikasi dibuka.
+ */
 const Notification = () => {
-  const [notifications, setNotifications] = useState([]);
-  const [selected, setSelected] = useState(null);
+  // 1. STATE MANAGEMENT
+  const [notifications, setNotifications] = useState([]); // Menyimpan array notifikasi
+  const [selected, setSelected] = useState(null);       // Menyimpan notifikasi yang sedang dibuka di popup
 
+  /**
+   * 2. EFFECT: Mengambil data notifikasi saat komponen pertama kali dimuat.
+   */
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -15,13 +24,15 @@ const Notification = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        // Tambahkan properti read boolean
+        // Mapping Data: Menambahkan properti boolean 'read' berdasarkan status dari database
         const mapped = res.data.map((n) => ({
           ...n,
           read: n.read_status === "read",
         }));
 
-        // Urutkan: belum dibaca di atas, lalu berdasarkan waktu terbaru
+        // Logika Pengurutan: 
+        // Notifikasi yang belum dibaca diposisikan paling atas (unread first),
+        // kemudian diurutkan berdasarkan waktu kirim terbaru (newest first).
         const sorted = mapped.sort((a, b) => {
           if (a.read === b.read) {
             return new Date(b.send_time) - new Date(a.send_time);
@@ -31,16 +42,22 @@ const Notification = () => {
 
         setNotifications(sorted);
       } catch (err) {
-        console.error("❌ Error fetching notifications:", err.response?.data || err.message);
+        console.error(" Error fetching notifications:", err.response?.data || err.message);
       }
     };
 
     fetchNotifications();
   }, []);
 
+  /**
+   * 3. HANDLER: handleSelect
+   * Dipanggil saat pengguna mengklik salah satu item notifikasi.
+   * Mengubah status notifikasi menjadi 'read' di database melalui API PATCH.
+   */
   const handleSelect = async (n) => {
-    setSelected(n);
+    setSelected(n); // Tampilkan detail di popup
 
+    // Jika notifikasi belum dibaca, jalankan update status ke backend
     if (!n.read) {
       try {
         const token = localStorage.getItem("token");
@@ -48,6 +65,7 @@ const Notification = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        // Update state lokal agar UI langsung berubah tanpa perlu refresh halaman
         setNotifications((prev) => {
           const updated = prev.map((notif) =>
             notif.id_notification === n.id_notification
@@ -55,7 +73,7 @@ const Notification = () => {
               : notif
           );
 
-          // Urutkan ulang setelah update
+          // Urutkan kembali daftar setelah status berubah agar posisi berpindah ke bawah (karena sudah dibaca)
           return updated.sort((a, b) => {
             if (a.read === b.read) {
               return new Date(b.send_time) - new Date(a.send_time);
@@ -64,21 +82,20 @@ const Notification = () => {
           });
         });
       } catch (err) {
-        console.error("❌ Gagal update status notifikasi:", err.response?.data || err.message);
+        console.error(" Gagal update status notifikasi:", err.response?.data || err.message);
       }
     }
   };
 
   return (
     <div className="flex min-h-screen bg-[#F5FAFF] font-sans relative">
-      {/* Sidebar  */}
       <Sidebar />
 
-      {/* Main Content */}
+      {/* Konten Utama Dashboard */}
       <main className="flex-1 p-8 ml-[260px] transition-all duration-300">
         <h1 className="text-[48px] font-bold text-gray-900 -mt-8 mb-8">Notification</h1>
 
-        {/* Daftar Notifikasi */}
+        {/* 4. DAFTAR NOTIFIKASI: Melakukan mapping terhadap state notifications */}
         <div className="space-y-5">
           {notifications.length === 0 ? (
             <p className="text-gray-500">No notifications.</p>
@@ -89,6 +106,7 @@ const Notification = () => {
                 onClick={() => handleSelect(n)}
                 className={`flex justify-between items-center px-8 py-5 rounded-2xl shadow-md transition-all 
                   duration-200 cursor-pointer ${
+                    // Kondisi Styling: Biru tua untuk yang belum dibaca, Abu-abu untuk yang sudah dibaca
                     n.read
                       ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
                       : "bg-[#0B3C78] text-white hover:bg-[#0d478b]"
@@ -109,18 +127,22 @@ const Notification = () => {
           )}
         </div>
 
-        {/* Popup Detail Notifikasi */}
+        {/* 5. POPUP DETAIL: Muncul hanya jika state 'selected' berisi data notifikasi */}
         {selected && (
           <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 transition">
             <div className="bg-white rounded-2xl shadow-lg w-[400px] p-6 text-center relative">
               <h2 className="text-lg font-bold mb-2">Notification Detail</h2>
               <hr className="border-gray-300 mb-3" />
+              
               <p className="text-sm text-gray-600 mb-6">{selected.content}</p>
+              
+              {/* Format Waktu: Menampilkan waktu kirim dalam format lokal Indonesia */}
               <p className="text-xs text-gray-400 mb-6">
                 Time: {new Date(selected.send_time).toLocaleString("id-ID")}
               </p>
+
               <button
-                onClick={() => setSelected(null)}
+                onClick={() => setSelected(null)} // Tutup modal
                 className="bg-[#0B3C78] hover:bg-[#0d478b] text-white px-6 py-2 rounded-full text-sm transition"
               >
                 Go Back

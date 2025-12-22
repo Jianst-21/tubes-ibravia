@@ -8,6 +8,9 @@ import toast from "react-hot-toast";
 import LogoBiru from "../../assets/images/logo/Logo Biru.png";
 import LogoPutih from "../../assets/images/logo/Logo Putih.png";
 
+/**
+ * Konfigurasi menu navigasi utama.
+ */
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Properties", href: "/Properties" },
@@ -15,20 +18,25 @@ const navItems = [
   { name: "About Us", href: "/AboutUs" },
 ];
 
+/**
+ * Komponen Navbar Utama.
+ * Mengelola navigasi, tema (dark/light), status login pengguna, dan tampilan responsif.
+ */
 export const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [isDark, setIsDark] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  // 1. STATE MANAGEMENT
+  const [isScrolled, setIsScrolled] = useState(false); // Melacak apakah layar sudah di-scroll
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Kontrol buka/tutup menu mobile
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Status autentikasi user
+  const [userData, setUserData] = useState(null);      // Menyimpan data profil user
+  const [isDark, setIsDark] = useState(false);         // Status tema (gelap/terang)
+  const [isReady, setIsReady] = useState(false);       // Memastikan data local ter-load sebelum render auth
+  const [open, setOpen] = useState(false);             // Kontrol dropdown user menu
+  const dropdownRef = useRef(null);                    // Referensi DOM untuk area dropdown
   const navigate = useNavigate();
 
-  /* ============================
-        Click Outside Dropdown
-  ============================ */
+  /* 
+        EFFECT: Menutup dropdown jika user klik di luar area menu
+   */
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -39,15 +47,15 @@ export const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  /* ============================
-        Main Init: theme, scroll,
-        login, userData
-  ============================ */
+  /* 
+        EFFECT UTAMA: Inisialisasi scroll, tema, dan status login
+   */
   useEffect(() => {
+    // A. Scroll Listener: Mengubah style navbar saat user scroll ke bawah
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
 
-    // Theme setup
+    // B. Theme Setup: Mendeteksi tema dari localStorage atau preferensi sistem
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setIsDark(savedTheme === "dark");
@@ -55,6 +63,7 @@ export const Navbar = () => {
       setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
 
+    // C. Theme Observer: Memantau perubahan class 'dark' pada elemen HTML
     const observer = new MutationObserver(() => {
       const darkMode = document.documentElement.classList.contains("dark");
       setIsDark(darkMode);
@@ -62,18 +71,16 @@ export const Navbar = () => {
     });
     observer.observe(document.documentElement, { attributes: true });
 
-    // Login state
+    // D. Login State & User Data: Mengambil data user dari localStorage
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
     setIsLoggedIn(loggedIn);
 
-    // User Data
     const stored = localStorage.getItem("user");
-
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
 
-        // 🔥 FILTER: If admin → treat as loggedOut for user navbar
+        // Filter Keamanan: Jika role admin masuk ke UI user, paksa logout secara visual
         if (parsed.role === "admin") {
           setUserData(null);
           setIsLoggedIn(false);
@@ -85,7 +92,7 @@ export const Navbar = () => {
       }
     }
 
-    setIsReady(true);
+    setIsReady(true); // Tandai bahwa inisialisasi selesai
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -93,9 +100,9 @@ export const Navbar = () => {
     };
   }, []);
 
-  /* ============================
-        Lock Scroll on Mobile
-  ============================ */
+  /* 
+        EFFECT: Mengunci scroll layar saat menu mobile terbuka
+   */
   useEffect(() => {
     if (isMenuOpen) {
       const scrollY = window.scrollY;
@@ -111,9 +118,9 @@ export const Navbar = () => {
     }
   }, [isMenuOpen]);
 
-  /* ============================
-              LOGOUT
-  ============================ */
+  /* 
+        FUNGSI: Logout (Hapus data session & kembali ke login)
+   */
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("user");
@@ -123,11 +130,10 @@ export const Navbar = () => {
     navigate("/Login");
   };
 
-  /* ============================
-           AVATAR INITIAL FIX
-  ============================ */
+  /* 
+        FUNGSI: Membuat inisial nama untuk avatar user */
   const getAvatarLetter = () => {
-    if (!userData) return ""; // 🔥 Fix U muncul
+    if (!userData) return ""; 
     const nameLetter = userData.name?.trim()?.charAt(0)?.toUpperCase();
     const emailLetter = userData.email?.trim()?.charAt(0)?.toUpperCase();
     return nameLetter || emailLetter || "";
@@ -141,7 +147,8 @@ export const Navbar = () => {
       )}
     >
       <div className="w-full px-16 flex items-center justify-between">
-        {/* LOGO */}
+        
+        {/* BAGIAN 1: LOGO & BRANDING */}
         <Link to="/" className="flex items-center space-x-2">
           <img
             key={isDark ? "logo-dark" : "logo-light"}
@@ -154,7 +161,7 @@ export const Navbar = () => {
           </span>
         </Link>
 
-        {/* DESKTOP NAV */}
+        {/* BAGIAN 2: NAVIGASI DESKTOP */}
         <div className="hidden md:flex items-center space-x-8">
           {navItems.map((item, idx) => (
             <Link
@@ -167,12 +174,13 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* AUTH + THEME */}
+        {/* BAGIAN 3: AUTHENTICATION + THEME TOGGLE (DESKTOP) */}
         <div className="hidden md:flex items-center gap-4">
           {isReady &&
             (isLoggedIn ? (
+              /* Tampilan Jika Sudah Login */
               <div className="relative" ref={dropdownRef}>
-                {/* AVATAR BUTTON */}
+                {/* Tombol Avatar (Membuka Dropdown) */}
                 <button
                   type="button"
                   className="cursor-pointer w-10 h-10 rounded-full bg-gradient-to-r 
@@ -182,7 +190,7 @@ export const Navbar = () => {
                   {getAvatarLetter()}
                 </button>
 
-                {/* DROPDOWN */}
+                {/* Dropdown Menu User */}
                 {open && (
                   <div className="absolute right-0 mt-2 w-44 bg-card text-foreground shadow-lg rounded-md z-50 transition-all duration-200">
                     <p className="px-4 py-2 text-sm border-b border-border truncate">
@@ -210,6 +218,7 @@ export const Navbar = () => {
                 )}
               </div>
             ) : (
+              /* Tampilan Jika Belum Login */
               <>
                 <Link
                   to="/Login"
@@ -228,7 +237,7 @@ export const Navbar = () => {
           <ThemeToggle />
         </div>
 
-        {/* MOBILE TOGGLE */}
+        {/* BAGIAN 4: TOMBOL MENU MOBILE (HAMBURGER) */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2 text-foreground z-[101]"
@@ -237,9 +246,10 @@ export const Navbar = () => {
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* BAGIAN 5: OVERLAY MENU MOBILE (Muncul saat Klik Hamburger) */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-[99] flex flex-col items-center bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden overflow-y-auto">
+          {/* List Navigasi Mobile */}
           <ul className="flex flex-col items-center space-y-6 text-lg font-medium mt-24">
             {navItems.map((item, idx) => (
               <li key={idx}>
@@ -256,7 +266,7 @@ export const Navbar = () => {
 
           <div className="w-32 border-t border-border my-8" />
 
-          {/* MOBILE AUTH BUTTONS */}
+          {/* Tombol Auth Mobile */}
           <div className="flex flex-col gap-4 w-[200px] mb-12">
             {isReady &&
               (isLoggedIn ? (

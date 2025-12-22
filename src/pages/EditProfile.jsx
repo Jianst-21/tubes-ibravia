@@ -3,7 +3,13 @@ import toast, { Toaster } from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 import api from "../api/api";
 
+/**
+ * Komponen EditProfile
+ * Berfungsi untuk mengelola dan memperbarui data profil pribadi pengguna.
+ * Mendukung fitur sinkronisasi tema (Dark/Light) dan pengambilan data profil secara otomatis.
+ */
 export default function EditProfile() {
+  // State untuk menampung data formulir profil pengguna
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -12,18 +18,24 @@ export default function EditProfile() {
     address: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [loading, setLoading] = useState(false); // Melacak status pengiriman data ke server
+  const [isDark, setIsDark] = useState(false);  // Melacak status tema saat ini
 
+  // Mengambil ID user dari localStorage untuk validasi dan request API
   const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
   const id_user = storedUser.id_user;
 
+  // Proteksi awal: Jika ID user tidak ada, tampilkan error dan hentikan render
   if (!id_user) {
     toast.error("User tidak valid!");
     return null;
   }
 
-  // ======== Theme Persist =========
+  /**
+   * Effect Sinkronisasi Tema:
+   * Mengatur agar tampilan halaman sesuai dengan tema (Dark/Light) yang tersimpan di sistem.
+   * Menggunakan MutationObserver untuk mendeteksi perubahan tema secara realtime dari komponen lain.
+   */
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const darkMode = savedTheme
@@ -42,8 +54,12 @@ export default function EditProfile() {
 
     return () => observer.disconnect();
   }, []);
-  // ================================
 
+  /**
+   * Effect Pengambilan Data:
+   * Mengambil data profil user dari backend saat komponen pertama kali dimuat.
+   * Memecah string 'name' dari database menjadi nama depan dan belakang untuk form.
+   */
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -68,12 +84,16 @@ export default function EditProfile() {
     fetchUser();
   }, [id_user]);
 
+  /**
+   * Fungsi handleSubmit:
+   * Mengirimkan data profil yang telah diubah ke server menggunakan method PUT.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const { data } = await api.put(`/user/${id_user}`, user);
+      await api.put(`/user/${id_user}`, user);
       toast.success("Profil berhasil diperbarui!");
     } catch (error) {
       toast.error(error.response?.data?.error || "Gagal memperbarui profil.");
@@ -89,7 +109,7 @@ export default function EditProfile() {
     >
       <Toaster position="top-right" />
 
-      {/* Header */}
+      {/* Header Halaman: Berisi Judul dan Tombol Navigasi Kembali */}
       <div className="w-full max-w-6xl flex items-center justify-between mb-8">
         <h1 className="text-3xl font-semibold text-foreground">Edit Profile</h1>
         <button
@@ -101,7 +121,7 @@ export default function EditProfile() {
         </button>
       </div>
 
-      {/* Card */}
+      {/* Kartu Formulir: Kontainer utama untuk input data profil */}
       <div
         className={`w-full max-w-6xl border border-border p-8 md:p-12 rounded-2xl 
         transition-colors duration-300 ${isDark ? "bg-card dark:bg-card" : "bg-card"}`}
@@ -126,6 +146,7 @@ export default function EditProfile() {
             value={user.phone_number}
             onChange={(val) => setUser({ ...user, phone_number: val })}
           />
+          {/* Email dinonaktifkan (disabled) karena merupakan identifier unik yang tidak boleh diubah sembarangan */}
           <InputField label="Email Address" value={user.email} onChange={() => {}} disabled />
           <TextAreaField
             label="Address"
@@ -148,6 +169,10 @@ export default function EditProfile() {
   );
 }
 
+/**
+ * Komponen InputField:
+ * Abstraksi untuk elemen input teks agar kode lebih modular dan bersih.
+ */
 const InputField = ({ label, value, onChange, disabled }) => (
   <div>
     <label className="block text-sm font-medium mb-1 text-foreground">{label}</label>
@@ -163,13 +188,18 @@ const InputField = ({ label, value, onChange, disabled }) => (
   </div>
 );
 
+/**
+ * Komponen TextAreaField:
+ * Abstraksi untuk elemen textarea (digunakan pada kolom alamat).
+ */
 const TextAreaField = ({ label, value, onChange }) => (
   <div>
     <label className="block text-sm font-medium mb-1 text-foreground">{label}</label>
     <textarea
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full border border-border rounded-md p-3 bg-card text-foreground resize-none h-28 focus:outline-none focus:ring-2 focus:ring-primary transition"
+      className="w-full border border-border rounded-md p-3 bg-card 
+      text-foreground resize-none h-28 focus:outline-none focus:ring-2 focus:ring-primary transition"
     />
   </div>
 );

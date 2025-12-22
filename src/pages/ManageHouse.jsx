@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "../components/AdminDashboard/Sidebar";
 import apiAdmin from "../api/apiadmin";
-import { ChevronDown, Check, Loader2 } from "lucide-react"; // Tambah import Check & Loader2
+import { ChevronDown, Check, Loader2 } from "lucide-react";
 
-/* ===============================
-   🔽 Komponen Dropdown Kustom (Tidak Berubah) a
-=============================== */
+/**
+ * Komponen Dropdown Kustom
+ * Digunakan untuk memilih Blok dan Nomor Rumah dengan UI yang konsisten.
+ * Memiliki fitur penutupan otomatis saat klik di luar area dropdown (Outside Click).
+ */
 const Dropdown = ({ label, options, value, onChange, disabled, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  // Effect untuk mendeteksi klik di luar komponen agar dropdown tertutup
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -51,6 +54,7 @@ const Dropdown = ({ label, options, value, onChange, disabled, placeholder }) =>
         />
       </button>
 
+      {/* List Opsi Dropdown */}
       {isOpen && (
         <div
           className="absolute z-10 mt-1 w-56 bg-white shadow-lg max-h-60 rounded-md py-1 
@@ -80,24 +84,27 @@ const Dropdown = ({ label, options, value, onChange, disabled, placeholder }) =>
   );
 };
 
-/* ===============================
-   🏠 Komponen Utama ManageHouse
-=============================== */
+/**
+ * Komponen Utama ManageHouse
+ * Panel kontrol bagi Admin untuk melihat detail spesifik rumah dan mengubah status (Available/Sold).
+ */
 const ManageHouse = () => {
-  const [houses, setHouses] = useState([]);
-  const [selectedBlock, setSelectedBlock] = useState("");
-  const [selectedNumber, setSelectedNumber] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [targetStatus, setTargetStatus] = useState("");
+  // 1. STATE MANAGEMENT
+  const [houses, setHouses] = useState([]);         // Master data seluruh rumah
+  const [selectedBlock, setSelectedBlock] = useState("");   // Filter blok terpilih
+  const [selectedNumber, setSelectedNumber] = useState(""); // Filter nomor rumah terpilih
+  const [loading, setLoading] = useState(true);      // Status loading inisial
+  const [updating, setUpdating] = useState(false);  // Status loading saat hit API patch
+  const [showModal, setShowModal] = useState(false); // Kontrol modal konfirmasi
+  const [targetStatus, setTargetStatus] = useState(""); // Status baru yang akan diterapkan
 
-  // State baru untuk Pop-up Sukses
+  // State untuk Pop-up Sukses otomatis
   const [successModal, setSuccessModal] = useState({
     isOpen: false,
-    status: "", // 'available' atau 'sold'
+    status: "", 
   });
 
+  // 2. EFFECT: Fetching data rumah dari backend admin saat pertama kali dimuat
   useEffect(() => {
     const fetchHouses = async () => {
       try {
@@ -112,12 +119,15 @@ const ManageHouse = () => {
     fetchHouses();
   }, []);
 
+  // 3. DERIVED DATA: Menghasilkan opsi dropdown berdasarkan data yang ada
+  // Menggunakan Set untuk memastikan nama blok unik
   const blockOptions = [
     ...new Set(houses.map((h) => h.block?.block_name || h.block_name).filter(Boolean)),
   ]
     .sort()
     .map((block) => ({ value: block, label: `Block ${block}` }));
 
+  // Mencari opsi nomor berdasarkan blok yang sedang dipilih
   const numberOptions = houses
     .filter((h) => (h.block?.block_name || h.block_name) === selectedBlock)
     .map((h) => h.number_block)
@@ -128,12 +138,17 @@ const ManageHouse = () => {
       label: `No. ${String(num).padStart(2, "0")}`,
     }));
 
+  // Mencari satu objek rumah spesifik yang cocok dengan filter
   const filteredHouse = houses.find(
     (h) =>
       (h.block?.block_name || h.block_name) === selectedBlock &&
       String(h.number_block) === String(selectedNumber)
   );
 
+  /**
+   * 4. LOGIKA PEMBARUAN STATUS
+   * Fungsi untuk memicu perubahan status antara Available ke Sold (atau sebaliknya).
+   */
   const handleEditClick = () => {
     if (!filteredHouse) return;
     setTargetStatus(filteredHouse.status === "available" ? "sold" : "available");
@@ -144,24 +159,24 @@ const ManageHouse = () => {
     if (!filteredHouse || !targetStatus) return;
     setUpdating(true);
     try {
+      // Hit endpoint PATCH untuk mengubah status di database
       await apiAdmin.patch(`/houses/${filteredHouse.id_house}/status`, {
         status: targetStatus,
       });
 
-      // Update state lokal dulu
+      // Update state lokal agar UI langsung berubah tanpa refresh
       setHouses((prev) =>
         prev.map((h) =>
           h.id_house === filteredHouse.id_house ? { ...h, status: targetStatus } : h
         )
       );
 
-      // Tutup modal konfirmasi
-      setShowModal(false);
+      setShowModal(false); // Tutup modal konfirmasi
 
-      // Tampilkan Modal Sukses
+      // Tampilkan Pop-up Sukses
       setSuccessModal({ isOpen: true, status: targetStatus });
 
-      // Tutup otomatis setelah 2 detik
+      // Menutup pop-up sukses secara otomatis setelah 2 detik
       setTimeout(() => {
         setSuccessModal({ isOpen: false, status: "" });
       }, 2000);
@@ -181,6 +196,7 @@ const ManageHouse = () => {
       </div>
     );
 
+  // 5. FORMATTING: Menyusun deskripsi fitur rumah dan alamat lengkap
   let houseDescription = "-";
   let fullAddress = "-";
 
@@ -213,7 +229,7 @@ const ManageHouse = () => {
         <div className="max-w-6xl mx-auto">
           <h1 className="text-[48px] font-bold text-[#0E1315] -mt-8 mb-8">Manage House</h1>
 
-          {/* FILTER AREA */}
+          {/* AREA FILTER: Tempat admin memilih rumah yang ingin dikelola */}
           <div className="flex gap-6 mb-8 relative z-10">
             <Dropdown
               label="Housing Block"
@@ -221,7 +237,7 @@ const ManageHouse = () => {
               value={selectedBlock}
               onChange={(val) => {
                 setSelectedBlock(val);
-                setSelectedNumber("");
+                setSelectedNumber(""); // Reset nomor saat blok berganti
               }}
               placeholder="Select Block"
             />
@@ -235,7 +251,7 @@ const ManageHouse = () => {
             />
           </div>
 
-          {/* CARD DETAIL */}
+          {/* DETAIL KARTU RUMAH: Muncul jika blok dan nomor sudah dipilih */}
           {filteredHouse ? (
             <div
               className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 w-full 
@@ -250,32 +266,31 @@ const ManageHouse = () => {
                     {filteredHouse.residence?.residence_name || "Nama Residence"}
                   </h2>
                 </div>
+                
+                {/* Badge Status Dinamis */}
                 <div className="flex flex-col items-end gap-2">
-               <span
-                className={`rounded-full capitalize
-                  inline-flex items-center justify-center text-center
-                  h-8 min-w-[110px] px-4
-                  text-[16px] font-semibold tracking-wider leading-none
-                  bg-white border border-[1.5px] border-current
-                  ${
-                    filteredHouse.status === "sold"
-                      ? "text-[#0B3C78]"
-                      : filteredHouse.status === "available"
-                        ? "text-[#249A42]"
-                        : filteredHouse.status === "reserved"
-                          ? "text-[#C5880A]"
-                          : "text-gray-600"
-                  }`}
-              >
-                {filteredHouse.status}
-              </span>
-
-
+                  <span
+                    className={`rounded-full capitalize inline-flex items-center justify-center text-center
+                      h-8 min-w-[110px] px-4 text-[16px] font-semibold tracking-wider leading-none
+                      bg-white border border-[1.5px] border-current
+                      ${
+                        filteredHouse.status === "sold"
+                          ? "text-[#0B3C78]"
+                          : filteredHouse.status === "available"
+                            ? "text-[#249A42]"
+                            : filteredHouse.status === "reserved"
+                              ? "text-[#C5880A]"
+                              : "text-gray-600"
+                      }`}
+                  >
+                    {filteredHouse.status}
+                  </span>
                 </div>
               </div>
 
               <hr className="border-gray-100 mb-5" />
 
+              {/* Grid Spesifikasi Luas Tanah dan Bangunan */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
                 <div className="space-y-3">
                   <div>
@@ -313,6 +328,7 @@ const ManageHouse = () => {
                 </div>
               </div>
 
+              {/* Tombol Akses Edit Status */}
               <div className="flex justify-end mt-8 pt-4 border-t border-gray-50">
                 <button
                   onClick={handleEditClick}
@@ -326,10 +342,8 @@ const ManageHouse = () => {
               </div>
             </div>
           ) : (
-            <div
-              className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border 
-                          border-gray-200 mt-10"
-            >
+            /* Placeholder saat belum ada data yang dipilih */
+            <div className="flex flex-col items-center justify-center p-10 bg-white rounded-2xl shadow-sm border border-gray-200 mt-10">
               <p className="text-center text-gray-500 text-lg font-medium">
                 {!selectedBlock || !selectedNumber
                   ? "Please select block and house number to view details."
@@ -340,24 +354,12 @@ const ManageHouse = () => {
         </div>
       </main>
 
-      {/* MODAL KONFIRMASI */}
+      {/* MODAL KONFIRMASI: Muncul sebelum melakukan PATCH ke database */}
       {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 
-                      backdrop-blur-sm animate-in fade-in duration-200"
-        >
-          <div
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 scale-100 
-                        animate-in zoom-in-95 duration-200"
-          >
-            {/* Title */}
-            <h3 className="text-xl font-bold text-center text-[#0E1315] mb-2">
-              Confirm Status Change
-            </h3>
-
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 scale-100 animate-in zoom-in-95 duration-200">
+            <h3 className="text-xl font-bold text-center text-[#0E1315] mb-2">Confirm Status Change</h3>
             <div className="w-full h-px bg-gray-200 my-4"></div>
-
-            {/* Message */}
             <p className="text-gray-600 text-center mb-8 text-lg leading-relaxed">
               {targetStatus === "available"
                 ? "Are you sure you want to change the status to available?"
@@ -368,22 +370,16 @@ const ManageHouse = () => {
               <button
                 onClick={() => setShowModal(false)}
                 disabled={updating}
-                className="w-36 py-3 rounded-lg font-semibold text-gray-700 bg-gray-100
-                          hover:bg-gray-200 transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-36 py-3 rounded-lg font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-50 cursor-pointer"
               >
                 Cancel
               </button>
-
               <button
                 onClick={handleConfirmUpdate}
                 disabled={updating}
-                className={`w-36 py-3 rounded-lg font-semibold text-white transition-all
-                          shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center
-                          justify-center gap-2 ${
-                            targetStatus === "available"
-                              ? "bg-green-600 hover:bg-green-700"
-                              : "bg-[#0B3C78] hover:opacity-90"
-                          }`}
+                className={`w-36 py-3 rounded-lg font-semibold text-white transition-all shadow-sm active:scale-95 disabled:opacity-70 cursor-pointer flex items-center justify-center gap-2 ${
+                  targetStatus === "available" ? "bg-green-600 hover:bg-green-700" : "bg-[#0B3C78] hover:opacity-90"
+                }`}
               >
                 {updating && <Loader2 className="w-4 h-4 animate-spin" />}
                 {updating ? "Updating..." : capitalize(targetStatus)}
@@ -393,38 +389,17 @@ const ManageHouse = () => {
         </div>
       )}
 
-      {/* --- SUCCESS POPUP MODAL --- */}
+      {/* POP-UP SUKSES: Muncul otomatis setelah data berhasil diperbarui di database */}
       {successModal.isOpen && (
-        <div
-          className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40
-                 backdrop-blur-sm animate-in fade-in duration-300"
-        >
-          <div
-            className="bg-white rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col items-center 
-                 max-w-sm w-full mx-4 scale-100 animate-in zoom-in-95 duration-300"
-          >
-            {/* Icon Check Biru Besar */}
-            <div
-              className="w-24 h-24 rounded-full flex items-center justify-center mb-6"
-              style={{ backgroundColor: "#E6EEFF" }} // biru muda lembut
-            >
-              <Check
-                className="w-12 h-12"
-                strokeWidth={3}
-                style={{ color: "#0F62FF" }} // warna utama biru
-              />
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-[30px] p-8 md:p-10 shadow-2xl flex flex-col items-center max-w-sm w-full mx-4 scale-100 animate-in zoom-in-95 duration-300">
+            {/* Ikon Check Centang Biru */}
+            <div className="w-24 h-24 rounded-full flex items-center justify-center mb-6" style={{ backgroundColor: "#E6EEFF" }}>
+              <Check className="w-12 h-12" strokeWidth={3} style={{ color: "#0F62FF" }} />
             </div>
-
-            {/* Teks Judul */}
-            <h2 className="text-2xl font-extrabold text-[#0E1315] text-center mb-3">
-              Status Updated!
-            </h2>
-
-            {/* Teks Deskripsi */}
+            <h2 className="text-2xl font-extrabold text-[#0E1315] text-center mb-3">Status Updated!</h2>
             <p className="text-gray-500 text-center text-base leading-relaxed">
-              Status has been changed to{" "}
-              <strong className="text-[#0E1315] font-semibold">{successModal.status}</strong>{" "}
-              successfully.
+              Status has been changed to <strong className="text-[#0E1315] font-semibold">{successModal.status}</strong> successfully.
             </p>
           </div>
         </div>
@@ -433,7 +408,7 @@ const ManageHouse = () => {
   );
 };
 
-// Helper kecil untuk kapitalisasi di tombol
+// Helper untuk membuat huruf pertama menjadi kapital (misal: sold -> Sold)
 const capitalize = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : "");
 
 export default ManageHouse;

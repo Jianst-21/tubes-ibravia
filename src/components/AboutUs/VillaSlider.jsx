@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+/**
+ * Komponen VillaSlider
+ * Digunakan untuk menampilkan konten properti dalam bentuk carousel/slider.
+ * Mendukung fitur autoplay, navigasi manual, dan tema warna dinamis.
+ */
 export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }) => {
+  // 1. STATE: Menyimpan index slide yang sedang aktif
   const [current, setCurrent] = useState(0);
 
+  // 2. AUTOPLAY EFFECT: Mengganti slide secara otomatis setiap 15 detik.
+  // clearInterval digunakan untuk membersihkan timer saat komponen tidak lagi digunakan (unmount).
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
@@ -11,11 +19,14 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  // Early return jika data slides kosong untuk menghindari error
   if (!slides.length) return null;
 
+  // 3. NAVIGATION FUNCTIONS: Fungsi untuk berpindah slide secara manual (kiri/kanan).
   const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   const nextSlide = () => setCurrent((prev) => (prev + 1) % slides.length);
 
+  // Mengambil data slide (judul, deskripsi, gambar) berdasarkan index 'current'
   const { title, desc, img } = slides[current];
 
   return (
@@ -24,12 +35,13 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
       ${blueTheme ? "bg-[#003B73]" : "bg-background text-foreground"}`}
     >
       <div className="flex justify-center items-center py-10 px-6 md:px-10 lg:px-[100px] xl:px-[120px]">
+        {/* 4. LAYOUT WRAPPER: Menangani arah konten (reversed atau normal) */}
         <div
           className={`flex flex-col md:flex-row items-center justify-center gap-14 w-full max-w-[1400px]
           ${reversed ? "md:flex-row-reverse" : ""}
           `}
         >
-          {/* TEXT */}
+          {/* 5. TEXT SECTION: Menampilkan judul dan deskripsi slide */}
           <div
             className={`flex flex-col justify-center max-w-[512px] text-center md:text-left 
             ${blueTheme ? "text-white" : ""}`}
@@ -51,7 +63,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
             )}
           </div>
 
-          {/* IMAGE */}
+          {/* 6. IMAGE SECTION: Menampilkan gambar utama properti */}
           <div className="relative flex-shrink-0">
             <div className="w-[512px] max-w-full aspect-[512/344] overflow-hidden rounded-2xl">
               <img
@@ -64,7 +76,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         </div>
       </div>
 
-      {/* NAV LEFT */}
+      {/* 7. NAVIGATION BUTTON (LEFT): Tombol panah kiri dengan posisi responsif */}
       <button
         onClick={prevSlide}
         className={`absolute top-1/2 -translate-y-1/2 left-0 z-20 
@@ -79,7 +91,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         <ChevronLeft size={24} />
       </button>
 
-      {/* NAV RIGHT */}
+      {/* 8. NAVIGATION BUTTON (RIGHT): Tombol panah kanan dengan posisi responsif */}
       <button
         onClick={nextSlide}
         className={`absolute top-1/2 -translate-y-1/2 right-0 z-20 
@@ -94,7 +106,7 @@ export const VillaSlider = ({ slides = [], reversed = false, blueTheme = false }
         <ChevronRight size={24} />
       </button>
 
-      {/* DOTS */}
+      {/* 9. INDICATOR DOTS: Menampilkan titik navigasi di bagian bawah slider */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
         {slides.map((_, i) => (
           <div

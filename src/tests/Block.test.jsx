@@ -3,7 +3,7 @@ import React from 'react'; // <--- TAMBAHKAN INI (Wajib)
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-// ✅ Perbaikan 1: Import Component Utama sesuai lokasi yang kamu konfirmasi
+// Perbaikan 1: Import Component Utama sesuai lokasi yang kamu konfirmasi
 import { Block } from "../components/PropertiesPage/Block"; 
 
 import axios from 'axios';
@@ -11,7 +11,7 @@ import * as router from 'react-router-dom';
 
 // --- MOCKING ---
 
-// ✅ Perbaikan 2: Mock Component Anak (VillaButton & BlockPreview)
+// Perbaikan 2: Mock Component Anak (VillaButton & BlockPreview)
 // Path disesuaikan: mundur dari 'tests' ke 'src', lalu masuk 'components/GlobalPage'
 vi.mock('../components/GlobalPage/VillaButton', () => ({
   VillaButton: ({ name, onClick }) => <button onClick={onClick}>{name}</button>

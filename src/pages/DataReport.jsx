@@ -3,23 +3,33 @@ import Sidebar from "../components/AdminDashboard/Sidebar";
 import apiAdmin from "../api/apiadmin";
 import { Printer, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 
+/**
+ * Komponen AdminDataReport
+ * Berfungsi untuk menampilkan laporan riwayat reservasi dalam bentuk tabel.
+ * Dilengkapi dengan fitur pagination (halaman) dan fungsi cetak laporan (Print).
+ */
 export default function AdminDataReport() {
-  const [report, setReport] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  const tableRef = useRef(null);
+  // 1. STATE MANAGEMENT
+  const [report, setReport] = useState([]);         // Menyimpan seluruh data laporan dari API
+  const [loading, setLoading] = useState(true);      // Melacak status loading saat fetch data
+  const [currentPage, setCurrentPage] = useState(1); // Menentukan halaman tabel yang sedang aktif
+  const itemsPerPage = 10;                           // Batasan jumlah baris data per halaman
+  const tableRef = useRef(null);                     // Referensi DOM untuk elemen tabel
 
+  // 2. EFFECT: Mengambil data laporan saat pertama kali halaman dimuat
   useEffect(() => {
     fetchReport();
   }, []);
 
+  /**
+   * 3. FUNGSI FETCH DATA: fetchReport
+   * Mengambil data laporan reservasi dari backend menggunakan instance apiAdmin.
+   */
   const fetchReport = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
+      // Mengambil token (jika diperlukan oleh interceptor) dan merequest data report
       const res = await apiAdmin.get("/report");
-
       setReport(res.data);
     } catch (err) {
       console.error("Gagal mengambil data report:", err);
@@ -28,22 +38,33 @@ export default function AdminDataReport() {
     }
   };
 
+  /**
+   * 4. FUNGSI PRINT: handlePrint
+   * Membuka dialog cetak browser. CSS khusus digunakan untuk menyembunyikan sidebar saat dicetak.
+   */
   const handlePrint = () => {
     window.print();
   };
 
+  // 5. LOGIKA PAGINATION: Menghitung data yang harus ditampilkan pada halaman aktif
   const totalPages = Math.ceil(report.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentData = report.slice(startIndex, startIndex + itemsPerPage);
 
+  // Fungsi navigasi ke halaman sebelumnya
   const goToPreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
   };
 
+  // Fungsi navigasi ke halaman berikutnya
   const goToNextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
 
+  /**
+   * 6. HELPER STYLE: getStatusColorClass
+   * Menentukan warna teks, background, dan border pada badge status (Accepted/Cancelled).
+   */
   const getStatusColorClass = (status) => {
     switch (status?.toLowerCase()) {
       case "accepted":
@@ -57,11 +78,15 @@ export default function AdminDataReport() {
 
   return (
     <div className="flex min-h-screen bg-[#F5FAFF] font-sans print:bg-white">
+      {/* SIDEBAR: Disembunyikan saat mode cetak (print:hidden) */}
       <div className="fixed top-0 left-0 h-full w-64 bg-[#F5FAFF] shadow-lg z-20 print:hidden">
         <Sidebar />
       </div>
 
+      {/* MAIN CONTENT AREA */}
       <main className="flex-1 p-8 ml-64 transition-all duration-300 print:ml-0 print:p-0 print:w-full">
+        
+        {/* HEADER: Judul Laporan dan Tombol Cetak */}
         <div className="flex items-center justify-between mb-8 print:mb-4">
           <div>
             <h1 className="text-[48px] font-bold text-gray-900 print:text-2xl -mt-8">
@@ -72,7 +97,7 @@ export default function AdminDataReport() {
             </p>
           </div>
 
-          {/* 🔹 Tombol Print Report dengan pointer dan efek hover */}
+          {/* Tombol Cetak (Hanya muncul di layar, tidak di kertas/PDF) */}
           <button
             onClick={handlePrint}
             className="print:hidden bg-[#0F62FF] hover:bg-[#0D56E0] text-white px-5 py-2.5 rounded-lg 
@@ -84,6 +109,7 @@ export default function AdminDataReport() {
           </button>
         </div>
 
+        {/* TABEL LAPORAN */}
         <div
           ref={tableRef}
           className="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200 print:shadow-none 
@@ -112,6 +138,7 @@ export default function AdminDataReport() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 print:divide-gray-300">
+              {/* TAMPILAN LOADING: Muncul saat data sedang diambil */}
               {loading ? (
                 <tr>
                   <td colSpan="5" className="px-6 py-8 text-center">
@@ -122,6 +149,7 @@ export default function AdminDataReport() {
                   </td>
                 </tr>
               ) : report.length === 0 ? (
+                /* TAMPILAN KOSONG: Jika API tidak mengembalikan data */
                 <tr>
                   <td colSpan="5" className="px-6 py-12 text-center">
                     <div className="flex flex-col items-center justify-center text-gray-400">
@@ -133,6 +161,7 @@ export default function AdminDataReport() {
                   </td>
                 </tr>
               ) : (
+                /* DATA MAPPING: Merender baris data laporan */
                 currentData.map((item, i) => (
                   <tr
                     key={i}
@@ -150,6 +179,7 @@ export default function AdminDataReport() {
                       {item.number_house}
                     </td>
                     <td className="px-6 py-4 print:border print:border-gray-300">
+                      {/* Format Tanggal Indonesia (misal: 23 Desember 2025) */}
                       {item.date
                         ? new Date(item.date).toLocaleDateString("id-ID", {
                             day: "numeric",
@@ -174,10 +204,10 @@ export default function AdminDataReport() {
           </table>
         </div>
 
-        {/* Pagination Controls */}
+        {/* KONTROL PAGINATION: Hanya muncul jika data lebih dari batasan baris */}
         {report.length > itemsPerPage && (
           <div className="flex justify-center items-center mt-8 gap-6 print:hidden">
-            {/* Tombol kiri */}
+            {/* Tombol Halaman Sebelumnya */}
             <button
               onClick={goToPreviousPage}
               disabled={currentPage === 1}
@@ -188,10 +218,10 @@ export default function AdminDataReport() {
               <ChevronLeft size={20} />
             </button>
 
-            {/* Nomor halaman */}
+            {/* Indikator Nomor Halaman */}
             <span className="text-lg font-semibold text-gray-700">{currentPage}</span>
 
-            {/* Tombol kanan */}
+            {/* Tombol Halaman Selanjutnya */}
             <button
               onClick={goToNextPage}
               disabled={currentPage === totalPages}
@@ -205,9 +235,11 @@ export default function AdminDataReport() {
         )}
       </main>
 
+      {/* STYLE KHUSUS PRINT: Memaksa warna muncul di cetakan fisik/PDF */}
       <style>{`
         @media print {
           body { background-color: white !important; color: black !important; }
+          /* Memastikan background warna badge/tabel muncul saat di-print */
           * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
       `}</style>

@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+// 1. IMPORT ASSETS: Mengimpor gambar properti dan logo developer
 import a02Image from "../../../src/assets/images/colection/a02.png";
 import f08Image from "../../../src/assets/images/colection/f08.png";
 import c04Image from "../../../src/assets/images/colection/c04.png";
@@ -7,7 +9,13 @@ import ptBangunPersada from "../../assets/images/pt/Persada.png";
 import ptBumiMoroAgung from "../../assets/images/pt/BumiMoro.png";
 import ptTotalBumiArtha from "../../assets/images/pt/Total.png";
 
+/**
+ * Komponen HouseCollections
+ * Berfungsi untuk menampilkan ringkasan koleksi rumah unggulan di halaman utama.
+ * Data ditampilkan dalam bentuk grid kartu yang dapat diklik untuk melihat detail.
+ */
 export const HouseCollections = () => {
+  // 2. DATA ARRAY: Daftar statis koleksi rumah yang akan ditampilkan
   const houses = [
     {
       id_house: 2,
@@ -58,22 +66,23 @@ export const HouseCollections = () => {
   return (
     <section className="py-20 bg-background text-foreground transition-colors duration-300 font-[var(--font-body)]">
       <div className="container mx-auto px-6">
-        {/* Subheading */}
+        
+        {/* 3. HEADER SECTION: Judul dan sub-judul bagian koleksi */}
         <p className="text-[16px] font-semibold text-primary uppercase tracking-wide mb-2 font-[var(--font-subheader)] text-center">
           Find the home that fits your lifestyle and future
         </p>
 
-        {/* Title */}
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground font-headline text-center">
           House Collections
         </h2>
 
-        {/* Grid Cards */}
+        {/* 4. GRID CONTAINER: Layout kartu responsif menggunakan auto-fit */}
         <div
           className="grid gap-4 justify-items-center 
             grid-cols-[repeat(auto-fit,minmax(280px,1fr))]"
         >
           {houses.map((house) => (
+            // Link ke halaman detail berdasarkan ID blok rumah
             <Link
               key={house.id_house}
               to={`/Detail-Properties/${house.id_block}`}
@@ -81,12 +90,12 @@ export const HouseCollections = () => {
               font-[var(--font-body)] transition-all duration-300 h-[456px] 
               flex flex-col p-4 shadow-md hover:shadow-lg"
             >
-              {/* Gambar */}
+              {/* Bagian Visual: Foto Rumah */}
               <div className="w-full h-[220px] overflow-hidden rounded-lg">
                 <img src={house.image} alt={house.title} className="w-full h-full object-cover" />
               </div>
 
-              {/* Konten */}
+              {/* Bagian Info: Judul, Kategori, dan Deskripsi Spesifikasi */}
               <div className="mt-4 flex-grow space-y-2">
                 <p className="text-sm text-primary font-medium">{house.category}</p>
 
@@ -94,9 +103,9 @@ export const HouseCollections = () => {
                   {house.title}
                 </h3>
 
-                {/* DESC — sudah diganti dari HSL ke text-muted-foreground */}
                 <p className="text-sm pt-4 text-muted-foreground leading-snug">{house.desc}</p>
 
+                {/* Bagian Footer Kartu: Logo Developer, Harga, dan Nama PT */}
                 <div className="pt-4 border-t border-border mt-auto">
                   <div className="flex items-center space-x-2">
                     <div className="w-8 h-8 rounded-full overflow-hidden">
@@ -108,8 +117,6 @@ export const HouseCollections = () => {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-foreground">{house.price}</p>
-
-                      {/* Developer — ganti ke text-muted-foreground */}
                       <p className="text-sm text-muted-foreground font-subheader">
                         {house.developer}
                       </p>
@@ -121,7 +128,7 @@ export const HouseCollections = () => {
           ))}
         </div>
 
-        {/* Tombol */}
+        {/* 5. CTA BUTTON: Navigasi untuk melihat seluruh daftar properti */}
         <div className="mt-12 text-center">
           <Link to="/properties" className="ibravia-button text-[20px] px-8 py-3 font-subheader">
             Explore More
